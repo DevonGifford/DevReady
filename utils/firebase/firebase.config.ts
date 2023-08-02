@@ -37,6 +37,5 @@ db = getFirestore(app);
 //- Storage exports
 storage = getStorage(app);
 
-
 export { provider, auth, storage };
 export default db;
