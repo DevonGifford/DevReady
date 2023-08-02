@@ -3,6 +3,7 @@ import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import LoginPage from "@/app/(auth)/(routes)/login/page";
+import RegisterPage from "@/app/(auth)/(routes)/register/page";
 
 jest.mock("next/navigation", () => ({
   useRouter: jest.fn(() => ({
@@ -20,35 +21,37 @@ global.ResizeObserver = jest.fn(() => ({
   disconnect: jest.fn(),
 }));
 
-// TESTING LOGIN PAGE
-describe.skip("Login Page Rendering Tests", () => {
+// TESTING REGISTER PAGE
+// ✅
+describe.skip("Reigster Page Rendering Tests", () => {
   it("renders login page", () => {
-    const { container } = render(<LoginPage />);
+    const { container } = render(<RegisterPage />);
     expect(container).toBeInTheDocument();
   });
 
   it("renders the header component correctly", () => {
-    render(<LoginPage />);
+    render(<RegisterPage />);
 
-    expect(screen.getByText("Login to your account")).toBeInTheDocument();
-    expect(screen.getByText(/by improving 1/i)).toBeInTheDocument();
+    expect(screen.getByText("Create a new account")).toBeInTheDocument();
+    expect(screen.getByText(/if it be not to come/i)).toBeInTheDocument();
   });
 
   it("renders the footer correctly", () => {
-    render(<LoginPage />);
+    render(<RegisterPage />);
 
-    expect(screen.getByText("Dont have an account?")).toBeInTheDocument();
     expect(screen.getByText("Back to Home Page")).toBeInTheDocument();
+    expect(screen.getByText("Already have an account?")).toBeInTheDocument();
   });
 });
 
-describe.skip("Login Form Validation Tests", () => {
+// ✅
+describe.skip("Reister Form Validation Tests", () => {
   test("case empty email/password renders error messages", async () => {
     //-Arrange
-    render(<LoginPage />);
+    render(<RegisterPage />);
     const emailInput = screen.getByPlaceholderText("email");
     const passwordInput = screen.getByPlaceholderText("password");
-    const submitButton = screen.getByRole("button", { name: "Login" });
+    const submitButton = screen.getByRole("button", { name: "Register" });
 
     //-Act
     await userEvent.click(emailInput);
@@ -66,10 +69,10 @@ describe.skip("Login Form Validation Tests", () => {
 
   test("case short password renders error message", async () => {
     //-Arrange
-    render(<LoginPage />);
+    render(<RegisterPage />);
     const emailInput = screen.getByPlaceholderText("email");
     const passwordInput = screen.getByPlaceholderText("password");
-    const submitButton = screen.getByRole("button", { name: "Login" });
+    const submitButton = screen.getByRole("button", { name: "Register" });
 
     //-Act
     await userEvent.click(emailInput);
@@ -89,10 +92,10 @@ describe.skip("Login Form Validation Tests", () => {
 
   test("case incorrect email format renders error message", async () => {
     //-Arrange
-    render(<LoginPage />);
+    render(<RegisterPage />);
     const emailInput = screen.getByPlaceholderText("email");
     const passwordInput = screen.getByPlaceholderText("password");
-    const submitButton = screen.getByRole("button", { name: "Login" });
+    const submitButton = screen.getByRole("button", { name: "Register" });
 
     //-Act
     await userEvent.click(emailInput);
@@ -108,12 +111,14 @@ describe.skip("Login Form Validation Tests", () => {
   });
 });
 
-describe.skip("Login Submission Tests", () => {
+
+// ⏳
+describe.skip("Register Submission Tests", () => {
   it.skip("successful form submit should have notification and reroute", async () => {
-    render(<LoginPage />);
+    render(<RegisterPage />);
     const emailInput = screen.getByPlaceholderText("email");
     const passwordInput = screen.getByPlaceholderText("password");
-    const submitButton = screen.getByRole("button", { name: "Login" });
+    const submitButton = screen.getByRole("button", { name: "Register" });
 
     // Fill in correct authentication details and submit
     await userEvent.type(emailInput, "test2@test.com");
@@ -128,10 +133,10 @@ describe.skip("Login Submission Tests", () => {
   });
 
   it.skip("unsuccessful form submit should have notification and error messages", async () => {
-    render(<LoginPage />);
+    render(<RegisterPage />);
     const emailInput = screen.getByPlaceholderText("email");
     const passwordInput = screen.getByPlaceholderText("password");
-    const submitButton = screen.getByRole("button", { name: "Login" });
+    const submitButton = screen.getByRole("button", { name: "Register" });
 
     // Fill in incorrect authentication details and submit
     await userEvent.type(emailInput, "notrealemail@test.com");
