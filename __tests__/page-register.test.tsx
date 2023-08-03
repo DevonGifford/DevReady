@@ -2,7 +2,6 @@ import "@testing-library/jest-dom";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
-import LoginPage from "@/app/(auth)/(routes)/login/page";
 import RegisterPage from "@/app/(auth)/(routes)/register/page";
 
 jest.mock("next/navigation", () => ({
@@ -14,6 +13,16 @@ jest.mock("next/navigation", () => ({
   })),
 }));
 
+jest.mock("../components/providers/AuthProvider", () => ({
+  useAuth: () => ({
+    register: jest.fn().mockImplementation(async (email, password) => {
+      // Your custom implementation goes here
+      // For example, simulate a successful registration
+      return { result: "success" }; // Change this based on your test scenario
+    }),
+  }),
+}));
+
 global.ResizeObserver = jest.fn(() => ({
   // Create a mock for ResizeObserver in test setup
   observe: jest.fn(),
@@ -22,7 +31,6 @@ global.ResizeObserver = jest.fn(() => ({
 }));
 
 // TESTING REGISTER PAGE
-// ✅
 describe.skip("Reigster Page Rendering Tests", () => {
   it("renders login page", () => {
     const { container } = render(<RegisterPage />);
@@ -44,7 +52,6 @@ describe.skip("Reigster Page Rendering Tests", () => {
   });
 });
 
-// ✅
 describe.skip("Reister Form Validation Tests", () => {
   test("case empty email/password renders error messages", async () => {
     //-Arrange
@@ -111,10 +118,16 @@ describe.skip("Reister Form Validation Tests", () => {
   });
 });
 
-
-// ⏳
 describe.skip("Register Submission Tests", () => {
-  it.skip("successful form submit should have notification and reroute", async () => {
+  it("successful form submit should have notification and reroute", async () => {
+    jest.mock("../components/providers/AuthProvider", () => ({
+      useAuth: () => ({
+        register: jest.fn().mockImplementation(async (email, password) => {
+          return { result: "success" };
+        }),
+      }),
+    }));
+
     render(<RegisterPage />);
     const emailInput = screen.getByPlaceholderText("email");
     const passwordInput = screen.getByPlaceholderText("password");
@@ -127,12 +140,19 @@ describe.skip("Register Submission Tests", () => {
 
     //-Assert
     setTimeout(() => {
-      expect(screen.getByText("Successfully signed in")).toBeInTheDocument();
-      expect(window.location.pathname).toBe("/dashboard"); // Example of checking for redirection
-    }, 4000);
+      expect(screen.getByText("Successfully registered.")).toBeInTheDocument();
+      expect(window.location.pathname).toBe("/onboarding");
+    }, 3000);
   });
 
-  it.skip("unsuccessful form submit should have notification and error messages", async () => {
+  it("unsuccessful form submit should have notification and error messages", async () => {
+    jest.mock("../components/providers/AuthProvider", () => ({
+      useAuth: () => ({
+        register: jest.fn().mockImplementation(async (email, password) => {
+          return { result: "error" };
+        }),
+      }),
+    }));
     render(<RegisterPage />);
     const emailInput = screen.getByPlaceholderText("email");
     const passwordInput = screen.getByPlaceholderText("password");
@@ -146,7 +166,7 @@ describe.skip("Register Submission Tests", () => {
     // Assert: Check for error messages
     setTimeout(() => {
       expect(
-        screen.getByText("Incorrect credentials, please try again.")
+        screen.getByText("Hmmm... something went wrong. Please try again.")
       ).toBeInTheDocument();
     });
   });
