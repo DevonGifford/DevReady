@@ -21,7 +21,7 @@ global.ResizeObserver = jest.fn(() => ({
 }));
 
 // TESTING REGISTER PAGE
-describe.skip("Reigster Page Rendering Tests", () => {
+describe("Reigster Page Rendering Tests", () => {
   it("renders login page", () => {
     const { container } = render(<RegisterPage />);
     expect(container).toBeInTheDocument();
@@ -42,7 +42,7 @@ describe.skip("Reigster Page Rendering Tests", () => {
   });
 });
 
-describe.skip("Reister Form Validation Tests", () => {
+describe("Reister Form Validation Tests", () => {
   test("case empty email/password renders error messages", async () => {
     //-Arrange
     render(<RegisterPage />);
@@ -108,7 +108,7 @@ describe.skip("Reister Form Validation Tests", () => {
   });
 });
 
-describe.skip("Register Submission Tests", () => {
+describe("Register Submission Tests", () => {
   it("successful form submit should have notification and reroute", async () => {
     //- Tearup
     const mockSuccessRegister = jest

@@ -11,7 +11,7 @@ import LandingPage from "@/app/(landingpage)/page";
 // import NextLink from "next/link";
 // jest.mock("next/router", () => jest.requireActual("next-router-mock"));
 
-describe.skip("Renders the Landing Page correctly - SSR 👀", () => {
+describe("Renders the Landing Page correctly - SSR 👀", () => {
   it("ENV TEST 1/3:  Page renders correctly", () => {
     //-aarange
     render(<LandingPage />);

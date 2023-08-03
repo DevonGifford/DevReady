@@ -137,6 +137,7 @@ export const ProfilePictureUploader: React.FC<PPProps> = ({ userDocId }) => {
                   </p>
                 </div>
                 <input
+                  data-testid="file-input"
                   id="dropzone-file"
                   ref={fileRef}
                   type="file"

@@ -21,7 +21,7 @@ global.ResizeObserver = jest.fn(() => ({
 }));
 
 // TESTING LOGIN PAGE
-describe.skip("Login Page Rendering Tests", () => {
+describe("Login Page Rendering Tests", () => {
   it("renders login page", () => {
     const { container } = render(<LoginPage />);
     expect(container).toBeInTheDocument();
@@ -42,7 +42,7 @@ describe.skip("Login Page Rendering Tests", () => {
   });
 });
 
-describe.skip("Login Form Validation Tests", () => {
+describe("Login Form Validation Tests", () => {
   test("case empty email/password renders error messages", async () => {
     //-Arrange
     render(<LoginPage />);
@@ -108,7 +108,7 @@ describe.skip("Login Form Validation Tests", () => {
   });
 });
 
-describe.skip("Login Submission Tests", () => {
+describe("Login Submission Tests", () => {
   it("successful form submit should have notification and reroute", async () => {
     //- Tearup
     const mockSuccessLogin = jest.fn().mockResolvedValue({ result: "success" });
