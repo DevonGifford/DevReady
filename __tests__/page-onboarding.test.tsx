@@ -24,31 +24,30 @@ global.ResizeObserver = jest.fn(() => ({
   disconnect: jest.fn(),
 }));
 
-// TESTING ONBOARDING PROCESS
 describe("Onboarding: General Page Rendering Tests", () => {
-  it("renders root page", () => {
+  it("renders root form handeling page", () => {
     const { container } = render(<OnboardingFormHandler />);
     expect(container).toBeInTheDocument();
   });
 
-  it("renders form", () => {
+  it("renders individual form seperately", () => {
     const { container } = render(<UserOnboardingWelcome />);
     expect(container).toBeInTheDocument();
   });
 
-  it("expect first-welcome-form to be rendered", () => {
+  it("expects first-welcome-form to be rendered without params", () => {
     render(<OnboardingFormHandler />);
     expect(screen.getByText("Welcome to your")).toBeInTheDocument();
   });
 
-  it("expect next form button", () => {
+  it("expect next form button on forms", () => {
     render(<OnboardingFormHandler />);
     expect(screen.getByText("Next page")).toBeInTheDocument();
   });
 });
 
 describe("Onboarding: User-Welcome-Form Tests", () => {
-  test("Testing rendering correct elements: Heading, name, career, career clicked", async () => {
+  test("form renders expected ui elements", async () => {
     //-Arrange
     render(<UserOnboardingWelcome />);
     const welcomeHeader = screen.getByTestId("welcome-header");
@@ -112,7 +111,7 @@ describe("Onboarding: User-Career-Form Tests", () => {
     expect(container).toBeInTheDocument();
   });
 
-  test("rendering correct elements: heading, sliders, next button", async () => {
+  test("form renders expected ui elements", async () => {
     //-Arrange
     render(<UserOnbaordingCareer />);
     const welcomeHeader = screen.getByText(/current level/i);
@@ -156,7 +155,7 @@ describe("Onboarding: User-Image-Form Tests", () => {
     expect(container).toBeInTheDocument();
   });
 
-  test("rendering correct elements: heading, sliders, next button", async () => {
+  test("form renders expected ui elements", async () => {
     //-Arrange
     render(<UserOnboardingImage />);
     const welcomeHeader = screen.getByText(/final step/i);
@@ -204,14 +203,17 @@ describe("Onboarding: Submission and integration tests", () => {
     }, 4000);
   });
 
-  it("unsuccessful form submit should have notification and reroute", async () => {
+  it("incomplete form submission should error", async () => {
     //- Tearup
-    const mockUserContext = jest.mock("../components/providers/UserProvider", () => ({
-      useUserContext: jest.fn(() => ({
-        userProfile: undefined,
-        updateUserDataProcess: jest.fn(), // You can mock this function as well if needed
-      })),
-    }));
+    const mockUserContext = jest.mock(
+      "../components/providers/UserProvider",
+      () => ({
+        useUserContext: jest.fn(() => ({
+          userProfile: undefined,
+          updateUserDataProcess: jest.fn(), // You can mock this function as well if needed
+        })),
+      })
+    );
 
     //- Arrange
     render(<UserOnboardingImage />);
@@ -223,12 +225,11 @@ describe("Onboarding: Submission and integration tests", () => {
     //-Assert
     setTimeout(() => {
       expect(screen.getByText("Something went wrong")).toBeInTheDocument();
-      expect(window.location.pathname).toBe("/dashboard"); // Example of checking for redirection
       expect(mockUserContext).toHaveBeenCalledTimes(1);
     }, 4000);
   });
 
-  it("unsuccessful form submit should have notification and error messages", async () => {
+  it("unsuccessful form submit should error", async () => {
     //- Tearup
     const mockFailedLogin = jest.fn().mockResolvedValue({ result: "error" });
     jest.mock("../components/providers/AuthProvider", () => ({

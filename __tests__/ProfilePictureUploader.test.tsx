@@ -24,7 +24,7 @@ global.ResizeObserver = jest.fn(() => ({
 jest.mock("../components/providers/UserProvider", () => ({
   useUserContext: jest.fn(() => ({
     userProfile: {
-      uuid: "mockedUserId", // Replace with your mock data as needed
+      uuid: "mockedUserId",
       account: {
         username: "mockedUsername",
         career_title: "mockedCareerTitle",
@@ -33,21 +33,21 @@ jest.mock("../components/providers/UserProvider", () => ({
         userimage: "mockedImageURL",
       },
     },
-    updateUserDataProcess: jest.fn(), // You can mock this function as well if needed
+    updateUserDataProcess: jest.fn(),
   })),
 }));
 
 const mockUpload = jest.mock("../utils/firebase/storage.utils", () => ({
-  uploadImageProcess: jest.fn(() => "mockImageUrl"), // Mock the upload function to return a URL
+  uploadImageProcess: jest.fn(() => "mockImageUrl"),
 }));
 
-describe("Rendering Tests", () => {
-  it("renders component page", () => {
+describe("Renders Component and UI Elements", () => {
+  it("renders component without crashing", () => {
     const { container } = render(<ProfilePictureUploader userDocId="123" />);
     expect(container).toBeInTheDocument();
   });
 
-  it("renders without crashing", () => {
+  it("renders descriptive text", () => {
     render(<ProfilePictureUploader userDocId="mockUserId" />);
 
     const uploadImageButton = screen.getByText(/Click to upload/i);
@@ -60,7 +60,7 @@ jest.mock("../utils/firebase/storage.utils", () => ({
 }));
 
 describe("ProfilePictureUploader Component", () => {
-  it("handles file upload correctly", async () => {
+  test("happy case - handle file upload ", async () => {
     render(<ProfilePictureUploader userDocId="mockUserId" />);
 
     const fileInput = screen.getByTestId("file-input");
@@ -94,6 +94,5 @@ describe("ProfilePictureUploader Component", () => {
     );
 
     fireEvent.click(screen.getByLabelText("Change again"));
-
   });
 });

@@ -20,21 +20,20 @@ global.ResizeObserver = jest.fn(() => ({
   disconnect: jest.fn(),
 }));
 
-// TESTING REGISTER PAGE
-describe("Reigster Page Rendering Tests", () => {
+describe("Renders page and expected UI Elements", () => {
   it("renders login page", () => {
     const { container } = render(<RegisterPage />);
     expect(container).toBeInTheDocument();
   });
 
-  it("renders the header component correctly", () => {
+  it("renders header component correctly", () => {
     render(<RegisterPage />);
 
     expect(screen.getByText("Create a new account")).toBeInTheDocument();
     expect(screen.getByText(/if it be not to come/i)).toBeInTheDocument();
   });
 
-  it("renders the footer correctly", () => {
+  it("renders footer component correctly", () => {
     render(<RegisterPage />);
 
     expect(screen.getByText("Back to Home Page")).toBeInTheDocument();

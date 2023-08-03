@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom";
-import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { render, screen, waitFor } from "@testing-library/react";
 
 import LoginPage from "@/app/(auth)/(routes)/login/page";
 
@@ -20,21 +20,20 @@ global.ResizeObserver = jest.fn(() => ({
   disconnect: jest.fn(),
 }));
 
-// TESTING LOGIN PAGE
 describe("Login Page Rendering Tests", () => {
   it("renders login page", () => {
     const { container } = render(<LoginPage />);
     expect(container).toBeInTheDocument();
   });
 
-  it("renders the header component correctly", () => {
+  it("renders header component correctly", () => {
     render(<LoginPage />);
 
     expect(screen.getByText("Login to your account")).toBeInTheDocument();
     expect(screen.getByText(/by improving 1/i)).toBeInTheDocument();
   });
 
-  it("renders the footer correctly", () => {
+  it("renders footer correctly", () => {
     render(<LoginPage />);
 
     expect(screen.getByText("Dont have an account?")).toBeInTheDocument();
@@ -109,7 +108,7 @@ describe("Login Form Validation Tests", () => {
 });
 
 describe("Login Submission Tests", () => {
-  it("successful form submit should have notification and reroute", async () => {
+  test("case successful form submission should reroute and toast notif", async () => {
     //- Tearup
     const mockSuccessLogin = jest.fn().mockResolvedValue({ result: "success" });
     jest.mock("../components/providers/AuthProvider", () => ({
@@ -137,7 +136,7 @@ describe("Login Submission Tests", () => {
     }, 4000);
   });
 
-  it("unsuccessful form submit should have notification and error messages", async () => {
+  test("case unsuccessful form submission should error with toast notif", async () => {
     //- Tearup
     const mockFailedLogin = jest.fn().mockResolvedValue({ result: "error" });
     jest.mock("../components/providers/AuthProvider", () => ({
