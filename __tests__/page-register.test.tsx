@@ -13,16 +13,6 @@ jest.mock("next/navigation", () => ({
   })),
 }));
 
-jest.mock("../components/providers/AuthProvider", () => ({
-  useAuth: () => ({
-    register: jest.fn().mockImplementation(async (email, password) => {
-      // Your custom implementation goes here
-      // For example, simulate a successful registration
-      return { result: "success" }; // Change this based on your test scenario
-    }),
-  }),
-}));
-
 global.ResizeObserver = jest.fn(() => ({
   // Create a mock for ResizeObserver in test setup
   observe: jest.fn(),
@@ -120,20 +110,23 @@ describe.skip("Reister Form Validation Tests", () => {
 
 describe.skip("Register Submission Tests", () => {
   it("successful form submit should have notification and reroute", async () => {
+    //- Tearup
+    const mockSuccessRegister = jest
+      .fn()
+      .mockResolvedValue({ result: "success" });
     jest.mock("../components/providers/AuthProvider", () => ({
       useAuth: () => ({
-        register: jest.fn().mockImplementation(async (email, password) => {
-          return { result: "success" };
-        }),
+        register: mockSuccessRegister,
       }),
     }));
 
+    //-Arrange
     render(<RegisterPage />);
     const emailInput = screen.getByPlaceholderText("email");
     const passwordInput = screen.getByPlaceholderText("password");
     const submitButton = screen.getByRole("button", { name: "Register" });
 
-    // Fill in correct authentication details and submit
+    //-Act
     await userEvent.type(emailInput, "test2@test.com");
     await userEvent.type(passwordInput, "test@123");
     await userEvent.click(submitButton);
@@ -142,32 +135,36 @@ describe.skip("Register Submission Tests", () => {
     setTimeout(() => {
       expect(screen.getByText("Successfully registered.")).toBeInTheDocument();
       expect(window.location.pathname).toBe("/onboarding");
+      expect(mockSuccessRegister).toHaveBeenCalledTimes(1);
     }, 3000);
   });
 
   it("unsuccessful form submit should have notification and error messages", async () => {
+    //- Tearup
+    const mockFailedRegister = jest.fn().mockResolvedValue({ result: "error" });
     jest.mock("../components/providers/AuthProvider", () => ({
       useAuth: () => ({
-        register: jest.fn().mockImplementation(async (email, password) => {
-          return { result: "error" };
-        }),
+        register: mockFailedRegister,
       }),
     }));
+
+    //- Arrange
     render(<RegisterPage />);
     const emailInput = screen.getByPlaceholderText("email");
     const passwordInput = screen.getByPlaceholderText("password");
     const submitButton = screen.getByRole("button", { name: "Register" });
 
-    // Fill in incorrect authentication details and submit
+    //- Act
     await userEvent.type(emailInput, "notrealemail@test.com");
     await userEvent.type(passwordInput, "notrealpassword");
     await userEvent.click(submitButton);
 
-    // Assert: Check for error messages
+    //- Assert
     setTimeout(() => {
       expect(
         screen.getByText("Hmmm... something went wrong. Please try again.")
       ).toBeInTheDocument();
+      expect(mockFailedRegister).toHaveBeenCalledTimes(1);
     });
   });
 });

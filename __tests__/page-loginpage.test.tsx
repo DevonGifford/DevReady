@@ -109,13 +109,22 @@ describe.skip("Login Form Validation Tests", () => {
 });
 
 describe.skip("Login Submission Tests", () => {
-  it.skip("successful form submit should have notification and reroute", async () => {
+  it("successful form submit should have notification and reroute", async () => {
+    //- Tearup
+    const mockSuccessLogin = jest.fn().mockResolvedValue({ result: "success" });
+    jest.mock("../components/providers/AuthProvider", () => ({
+      useAuth: () => ({
+        login: mockSuccessLogin,
+      }),
+    }));
+
+    //- Arrange
     render(<LoginPage />);
     const emailInput = screen.getByPlaceholderText("email");
     const passwordInput = screen.getByPlaceholderText("password");
     const submitButton = screen.getByRole("button", { name: "Login" });
 
-    // Fill in correct authentication details and submit
+    //- Act
     await userEvent.type(emailInput, "test2@test.com");
     await userEvent.type(passwordInput, "test@123");
     await userEvent.click(submitButton);
@@ -124,25 +133,36 @@ describe.skip("Login Submission Tests", () => {
     setTimeout(() => {
       expect(screen.getByText("Successfully signed in")).toBeInTheDocument();
       expect(window.location.pathname).toBe("/dashboard"); // Example of checking for redirection
+      expect(mockSuccessLogin).toHaveBeenCalledTimes(1);
     }, 4000);
   });
 
-  it.skip("unsuccessful form submit should have notification and error messages", async () => {
+  it("unsuccessful form submit should have notification and error messages", async () => {
+    //- Tearup
+    const mockFailedLogin = jest.fn().mockResolvedValue({ result: "error" });
+    jest.mock("../components/providers/AuthProvider", () => ({
+      useAuth: () => ({
+        login: mockFailedLogin,
+      }),
+    }));
+
+    //- Arrange
     render(<LoginPage />);
     const emailInput = screen.getByPlaceholderText("email");
     const passwordInput = screen.getByPlaceholderText("password");
     const submitButton = screen.getByRole("button", { name: "Login" });
 
-    // Fill in incorrect authentication details and submit
+    //- Act
     await userEvent.type(emailInput, "notrealemail@test.com");
     await userEvent.type(passwordInput, "notrealpassword");
     await userEvent.click(submitButton);
 
-    // Assert: Check for error messages
+    //- Assert
     setTimeout(() => {
       expect(
         screen.getByText("Incorrect credentials, please try again.")
       ).toBeInTheDocument();
+      expect(mockFailedLogin).toHaveBeenCalledTimes(1);
     });
   });
 });
