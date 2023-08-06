@@ -239,3 +239,8 @@ Application does all this through a trace context
 
 A trace context consists fo the following
 sentry-trace = traceid-spanid-sampled
+
+
+https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/#extend-your-nextjs-configuration
+
+great info for changes
