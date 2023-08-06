@@ -217,32 +217,3 @@ This project is licensed under the [MIT License](🎯).
 
 <br>
  
-
-# Distributes Tracing with Sentry.io
-
- ### what is distributed tracing?
- The process of tracking the flow and timing of requests as they pass through a system .  
-
-
-### So whats it do
-Have a clear view of the entire operation flow from frontend through to db
-identify perfomance bottlenecks
-improve the quality and reliability 
-
-
-### How does it work
-**Trace** - log of events during a programs execution.  
-**Transactions** -a trace has a number of transactions 
-**Span** - parent and children spans root spans - these are even smaller transactions
-
-Application does all this through a trace context
-
-A trace context consists fo the following
-sentry-trace = traceid-spanid-sampled
-
-
-https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/#extend-your-nextjs-configuration
-
-great info for changes
-
-Added logs to environment variables...
