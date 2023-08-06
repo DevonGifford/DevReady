@@ -23,7 +23,8 @@ jobs:
       run: npm ci
     - name: Debug Env Variables
       run: |
-        echo "My Secret: ${{ secrets.NEXT_PUBLIC_FIREBASE_PROJECT_ID }}"
+        echo "Firebase Project ID: ${{ secrets.NEXT_PUBLIC_FIREBASE_PROJECT_ID }}"
+        echo "API Key: ${{ secrets.NEXT_PUBLIC_FIREBASE_API_KEY }}"
         env | grep NEXT_PUBLIC_FIREBASE_PROJECT_ID
     - name: Run unit + integration tests
       run: npm run test
