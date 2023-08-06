@@ -1,14 +1,20 @@
 name: Playwright Tests
 on:
   push:
-    branches: [ main, master ]
+    branches: [ main, master, stage ]
   pull_request:
-    branches: [ main, master ]
+    branches: [ main, master, stage ]
 jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     steps:
+    - name: Waiting for 200 from the Vercel Preview
+      uses: patrickedqvist/wait-for-vercel-preview@v1.3.1
+      id: waitFor200
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        max_timeout: 300
     - uses: actions/checkout@v3
     - uses: actions/setup-node@v3
       with:
@@ -17,8 +23,12 @@ jobs:
       run: npm ci
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
+    - name: Run Jest
+      run: npm run test
     - name: Run Playwright tests
       run: npx playwright test
+      env:
+        BASE_URL: ${{ steps.waitForDeploy.outputs.url }}
     - uses: actions/upload-artifact@v3
       if: always()
       with:
