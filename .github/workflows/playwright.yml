@@ -1,4 +1,4 @@
-name: Playwright Tests
+name: Testing
 on:
   push:
     branches: [ main, master, stage ]
@@ -23,9 +23,9 @@ jobs:
       run: npm ci
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
-    - name: Run Jest
+    - name: Run unit + integration tests
       run: npm run test
-    - name: Run Playwright tests
+    - name: Run e2e playwright tests
       run: npx playwright test
       env:
         BASE_URL: ${{ steps.waitForDeploy.outputs.url }}
