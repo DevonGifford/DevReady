@@ -24,8 +24,7 @@ jobs:
     - name: Debug Env Variables
       run: |
         echo "My Secret: ${{ secrets.NEXT_PUBLIC_FIREBASE_PROJECT_ID }}"
-        echo "My Secret: ${{ secrets.MY_SECRET }}"
-        env | grep MY_SECRET
+        env | grep NEXT_PUBLIC_FIREBASE_PROJECT_ID
     - name: Run unit + integration tests
       run: npm run test
       env: 
