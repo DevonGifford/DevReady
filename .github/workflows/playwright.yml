@@ -25,6 +25,8 @@ jobs:
       run: npx playwright install --with-deps
     - name: Run unit + integration tests
       run: npm run test
+      env: 
+        API_KEY: ${{ secrets.NEXT_PUBLIC_FIREBASE_API_KEY}}
     - name: Run e2e playwright tests
       run: npx playwright test
       env:
