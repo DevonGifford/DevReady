@@ -6,9 +6,11 @@
 
   "TechnicalDocuments": "Technical Documentation",
 
-  "faq": "Troubleshooting and FAQs",
+  "ContributionGuides": "Contribution Guides",
+  
+  "faq": "Troubleshooting & FAQs",
 
-  "contributingGuide": "Contributing Guide",
+
   "security": "Security and Privacy",
   "legal": "Legal and Licensing",
 

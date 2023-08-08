@@ -1,8 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
 
-function Logo( size?: number) {
-  
+function Logo() {
   const logoStyle = {
     display: "flex",
     alignItems: "center",
