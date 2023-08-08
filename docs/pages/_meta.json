@@ -1,15 +1,29 @@
 {
-  "index": "Introduction",
-  "another": "Another Page",
-  "advanced": "Advanced (A Folder)",
+  "index": "Welcome",
+  "gettingStarted": "Getting Started",
+
+  "ArchitectureOverview": "Project Architecture",
+
+  "TechnicalDocuments": "Technical Documentation",
+
+  "faq": "Troubleshooting and FAQs",
+
+  "contributingGuide": "Contributing Guide",
+  "security": "Security and Privacy",
+  "legal": "Legal and Licensing",
+
   "about": {
     "title": "About",
+    "type": "page"
+  },
+  "contributeGuide": {
+    "title": "Contribute",
     "type": "page"
   },
   "contact": {
     "title": "Contact ↗",
     "type": "page",
-    "href": "https://twitter.com/shuding_",
+    "href": "https://github.com/DevonGifford",
     "newWindow": true
   }
 }
