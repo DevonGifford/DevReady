@@ -1,14 +1,29 @@
-# Documentation Repository for ZTM Ready
+## Documentation Repo for ZTM Ready
 
-Welcome to the official documentation repository for ZTM Ready. This repository hosts comprehensive documentation covering various aspects of the project's functionalities, usage, and integrations.
+
+Welcome to the official documentation repository for ZTM Ready. 
+
+This repository hosts comprehensive documentation covering various aspects of the project's functionalities, usage, and integrations.
+
+⚠ Please note, this is a work in progress.
+
+
+You can find a live demo here: <br/>
+[ZTM Ready Documentation]()
+
+<br/>
+<br/>
+<br/>
 
 ---
 
-## Quick Start
-
+### Running Locally
+---
 This repository utilizes [Nextra](https://nextra.site), a versatile documentation generator, to streamline the creation and organization of project documentation. 
 
-### Getting Started
+
+
+#### Getting Started
 
 To get started with contributing or exploring the documentation:
 
@@ -16,23 +31,14 @@ To get started with contributing or exploring the documentation:
 2. **Install Dependencies:** Run `pnpm i` to install all the necessary dependencies.
 3. **Run Locally:** Use `pnpm dev` to start the development server. Navigate to `localhost:3000` in your browser to view the documentation locally.
 
----
 
-## Structure of Documentation
-
-The documentation here covers a wide range of topics related to ZTM Ready, including:
-
-- **[Topic 1]:** coming soon...Description of the first topic.
-- **[Topic 2]:** coming soon...Overview and usage guide for the second topic.
-- **[Topic 3]:** coming soon...Integration and configuration details for the third topic.
-- ...
-
-Feel free to explore various sections and sub-sections within this documentation to gain insights into different aspects of the project.
+<br/>
+<br/>
 
 ---
 
-## Contribution Guidelines
-
+### Contribution Guidelines
+---
 We encourage contributions to enhance and expand this documentation repository. If you have any valuable insights, updates, or new sections to add:
 
 1. **Fork this Repository:** Create your fork and make necessary updates.
@@ -40,6 +46,11 @@ We encourage contributions to enhance and expand this documentation repository. 
 3. **Review and Merge:** Our team will review the changes and merge them after verification.
 
 By contributing to this documentation, you actively contribute to the improvement and accessibility of information related to ZTM Ready.
+
+
+<br/>
+<br/>
+
 
 ---
 
