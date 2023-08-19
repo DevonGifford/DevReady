@@ -19,10 +19,9 @@ function MainPage() {
         Welcome Back, {userProfile?.account.username}{" "}
       </h1>
 
-
       {/* // 👇 Reccommended for you */}
       <div>
-        <h3 className="text-xl text-devready-green font-semibold tracking-wider pb-4">
+        <h3 className="text-xl lg:text-2xl text-devready-green font-bold tracking-widest pb-4">
           Reccommended for you
         </h3>
 
@@ -31,7 +30,7 @@ function MainPage() {
             {Array.from({ length: 8 }).map((_, index) => (
               <CarouselItem
                 key={index}
-                className="pl-1 basis-1/3 md:basis-3/12 xl:basis-2/12"
+                className="pl-1 basis-7/12 md:basis-6/12 xl:basis-4/12 2xl:basis-2/12 transition duration-400 hover:scale-95  cursor-pointer"
               >
                 <div className="p-1">
                   <Card>
@@ -54,7 +53,7 @@ function MainPage() {
       <div className="flex flex-col lg:flex-row gap-10 justify-between pt-10">
         <Card className="w-full pb-10 bg-transparent">
           <CardHeader>
-            <h3 className="text-xl text-devready-green font-semibold tracking-wider pb-4">
+            <h3 className="text-xl lg:text-2xl text-center lg:text-start text-devready-green font-bold tracking-widest pb-10">
               Most popular
             </h3>
           </CardHeader>
@@ -68,7 +67,7 @@ function MainPage() {
             >
               <CarouselContent className="-mt-1 h-[400px]">
                 {Array.from({ length: 5 }).map((_, index) => (
-                  <CarouselItem key={index} className="pt-1 basis-1/4">
+                  <CarouselItem key={index} className="pt-1 basis-1/4 transition duration-400 hover:scale-95  cursor-pointer">
                     <div className="p-1">
                       <Card>
                         <CardContent className="flex items-center justify-center p-6">
@@ -88,8 +87,8 @@ function MainPage() {
         </Card>
         <Card className="w-full pb-10 bg-transparent">
           <CardHeader>
-            <h3 className="text-xl text-devready-green font-semibold tracking-wider pb-4">
-              Most popular
+            <h3 className="text-xl lg:text-2xl text-center lg:text-start text-devready-green font-semibold tracking-widest pb-10">
+              Recent activity
             </h3>
           </CardHeader>
           <CardContent className="flex flex-row w-full justify-center items-center">
@@ -102,7 +101,7 @@ function MainPage() {
             >
               <CarouselContent className="-mt-1 h-[400px]">
                 {Array.from({ length: 5 }).map((_, index) => (
-                  <CarouselItem key={index} className="pt-1 basis-1/4">
+                  <CarouselItem key={index} className="pt-1 basis-1/4 transition duration-400 hover:scale-95  cursor-pointer">
                     <div className="p-1">
                       <Card>
                         <CardContent className="flex items-center justify-center p-6">
