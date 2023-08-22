@@ -1,0 +1,58 @@
+[
+  {
+    "index": 1,
+    "title": "Typescript with React",
+    "tags": ["React", "JavaScript", "TypeScript"],
+    "imagelink": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/2048px-Typescript_logo_2020.svg.png",
+    "call2action": "/dashboard"
+  },
+  {
+    "index": 2,
+    "title": "ZTM Remix bootcamp",
+    "tags": ["TypeScript", "Frontend", "Remix"],
+    "imagelink": "https://avatars.githubusercontent.com/u/72662859?v=4",
+    "call2action": "/dashboard"
+  },
+  {
+    "index": 3,
+    "title": "ZTM Data Engineer Bootcamp",
+    "tags": ["Python", "Backend", "Pandas"],
+    "imagelink": "https://avatars.githubusercontent.com/u/35373879?s=280&v=4",
+    "call2action": "/dashboard"
+  },
+  {
+    "index": 6,
+    "title": "Frontend Engineer Role",
+    "tags": ["React", "JavaScript", "HTML", "CSS"],
+    "imagelink": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Typescript_logo_2020.svg/2048px-Typescript_logo_2020.svg.png",
+    "call2action": "/dashboard"
+  },
+  {
+    "index": 4,
+    "title": "ZTM Full Stack Developer",
+    "tags": ["JavaScript", "Node.js", "MongoDB"],
+    "imagelink": "https://avatars.githubusercontent.com/u/35373879?s=280&v=4",
+    "call2action": "/dashboard"
+  },
+  {
+    "index": 5,
+    "title": "Machine Learning Workshop",
+    "tags": ["Python", "Machine Learning", "TensorFlow"],
+    "imagelink": "https://avatars.githubusercontent.com/u/35373879?s=280&v=4",
+    "call2action": "/dashboard"
+  },
+  {
+    "index": 7,
+    "title": "Cloud Computing Seminar",
+    "tags": ["AWS", "Azure", "Google Cloud", "DevOps"],
+    "imagelink": "https://avatars.githubusercontent.com/u/35373879?s=280&v=4",
+    "call2action": "/dashboard"
+  },
+  {
+    "index": 8,
+    "title": "Cybersecurity Workshop",
+    "tags": ["DevOps", "Hacking", "Security"],
+    "imagelink": "https://avatars.githubusercontent.com/u/35373879?s=280&v=4",
+    "call2action": "/dashboard"
+  }
+]
