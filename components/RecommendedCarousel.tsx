@@ -1,4 +1,5 @@
 import React from "react";
+import { Card, CardContent } from "@/components/ui/card";
 import {
   Carousel,
   CarouselContent,
@@ -6,8 +7,6 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { Card, CardContent } from "@/components/ui/card";
-
 import {
   PlusCircle,
   MonitorSmartphone,
@@ -30,7 +29,7 @@ const iconMap: Record<string, LucideIcon> = {
 interface RecommendedCarouselProps {
   data: {
     label: string;
-    icon: any; // Replace 'any' with the appropriate icon type
+    icon: string;
     href?: string;
     isMain?: boolean;
   }[];
@@ -46,7 +45,7 @@ const RecommendedCarousel: React.FC<RecommendedCarouselProps> = ({ data }) => {
       <Carousel className="w-full">
         <CarouselContent className="-ml-1 w-full gap-8">
           {data.map((item, index) => {
-            const IconComponent = iconMap[item.icon]; // Get the corresponding Lucide icon component
+            const IconComponent = iconMap[item.icon]; //👈 getting the lucidIcon
             return (
               <CarouselItem
                 key={index}
