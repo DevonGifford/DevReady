@@ -17,7 +17,7 @@ interface RecentActivityCarouselProps {
     title: string;
     tags: string[];
     imagelink: string;
-    call2action: string;
+    href: string;
   }[];
 }
 
@@ -46,7 +46,7 @@ const RecentActivityCarousel: React.FC<RecentActivityCarouselProps> = ({
                 key={index}
                 className="pt-1 basis-1/4 transition duration-400 hover:scale-95 cursor-pointe"
               >
-                <Link href={item.call2action}>
+                <Link href={item.href}>
                   <div className="p-2 py-6 flex items-center border-2 rounded-2xl">
                     <div className="hidden sm:flex w-20 h-20 rounded overflow-hidden">
                       <Image
