@@ -40,11 +40,11 @@ const RecentActivityCarousel: React.FC<RecentActivityCarouselProps> = ({
           orientation="vertical"
           className="w-full"
         >
-          <CarouselContent className="-mt-1 h-[400px]">
+          <CarouselContent className="mt-0.5 h-[450px]">
             {data.map((item, index) => (
               <CarouselItem
                 key={index}
-                className="pt-1 basis-1/4 transition duration-400 hover:scale-95 cursor-pointe"
+                className="py-1 basis-1/4 transition duration-400 hover:scale-95 cursor-pointe"
               >
                 <Link href={item.href}>
                   <div className="p-2 py-6 flex items-center border-2 rounded-2xl">

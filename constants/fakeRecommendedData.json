@@ -2,63 +2,63 @@
   {
     "label": "Create Flash Cards",
     "icon": "PlusCircle",
-    "href": "interviews"
+    "href": "/create-flashcards"
   },
   {
     "label": "Frontend Interview",
     "icon": "MonitorSmartphone",
-    "href": "interviews"
+    "href": "/interviews"
   },
   {
     "label": "Backend Interview",
     "icon": "DatabaseBackup",
-    "href": "coming-soon"
+    "href": "/interviews"
   },
   {
     "label": "Fullstack Interview",
     "icon": "AlignVerticalJustifyStart",
-    "href": "coming-soon"
+    "href": "/coming-soon"
   },
   {
     "label": "Interview with AI Hiring Manager",
     "icon": "BrainCircuit",
-    "href": "coming-soon"
+    "href": "/coming-soon"
   },
 
   {
     "label": "Remix Bootcamp",
     "icon": "ScrollText",
     "customIcon": "ZTM-logo.png",
-    "href": "coming-soon"
+    "href": "/coming-soon"
   },
   {
     "label": "The Complete Web Developer",
     "icon": "ScrollText",
     "customIcon": "ZTM-logo.png",
-    "href": "coming-soon"
+    "href": "/coming-soon"
   },
   {
     "label": "Complete Junior to Senior Web Developer",
     "icon": "ScrollText",
     "customIcon": "ZTM-logo.png",
-    "href": "coming-soon"
+    "href": "/coming-soon"
   },
   {
     "label": "Complete Python Developer",
     "icon": "ScrollText",
     "customIcon": "ZTM-logo.png",
-    "href": "coming-soon"
+    "href": "/coming-soon"
   },
   {
     "label": "JavaScript: The Advanced Concepts",
     "icon": "ScrollText",
     "customIcon": "ZTM-logo.png",
-    "href": "coming-soon"
+    "href": "/coming-soon"
   },
   {
     "label": "TypeScript Bootcamp: Zero to Mastery",
     "icon": "ScrollText",
     "customIcon": "ZTM-logo.png",
-    "href": "coming-soon"
+    "href": "/coming-soon"
   }
 ]
