@@ -7,7 +7,7 @@ import RecommendedCarousel from "@/components/RecommendedCarousel";
 import fakeRecentActivityData from "@/constants/fakeRecentActivityData.json";
 import fakeRecommendedActivityData from "@/constants/fakeRecommendedData.json";
 
-function MainPage() {
+function DashboardPage() {
   const { userProfile } = useUserContext();
 
   return (
@@ -35,4 +35,4 @@ function MainPage() {
   );
 }
 
-export default MainPage;
+export default DashboardPage;
