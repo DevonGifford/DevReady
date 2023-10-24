@@ -1,6 +1,7 @@
-'use client';
+"use client";
 
 import { DatabaseContextProvider } from "@/components/providers/DatabaseProvider";
+import { QuizContextProvider } from "@/components/providers/QuizzProvider";
 
 export default function FlashCardsLayout({
   children,
@@ -9,7 +10,13 @@ export default function FlashCardsLayout({
 }) {
   return (
     <>
-      <DatabaseContextProvider>{children}</DatabaseContextProvider>
+      <DatabaseContextProvider>
+        <QuizContextProvider>
+
+        {children}
+
+        </QuizContextProvider>
+      </DatabaseContextProvider>
     </>
   );
 }
