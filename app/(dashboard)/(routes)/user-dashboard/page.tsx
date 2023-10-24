@@ -5,7 +5,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import RecentActivityCarousel from "@/components/RecentActivityCarousel";
 import RecommendedCarousel from "@/components/RecommendedCarousel";
 import CurrentRank from "./_components/CurrentRank";
-import EarnedBadges from "./_components/EarnedBadges";
+import EarnedBadges from "../../../../components/EarnedBadges";
 import RatingHistory from "./_components/RatingHistory";
 
 import fakeRecentActivityData from "@/constants/fakeRecentActivityData.json";
