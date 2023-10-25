@@ -1,6 +1,6 @@
 <!-- Introduction Text -->
 <div align="center">
-  <a href='🎯', target='_blank'>
+  <a href='https://ztm-ready-portfolio-project.vercel.app/', target='_blank'>
     <h1>ZTMReady - Flash Card App</h1>
     <h3>Fullstack Application</h3>
     <h3>Currently a work in progress</h3>
