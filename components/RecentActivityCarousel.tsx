@@ -29,7 +29,7 @@ const RecentActivityCarousel: React.FC<RecentActivityCarouselProps> = ({
     <Card className="w-full pb-10 bg-transparent">
       <CardHeader>
         <h3 className="text-xl lg:text-2xl text-center lg:text-start text-devready-green font-bold tracking-widest pb-10">
-          {title}
+          {title}:
         </h3>
       </CardHeader>
       <CardContent className="flex flex-row w-full justify-center items-center">

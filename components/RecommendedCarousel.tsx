@@ -40,7 +40,7 @@ const RecommendedCarousel: React.FC<RecommendedCarouselProps> = ({ data }) => {
   return (
     <div>
       <h3 className="text-xl lg:text-2xl text-devready-green font-bold tracking-widest pb-4">
-        Recommended for you
+        Recommended for you:
       </h3>
 
       <Carousel className="w-full">
