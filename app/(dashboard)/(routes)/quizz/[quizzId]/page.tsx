@@ -2,32 +2,25 @@
 
 import { useEffect, useState } from "react";
 import { notFound, useRouter, useSearchParams } from "next/navigation";
-import { useDatabaseContext } from "@/components/providers/DatabaseProvider";
 import { Button } from "@/components/ui/button";
 import { LucideXSquare } from "lucide-react";
 
-import QuizComponent from "../_components/flashcard-quizz";
+import QuizApplication from "../_components/quizApplication";
 import QuizWelcome from "../_components/quizWelcome";
 import QuizResults from "../_components/quizResults";
 
-// import questionsData from "@/constants/TestQuestion.json"; // 👈🦺 Temporary solution for development purposes (mock Data)
-// import mockDB from "@/constants/mockDB.json";
-import { QuizQuestion } from "@/types/databaseSchema";
 import { useQuizzContext } from "@/components/providers/QuizzProvider";
 import { quizGeneratingAlgo } from "@/lib/quizGeneratingAlgo";
 import toast from "react-hot-toast";
 
-function FlashcardGame({ params }: { params: { quizzId: string } }) {
+function QuizControl({ params }: { params: { quizzId: string } }) {
   const router = useRouter();
-  const { database } = useDatabaseContext();
   const searchParams = useSearchParams();
-  const { resetQuizResults, setCustomQuizData, quizData } = useQuizzContext();
   const [isLoadingData, setIsLoadingData] = useState(true);
+  const { resetQuizResults, setCustomQuizData, quizData } = useQuizzContext();
 
   const paramsQuizzId = params.quizzId; // 👈 Reference, check and fetch data from local DB
   const pageId = searchParams.get("pageId"); // 👈 Renders different component pages accordingly
-
-  // const testQuestions: QuizQuestion[] = mockDB[0].setData; // 👈🦺 Temporary solution for development purposes (mock Data)
 
   // ✅ SERVE NOT FOUND IF NO SPECIFIC QUEREY
   // 👇 If the selected quizz ID doesn't match any in the database, redirect to a not-found page
@@ -109,7 +102,8 @@ function FlashcardGame({ params }: { params: { quizzId: string } }) {
       {/* Conditional rendering based on router query */}
       {pageId === "active-quiz" && (
         <>
-          <QuizComponent key="quiz" questions={quizData} />
+          <QuizApplication key="quiz" questions={quizData} />
+          {/* Quit quiz button */}
           <Button
             className="text-xs font-bold translate-y-1/2"
             variant={"outline"}
@@ -134,11 +128,11 @@ function FlashcardGame({ params }: { params: { quizzId: string } }) {
           key="intro"
         />
         // 👇 for development use
-        // <QuizComponent key="quiz" questions={testQuestions} />
+        // <QuizApplication key="quiz" questions={testQuestions} />
         // <QuizResults key="results" />
       )}
     </div>
   );
 }
 
-export default FlashcardGame;
+export default QuizControl;

@@ -26,7 +26,7 @@ const QuizWelcome: React.FC<QuizWelcomeProps> = ({
   // ✅ HANDLE START NOW BUTTON CLICK
   function handleStartNow() {
     if (!quizMetaData || isLoading) {
-      toast("fetching data")
+      toast("fetching data");
       return;
     }
 
@@ -40,13 +40,13 @@ const QuizWelcome: React.FC<QuizWelcomeProps> = ({
       };
       const queryString = new URLSearchParams(queryParams).toString();
       router.push(`?${queryString}`);
-      toast.success("Starting your quiz")
+      toast.success("Starting your quiz");
     } catch (error) {
       //-Handle errors related to router.push here
+      //🔮 consider update:  show a user-friendly message or handle it differently
       console.error("Error navigating:", error);
       Sentry.captureException(error);
       toast.error("something went wrong");
-      //🔮 show a user-friendly message or handle it differently
     }
   }
 

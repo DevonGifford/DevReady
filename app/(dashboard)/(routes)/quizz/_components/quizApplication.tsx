@@ -22,7 +22,7 @@ interface QuizProps {
   questions: QuizQuestion[];
 }
 
-const QuizComponent: React.FC<QuizProps> = ({ questions }) => {
+const QuizApplication: React.FC<QuizProps> = ({ questions }) => {
   const router = useRouter();
   const { updateResults, quizResults } = useQuizzContext();
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -182,4 +182,4 @@ const QuizComponent: React.FC<QuizProps> = ({ questions }) => {
   );
 };
 
-export default QuizComponent;
+export default QuizApplication;
