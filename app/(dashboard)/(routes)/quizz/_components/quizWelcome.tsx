@@ -6,6 +6,7 @@ import { DatabaseSchema } from "@/types/databaseSchema";
 import AssociatedTags from "@/components/AssociatedTags";
 import QuizTypeInstructions, { QuizType } from "./quizTypeIntstructions";
 import { ExternalLinkIcon } from "lucide-react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface QuizWelcomeProps {
   quizMetaData: Partial<DatabaseSchema>;
@@ -35,20 +36,46 @@ const QuizWelcome: React.FC<QuizWelcomeProps> = ({ quizMetaData }) => {
 
   return (
     <>
-      <h1 className="text-xl sm:text-3xl underline underline-offset-8 font-bold tracking-widest">
-        {quizMetaData.setTitle}
-      </h1>
-      <AssociatedTags data={quizMetaData.setTags} />
+      {quizMetaData && quizMetaData.setTitle ? (
+        <h1 className="text-xl sm:text-3xl underline underline-offset-8 font-bold tracking-widest">
+          {quizMetaData.setTitle}
+        </h1>
+      ) : (
+        <Skeleton className="h-10 w-60 rounded-full" />
+      )}
+      {quizMetaData && quizMetaData.setTags ? (
+        <AssociatedTags data={quizMetaData.setTags} />
+      ) : (
+        <div className="flex flex-row gap-1.5">
+          {Array.from({ length: 4 }).map((_, index) => (
+            <Skeleton key={index} className="h-5 w-16 rounded-full" />
+          ))}
+        </div>
+      )}
       <div className="flex flex-col justify-center items-center py-4 gap-4 md:gap-8">
         {/* Quiz Image */}
-        <Avatar className="h-32 w-32">
-          <AvatarImage src={quizMetaData.setImage} alt="profile-picture" />
-          <AvatarFallback>{quizMetaData.setType}</AvatarFallback>
-        </Avatar>
+        {quizMetaData && quizMetaData.setImage ? (
+          <Avatar className="h-32 w-32">
+            <AvatarImage src={quizMetaData.setImage} alt="profile-picture" />
+            <AvatarFallback>
+              <Skeleton className="h-20 w-20 rounded-full" />
+            </AvatarFallback>
+          </Avatar>
+        ) : (
+          <Skeleton className="h-20 w-20 rounded-full" />
+        )}
         {/* Quiz Description */}
-        <div className="text-base italic text-center mx-10 max-w-2xl pb-2">
-          {quizMetaData.setDescription}
-        </div>
+        {quizMetaData && quizMetaData.setDescription ? (
+          <div className="text-base italic text-center mx-10 max-w-2xl pb-2">
+            {quizMetaData.setDescription}
+          </div>
+        ) : (
+          <div className="flex flex-col items-center justify-center gap-3">
+            <Skeleton className="h-5 w-96 rounded-full" />
+            <Skeleton className="h-5 w-80 rounded-full" />
+            <Skeleton className="h-5 w-72 rounded-full" />
+          </div>
+        )}
         {/* Start Button */}
         <Button variant={"devfill"} size={"lg"} onClick={handleStartNow}>
           Start Now
@@ -56,11 +83,13 @@ const QuizWelcome: React.FC<QuizWelcomeProps> = ({ quizMetaData }) => {
       </div>
       <div className="flex flex-col gap-3 py-4 border-4 m-10 rounded-xl">
         {/* Quiz Type Instructions */}
-        <QuizTypeInstructions type={quizMetaData.setType as QuizType} />
+        {quizMetaData && quizMetaData.setImage && (
+          <QuizTypeInstructions type={quizMetaData.setType as QuizType} />
+        )}
         {/* Buttons */}
         <Button variant={"outline"} onClick={handleHowTo} className="gap-2">
           <span>more information</span>
-          <ExternalLinkIcon size={16}/>
+          <ExternalLinkIcon size={16} />
         </Button>
       </div>
     </>
