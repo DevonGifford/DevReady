@@ -7,8 +7,9 @@ import AssociatedTags from "@/components/AssociatedTags";
 import QuizTypeInstructions, { QuizType } from "./quizTypeIntstructions";
 import { ExternalLinkIcon } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useState } from "react";
 import { Spinner } from "@/components/Spinner";
+import * as Sentry from "@sentry/react";
+import toast from "react-hot-toast";
 
 interface QuizWelcomeProps {
   quizMetaData: Partial<DatabaseSchema>;
@@ -25,6 +26,7 @@ const QuizWelcome: React.FC<QuizWelcomeProps> = ({
   // ✅ HANDLE START NOW BUTTON CLICK
   function handleStartNow() {
     if (!quizMetaData || isLoading) {
+      toast("fetching data")
       return;
     }
 
@@ -38,9 +40,12 @@ const QuizWelcome: React.FC<QuizWelcomeProps> = ({
       };
       const queryString = new URLSearchParams(queryParams).toString();
       router.push(`?${queryString}`);
+      toast.success("Starting your quiz")
     } catch (error) {
       //-Handle errors related to router.push here
       console.error("Error navigating:", error);
+      Sentry.captureException(error);
+      toast.error("something went wrong");
       //🔮 show a user-friendly message or handle it differently
     }
   }
