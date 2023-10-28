@@ -95,23 +95,53 @@ export const DatabaseContextProvider = ({
       "🎯event_log:  🎭DatabaseContext/setMockDatabase:  💢 Triggered"
     );
     try {
-      const theMockData: DatabaseSchema[] = mockDB; // Assuming mockDB is an array of DatabaseSchema[]
+      const theMockData: DatabaseSchema[] = mockDB; //- Assuming mockDB is an array of DatabaseSchema[]
 
       const localStorageKey = "ztmready-database";
       const existingMockData = localStorage.getItem(localStorageKey);
+      const currentTimeStamp = new Date().getTime(); //- Current timestamp in milliseconds
 
       if (!existingMockData) {
-        localStorage.setItem(localStorageKey, JSON.stringify(theMockData));
-        setDatabase(theMockData); // Set the entire array into the state
+        const dataWithTimestamp = {
+          timestamp: currentTimeStamp,
+          data: theMockData,
+        };
+        localStorage.setItem(
+          localStorageKey,
+          JSON.stringify(dataWithTimestamp)
+        );
+        setDatabase(theMockData); //- Set the entire array into the state
         console.log(
           "🎯event_log:  🎭DatabaseContext/setMockDatabase:  ✔ Success: Mock data set in database context and local storage."
         );
       } else {
         const parsedMockData = JSON.parse(existingMockData);
-        setDatabase(parsedMockData); // Set the parsed data from local storage into the state
-        console.log(
-          "🎯event_log:  🎭DatabaseContext/setMockDatabase:  ⚠ Warning: DatabaseContext already has mock data from local storage."
-        );
+        const storedTimeStamp = parsedMockData.timestamp;
+
+        //- Check if stored data is older than 24 hours
+        const isDataOld =
+          currentTimeStamp - storedTimeStamp > 24 * 60 * 60 * 1000;
+
+        if (isDataOld) {
+          const dataWithTimestamp = {
+            timestamp: currentTimeStamp,
+            data: theMockData,
+          };
+          localStorage.setItem(
+            localStorageKey,
+            JSON.stringify(dataWithTimestamp)
+          );
+          setDatabase(theMockData); //- Set the entire array into the state
+          console.log(
+            "🎯event_log:  🎭DatabaseContext/setMockDatabase:  ⚠ Warning: Mock data set due to old data in local storage."
+          );
+        } else {
+          //- Use the existing data from local storage
+          setDatabase(parsedMockData.data);
+          console.log(
+            "🎯event_log:  🎭DatabaseContext/setMockDatabase:  ✔ Success: Using existing data from local storage."
+          );
+        }
       }
     } catch (error) {
       console.error(

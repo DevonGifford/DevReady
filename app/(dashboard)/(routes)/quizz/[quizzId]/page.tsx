@@ -35,37 +35,58 @@ function FlashcardGame({ params }: { params: { quizzId: string } }) {
 
   // ✅ FETCH QUIZZ METADATA - title description tags etc.
   const fetchQuizMetadata = () => {
-    const storedData: any[] = JSON.parse(
-      localStorage.getItem("ztmready-database") || "[]"
-    );
+    const localStorageKey = "ztmready-database";
+    const storedData: string | null = localStorage.getItem(localStorageKey);
 
-    const relevantData = storedData.find((data) => data.uuid === paramsQuizzId);
-
-    if (!relevantData) {
+    if (!storedData) {
       console.log(
-        "🎯event_log:  🎇/quizGeneratingAlgo  ❌ Error occurred: no matching data found"
+        "🎯event_log:  🎇/fetchQuizMetadata  ❌ Error occurred: no data found in local storage"
       );
-      return [];
+      return null; // Handle the absence of data
     }
 
-    // Destructure the relevantData object excluding the setData property
-    const { setData, ...dataWithoutSetData } = relevantData;
+    try {
+      const parsedData = JSON.parse(storedData);
 
-    console.log(
-      "Here is that relevantData you asked about good sir without setData",
-      dataWithoutSetData
-    );
+      if (!parsedData.data || !parsedData.timestamp) {
+        console.log(
+          "🎯event_log:  🎇/fetchQuizMetadata  ❌ Error occurred: incomplete data format in local storage"
+        );
+        return null; // Handle incomplete data format
+      }
 
-    // Return or use dataWithoutSetData where needed
-    return dataWithoutSetData;
+      const relevantData = parsedData.data.find(
+        (data: any) => data.uuid === paramsQuizzId
+      );
+
+      if (!relevantData) {
+        console.log(
+          "🎯event_log:  🎇/fetchQuizMetadata  ❌ Error occurred: no matching data found"
+        );
+        return null; // Handle the absence of relevant data
+      }
+
+      const { setData, ...dataWithoutSetData } = relevantData;
+      console.log(
+        "Here is that relevantData you asked about good sir without setData",
+        dataWithoutSetData
+      );
+
+      return dataWithoutSetData;
+    } catch (error) {
+      console.error(
+        "🎯event_log:  🎇/fetchQuizMetadata  ❌ Error occurred while parsing data from local storage:",
+        error
+      );
+      return null; // Handle parsing error
+    }
   };
-  
 
   // ✅ GET CUSTOM QUESTIONS via Algorithm
   const setCustomQuizQuestion = () => {
     // - Call Algo to create custom questions
     // 🎯 need to update the Algo
-    const customQuestionSet: QuizQuestion[] = quizGeneratingAlgo(
+    const customQuestionSet = quizGeneratingAlgo(
       paramsQuizzId,
       10,
       "userHistory"
@@ -73,7 +94,6 @@ function FlashcardGame({ params }: { params: { quizzId: string } }) {
     console.log("customQuestionSet 🎈", customQuestionSet);
     setCustomQuizData(customQuestionSet);
   };
-
 
   // ✅ HOOK TO TRIGGER CUSTOM QUESTION FETCH
   useEffect(() => {

@@ -10,34 +10,51 @@ export function quizGeneratingAlgo(
   quizzID: string,
   userLevel: number,
   userHistory: any // Update this type
-): QuizQuestion[] {
+): QuizQuestion[] | null {
   console.log("🎯event_log:  🎇/quizGeneratingAlgo 💢 Triggered");
 
-  //- Retrieve data from local storage
-  const storedData: any[] = JSON.parse(
-    localStorage.getItem("ztmready-database") || "[]"
-  );
+  const localStorageKey = "ztmready-database";
+  const storedData: string | null = localStorage.getItem(localStorageKey);
 
-  //- Find relevant data based on quizzID
-  const relevantData = storedData.find((data) => data.uuid === quizzID);
-
-  //- If no matching data found, return an empty array or handle case accordingly
-  if (!relevantData) {
+  if (!storedData) {
     console.log(
-      "🎯event_log:  🎇/quizGeneratingAlgo  ❌ Error occured no matching data found"
+      "🎯event_log:  🎇/quizGeneratingAlgo  ❌ Error occurred: no data found in local storage"
     );
-    return [];
+    return null; //🔮 Handle the absence of data
   }
 
-  console.log("Here is that relevantData you asked about good sir", relevantData)
+  try {
+    const parsedData = JSON.parse(storedData);
 
+    if (!parsedData.data || !parsedData.timestamp) {
+      console.log(
+        "🎯event_log:  🎇/quizGeneratingAlgo  ❌ Error occurred: incomplete data format in local storage"
+      );
+      return null; //🔮 Handle incomplete data format
+    }
 
-  //- Retrieve setData property containing quiz questions
-  const quizQuestions: QuizQuestion[] = relevantData.setData;
+    const relevantData = parsedData.data.find(
+      (data: any) => data.uuid === quizzID
+    );
 
-  //- Handle custom logic for selecting questions (based on user level or history)
-  // 🎯 to do list
+    if (!relevantData) {
+      console.log(
+        "🎯event_log:  🎇/quizGeneratingAlgo  ❌ Error occurred: no matching data found"
+      );
+      return null; //🔮 Handle the absence of relevant data
+    }
 
-  // - Return the result
-  return quizQuestions;
+    const quizQuestions: QuizQuestion[] = relevantData.setData;
+
+    //🔮 Handle custom logic for selecting questions (based on user level or history)
+    //🔮 🎯 Add logic here
+
+    return quizQuestions;
+  } catch (error) {
+    console.error(
+      "🎯event_log:  🎇/quizGeneratingAlgo  ❌ Error occurred while parsing data from local storage:",
+      error
+    );
+    return null; //🔮 Handle parsing error
+  }
 }
