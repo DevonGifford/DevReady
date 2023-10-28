@@ -1,3 +1,5 @@
+import toast from "react-hot-toast";
+import * as Sentry from "@sentry/react";
 import { useQuizzContext } from "@/components/providers/QuizzProvider";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -8,11 +10,9 @@ import QuizTypeInstructions, { QuizType } from "./quizTypeIntstructions";
 import { ExternalLinkIcon } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Spinner } from "@/components/Spinner";
-import * as Sentry from "@sentry/react";
-import toast from "react-hot-toast";
 
 interface QuizWelcomeProps {
-  quizMetaData: Partial<DatabaseSchema>;
+  quizMetaData: Partial<DatabaseSchema> | null;
   isLoading: boolean;
 }
 

@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation";
+import { notFound, useRouter } from "next/navigation";
 import { useQuizzContext } from "@/components/providers/QuizzProvider";
 import { useUserContext } from "@/components/providers/UserProvider";
 import { Button } from "@/components/ui/button";
@@ -13,10 +13,19 @@ import { UserProfile } from "@/types/UserProfile";
 
 import mockDB from "@/constants/mockDB.json"; // 👈🦺 Temporary solution for development purposes (mock Data)
 
-function QuizResults() {
+function QuizResults({
+  quizMetaData,
+}: {
+  quizMetaData: DatabaseSchema | null;
+}) {
   const router = useRouter();
   const { quizResults, resetQuizResults } = useQuizzContext();
   const { userProfile, updateUserDataProcess } = useUserContext();
+
+  if (!quizMetaData) {
+    //   notFound();
+    return null; // or a loading state, error message, etc.
+  }
 
   // 👇🦺 Temporary solution for development purposes (mock Data)
   const quizDataMock: DatabaseSchema = mockDB[0];
@@ -60,7 +69,7 @@ function QuizResults() {
   //✅ use quizResults to update user document
   const updateDatabaseHelper = () => {
     //- Logic to identify incorrect answers and extract their questionIDs
-    // 🎯🔮 Update too Local Storage
+    // 🎯🔮 Update Local Storage too
     const resultData = {
       quizID: quizResults?.quizUuid || "unknown",
       incorrectQuestionIDs:
@@ -106,7 +115,7 @@ function QuizResults() {
     <>
       <div className="flex flex-col justify-center items-center space-y-6 -translate-y-6">
         <h1 className="text-3xl underline underline-offset-8 font-bold tracking-widest pb-10 text-center">
-          {quizDataMock.setTitle} Results
+          {quizMetaData?.setTitle || "Quiz Title"} Results
         </h1>
 
         <div className="flex flex-col-reverse xl:flex-row justify-between ">

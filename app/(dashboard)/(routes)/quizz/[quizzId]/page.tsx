@@ -12,12 +12,14 @@ import QuizResults from "../_components/quizResults";
 import { useQuizzContext } from "@/components/providers/QuizzProvider";
 import { quizGeneratingAlgo } from "@/lib/quizGeneratingAlgo";
 import toast from "react-hot-toast";
+import { DatabaseSchema } from "@/types/databaseSchema";
 
 function QuizControl({ params }: { params: { quizzId: string } }) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [isLoadingData, setIsLoadingData] = useState(true);
   const { resetQuizResults, setCustomQuizData, quizData } = useQuizzContext();
+  const [quizMetaData, setQuizMetaData] = useState<DatabaseSchema | null>(null);
 
   const paramsQuizzId = params.quizzId; // 👈 Reference, check and fetch data from local DB
   const pageId = searchParams.get("pageId"); // 👈 Renders different component pages accordingly
@@ -31,9 +33,9 @@ function QuizControl({ params }: { params: { quizzId: string } }) {
   // ✅ FETCH QUIZZ METADATA - title description tags etc.
   const fetchQuizMetadata = () => {
     const localStorageKey = "ztmready-database";
-    const storedData: string | null = localStorage.getItem(localStorageKey);
+    const localDB: string | null = localStorage.getItem(localStorageKey);
 
-    if (!storedData) {
+    if (!localDB) {
       console.log(
         "🎯event_log:  🎇/fetchQuizMetadata  ❌ Error occurred: no data found in local storage"
       );
@@ -41,7 +43,7 @@ function QuizControl({ params }: { params: { quizzId: string } }) {
     }
 
     try {
-      const parsedData = JSON.parse(storedData);
+      const parsedData = JSON.parse(localDB);
 
       if (!parsedData.data || !parsedData.timestamp) {
         console.log(
@@ -62,10 +64,6 @@ function QuizControl({ params }: { params: { quizzId: string } }) {
       }
 
       const { setData, ...dataWithoutSetData } = relevantData;
-      console.log(
-        "Here is that relevantData you asked about good sir without setData",
-        dataWithoutSetData
-      );
 
       return dataWithoutSetData;
     } catch (error) {
@@ -93,6 +91,8 @@ function QuizControl({ params }: { params: { quizzId: string } }) {
   // ✅ HOOK TO TRIGGER CUSTOM QUESTION FETCH
   useEffect(() => {
     setCustomQuizQuestion(); // Call setCustomQuizQuestion once on initial render
+    const metaQuizData = fetchQuizMetadata();
+    setQuizMetaData(metaQuizData);
     setIsLoadingData(false); // Turn off loading once data is set
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -118,12 +118,14 @@ function QuizControl({ params }: { params: { quizzId: string } }) {
           </Button>
         </>
       )}
-      {pageId === "results-page" && <QuizResults key="results" />}
+      {pageId === "results-page" && (
+        <QuizResults quizMetaData={quizMetaData} key="results" />
+      )}
 
       {/* Render 'go back to previous form' button or render first form */}
       {!pageId && (
         <QuizWelcome
-          quizMetaData={fetchQuizMetadata()}
+          quizMetaData={quizMetaData}
           isLoading={isLoadingData}
           key="intro"
         />

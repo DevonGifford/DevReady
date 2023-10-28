@@ -1,5 +1,6 @@
 "use client";
 
+import * as Sentry from "@sentry/react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -28,22 +29,24 @@ const QuizApplication: React.FC<QuizProps> = ({ questions }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showAnswer, setShowAnswer] = useState(false);
 
-  console.log('quizResults', quizResults)
-
-  const handleNextCard = () => {
-    if (currentQuestion < questions.length - 1) {
-      console.log(currentQuestion);
-      setCurrentQuestion(currentQuestion + 1);
-      setShowAnswer(false);
-    } else {
-      //- handle if final question -> redirect complete
-      toast("Quiz Complete");
-      const queryParams = {
-        pageId: "results-page",
-      };
-
-      const queryString = new URLSearchParams(queryParams).toString();
-      router.push(`?${queryString}`);
+  const handleNextCard = async () => {
+    try {
+      //- handle if there are more questions
+      if (currentQuestion < questions.length - 1) {
+        setCurrentQuestion(currentQuestion + 1);
+        setShowAnswer(false);
+      } else {
+        //- handle if final question -> redirect complete
+        const queryParams = {
+          pageId: "results-page",
+        };
+        const queryString = new URLSearchParams(queryParams).toString();
+        router.push(`?${queryString}`);
+        toast.success("Quiz Completed!");
+      }
+    } catch (error) {
+      toast.error("Failed to complete the quiz.");
+      Sentry.captureException(error);
     }
   };
 
