@@ -15,6 +15,7 @@ import QuizResults from "../_components/quizResults";
 import { QuizQuestion } from "@/types/databaseSchema";
 import { useQuizzContext } from "@/components/providers/QuizzProvider";
 import { quizGeneratingAlgo } from "@/lib/quizGeneratingAlgo";
+import toast from "react-hot-toast";
 
 function FlashcardGame({ params }: { params: { quizzId: string } }) {
   const router = useRouter();
@@ -107,25 +108,31 @@ function FlashcardGame({ params }: { params: { quizzId: string } }) {
     <div className="flex flex-col h-auto py-24 md:h-screen items-center justify-center space-y-4 overflow-scroll">
       {/* Conditional rendering based on router query */}
       {pageId === "active-quiz" && (
-        <QuizComponent key="quiz" questions={quizData} />
+        <>
+          <QuizComponent key="quiz" questions={quizData} />
+          <Button
+            className="text-xs font-bold translate-y-1/2"
+            variant={"outline"}
+            size={"sm"}
+            onClick={() => {
+              router.back();
+              resetQuizResults();
+              toast("Quiz cancelled");
+            }}
+          >
+            <LucideXSquare size={16} /> Quit Quiz
+          </Button>
+        </>
       )}
       {pageId === "results-page" && <QuizResults key="results" />}
 
       {/* Render 'go back to previous form' button or render first form */}
-      {pageId ? (
-        <Button
-          className="text-xs font-bold translate-y-1/2"
-          variant={"outline"}
-          size={"sm"}
-          onClick={() => {
-            router.back();
-            resetQuizResults();
-          }}
-        >
-          <LucideXSquare size={16} /> Quit Quiz
-        </Button>
-      ) : (
-        <QuizWelcome quizMetaData={fetchQuizMetadata()} isLoading={isLoadingData} key="intro" />
+      {!pageId && (
+        <QuizWelcome
+          quizMetaData={fetchQuizMetadata()}
+          isLoading={isLoadingData}
+          key="intro"
+        />
         // 👇 for development use
         // <QuizComponent key="quiz" questions={testQuestions} />
         // <QuizResults key="results" />
