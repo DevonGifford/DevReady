@@ -1,5 +1,6 @@
 "use client"; //👈 req for error boundary
 
+import { useEffect, useState } from "react";
 import { notFound, useRouter, useSearchParams } from "next/navigation";
 import { useDatabaseContext } from "@/components/providers/DatabaseProvider";
 import { Button } from "@/components/ui/button";
@@ -14,13 +15,13 @@ import QuizResults from "../_components/quizResults";
 import { QuizQuestion } from "@/types/databaseSchema";
 import { useQuizzContext } from "@/components/providers/QuizzProvider";
 import { quizGeneratingAlgo } from "@/lib/quizGeneratingAlgo";
-import { useEffect } from "react";
 
 function FlashcardGame({ params }: { params: { quizzId: string } }) {
   const router = useRouter();
   const { database } = useDatabaseContext();
   const searchParams = useSearchParams();
   const { resetQuizResults, setCustomQuizData, quizData } = useQuizzContext();
+  const [isLoadingData, setIsLoadingData] = useState(true);
 
   const paramsQuizzId = params.quizzId; // 👈 Reference, check and fetch data from local DB
   const pageId = searchParams.get("pageId"); // 👈 Renders different component pages accordingly
@@ -98,6 +99,7 @@ function FlashcardGame({ params }: { params: { quizzId: string } }) {
   // ✅ HOOK TO TRIGGER CUSTOM QUESTION FETCH
   useEffect(() => {
     setCustomQuizQuestion(); // Call setCustomQuizQuestion once on initial render
+    setIsLoadingData(false); // Turn off loading once data is set
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -123,7 +125,7 @@ function FlashcardGame({ params }: { params: { quizzId: string } }) {
           <LucideXSquare size={16} /> Quit Quiz
         </Button>
       ) : (
-        <QuizWelcome quizMetaData={fetchQuizMetadata()} key="intro" />
+        <QuizWelcome quizMetaData={fetchQuizMetadata()} isLoading={isLoadingData} key="intro" />
         // 👇 for development use
         // <QuizComponent key="quiz" questions={testQuestions} />
         // <QuizResults key="results" />

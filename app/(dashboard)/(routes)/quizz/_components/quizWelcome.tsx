@@ -7,28 +7,42 @@ import AssociatedTags from "@/components/AssociatedTags";
 import QuizTypeInstructions, { QuizType } from "./quizTypeIntstructions";
 import { ExternalLinkIcon } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useState } from "react";
+import { Spinner } from "@/components/Spinner";
 
 interface QuizWelcomeProps {
   quizMetaData: Partial<DatabaseSchema>;
+  isLoading: boolean;
 }
 
-const QuizWelcome: React.FC<QuizWelcomeProps> = ({ quizMetaData }) => {
+const QuizWelcome: React.FC<QuizWelcomeProps> = ({
+  quizMetaData,
+  isLoading,
+}) => {
   const router = useRouter();
   const { resetQuizResults } = useQuizzContext();
 
   // ✅ HANDLE START NOW BUTTON CLICK
   function handleStartNow() {
-    console.log("🎯event-log:  📝Quiz/Welcome/StartNow:  💢 Triggered");
+    if (!quizMetaData || isLoading) {
+      return;
+    }
 
-    // - ensure quiz state is in default state
-    resetQuizResults();
-
-    // - re-route with querey params
-    const queryParams = {
-      pageId: "active-quiz",
-    };
-    const queryString = new URLSearchParams(queryParams).toString();
-    router.push(`?${queryString}`);
+    try {
+      console.log("🎯event-log:  📝Quiz/Welcome/StartNow:  💢 Triggered");
+      // - ensure quiz state is in default state
+      resetQuizResults();
+      // - re-route with querey params
+      const queryParams = {
+        pageId: "active-quiz",
+      };
+      const queryString = new URLSearchParams(queryParams).toString();
+      router.push(`?${queryString}`);
+    } catch (error) {
+      //-Handle errors related to router.push here
+      console.error("Error navigating:", error);
+      //🔮 show a user-friendly message or handle it differently
+    }
   }
 
   // 🎯 HANDLE HOW IT WORKS BUTTON CLICK
@@ -77,8 +91,13 @@ const QuizWelcome: React.FC<QuizWelcomeProps> = ({ quizMetaData }) => {
           </div>
         )}
         {/* Start Button */}
-        <Button variant={"devfill"} size={"lg"} onClick={handleStartNow}>
-          Start Now
+        <Button
+          variant={"devfill"}
+          size={"lg"}
+          onClick={handleStartNow}
+          disabled={!quizMetaData || isLoading}
+        >
+          {isLoading ? <Spinner /> : <span>Start Now</span>}
         </Button>
       </div>
       <div className="flex flex-col gap-3 py-4 border-4 m-10 rounded-xl">
