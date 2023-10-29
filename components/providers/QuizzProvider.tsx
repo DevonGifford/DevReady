@@ -2,13 +2,13 @@
 
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { Spinner } from "../Spinner";
-import { QuizResultsSchema, QuizSchema } from "@/types/quizzSchema";
+import { QuizResultsSchema, QuizSchema, usersInput } from "@/types/quizzSchema";
 
 type QuizzContextProps = {
   quizData: QuizSchema | undefined;
   quizResults: QuizResultsSchema | undefined;
   generateQuizData: () => {};
-  updateResults: () => {};
+  updateResults: (newResults: Partial<QuizResultsSchema>) => Promise<void>;
   updateUser: () => {};
 };
 
@@ -51,7 +51,7 @@ export const QuizContextProvider = ({
   }, []); // Empty dependency array ensures it runs only once on mount
 
   /**
-   * ✅ HANDLE SETTING QUIZZ DATA
+   * ✅ HANDLE SETTING QUIZZ DATA - quizz welcome page
    */
   const generateQuizData = async () => {
     console.log(
@@ -60,14 +60,57 @@ export const QuizContextProvider = ({
   };
 
   /**
-   * ✅ HANDLE UPDATING STATE
+   * ✅ HANDLE UPDATING STATE - quizz application page
    */
-  const updateResults = async () => {
-    console.log("🎯event_log:  ❓quizzProvider/updateResults:  💢 Triggered ");
+  const updateResults = async (
+    newResults: Partial<QuizResultsSchema>
+  ): Promise<void> => {
+    return new Promise<void>((resolve, reject) => {
+      setQuizResults((prevResults) => {
+        if (!prevResults) {
+          // If no previous results exist, initialize usersAnswers with new data
+          return {
+            quizUuid: newResults.quizUuid || "", // Update with appropriate value
+            usersAnswers: newResults.usersAnswers || [], // Update with appropriate value
+          };
+        } else {
+          // If previous results exist, merge or update usersAnswers
+          const updatedUserAnswers = newResults.usersAnswers || [];
+
+          // Update existing user answers or add new ones
+          const mergedUsersAnswers = updatedUserAnswers.reduce(
+            (acc: usersInput[], newAnswer: usersInput) => {
+              const existingIndex = prevResults.usersAnswers.findIndex(
+                (existingAnswer) =>
+                  existingAnswer.questionUuid === newAnswer.questionUuid
+              );
+
+              if (existingIndex !== -1) {
+                // If an answer for the question exists, update it
+                acc[existingIndex] = newAnswer;
+              } else {
+                // If answer doesn't exist, add it to the array
+                acc.push(newAnswer);
+              }
+
+              return acc;
+            },
+            [...prevResults.usersAnswers] // Copy existing answers
+          );
+
+          return {
+            ...prevResults,
+            usersAnswers: mergedUsersAnswers,
+          };
+        }
+      });
+
+      resolve(); // Resolve here after the state has been updated
+    });
   };
 
   /**
-   * ✅ HANLDE UPDATING USERCONTEXT
+   * ✅ HANLDE UPDATING USERCONTEXT - quizz results page
    */
   const updateUser = async () => {
     console.log("🎯event_log:  ❓quizzProvider/updateUser:    💢 Triggered ");

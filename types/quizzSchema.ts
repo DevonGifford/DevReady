@@ -14,9 +14,12 @@ export interface QuizSchema {
   questions: QuizQuestions[];
 }
 
+export interface usersInput {
+  questionUuid: number;
+  selectedAnswer: ["True" | "False" | "Skipped"];
+}
+
 export interface QuizResultsSchema {
   quizUuid: string; // References the UUID of the quiz
-  questionUuid: number; // References the UUID of the answered question
-  userAnswer: string; // User's answer to the question
-  isCorrect: boolean; // Indicates whether the user's answer is correct
+  usersAnswers: usersInput[];
 }

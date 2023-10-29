@@ -14,7 +14,7 @@
     ],
     "setData": [
       {
-        "uuid": 1,
+        "questionUuid": 1,
         "questionTitle": "What is Javascript?",
         "questionDescription": "Can you spend 2 minutes explaing to me what JavaScript is",
         "questionAnswer": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
@@ -22,7 +22,7 @@
         "questionTags": ["JS", "TS", "React"]
       },
       {
-        "uuid": 2,
+        "questionUuid": 2,
         "questionTitle": "What is ECMAScript?",
         "questionDescription": "In a sentance, 'have you seen the latest ECMAScript changes?'",
         "questionAnswer": "It is a standard specification for scripting languages. JavaScript is based on ECMAScript.",
@@ -30,7 +30,7 @@
         "questionTags": ["JS"]
       },
       {
-        "uuid": 3,
+        "questionUuid": 3,
         "questionTitle": "What is the difference between == and ===?",
         "questionDescription": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
         "questionAnswer": "== compares values. === compares both type and value.",
@@ -54,7 +54,7 @@
     ],
     "setData": [
       {
-        "uuid": 1,
+        "questionUuid": 1,
         "questionTitle": "What is Javascript?",
         "questionDescription": "Can you spend 2 minutes explaing to me what JavaScript is",
         "questionAnswer": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
@@ -62,7 +62,7 @@
         "questionTags": ["JS", "TS", "React"]
       },
       {
-        "uuid": 2,
+        "questionUuid": 2,
         "questionTitle": "What is ECMAScript?",
         "questionDescription": "In a sentance, 'have you seen the latest ECMAScript changes?'",
         "questionAnswer": "It is a standard specification for scripting languages. JavaScript is based on ECMAScript.",
@@ -70,7 +70,7 @@
         "questionTags": ["JS"]
       },
       {
-        "uuid": 3,
+        "questionUuid": 3,
         "questionTitle": "What is the difference between == and ===?",
         "questionDescription": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
         "questionAnswer": "== compares values. === compares both type and value.",
@@ -94,7 +94,7 @@
     ],
     "setData": [
       {
-        "uuid": 1,
+        "questionUuid": 1,
         "questionTitle": "What is Javascript?",
         "questionDescription": "Can you spend 2 minutes explaing to me what JavaScript is",
         "questionAnswer": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
@@ -102,7 +102,7 @@
         "questionTags": ["JS", "TS", "React"]
       },
       {
-        "uuid": 2,
+        "questionUuid": 2,
         "questionTitle": "What is ECMAScript?",
         "questionDescription": "In a sentance, 'have you seen the latest ECMAScript changes?'",
         "questionAnswer": "It is a standard specification for scripting languages. JavaScript is based on ECMAScript.",
@@ -110,7 +110,7 @@
         "questionTags": ["JS"]
       },
       {
-        "uuid": 3,
+        "questionUuid": 3,
         "questionTitle": "What is the difference between == and ===?",
         "questionDescription": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
         "questionAnswer": "== compares values. === compares both type and value.",

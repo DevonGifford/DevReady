@@ -13,12 +13,6 @@ import questionsData from "@/constants/TestQuestion.json"; // 👈🦺 Temporary
 import mockDB from "@/constants/mockDB.json";
 import { QuizQuestion } from "@/types/databaseSchema";
 
-interface Question {
-  id: number;
-  question: string;
-  answer: string;
-}
-
 function FlashcardGame({ params }: { params: { quizzId: string } }) {
   const router = useRouter();
   const { database } = useDatabaseContext();

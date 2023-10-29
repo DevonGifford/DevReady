@@ -1,5 +1,5 @@
 export interface QuizQuestion {
-  uuid: number;
+  questionUuid: number;
   questionTitle: string;
   questionDescription?: string;
   questionAnswer: string;
@@ -34,7 +34,7 @@ export const quickSampleDatabaseData: DatabaseSchema[] = [
     ],
     setData: [
       {
-        uuid: 1,
+        questionUuid: 1,
         questionTitle: "What is Javascript?",
         questionDescription:
           "Can you spend 2 minutes explaining to me what JavaScript is",

@@ -26,7 +26,7 @@ const CustomPieChart: React.FC<CustomPieChartProps> = ({ pieData }) => {
             <span className="legend-label font-semibold">
               {entry.name}: {"  "}{" "}
             </span>
-            <span className="legend-result">{entry.value}%</span>
+            <span className="legend-result">{Math.round(entry.value)}%</span>
           </div>
         </div>
       ))}

@@ -8,46 +8,103 @@ import CustomPieChart from "./pieChart";
 import GradeStamp from "./gradeStamp";
 
 import { DatabaseSchema } from "@/types/databaseSchema";
-import { QuizResultsSchema } from "@/types/quizzSchema";
+import { QuizResultsSchema, usersInput } from "@/types/quizzSchema";
 
 import mockDB from "@/constants/mockDB.json"; // 👈🦺 Temporary solution for development purposes (mock Data)
 
 function QuizResults() {
   const router = useRouter();
-  const {} = useQuizzContext();
-  const {} = useUserContext();
+  const { quizResults } = useQuizzContext();
+  const { updateUserDataProcess } = useUserContext();
 
   // 👇🦺 Temporary solution for development purposes (mock Data)
   const quizDataMock: DatabaseSchema = mockDB[0];
-  const pieDataMock = [
-    { name: "Correct", value: 30 },
-    { name: "Incorrect", value: 25 },
-    { name: "Skipped", value: 45 },
-  ];
 
-  // 🎯 CALCULATE GRADE STAMP
-  function manageGradeStamp() {}
+  // ✅ Use quizResults to calculate the pie chart values
+  const calculatePieChartData = () => {
+    const totalQuestions = 3; //🎯 UPDATE REQ _ HARD CODED
 
-  // 🎯 CALCULATE QUIZ GRAPH
-  function manageGraphData() {}
+    const correctCount =
+      quizResults?.usersAnswers.filter((answer: usersInput) =>
+        answer.selectedAnswer.includes("True")
+      ).length || 0;
+
+    const incorrectCount =
+      quizResults?.usersAnswers.filter((answer: usersInput) =>
+        answer.selectedAnswer.includes("False")
+      ).length || 0;
+
+    const skippedCount = totalQuestions - correctCount - incorrectCount;
+
+    const pieData = [
+      { name: "Correct", value: (correctCount / totalQuestions) * 100 },
+      { name: "Incorrect", value: (incorrectCount / totalQuestions) * 100 },
+      { name: "Skipped", value: (skippedCount / totalQuestions) * 100 },
+    ];
+    return pieData;
+  };
+
+  // ✅ Use quizResults to calculate the grade stamp
+  const calculateGradeStamp = () => {
+    const totalQuestions = 3; //🎯 UPDATE REQ _ HARD CODED
+
+    const correctCount =
+      quizResults?.usersAnswers.filter((answer: usersInput) =>
+        answer.selectedAnswer.includes("True")
+      ).length || 0;
+    const score = (correctCount / totalQuestions) * 100;
+    return score;
+  };
 
   // 🎯 HANDLE RESTART FLASHCARD GAME
   function handleRestart() {
-    // - router.push
-    // - same set or recalculate? - sameset..
-    // - update context with this data?  - yes, locally....
-    const queryParams = {
-      pageId: "",
+    //- Prepare result data for uploading to Firestore
+    //- Logic to identify incorrect answers and extract their questionIDs
+    const resultData = {
+      quizID: quizResults?.quizUuid || "",
+      incorrectQuestionIDs:
+        quizResults?.usersAnswers
+          .filter(
+            (answer: { selectedAnswer: string }) =>
+              answer.selectedAnswer === "False"
+          )
+          .map((answer: { questionUuid: any }) => answer.questionUuid) || [],
     };
-    const queryString = new URLSearchParams(queryParams).toString();
+  
+    // 🎯 Update user document & Local Storage
+    // updateUserDataProcess(
+    //   documentId: string,
+    //   newData: Partial<UserProfile>
+    // );
+
+    // -🎯 reset the useQuizz Context
+
+    // - Navigate back to quizz
     router.back();
   }
 
   // 🎯 HANDLE GO BACK HOME
   function handleHome() {
-    // - router.push
-    // - update user Document with new data
-    // - update local Storage with new data
+    //- Prepare result data for uploading to Firestore
+    //- Logic to identify incorrect answers and extract their questionIDs
+    const resultData = {
+      quizID: quizResults?.quizUuid || "",
+      incorrectQuestionIDs:
+        quizResults?.usersAnswers
+          .filter(
+            (answer: { selectedAnswer: string }) =>
+              answer.selectedAnswer === "False"
+          )
+          .map((answer: { questionUuid: any }) => answer.questionUuid) || [],
+    };
+
+    // 🎯 Update user document & Local Storage
+    // updateUserDataProcess(
+    //   documentId: string,
+    //   newData: Partial<UserProfile>
+    // );
+
+    //- Navigate back to the dashboard or home page
     router.push(`/dashboard`);
   }
 
@@ -60,9 +117,9 @@ function QuizResults() {
 
         <div className="flex flex-col-reverse xl:flex-row justify-between ">
           <div className="flex flex-col w-full">
-            <CustomPieChart pieData={pieDataMock} />
+            <CustomPieChart pieData={calculatePieChartData()} />
           </div>
-          <GradeStamp score={91} />
+          <GradeStamp score={calculateGradeStamp()} />
         </div>
 
         <div className="flex flex-col gap-5 pt-10">
