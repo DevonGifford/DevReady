@@ -12,11 +12,13 @@ import QuizResults from "../_components/quizResults";
 import questionsData from "@/constants/TestQuestion.json"; // 👈🦺 Temporary solution for development purposes (mock Data)
 import mockDB from "@/constants/mockDB.json";
 import { QuizQuestion } from "@/types/databaseSchema";
+import { useQuizzContext } from "@/components/providers/QuizzProvider";
 
 function FlashcardGame({ params }: { params: { quizzId: string } }) {
   const router = useRouter();
   const { database } = useDatabaseContext();
   const searchParams = useSearchParams();
+  const { resetQuizResults } = useQuizzContext();
 
   const paramsQuizzId = params.quizzId; // 👈 Reference, check and fetch data from local DB
   const pageId = searchParams.get("pageId"); // 👈 Renders different component pages accordingly
@@ -37,7 +39,7 @@ function FlashcardGame({ params }: { params: { quizzId: string } }) {
     notFound();
   }
 
-  // ✅🔮 Run CUSTOM SORTING ALGORITHM HERE
+  // ✅🔮 Run CUSTOM SORTING ALGORITHM HERE - use effect?
   // 🎯 todolist:
   // - History check and custom quizz creation
   // - (or maybe call from the quiz context?)
@@ -58,6 +60,7 @@ function FlashcardGame({ params }: { params: { quizzId: string } }) {
           size={"sm"}
           onClick={() => {
             router.back();
+            resetQuizResults();
           }}
         >
           <LucideXSquare size={16} /> Quit Quiz

@@ -1,6 +1,6 @@
+import { useRouter } from "next/navigation";
 import { useQuizzContext } from "@/components/providers/QuizzProvider";
 import { useUserContext } from "@/components/providers/UserProvider";
-import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { HomeIcon, LucideArrowDownSquare, LucideRepeat2 } from "lucide-react";
 
@@ -8,19 +8,20 @@ import CustomPieChart from "./pieChart";
 import GradeStamp from "./gradeStamp";
 
 import { DatabaseSchema } from "@/types/databaseSchema";
-import { QuizResultsSchema, usersInput } from "@/types/quizzSchema";
+import { usersInput } from "@/types/quizzSchema";
+import { UserProfile } from "@/types/UserProfile";
 
 import mockDB from "@/constants/mockDB.json"; // 👈🦺 Temporary solution for development purposes (mock Data)
 
 function QuizResults() {
   const router = useRouter();
-  const { quizResults } = useQuizzContext();
-  const { updateUserDataProcess } = useUserContext();
+  const { quizResults, resetQuizResults } = useQuizzContext();
+  const { userProfile, updateUserDataProcess } = useUserContext();
 
   // 👇🦺 Temporary solution for development purposes (mock Data)
   const quizDataMock: DatabaseSchema = mockDB[0];
 
-  // ✅ Use quizResults to calculate the pie chart values
+  //✅ use quizResults to calculate the pie chart values
   const calculatePieChartData = () => {
     const totalQuestions = 3; //🎯 UPDATE REQ _ HARD CODED
 
@@ -44,7 +45,7 @@ function QuizResults() {
     return pieData;
   };
 
-  // ✅ Use quizResults to calculate the grade stamp
+  //✅ use quizResults to calculate the grade stamp
   const calculateGradeStamp = () => {
     const totalQuestions = 3; //🎯 UPDATE REQ _ HARD CODED
 
@@ -56,12 +57,12 @@ function QuizResults() {
     return score;
   };
 
-  // 🎯 HANDLE RESTART FLASHCARD GAME
-  function handleRestart() {
-    //- Prepare result data for uploading to Firestore
+  //✅ use quizResults to update user document
+  const updateDatabaseHelper = () => {
     //- Logic to identify incorrect answers and extract their questionIDs
+    // 🎯🔮 Update too Local Storage
     const resultData = {
-      quizID: quizResults?.quizUuid || "",
+      quizID: quizResults?.quizUuid || "unknown",
       incorrectQuestionIDs:
         quizResults?.usersAnswers
           .filter(
@@ -70,42 +71,35 @@ function QuizResults() {
           )
           .map((answer: { questionUuid: any }) => answer.questionUuid) || [],
     };
-  
-    // 🎯 Update user document & Local Storage
-    // updateUserDataProcess(
-    //   documentId: string,
-    //   newData: Partial<UserProfile>
-    // );
+    //- Prepare data for uploading to Firestore
+    const newData: Partial<UserProfile> = {
+      history: {
+        quizCompleted: [
+          {
+            quizID: resultData.quizID,
+            incorrectQuestionIDs: resultData.incorrectQuestionIDs,
+          },
+        ],
+      },
+    };
 
-    // -🎯 reset the useQuizz Context
+    // console.log('newData', newData)
+    //- Update user document & Local Storage
+    updateUserDataProcess(userProfile?.uuid!, newData);
+  };
 
-    // - Navigate back to quizz
-    router.back();
+  //✅ HANDLE RESTART FLASHCARD GAME
+  function handleRestart() {
+    updateDatabaseHelper(); //- save users answers
+    resetQuizResults(); //- reset the context
+    router.back(); //- re-route
   }
 
-  // 🎯 HANDLE GO BACK HOME
+  //✅ HANDLE GO BACK HOME
   function handleHome() {
-    //- Prepare result data for uploading to Firestore
-    //- Logic to identify incorrect answers and extract their questionIDs
-    const resultData = {
-      quizID: quizResults?.quizUuid || "",
-      incorrectQuestionIDs:
-        quizResults?.usersAnswers
-          .filter(
-            (answer: { selectedAnswer: string }) =>
-              answer.selectedAnswer === "False"
-          )
-          .map((answer: { questionUuid: any }) => answer.questionUuid) || [],
-    };
-
-    // 🎯 Update user document & Local Storage
-    // updateUserDataProcess(
-    //   documentId: string,
-    //   newData: Partial<UserProfile>
-    // );
-
-    //- Navigate back to the dashboard or home page
-    router.push(`/dashboard`);
+    updateDatabaseHelper(); //- save users answers
+    resetQuizResults(); //- reset the context
+    router.push(`/dashboard`); //- re-route
   }
 
   return (
@@ -122,7 +116,7 @@ function QuizResults() {
           <GradeStamp score={calculateGradeStamp()} />
         </div>
 
-        <div className="flex flex-col gap-5 pt-10">
+        <div className="flex flex-col gap-12 pt-10">
           <Button size={"lg"} variant={"devfill"} onClick={handleRestart}>
             <LucideRepeat2 size={40} className="mr-5" />
             Try Again
@@ -138,10 +132,10 @@ function QuizResults() {
           </Button>
         </div>
 
-        <div className="flex flex-col justify-center items-center gap-3">
+        {/* <div className="flex flex-col justify-center items-center gap-3">
           <h4 className="text-xl  font-bold tracking-widest">Study Result</h4>
           <LucideArrowDownSquare />
-        </div>
+        </div> */}
       </div>
     </>
   );

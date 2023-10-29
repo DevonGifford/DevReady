@@ -28,6 +28,8 @@ const QuizComponent: React.FC<QuizProps> = ({ questions }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showAnswer, setShowAnswer] = useState(false);
 
+  console.log('quizResults', quizResults)
+
   const handleNextCard = () => {
     if (currentQuestion < questions.length - 1) {
       console.log(currentQuestion);

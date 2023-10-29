@@ -65,6 +65,13 @@ export interface UserProfile {
       value: string;
     };
   };
+
+  history?: {
+    quizCompleted?: {
+      quizID: string;
+      incorrectQuestionIDs: number;
+    }[];
+  };
 }
 
 export const defaultUserProfile: UserProfile = {

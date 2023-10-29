@@ -47,7 +47,7 @@ const GradeStamp: React.FC<GradeStampProps> = ({ score }) => {
     <div
       className={`grade-stamp ${grade.toLowerCase()} flex flex-col items-center justify-center space-y-2`}
     >
-      <div className="grade text-5xl text-devready-green font-bold border-8 border-devready-green rounded-full w-44 h-44 p-20 my-2 mx-10 justify-center items-center flex">
+      <div className="grade text-5xl text-devready-green mt-6 font-bold border-8 border-devready-green rounded-full w-40 h-40 p-20 my-2 mx-10 justify-center items-center flex">
         {grade}
       </div>
       <div className="flex flex-col gap-3 justify-center items-center text-center border-2 rounded-xl p-4">

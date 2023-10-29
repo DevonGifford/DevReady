@@ -10,6 +10,7 @@ type QuizzContextProps = {
   generateQuizData: () => {};
   updateResults: (newResults: Partial<QuizResultsSchema>) => Promise<void>;
   updateUser: () => {};
+  resetQuizResults: () => void;
 };
 
 // 👇 AUTH CONTEXT => exposing following...
@@ -19,6 +20,7 @@ const QuizzContext = createContext<QuizzContextProps>({
   generateQuizData: async () => {},
   updateResults: async () => {},
   updateUser: async () => {},
+  resetQuizResults: async () => {},
 });
 
 // - Arrow Function Shorthand:
@@ -49,6 +51,17 @@ export const QuizContextProvider = ({
       // ⏳ Add clean-up logic
     };
   }, []); // Empty dependency array ensures it runs only once on mount
+
+  /**
+   * ✅ Resetting Quiz Results to Default
+   */
+  const resetQuizResults = () => {
+    const defaultQuizResults: QuizResultsSchema = {
+      quizUuid: "",
+      usersAnswers: [],
+    };
+    setQuizResults(defaultQuizResults);
+  };
 
   /**
    * ✅ HANDLE SETTING QUIZZ DATA - quizz welcome page
@@ -121,6 +134,7 @@ export const QuizContextProvider = ({
     quizResults,
     generateQuizData,
     updateResults,
+    resetQuizResults,
     updateUser,
   };
 
