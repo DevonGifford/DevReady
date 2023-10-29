@@ -10,6 +10,8 @@ import QuizWelcome from "../_components/quizWelcome";
 import QuizResults from "../_components/quizResults";
 
 import questionsData from "@/constants/TestQuestion.json"; // 👈🦺 Temporary solution for development purposes (mock Data)
+import mockDB from "@/constants/mockDB.json";
+import { QuizQuestion } from "@/types/databaseSchema";
 
 interface Question {
   id: number;
@@ -22,11 +24,10 @@ function FlashcardGame({ params }: { params: { quizzId: string } }) {
   const { database } = useDatabaseContext();
   const searchParams = useSearchParams();
 
-  const paramsQuizzId = params.quizzId;      // 👈 Reference, check and fetch data from local DB
+  const paramsQuizzId = params.quizzId; // 👈 Reference, check and fetch data from local DB
   const pageId = searchParams.get("pageId"); // 👈 Renders different component pages accordingly
 
-  const testQuestions: Question[] = questionsData;  // 👈🦺 Temporary solution for development purposes (mock Data)
-
+  const testQuestions: QuizQuestion[] = mockDB[0].setData; // 👈🦺 Temporary solution for development purposes (mock Data)
 
   // ✅ FIND QUIZZ IN DB BASED ON QUEREY STRING
   if (database) {
