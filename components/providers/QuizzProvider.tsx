@@ -3,12 +3,12 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { Spinner } from "../Spinner";
 import { QuizResultsSchema, usersInput } from "@/types/quizzSchema";
-import { QuizQuestion } from "@/types/databaseSchema";
+import { DatabaseSchema, QuizQuestion } from "@/types/databaseSchema";
 
 type QuizzContextProps = {
-  quizData: QuizQuestion[] | undefined;
+  quizData: DatabaseSchema | undefined;
   quizResults: QuizResultsSchema | undefined;
-  setCustomQuizData: (customQuestions: QuizQuestion[]) => {};
+  setCustomQuizData: (customQuizData: DatabaseSchema) => {};
   updateResults: (newResults: Partial<QuizResultsSchema>) => Promise<void>;
   resetQuizResults: () => void;
 };
@@ -31,7 +31,7 @@ export const QuizContextProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [quizData, setQuizData] = useState<QuizQuestion[]>();
+  const [quizData, setQuizData] = useState<DatabaseSchema>();
   const [quizResults, setQuizResults] = useState<QuizResultsSchema>();
   const [loading, setLoading] = useState<Boolean>(true);
 
@@ -64,12 +64,12 @@ export const QuizContextProvider = ({
   };
 
   //✅ HANDLE SETTING QUIZZ DATA - quizz welcome page
-  const setCustomQuizData = async (customQuestions: QuizQuestion[]) => {
+  const setCustomQuizData = async (customQuizData: DatabaseSchema) => {
     console.log(
       "🎯event_log:  ❓quizzProvider/setCustomQuizData:  💢 Triggered"
     );
-    console.log("customQuestions", customQuestions);
-    setQuizData(customQuestions);
+    console.log("customQuizData", customQuizData);
+    setQuizData(customQuizData);
   };
 
   //✅ HANDLE UPDATING STATE - quizz application page

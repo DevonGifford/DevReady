@@ -17,7 +17,6 @@ export function quizGeneratingAlgo(
   const storedData: any[] = JSON.parse(
     localStorage.getItem("ztmready-database") || "[]"
   );
-  console.log("storedData 🦺", storedData);
 
   //- Find relevant data based on quizzID
   const relevantData = storedData.find((data) => data.uuid === quizzID);
@@ -30,9 +29,11 @@ export function quizGeneratingAlgo(
     return [];
   }
 
+  console.log("Here is that relevantData you asked about good sir", relevantData)
+
+
   //- Retrieve setData property containing quiz questions
   const quizQuestions: QuizQuestion[] = relevantData.setData;
-  console.log("quizQuestions 🦺", quizQuestions);
 
   //- Handle custom logic for selecting questions (based on user level or history)
   // 🎯 to do list

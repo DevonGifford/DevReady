@@ -73,13 +73,13 @@ export const sidebarIndex: SidebarIndexProps[] = [
       {
         label: "Backend Interview",
         icon: DatabaseBackup,
-        href: "coming-soon",
+        href: "quizz/topic-react",
         isMain: true,
       },
       {
         label: "Fullstack Interview",
         icon: AlignVerticalJustifyStart,
-        href: "coming-soon",
+        href: "quizz/custom-remix-bootcamp",
         isMain: true,
       },
       {
