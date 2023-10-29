@@ -85,6 +85,43 @@ export const DatabaseContextProvider = ({
   }, []);
 
   /**
+   * ⌛✅ HANDLES SETTING MOCK DATA INTO THE DATABASE
+   * 🔮 Need to also add funcitonality to update local storage
+   * Handles fetching user firestore collection by checking if it exists and then sets it to the state & local-storage.
+   * @returns {Promise<void>} A Promise that resolves once the fetch process completes.
+   */
+  const setMockDatabase = async () => {
+    console.log(
+      "🎯event_log:  🎭DatabaseContext/setMockDatabase:  💢 Triggered"
+    );
+    try {
+      const theMockData: DatabaseSchema[] = mockDB; // Assuming mockDB is an array of DatabaseSchema[]
+
+      const localStorageKey = "ztmready-database";
+      const existingMockData = localStorage.getItem(localStorageKey);
+
+      if (!existingMockData) {
+        localStorage.setItem(localStorageKey, JSON.stringify(theMockData));
+        setDatabase(theMockData); // Set the entire array into the state
+        console.log(
+          "🎯event_log:  🎭DatabaseContext/setMockDatabase:  ✔ Success: Mock data set in database context and local storage."
+        );
+      } else {
+        const parsedMockData = JSON.parse(existingMockData);
+        setDatabase(parsedMockData); // Set the parsed data from local storage into the state
+        console.log(
+          "🎯event_log:  🎭DatabaseContext/setMockDatabase:  ⚠ Warning: DatabaseContext already has mock data from local storage."
+        );
+      }
+    } catch (error) {
+      console.error(
+        "🎯event_log:  🎭DatabaseContext/setMockDatabase:  ❌ Error: Failed to load mock data or set it into database context and local storage.",
+        error
+      );
+    }
+  };
+
+  /**
    * ✅ HANDLES UPDATING DATABASE CONTEXT LOCALLY:
    * 🔮 Need to also add funcitonality to update local storage
    * - Updates the database context in the context as well as within the local storage...
@@ -216,43 +253,6 @@ export const DatabaseContextProvider = ({
     } catch (error) {
       console.error(
         "🎯event_log:  🎭DatabaseContext/syncDatabase:  ❌ Error:  DatabaseContext failed to load data - Error fetching user profile:"
-      );
-    }
-  };
-
-  /**
-   * ⌛✅ HANDLES SETTING MOCK DATA INTO THE DATABASE
-   * 🔮 Need to also add funcitonality to update local storage
-   * Handles fetching user firestore collection by checking if it exists and then sets it to the state & local-storage.
-   * @returns {Promise<void>} A Promise that resolves once the fetch process completes.
-   */
-  const setMockDatabase = async () => {
-    console.log(
-      "🎯event_log:  🎭DatabaseContext/setMockDatabase:  💢 Triggered"
-    );
-    try {
-      const theMockData: DatabaseSchema[] = mockDB; // Assuming mockDB is an array of DatabaseSchema[]
-
-      const localStorageKey = "mockData";
-      const existingMockData = localStorage.getItem(localStorageKey);
-
-      if (!existingMockData) {
-        localStorage.setItem(localStorageKey, JSON.stringify(theMockData));
-        setDatabase(theMockData); // Set the entire array into the state
-        console.log(
-          "🎯event_log:  🎭DatabaseContext/setMockDatabase:  ✔ Success: Mock data set in database context and local storage."
-        );
-      } else {
-        const parsedMockData = JSON.parse(existingMockData);
-        setDatabase(parsedMockData); // Set the parsed data from local storage into the state
-        console.log(
-          "🎯event_log:  🎭DatabaseContext/setMockDatabase:  ⚠ Warning: DatabaseContext already has mock data from local storage."
-        );
-      }
-    } catch (error) {
-      console.error(
-        "🎯event_log:  🎭DatabaseContext/setMockDatabase:  ❌ Error: Failed to load mock data or set it into database context and local storage.",
-        error
       );
     }
   };

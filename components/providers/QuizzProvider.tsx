@@ -2,14 +2,14 @@
 
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { Spinner } from "../Spinner";
-import { QuizResultsSchema, QuizSchema, usersInput } from "@/types/quizzSchema";
+import { QuizResultsSchema, usersInput } from "@/types/quizzSchema";
+import { QuizQuestion } from "@/types/databaseSchema";
 
 type QuizzContextProps = {
-  quizData: QuizSchema | undefined;
+  quizData: QuizQuestion[] | undefined;
   quizResults: QuizResultsSchema | undefined;
-  generateQuizData: () => {};
+  setCustomQuizData: (customQuestions: QuizQuestion[]) => {};
   updateResults: (newResults: Partial<QuizResultsSchema>) => Promise<void>;
-  updateUser: () => {};
   resetQuizResults: () => void;
 };
 
@@ -17,9 +17,8 @@ type QuizzContextProps = {
 const QuizzContext = createContext<QuizzContextProps>({
   quizData: undefined,
   quizResults: undefined,
-  generateQuizData: async () => {},
+  setCustomQuizData: async () => {},
   updateResults: async () => {},
-  updateUser: async () => {},
   resetQuizResults: async () => {},
 });
 
@@ -32,11 +31,11 @@ export const QuizContextProvider = ({
 }: {
   children: React.ReactNode;
 }) => {
-  const [quizData, setQuizData] = useState<QuizSchema>();
+  const [quizData, setQuizData] = useState<QuizQuestion[]>();
   const [quizResults, setQuizResults] = useState<QuizResultsSchema>();
   const [loading, setLoading] = useState<Boolean>(true);
 
-  // ✅ Initialization context logic here...
+  // ✅ Initialization context logic on mount...
   useEffect(() => {
     // - Fetch data or perform actions here
     const fetchData = async () => {
@@ -50,12 +49,13 @@ export const QuizContextProvider = ({
     return () => {
       // ⏳ Add clean-up logic
     };
-  }, []); // Empty dependency array ensures it runs only once on mount
+  }, []);
 
-  /**
-   * ✅ Resetting Quiz Results to Default
-   */
+  //✅ HANDLE RESET - resetting Quiz Results to Default
   const resetQuizResults = () => {
+    console.log(
+      "🎯event_log:  ❓quizzProvider/resetQuizResults:  💢 Triggered"
+    );
     const defaultQuizResults: QuizResultsSchema = {
       quizUuid: "",
       usersAnswers: [],
@@ -63,34 +63,32 @@ export const QuizContextProvider = ({
     setQuizResults(defaultQuizResults);
   };
 
-  /**
-   * ✅ HANDLE SETTING QUIZZ DATA - quizz welcome page
-   */
-  const generateQuizData = async () => {
+  //✅ HANDLE SETTING QUIZZ DATA - quizz welcome page
+  const setCustomQuizData = async (customQuestions: QuizQuestion[]) => {
     console.log(
-      "🎯event_log:  ❓quizzProvider/generateQuizData:  💢 Triggered"
+      "🎯event_log:  ❓quizzProvider/setCustomQuizData:  💢 Triggered"
     );
+    console.log("customQuestions", customQuestions);
+    setQuizData(customQuestions);
   };
 
-  /**
-   * ✅ HANDLE UPDATING STATE - quizz application page
-   */
+  //✅ HANDLE UPDATING STATE - quizz application page
   const updateResults = async (
     newResults: Partial<QuizResultsSchema>
   ): Promise<void> => {
     return new Promise<void>((resolve, reject) => {
       setQuizResults((prevResults) => {
         if (!prevResults) {
-          // If no previous results exist, initialize usersAnswers with new data
+          //- If no previous results exist, initialize usersAnswers with new data
           return {
-            quizUuid: newResults.quizUuid || "", // Update with appropriate value
-            usersAnswers: newResults.usersAnswers || [], // Update with appropriate value
+            quizUuid: newResults.quizUuid || "",
+            usersAnswers: newResults.usersAnswers || [],
           };
         } else {
-          // If previous results exist, merge or update usersAnswers
+          //- If previous results exist, merge or update usersAnswers
           const updatedUserAnswers = newResults.usersAnswers || [];
 
-          // Update existing user answers or add new ones
+          //- Update existing user answers or add new ones
           const mergedUsersAnswers = updatedUserAnswers.reduce(
             (acc: usersInput[], newAnswer: usersInput) => {
               const existingIndex = prevResults.usersAnswers.findIndex(
@@ -99,16 +97,16 @@ export const QuizContextProvider = ({
               );
 
               if (existingIndex !== -1) {
-                // If an answer for the question exists, update it
+                //- If an answer for the question exists, update it
                 acc[existingIndex] = newAnswer;
               } else {
-                // If answer doesn't exist, add it to the array
+                //- If answer doesn't exist, add it to the array
                 acc.push(newAnswer);
               }
 
               return acc;
             },
-            [...prevResults.usersAnswers] // Copy existing answers
+            [...prevResults.usersAnswers] //- Copy existing answers
           );
 
           return {
@@ -118,24 +116,16 @@ export const QuizContextProvider = ({
         }
       });
 
-      resolve(); // Resolve here after the state has been updated
+      resolve(); //- Resolve here after the state has been updated
     });
-  };
-
-  /**
-   * ✅ HANLDE UPDATING USERCONTEXT - quizz results page
-   */
-  const updateUser = async () => {
-    console.log("🎯event_log:  ❓quizzProvider/updateUser:    💢 Triggered ");
   };
 
   const quizContextValue: QuizzContextProps = {
     quizData,
     quizResults,
-    generateQuizData,
     updateResults,
     resetQuizResults,
-    updateUser,
+    setCustomQuizData,
   };
 
   return (

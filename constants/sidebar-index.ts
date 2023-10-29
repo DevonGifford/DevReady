@@ -67,7 +67,7 @@ export const sidebarIndex: SidebarIndexProps[] = [
       {
         label: "Frontend Interview",
         icon: MonitorSmartphone,
-        href: "quizz/1",
+        href: "quizz/interview-frontend",
         isMain: true,
       },
       {
