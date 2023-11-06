@@ -102,7 +102,7 @@ By embracing the spirit of open collaboration, the platform extends an open invi
   Create and share sets within the community-driven database.
 
 - **Course Recommendations**: <br>
-  Suggest ZTM courses based on user data - quizz results and onboarding info.
+  Suggest ZTM courses based on user data - quiz results and onboarding info.
 
 - **OpenAI Integration**: <br>
   Incorporate a trained OpenAI API bot for interactive interviews.

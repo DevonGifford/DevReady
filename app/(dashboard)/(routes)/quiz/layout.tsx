@@ -1,7 +1,7 @@
 "use client";
 
 import { DatabaseContextProvider } from "@/components/providers/DatabaseProvider";
-import { QuizContextProvider } from "@/components/providers/QuizzProvider";
+import { QuizContextProvider } from "@/components/providers/QuizProvider";
 
 export default function FlashCardsLayout({
   children,

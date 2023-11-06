@@ -1,5 +1,5 @@
 import { notFound, useRouter } from "next/navigation";
-import { useQuizzContext } from "@/components/providers/QuizzProvider";
+import { useQuizContext } from "@/components/providers/QuizProvider";
 import { useUserContext } from "@/components/providers/UserProvider";
 import { Spinner } from "@/components/Spinner";
 import { Button } from "@/components/ui/button";
@@ -18,7 +18,7 @@ function QuizResults({
   quizMetaData: DatabaseSchema | null;
 }) {
   const router = useRouter();
-  const { quizResults, resetQuizResults } = useQuizzContext();
+  const { quizResults, resetQuizResults } = useQuizContext();
   const { userProfile, updateUserDataProcess } = useUserContext();
 
   // ✅ Handle waiting for metadata

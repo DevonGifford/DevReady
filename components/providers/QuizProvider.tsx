@@ -5,7 +5,7 @@ import { Spinner } from "../Spinner";
 import { QuizResultsSchema, usersInput } from "@/types/quizzSchema";
 import { DatabaseSchema, QuizQuestion } from "@/types/databaseSchema";
 
-type QuizzContextProps = {
+type QuizContextProps = {
   quizData: DatabaseSchema | undefined;
   quizResults: QuizResultsSchema | undefined;
   setCustomQuizData: (customQuizData: DatabaseSchema) => {};
@@ -14,7 +14,7 @@ type QuizzContextProps = {
 };
 
 // 👇 AUTH CONTEXT => exposing following...
-const QuizzContext = createContext<QuizzContextProps>({
+const QuizContext = createContext<QuizContextProps>({
   quizData: undefined,
   quizResults: undefined,
   setCustomQuizData: async () => {},
@@ -24,7 +24,7 @@ const QuizzContext = createContext<QuizzContextProps>({
 
 // - Arrow Function Shorthand:
 // - directly returns result of useContext explicitly defining any type.
-export const useQuizzContext = () => useContext<any>(QuizzContext);
+export const useQuizContext = () => useContext<any>(QuizContext);
 
 export const QuizContextProvider = ({
   children,
@@ -63,7 +63,7 @@ export const QuizContextProvider = ({
     setQuizResults(defaultQuizResults);
   };
 
-  //✅ HANDLE SETTING QUIZZ DATA - quizz welcome page
+  //✅ HANDLE SETTING QUIZ DATA - quiz welcome page
   const setCustomQuizData = async (customQuizData: DatabaseSchema) => {
     console.log(
       "🎯event_log:  ❓quizzProvider/setCustomQuizData:  💢 Triggered"
@@ -72,7 +72,7 @@ export const QuizContextProvider = ({
     setQuizData(customQuizData);
   };
 
-  //✅ HANDLE UPDATING STATE - quizz application page
+  //✅ HANDLE UPDATING STATE - quiz application page
   const updateResults = async (
     newResults: Partial<QuizResultsSchema>
   ): Promise<void> => {
@@ -120,7 +120,7 @@ export const QuizContextProvider = ({
     });
   };
 
-  const quizContextValue: QuizzContextProps = {
+  const quizContextValue: QuizContextProps = {
     quizData,
     quizResults,
     updateResults,
@@ -129,7 +129,7 @@ export const QuizContextProvider = ({
   };
 
   return (
-    <QuizzContext.Provider value={quizContextValue}>
+    <QuizContext.Provider value={quizContextValue}>
       {loading ? (
         <div className="h-screen w-screen bg-primary flex items-center justify-center space-y-4">
           <Spinner size="screen" />
@@ -137,6 +137,6 @@ export const QuizContextProvider = ({
       ) : (
         children
       )}
-    </QuizzContext.Provider>
+    </QuizContext.Provider>
   );
 };

@@ -9,7 +9,7 @@ import QuizApplication from "../_components/quizApplication";
 import QuizWelcome from "../_components/quizWelcome";
 import QuizResults from "../_components/quizResults";
 
-import { useQuizzContext } from "@/components/providers/QuizzProvider";
+import { useQuizContext } from "@/components/providers/QuizProvider";
 import { quizGeneratingAlgo } from "@/lib/quizGeneratingAlgo";
 import toast from "react-hot-toast";
 import { DatabaseSchema } from "@/types/databaseSchema";
@@ -18,7 +18,7 @@ function QuizControl({ params }: { params: { quizId: string } }) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [isLoadingData, setIsLoadingData] = useState(true);
-  const { resetQuizResults, setCustomQuizData, quizData } = useQuizzContext();
+  const { resetQuizResults, setCustomQuizData, quizData } = useQuizContext();
   const [quizMetaData, setQuizMetaData] = useState<DatabaseSchema | null>(null);
 
   const paramsQuizzId = params.quizId; // 👈 Reference, check and fetch data from local DB

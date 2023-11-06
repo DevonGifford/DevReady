@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 import * as Sentry from "@sentry/react";
 import QuizTypeInstructions, { QuizType } from "./quizTypeIntstructions";
 import AssociatedTags from "@/components/AssociatedTags";
-import { useQuizzContext } from "@/components/providers/QuizzProvider";
+import { useQuizContext } from "@/components/providers/QuizProvider";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Spinner } from "@/components/Spinner";
@@ -21,7 +21,7 @@ const QuizWelcome: React.FC<QuizWelcomeProps> = ({
   isLoading,
 }) => {
   const router = useRouter();
-  const { resetQuizResults } = useQuizzContext();
+  const { resetQuizResults } = useQuizContext();
 
   // ✅ HANDLE START NOW BUTTON CLICK
   function handleStartNow() {

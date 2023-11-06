@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { useQuizzContext } from "@/components/providers/QuizzProvider";
+import { useQuizContext } from "@/components/providers/QuizProvider";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import {
   Card,
@@ -25,7 +25,7 @@ interface QuizProps {
 
 const QuizApplication: React.FC<QuizProps> = ({ questions }) => {
   const router = useRouter();
-  const { updateResults, quizResults } = useQuizzContext();
+  const { updateResults, quizResults } = useQuizContext();
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [showAnswer, setShowAnswer] = useState(false);
 
