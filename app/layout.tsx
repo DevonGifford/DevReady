@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 
 import "./globals.css";
-import { ThemeProvider } from "@/components/providers/theme-provider";
+import { ThemeProvider } from "@/components/providers/ThemeProvider";
+import ToasterProvider from "@/components/providers/ToasterProvider";
 
 export const metadata: Metadata = {
   title: "ZTMReady",
@@ -30,8 +31,9 @@ export default function RootLayout({
           defaultTheme="light"
           enableSystem
           disableTransitionOnChange
-          storageKey="devotion-theme"
+          storageKey="ztmready-theme"
         >
+          <ToasterProvider />
           <div>{children}</div>
         </ThemeProvider>
       </body>

@@ -1,8 +1,8 @@
 import { NAV_LINKS } from "@/constants";
 import Image from "next/image";
 import Link from "next/link";
-import { ModeToggle } from "../../../components/ThemeToggle";
-import { Button } from "../../../components/ui/button";
+import { ModeToggle } from "./ThemeToggle";
+import { Button } from "./ui/button";
 
 const Navbar = () => {
   return (
