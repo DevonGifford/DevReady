@@ -88,7 +88,7 @@ function QuizControl({ params }: { params: { quizzId: string } }) {
     setCustomQuizData(customQuestionSet);
   };
 
-  // ✅ HOOK TO TRIGGER CUSTOM QUESTION FETCH
+  // ✅ HOOK TO TRIGGER FETCH ACTIONS
   useEffect(() => {
     setCustomQuizQuestion(); // Call setCustomQuizQuestion once on initial render
     const metaQuizData = fetchQuizMetadata();

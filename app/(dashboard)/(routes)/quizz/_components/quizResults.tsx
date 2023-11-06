@@ -1,8 +1,9 @@
 import { notFound, useRouter } from "next/navigation";
 import { useQuizzContext } from "@/components/providers/QuizzProvider";
 import { useUserContext } from "@/components/providers/UserProvider";
+import { Spinner } from "@/components/Spinner";
 import { Button } from "@/components/ui/button";
-import { HomeIcon, LucideArrowDownSquare, LucideRepeat2 } from "lucide-react";
+import { HomeIcon, LucideRepeat2 } from "lucide-react";
 
 import CustomPieChart from "./pieChart";
 import GradeStamp from "./gradeStamp";
@@ -10,8 +11,6 @@ import GradeStamp from "./gradeStamp";
 import { DatabaseSchema } from "@/types/databaseSchema";
 import { usersInput } from "@/types/quizzSchema";
 import { UserProfile } from "@/types/UserProfile";
-
-import mockDB from "@/constants/mockDB.json"; // 👈🦺 Temporary solution for development purposes (mock Data)
 
 function QuizResults({
   quizMetaData,
@@ -22,13 +21,10 @@ function QuizResults({
   const { quizResults, resetQuizResults } = useQuizzContext();
   const { userProfile, updateUserDataProcess } = useUserContext();
 
+  // ✅ Handle waiting for metadata
   if (!quizMetaData) {
-    //   notFound();
-    return null; // or a loading state, error message, etc.
+    return <Spinner />;
   }
-
-  // 👇🦺 Temporary solution for development purposes (mock Data)
-  const quizDataMock: DatabaseSchema = mockDB[0];
 
   //✅ use quizResults to calculate the pie chart values
   const calculatePieChartData = () => {
@@ -92,7 +88,6 @@ function QuizResults({
       },
     };
 
-    // console.log('newData', newData)
     //- Update user document & Local Storage
     updateUserDataProcess(userProfile?.uuid!, newData);
   };

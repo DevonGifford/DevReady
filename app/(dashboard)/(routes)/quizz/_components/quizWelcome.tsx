@@ -1,15 +1,15 @@
+import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import * as Sentry from "@sentry/react";
-import { useQuizzContext } from "@/components/providers/QuizzProvider";
-import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { DatabaseSchema } from "@/types/databaseSchema";
-import AssociatedTags from "@/components/AssociatedTags";
 import QuizTypeInstructions, { QuizType } from "./quizTypeIntstructions";
-import { ExternalLinkIcon } from "lucide-react";
+import AssociatedTags from "@/components/AssociatedTags";
+import { useQuizzContext } from "@/components/providers/QuizzProvider";
+import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Spinner } from "@/components/Spinner";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { DatabaseSchema } from "@/types/databaseSchema";
+import { ExternalLinkIcon } from "lucide-react";
 
 interface QuizWelcomeProps {
   quizMetaData: Partial<DatabaseSchema> | null;
@@ -27,7 +27,7 @@ const QuizWelcome: React.FC<QuizWelcomeProps> = ({
   function handleStartNow() {
     if (!quizMetaData || isLoading) {
       toast("fetching data");
-      return;
+      return <Spinner />;
     }
 
     try {
