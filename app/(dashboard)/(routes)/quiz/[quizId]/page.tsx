@@ -25,12 +25,12 @@ function QuizControl({ params }: { params: { quizId: string } }) {
   const pageId = searchParams.get("pageId"); // 👈 Renders different component pages accordingly
 
   // ✅ SERVE NOT FOUND IF NO SPECIFIC QUEREY
-  // 👇 If the selected quizz ID doesn't match any in the database, redirect to a not-found page
+  // 👇 If the selected quiz ID doesn't match any in the database, redirect to a not-found page
   if (!paramsQuizzId) {
     notFound();
   }
 
-  // ✅ FETCH QUIZZ METADATA - title description tags etc.
+  // ✅ FETCH QUIZ METADATA - title description tags etc.
   const fetchQuizMetadata = () => {
     const localStorageKey = "ztmready-database";
     const localDB: string | null = localStorage.getItem(localStorageKey);
