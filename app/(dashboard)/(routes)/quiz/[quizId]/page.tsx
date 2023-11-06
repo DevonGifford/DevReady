@@ -14,14 +14,14 @@ import { quizGeneratingAlgo } from "@/lib/quizGeneratingAlgo";
 import toast from "react-hot-toast";
 import { DatabaseSchema } from "@/types/databaseSchema";
 
-function QuizControl({ params }: { params: { quizzId: string } }) {
+function QuizControl({ params }: { params: { quizId: string } }) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const [isLoadingData, setIsLoadingData] = useState(true);
   const { resetQuizResults, setCustomQuizData, quizData } = useQuizzContext();
   const [quizMetaData, setQuizMetaData] = useState<DatabaseSchema | null>(null);
 
-  const paramsQuizzId = params.quizzId; // 👈 Reference, check and fetch data from local DB
+  const paramsQuizzId = params.quizId; // 👈 Reference, check and fetch data from local DB
   const pageId = searchParams.get("pageId"); // 👈 Renders different component pages accordingly
 
   // ✅ SERVE NOT FOUND IF NO SPECIFIC QUEREY
