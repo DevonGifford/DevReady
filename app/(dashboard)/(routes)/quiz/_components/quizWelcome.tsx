@@ -107,7 +107,7 @@ const QuizWelcome: React.FC<QuizWelcomeProps> = ({
       </div>
       <div className="flex flex-col gap-3 py-4 border-4 m-10 rounded-xl">
         {/* Quiz Type Instructions */}
-        {quizMetaData && quizMetaData.setImage && (
+        {quizMetaData && quizMetaData.setType && (
           <QuizTypeInstructions type={quizMetaData.setType as QuizType} />
         )}
         {/* Buttons */}

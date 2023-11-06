@@ -1,6 +1,6 @@
 import React from "react";
 
-export type QuizType = "custom" | "topic" | "interview";
+export type QuizType = "course" | "topic" | "interview";
 
 interface QuizTypeInstructionsProps {
   type: QuizType;
@@ -12,7 +12,7 @@ const QuizTypeInstructions: React.FC<QuizTypeInstructionsProps> = ({
   let instructions: JSX.Element | null = null;
 
   switch (type) {
-    case "custom":
+    case "course":
       instructions = (
         <div className="flex flex-col text-center py-4">
           <h4 className="text-lg font-semibold pb-4 underline underline-offset-4">
