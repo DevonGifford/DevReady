@@ -16,7 +16,7 @@ function UserDashboard() {
   const { userProfile } = useUserContext();
 
   return (
-    <div className="h-full flex flex-col p-4 py-20 sm:p-20 space-y-4">
+    <div className="h-full flex flex-col p-4 py-20 sm:py-20 2xl:px-10 space-y-4">
       {/* //👇 HEADING */}
       <h1 className="text-4xl font-semibold tracking-wide">
         Welcome to your <span className=" text-devready-green">Profile</span>
@@ -25,8 +25,8 @@ function UserDashboard() {
       <div className="flex flex-col 2xl:flex-row justify-between gap-4">
         <div className="flex flex-col 2xl:w-2/3 h-full gap-5">
           {/* //👇 HEADER SECTION */}
-          <div className="flex flex-col gap-4 xl:flex-row xl:gap-1 items-center xl:items-stretch xl:justify-between ">
-            <div className="flex flex-row gap-5 justify-start items-center border-2 p-10 w-full rounded-2xl bg-blue-70">
+          <div className="flex flex-col gap-5 xl:flex-row xl:gap-8 items-center xl:items-stretch xl:justify-between ">
+            <div className="flex flex-row gap-5 justify-start items-center border-2 p-10 w-full rounded-2xl">
               <Avatar className="h-24 w-24">
                 <AvatarImage
                   src={userProfile?.account.userimage!}
@@ -34,11 +34,11 @@ function UserDashboard() {
                 />
                 <AvatarFallback>ZTM</AvatarFallback>
               </Avatar>
-              <div>
+              <div className="flex flex-col gap-1">
                 <p className="text-3xl font-semibold">
                   {userProfile?.account.username}
                 </p>
-                <p className="text-lg font-thin ml-1">
+                <p className="text-lg font-thin ml-1 mb-3">
                   {userProfile?.account.career_title}
                 </p>
                 {/* //👇  BADGES SECTION */}

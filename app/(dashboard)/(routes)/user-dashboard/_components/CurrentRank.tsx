@@ -10,7 +10,7 @@ const CurrentRank: React.FC<CurrentRankProps> = ({ rank }) => {
   const currentRank = rank || 0; // If rank is not provided, default to 0
 
   return (
-    <div className="flex flex-col justify-center items-center text-center border-2 p-6 w-96 rounded-2xl bg-blue-70">
+    <div className="flex flex-col justify-center items-center text-center border-2 p-6 w-96 rounded-2xl ">
       <p className="text-2xl font-semibold">Current Rank</p>
       <p className="text-sm font-thin italic pb-5">
         This is still a work in progress
