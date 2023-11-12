@@ -45,7 +45,7 @@ function UserDashboard() {
                 <EarnedBadges data={userProfile?.account.skills_list!} />
               </div>
             </div>
-            <CurrentRank />
+            <CurrentRank rank={userProfile?.ranking?.current_rank} />
           </div>
 
           <RatingHistory />

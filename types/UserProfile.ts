@@ -48,13 +48,22 @@ export interface UserProfile {
 
   notifications: {
     notif_level: "all" | "profile" | "none";
-    
+
     communication_emails: boolean;
     marketing_emails: boolean;
     newsletter_emails: boolean;
-    
+
     push_notifs: boolean;
     mobile_notifs: boolean;
+  };
+
+  ranking?: {
+    current_rank?: number;
+    past_rank?: {
+      year: number;
+      month: string;
+      value: string;
+    };
   };
 }
 
