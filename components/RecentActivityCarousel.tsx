@@ -21,6 +21,11 @@ interface RecentActivityCarouselProps {
   }[];
 }
 
+// 🎯🔮 FUTURE TASKS:
+// - handle real data...
+// - handle case no data...
+// - handle loading skeleton...
+
 const RecentActivityCarousel: React.FC<RecentActivityCarouselProps> = ({
   title,
   data,

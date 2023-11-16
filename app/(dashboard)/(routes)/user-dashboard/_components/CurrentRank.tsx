@@ -3,7 +3,7 @@ import { Progress } from "@/components/ui/progress";
 import { TrophyIcon } from "lucide-react";
 
 interface CurrentRankProps {
-  rank?: number; // Define the rank as an optional number
+  rank?: number;
 }
 
 const CurrentRank: React.FC<CurrentRankProps> = ({ rank }) => {

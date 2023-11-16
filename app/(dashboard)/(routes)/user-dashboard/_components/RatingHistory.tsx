@@ -1,6 +1,8 @@
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
 import fakeRatingHistoryData from "@/constants/fakeRatingHistoryData.json";
 
+// 🎯🔮 Need to replace the fake data and create a state waiting for data...
+
 const RatingHistory: React.FC = () => {
   return (
     <div className="border-2 rounded-2xl">

@@ -1,12 +1,14 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 
+// 🎯🔮 Future feature - users will be able to earn badges upon completing certain objectives - this component will display those badges....
+
 interface EarnedBadgesProps {
-  data?: string[]; // Define the rank as an optional number
+  data?: string[]; 
 }
 
 const EarnedBadges: React.FC<EarnedBadgesProps> = ({ data }) => {
-  const usersBadges = data || ["baby yoda"]; // If rank is not provided, default to 0
+  const usersBadges = data || ["baby yoda"]; // If rank is not provided, default ...
 
   return (
     <div className="flex flex-wrap flex-row gap-1.5">

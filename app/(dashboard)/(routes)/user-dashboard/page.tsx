@@ -10,7 +10,6 @@ import RatingHistory from "./_components/RatingHistory";
 
 import fakeRecentActivityData from "@/constants/fakeRecentActivityData.json";
 import fakeRecommendedActivityData from "@/constants/fakeRecommendedData.json";
-import fakeRatingHistoryData from "@/constants/fakeRatingHistoryData.json";
 
 function UserDashboard() {
   const { userProfile } = useUserContext();

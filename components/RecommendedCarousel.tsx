@@ -36,6 +36,11 @@ interface RecommendedCarouselProps {
   }[];
 }
 
+// 🎯🔮 FUTURE TASKS:
+// - handle real data...
+// - handle case no data...
+// - handle loading skeleton...
+
 const RecommendedCarousel: React.FC<RecommendedCarouselProps> = ({ data }) => {
   return (
     <div>
