@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { PEOPLE_URL } from "@/constants";
+import { PEOPLE_URL } from "@/constants/landingpage-index";
 
 interface ImageCardProps {
     backgroundImage: string;

@@ -26,7 +26,7 @@ function LoginPage(): JSX.Element {
 
     // - Sign in successful
     console.log( result );
-    // 🎯 update context
+    // 🎯🎯🎯 update context
 
     // - Redirect to the home page
     router.push( "/" );

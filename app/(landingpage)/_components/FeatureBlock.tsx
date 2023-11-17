@@ -1,4 +1,4 @@
-import { FEATURES } from "@/constants";
+import { FEATURES } from "@/constants/landingpage-index";
 import Image from "next/image";
 import React from "react";
 

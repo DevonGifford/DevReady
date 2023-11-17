@@ -1,4 +1,4 @@
-import { NAV_LINKS } from "@/constants";
+import { NAV_LINKS } from "@/constants/landingpage-index";
 import Image from "next/image";
 import Link from "next/link";
 import { ModeToggle } from "../../../components/ThemeToggle";
