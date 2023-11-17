@@ -108,6 +108,42 @@ const DialogDescription = React.forwardRef<
 ))
 DialogDescription.displayName = DialogPrimitive.Description.displayName
 
+const SettingSection = React.forwardRef<
+  React.ElementRef<typeof DialogPrimitive.Description>,
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>
+>(({ className, ...props }, ref) => (
+  <DialogPrimitive.Description
+    ref={ref}
+    className={cn("flex py-3 items-center justify-between", className)}
+    {...props}
+  />
+))
+SettingSection.displayName = DialogPrimitive.Description.displayName
+
+const SettingTitle = React.forwardRef<
+  React.ElementRef<typeof DialogPrimitive.Description>,
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>
+>(({ className, ...props }, ref) => (
+  <DialogPrimitive.Description
+    ref={ref}
+    className={cn("flex flex-col gap-y-1", className)}
+    {...props}
+  />
+))
+SettingTitle.displayName = DialogPrimitive.Description.displayName
+
+const SettingDescription = React.forwardRef<
+  React.ElementRef<typeof DialogPrimitive.Description>,
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>
+>(({ className, ...props }, ref) => (
+  <DialogPrimitive.Description
+    ref={ref}
+    className={cn("text-[0.8rem] text-muted-foreground", className)}
+    {...props}
+  />
+))
+SettingDescription.displayName = DialogPrimitive.Description.displayName
+
 export {
   Dialog,
   DialogPortal,
@@ -119,4 +155,7 @@ export {
   DialogFooter,
   DialogTitle,
   DialogDescription,
+  SettingSection,
+  SettingTitle,
+  SettingDescription,
 }
