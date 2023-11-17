@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import mockRouter from "next-router-mock";
 import { MemoryRouterProvider } from "next-router-mock/MemoryRouterProvider";
 import { render, screen } from "@testing-library/react";
-import UserDashboard from "@/app/(dashboard)/(routes)/user-dashboard/page";
+import LandingDashboardPage from "@/app/(dashboard)/(routes)/dashboard/page";
 
 global.ResizeObserver = jest.fn(() => ({
   // Create a mock for ResizeObserver in test setup
@@ -15,7 +15,7 @@ global.ResizeObserver = jest.fn(() => ({
 describe.skip("Renders the Landing Page correctly - SSR 👀", () => {
   test.only("Landing page renders correctly", () => {
     //-Arrange
-    const { container } = render(<UserDashboard />);
+    const { container } = render(<LandingDashboardPage />);
 
     //-Act
 
@@ -43,13 +43,13 @@ describe.skip("Renders the Landing Page correctly - SSR 👀", () => {
 
 
 --------------------------------------------------------------------------
-- INTEGRATION TESTING
+ - INTEGRATION TESTING
 --------------------------------------------------------------------------
 
-🧪 Test Data Passing and Props Handeling
+🧪 Test Avatar Component Test
    
-🧪 Test Carousel Interaction 
+🧪 Test Carousel Interaction Test
 
-🧪 Test Mock Data Display Test
+🧪 Test 
 
 */

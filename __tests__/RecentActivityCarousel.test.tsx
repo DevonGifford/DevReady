@@ -63,4 +63,34 @@ describe.skip("Renders Data Accordingly Testing", () => {
 });
 
 
-// 🧪🎯 OPEN ISSUE :  https://github.com/DevonGifford/ZtmReady--PortfolioProject/issues/77
+/* 
+
+🎯 OPEN ISSUE :  
+🧱 Issue with unit testing embla-carousel components
+🔮 https://github.com/DevonGifford/ZtmReady--PortfolioProject/issues/77
+
+--------------------------------------------------------------------------
+ -  UNIT TESTING
+--------------------------------------------------------------------------
+
+🧪 Test Basic Component Rendering - renders without crashing
+
+🧪 Test Data Handeling and basic UI elements present   
+
+🧪 Test Empy Data Handling - assert the component handles empty data gracefully
+
+🧪 Test Icon Mapping Tests - assert icons are correctly mapped
+
+
+--------------------------------------------------------------------------
+ - INTEGRATION TESTING
+ --------------------------------------------------------------------------
+🔍 note: Most of the integreation tests are covered in the respective page tests
+
+🧪  Test Expected Functionality of NextLink Integration
+
+🧪  Test Carousel Functionalities
+
+🧪  Test Carousel Next/Prev Button clicks
+
+*/
