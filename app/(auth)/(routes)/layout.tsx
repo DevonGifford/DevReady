@@ -1,29 +1,7 @@
-"use client";
-
 import Link from "next/link";
 import Image from "next/image";
 
-// import Navbar from "@/components/NavBar";
-// import { redirect } from "next/navigation";
-
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
-  //  const { isAuthenticated, isLoading } = //🎯Link to auth state
-
-  // - handle loading state
-  //   if (isLoading) {
-  //     return (
-  //       <div className="h-full flex items-center justify-center">
-  //         <Spinner /> //🎯NEED TO CREATE AND IMPORT 
-  //       </div>
-  //     );
-  //   }
-
-  // - send user back to home page if already signedIn
-  //   if (!isAuthenticated) {
-  //     //🎯toast notif?
-  //     return redirect("/");
-  //   }
-
   return (
     <div className="h-full flex-col">
       {/* <Navbar /> */}

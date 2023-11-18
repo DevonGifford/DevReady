@@ -3,14 +3,16 @@
 import { useEffect, useState, useContext } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { logoutUser } from "@/utils/firebase/auth/utils";
+// import { logOut } from "@/utils/firebase/auth/logout";
 import { LogoutModalContext } from "@/components/providers/LogoutProvider";
 import { Dialog, DialogContent, DialogHeader } from "@/components/ui/dialog";
 
 import toast from "react-hot-toast";
+import { useAuth } from "../providers/AuthProvider";
 
 export const LogoutModal = () => {
   const router = useRouter();
+  const { logOut } = useAuth();
   const [isMounted, setIsMounted] = useState(false);
   const { openLogoutModal, setOpenLogoutModal } =
     useContext(LogoutModalContext);
@@ -27,7 +29,7 @@ export const LogoutModal = () => {
   const handleCaseYes = () => {
     //🎯 needs to be updated
     try {
-      logoutUser();
+      logOut();
       router.push("/");
       toast.success("Successfully logged out");
       console.log("completed logout process");

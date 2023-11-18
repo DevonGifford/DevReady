@@ -1,15 +1,17 @@
 "use client";
 
 import Link from "next/link";
+import toast from "react-hot-toast";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useAuth } from "@/components/providers/AuthProvider";
 import { Button } from "@/components/ui/button";
-import register from "@/utils/firebase/auth/register";
 
 function Page(): JSX.Element {
+  const router = useRouter();
+  const { register } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const router = useRouter();
 
   // ⌛ Handle Form Submission - REGISTER
   const handleForm = async (event: { preventDefault: () => void }) => {
@@ -19,16 +21,23 @@ function Page(): JSX.Element {
     const { result, error } = await register(email, password);
 
     if (error) {
-      //- Display and log any sign-up errors
+      //  - Display and log any sign-up errors
+      //🎯 create different errors for different messages.
       console.log(error);
+      toast.error("Hmmm... something went wrong - please try again"); //🎯 clean this up
       return;
     }
 
     //- Sign up successful
-    console.log(result);
+    // 🎯 udpate user-auth context
+    console.log("✅ user has been successfully created with firebase"); //🎯remove
+    console.log("Here is the result from firebase:", result); //🎯remove
+    toast.success(
+      "Successfully registered and logged in.  This needs an onboarding process..."
+    );
 
     //- Redirect to the home page
-    router.push("/");
+    router.push("/dashboard");
   };
 
   return (
@@ -60,7 +69,7 @@ function Page(): JSX.Element {
             name="email"
             id="email"
             placeholder="example@gmail.com"
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-secondary leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-primary leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
         {/* PASSWORD */}
@@ -75,7 +84,7 @@ function Page(): JSX.Element {
             name="password"
             id="password"
             placeholder="password"
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-secondary leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border rounded w-full py-2 px-3 text-primary leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
         {/* SUBMIT BUTTON */}
