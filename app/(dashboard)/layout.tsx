@@ -13,6 +13,7 @@ import { LogoutModal } from "@/components/modals/logout-modal";
 import { SettingsModal } from "@/components/modals/settings-modal";
 
 import { Navigation } from "./_components/Navigation";
+import toast from "react-hot-toast";
 
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
   const { user } = useAuth();
@@ -23,22 +24,18 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
   const [openLogoutModal, setOpenLogoutModal] = useState(false);
 
   // // ✅ Handle loading state while authentication is being checked
-  // - this is now being done in the authProvider
+  // - this is now being handled in the authProvider
 
   // ✅ If not authenticated, redirect to the home page
+  // 🎯 to do list
+  //- this results in a flashing of content - I need to figure it out
   useEffect(() => {
-    console.log(
-      "NOT AUTHENTICATED - redirect to home page 🎯 track this? toast this?",
-      user
-    );
-    if (user.uuid == null) router.push("/");
+    // If the user is not authenticated, redirect to the home page
+    if (!user || !user.uid) {
+      toast.error("Woops - Something went wrong - please login again");
+      router.push("/");
+    }
   }, [user, router]);
-
-  if (!user.uid) {
-    // return redirect("/");
-    // ? Or return null;
-    // ? Or return a loading spinner or message?
-  }
 
   return (
     <>

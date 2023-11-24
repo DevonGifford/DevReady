@@ -30,7 +30,7 @@ export const UserDropdown = () => {
   // 🎯 to-do-list : get user data
   //const { destruct, user, data } = useUserDataDevon();
 
-  // 🎯 to-do-list : handle user Image
+  // 🎯 to-do-list : handle user Image (temp solution)
   const userImage = "/profile-placeholder-image.svg" || "real image";
 
   const { openLogoutModal, setOpenLogoutModal } =

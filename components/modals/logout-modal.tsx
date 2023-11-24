@@ -27,7 +27,6 @@ export const LogoutModal = () => {
   }
 
   const handleCaseYes = () => {
-    //🎯 needs to be updated
     try {
       logOut();
       router.push("/");
@@ -39,7 +38,6 @@ export const LogoutModal = () => {
   };
 
   const handleCaseNo = () => {
-    //🎯 needs to be updated
     setOpenLogoutModal(false);
   };
 

@@ -47,7 +47,7 @@ export const AuthContextProvider = ({
     return () => unsubscribe();
   }, []);
 
-  //- Sign up the user
+  //- Register new user
   const register = (email: string, password: string) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
@@ -72,6 +72,6 @@ export const AuthContextProvider = ({
       ) : (
         children
       )}
-    </AuthContext.Provider>
+    </AuthContext.Provider> 
   );
 };
