@@ -1,24 +1,15 @@
-import { NAV_LINKS } from "@/constants";
+import { NAV_LINKS } from "@/constants/landingpage-index";
 import Image from "next/image";
 import Link from "next/link";
-import { ModeToggle } from "../../../components/ThemeToggle";
-import { Button } from "../../../components/ui/button";
+import { ModeToggle } from "./ThemeToggle";
+import { Button } from "./ui/button";
+import { Logo } from "./Logo";
 
 const Navbar = () => {
   return (
     <nav className="flexBetween max-container padding-container relative z-30 py-5">
-      <Link href="/" className="flex gap-0.5 font-bold text-3xl">
         {/* TEMPORARY LOGO SOLUTION 🎯 */}
-        <Image
-          src="/landingpage/ZTM-logo.png"
-          alt="ztmready logo"
-          width={33}
-          height={33}
-          className="pb-2"
-        />
-        <span className="hidden sm:flex text-devready-green">ZTM</span>
-        <span className="hidden sm:flex">Ready</span>
-      </Link>
+       <Logo href="/"/>
 
       <ul className="hidden h-full gap-12 lg:flex">
         {NAV_LINKS.map((link) => (

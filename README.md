@@ -1,17 +1,16 @@
 <!-- Introduction Text -->
 <div align="center">
-  <a href='https://ztm-ready-portfolio-project.vercel.app/', target='_blank'>
     <h1>ZTMReady - Flash Card App</h1>
     <h3>Fullstack Application</h3>
     <h3>Currently a work in progress</h3>
+  <a href='https://ztm-ready-portfolio-project.vercel.app/', target='_blank'>
     <h5>live demo</h5>
-    <!-- <h4>(Portfolio Project)<h4> -->
-    <!-- <hr> -->
-    <!-- <h6>
+  </a>
+    <hr>
+    <h6>
         built with <a href="https://nextjs.org">Next.js</a> &
         hosted by <a href="https://vercel.com/">Vercel</a> 
-    </h6> -->
-  </a>
+    </h6>
 </div>
 
 <!-- Logo -->
@@ -22,6 +21,7 @@
 </p> -->
 
 ---
+
 # **Table of Contents**
 
 - [Introduction](🎯)
@@ -32,57 +32,81 @@
 - [License](🎯)
 - [Notes](🎯)
 
-
 <!-- -------------------------------------------------------------------------- -->
 
-
 ---
+
 # **INTRODUCTION**:
 
-This project is inspired by the style of ZTM, tailored to create an engaging quiz platform for ZTM students. Here's an overview of the envisioned features:
+Welcome to the ZTM Quiz Platform. A web application inspired by ZTM, designed to create an engaging and interactive quiz platform for students. The project aims to empower learning through gamification and dynamic features tailored to enhance the learning experience.
+
+More than a quiz tool; it's a holistic learning ecosystem designed to prepare students for successful careers in tech.
+
+## **Goals**
+
+1.  **Job-Ready Assessment:**
+
+    This platform will serve as a check to gauge students' readiness for job applications and interviews. Upon successful completion, students will have the confidence and assurance to venture into the job market, equipped with skills and knowledge for excelling in the interview process.
+
+2.  **Interactive Learning Experience:**
+
+    The platform creates an engaging learning environment by integrating gaming elements with educational content. This approach aids students in introducing, comprehending, and articulating the necessary aspects and broader coding concepts in an enjoyable and straightforward manner.
+
+3.  **By ZTM Students, For ZTM Students:**
+
+    Aligning seamlessly with ZTM's teaching methodologies, this platform is crafted by students and tailored exclusively for it's students. It serves as a reinforcement of course materials, empowering students to merge theoretical knowledge with practical application, effectively preparing them for the demands of the industry.
+
+4.  **Fostering Autonomous Learning:**
+
+    With adaptive learning features, progress tracking, and a user-friendly dashboard, students can personalize their learning journeys. This autonomy nurtures a deeper understanding of coding concepts, empowering students and enhancing their readiness for employment.
+
+<br/>
+
+### Community-Driven Collaboration:
+
+As an open-source initiative, this platform encourages collaboration and contributions from both students, mentors and educators. It nurtures a culture of knowledge sharing and continuous improvement.
+
+- **Code Contributions:** One of the primary ways to contribute is by enhancing the codebase. Developers and programmers can submit code improvements, bug fixes, or new features via pull requests, driving the evolution and functionality of the platform.
+
+- **Documentation and Guides:** Clear and comprehensive documentation is fundamental to the project's accessibility and usability. Contributions in the form of guides, tutorials, or documentation enhancements greatly assist users and developers in navigating the platform.
+
+- **Testing and Feedback**: Engaging in testing activities and providing constructive feedback on user experiences, functionalities, or usability issues plays a pivotal role in refining the platform and ensuring its reliability.
+
+
+We believe that every contribution, regardless of its nature, adds immense value to the community and the project. Emphasizing inclusivity, the platform encourages contributions in various forms, creating an environment where diverse skill sets and perspectives converge to enrich the learning experience.
+
+By embracing the spirit of open collaboration, the platform extends an open invitation to everyone, welcoming their expertise, creativity, and passion to collectively enhance the learning journey for all participants.
+
+<br/>
+---
 
 #### Initial Scope of Key Features:
 
-- **Dynamic Flashcard Game**: Reinforce understanding of concepts and assess knowledge.
-- **Adaptive Learning System**: Remember incorrect answers for future quizzes, providing targeted practice.
-- **Progress Tracking**: Monitor advancement and achievements within the platform.
-- **Intuitive Dashboard**: Enjoy a visually appealing and gamified experience while tracking progress.
+- **Dynamic Flashcard Game Mechanism**: <br>
+  Reinforce understanding of concepts and assess knowledge.
 
-#### List of Posible Future Ideas:
+- **Adaptive Learning System**: <br>
+  Remember incorrect answers for future quizzes, providing targeted practice.
 
-- **Collaborative Flashcard Database**: Fueled by community contributions. (Consider best practices for database management.)
-- **Customizable Flashcard Sets**: Create and share sets within the community-driven database.
-- **Course Recommendations**: Suggest ZTM courses based on user data - quizz results and onboarding info.
-- **OpenAI Bot Integration**: Incorporate a trained OpenAI API bot for interactive interviews.
+- **Progress Tracking**: <br>
+  Monitor advancement and achievements within the platform.
 
-### **Project Goals**
+- **Intuitive Dashboard**: <br>
+  Enjoy a visually appealing and gamified experience while tracking progress.
 
-This project serves two main purposes:
+- **Collaborative Flashcard Database**: <br>
+  Fueled by community contributions. (Consider best practices for database management.)
 
-1. **Frontend Mastery**: Practice and refine frontend development skills.
-2. **Development Best Practices**: Learn structuring, ordering, and planning for a seamless project workflow.
+- **Customizable Flashcard Sets**: <br>
+  Create and share sets within the community-driven database.
 
-Moreover, this endeavor holds the potential to benefit others:
+- **Course Recommendations**: <br>
+  Suggest ZTM courses based on user data - quizz results and onboarding info.
 
-- **Tool for ZTM Students**: Serve as a valuable resource for ZTM students.
-- **Open-Source Initiative**: Contribute as an open-source project for the broader ZTM community.
-
-### Sub Goals:
-
-- Explore a React Native version of the app after establishing the basic prototype.
-- Implement Playwright for end-to-end testing, alongside robust unit and integration testing using Jest and RTL.
-
-
+- **OpenAI Integration**: <br>
+  Incorporate a trained OpenAI API bot for interactive interviews.
 
 <br>
-<br>
-
-
-
-
-
-
-
 
 <!-- ---------------------------------------------------------------- -->
 
@@ -95,16 +119,14 @@ Moreover, this endeavor holds the potential to benefit others:
 Let's dive into the key features implemented in this project: 🔑
 
 - **Modern UI with Tailwind design:** <br/> Enjoy a visually stunning and sleek user interface.
-  
+
 - **Full responsiveness for all devices:** <br/> The application adapts flawlessly to various screen sizes and devices.
 
 - **Feature name:** <br/> description
 
 <br>
 
-
 ### **Features Coming Soon**
-
 
 These features are currently being worked on: 👨‍💻
 
@@ -112,22 +134,13 @@ These features are currently being worked on: 👨‍💻
 
 -
 
-
-
 <br>
 
 ---
 
-
-
-
-
-
-
 <!-- ---------------------------------------------------------------- -->
 
 # **RUNNING LOCALLY:**
-
 
 <!-- Small container -->
 <details>
@@ -167,15 +180,17 @@ npm run dev
 
 <br><br>
 
-
 ---
 
 # **CONTRIBUTIONS**
 
-If you'd like to contribute to this repository by adding more exercises, fixing bugs, or improving documentation, please feel free to submit a pull request. Your contributions are greatly appreciated!
+If you'd like to contribute to this repository by adding more features, fixing bugs, or improving documentation, please feel free to check out existing issues and submit a pull request. 
 
+Your contributions are greatly appreciated!
+
+
+<!-- This needs to be updated one day 🎯 -->
 <br/>
-
 
 ---
 
@@ -187,13 +202,10 @@ This project is licensed under the [MIT License](🎯).
 
 ---
 
-
-
-
 # **NOTES:**
 
 <details>
-<summary> Click here to see all the features: </summary>
+<summary> Click here to see further notes: </summary>
 <br/>
 
 - This project is for educational purposes only and not affiliated with ZTM.
