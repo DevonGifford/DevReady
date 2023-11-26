@@ -168,7 +168,7 @@ export const sidebarIndex: SidebarIndexProps[] = [
             label: "JavaScript Flashcards",
             icon: ScrollText,
             customIcon: "javascript-logo.svg",
-            href: "coming-soon",
+            href: "flashcards",
             isSub: true,
           },
           {

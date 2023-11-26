@@ -1,14 +1,23 @@
 import { Button } from "@/components/ui/button";
 import { PlusCircle } from "lucide-react";
 import React from "react";
+import QuizComponent from "./_components/flashcard-quizz";
+
+import questionsData from '@/constants/TestQuestion.json';
+
+interface Question {
+  id: number;
+  question: string;
+  answer: string;
+}
 
 function FlashcardGame() {
+
+  const testQuestions: Question[] = questionsData
+  
   return (
     <div className="h-full flex flex-col items-center justify-center space-y-4">
-      <h2 className="text-lg font-medium">
-        Welcome to the future Flashcards Page
-      </h2>
-      <h3 className="text-devready-green">Coming Soon</h3>
+      <QuizComponent questions={testQuestions} />
     </div>
   );
 }

@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1,
+    "question": "What is Javascript?",
+    "answer": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server."
+  },
+  {
+    "id": 2,
+    "question": "What is ECMAScript?",
+    "answer": "It is a standard specification for scripting languages. JavaScript is based on ECMAScript."
+  },
+  {
+    "id": 3,
+    "question": "What is the difference between == and ===?",
+    "answer": "== compares values. === compares both type and value."
+  },
+  {
+    "id": 4,
+    "question": "What is a promise?",
+    "answer": "It is an object that may produce a single value sometime in the future with either a resolved value or a reason for not being resolved."
+  },
+  {
+    "id": 5,
+    "question": "What is strict mode in JS?",
+    "answer": "It is useful for writing secure JS code. It prevents some bugs from happening and throws more exceptions."
+  },
+  {
+    "id": 6,
+    "question": "What is the difference between null and undefined?",
+    "answer": "null type is an object that is explicitly assigned to a variable. undefined type is undefined where the variable has been declared but has no assigned value."
+  },
+  {
+    "id": 7,
+    "question": "What is AJAX?",
+    "answer": "It stands for Asynchronous JavaScript and XML. We can send data to the server and get data without refreshing the page."
+  },
+  {
+    "id": 8,
+    "question": "Explain the difference between synchronous and asynchronous.",
+    "answer": "Synchronous is blocking operation while asynchronous is not. Synchronous completes the current code before the next code is executed while asynchronous continues on the next code without completing the current code."
+  },
+  {
+    "id": 9,
+    "question": "What are the differences between var, let, and const?",
+    "answer": "var is scoped to a function. let and const are block-scoped. Accessible to nearest curly braces (function, if-else, for-loop)."
+  },
+  {
+    "id": 10,
+    "question": "What is the DOM?",
+    "answer": "It stands for Document Object Model. This can be used to access and change the document structure, style, and content."
+  }
+]

@@ -119,7 +119,7 @@ export const UserDropdown = () => {
 
         {/* 👉 ZTM ACADEMY */}
         <a href="https://academy.zerotomastery.io/" target="_blank">
-          <SidebarItem label="ZTM Academy" icon={LogOut} isMaster />
+          <SidebarItem label="ZTM Academy" icon={LogOut} onClick={() => {}} />
         </a>
 
         {/* 👉 LOGOUT BUTTON */}
