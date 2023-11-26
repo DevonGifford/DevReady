@@ -42,7 +42,7 @@
     "setTags": ["Backend", "Node"],
     "setData": [
       {
-        "questionUuid": 1,
+        "questionUuid": 4,
         "questionTitle": "BE - What is Javascript?",
         "questionDescription": "Can you spend 2 minutes explaing to me what JavaScript is",
         "questionAnswer": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
@@ -50,7 +50,7 @@
         "questionTags": ["JS", "TS", "React"]
       },
       {
-        "questionUuid": 2,
+        "questionUuid": 5,
         "questionTitle": "BE - What is ECMAScript?",
         "questionDescription": "In a sentance, 'have you seen the latest ECMAScript changes?'",
         "questionAnswer": "It is a standard specification for scripting languages. JavaScript is based on ECMAScript.",
@@ -58,7 +58,7 @@
         "questionTags": ["JS"]
       },
       {
-        "questionUuid": 3,
+        "questionUuid": 6,
         "questionTitle": "BE - What is the difference between == and ===?",
         "questionDescription": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
         "questionAnswer": "== compares values. === compares both type and value.",
@@ -76,7 +76,7 @@
     "setTags": ["TypeScript", "React", "Node", "Databases"],
     "setData": [
       {
-        "questionUuid": 1,
+        "questionUuid": 7,
         "questionTitle": "BE - What is Javascript?",
         "questionDescription": "Can you spend 2 minutes explaing to me what JavaScript is",
         "questionAnswer": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
@@ -84,7 +84,7 @@
         "questionTags": ["JS", "TS", "React"]
       },
       {
-        "questionUuid": 2,
+        "questionUuid": 8,
         "questionTitle": "BE - What is ECMAScript?",
         "questionDescription": "In a sentance, 'have you seen the latest ECMAScript changes?'",
         "questionAnswer": "It is a standard specification for scripting languages. JavaScript is based on ECMAScript.",
@@ -92,7 +92,7 @@
         "questionTags": ["JS"]
       },
       {
-        "questionUuid": 3,
+        "questionUuid": 9,
         "questionTitle": "BE - What is the difference between == and ===?",
         "questionDescription": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
         "questionAnswer": "== compares values. === compares both type and value.",
@@ -110,7 +110,7 @@
     "setTags": ["Remix", "React", "WebDevelopment", "Frontend"],
     "setData": [
       {
-        "questionUuid": 1,
+        "questionUuid": 10,
         "questionTitle": "topic-react What is Javascript?",
         "questionDescription": "Can you spend 2 minutes explaing to me what JavaScript is",
         "questionAnswer": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
@@ -118,7 +118,7 @@
         "questionTags": ["JS", "TS", "React"]
       },
       {
-        "questionUuid": 2,
+        "questionUuid": 11,
         "questionTitle": "topic-react What is ECMAScript?",
         "questionDescription": "In a sentance, 'have you seen the latest ECMAScript changes?'",
         "questionAnswer": "It is a standard specification for scripting languages. JavaScript is based on ECMAScript.",
@@ -126,7 +126,7 @@
         "questionTags": ["JS"]
       },
       {
-        "questionUuid": 3,
+        "questionUuid": 12,
         "questionTitle": "topic-react What is the difference between == and ===?",
         "questionDescription": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
         "questionAnswer": "== compares values. === compares both type and value.",
@@ -144,7 +144,7 @@
     "setTags": ["WebDevelopment", "Frontend", "Backend", "FullStack"],
     "setData": [
       {
-        "questionUuid": 1,
+        "questionUuid": 13,
         "questionTitle": "topic-react What is Javascript?",
         "questionDescription": "Can you spend 2 minutes explaing to me what JavaScript is",
         "questionAnswer": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
@@ -152,7 +152,7 @@
         "questionTags": ["JS", "TS", "React"]
       },
       {
-        "questionUuid": 2,
+        "questionUuid": 14,
         "questionTitle": "topic-react What is ECMAScript?",
         "questionDescription": "In a sentance, 'have you seen the latest ECMAScript changes?'",
         "questionAnswer": "It is a standard specification for scripting languages. JavaScript is based on ECMAScript.",
@@ -160,7 +160,7 @@
         "questionTags": ["JS"]
       },
       {
-        "questionUuid": 3,
+        "questionUuid": 15,
         "questionTitle": "topic-react What is the difference between == and ===?",
         "questionDescription": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
         "questionAnswer": "== compares values. === compares both type and value.",
@@ -178,7 +178,7 @@
     "setTags": ["WebDevelopment", "Frontend", "Backend", "SeniorDev"],
     "setData": [
       {
-        "questionUuid": 1,
+        "questionUuid": 16,
         "questionTitle": "topic-react What is Javascript?",
         "questionDescription": "Can you spend 2 minutes explaing to me what JavaScript is",
         "questionAnswer": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
@@ -186,7 +186,7 @@
         "questionTags": ["JS", "TS", "React"]
       },
       {
-        "questionUuid": 2,
+        "questionUuid": 17,
         "questionTitle": "topic-react What is ECMAScript?",
         "questionDescription": "In a sentance, 'have you seen the latest ECMAScript changes?'",
         "questionAnswer": "It is a standard specification for scripting languages. JavaScript is based on ECMAScript.",
@@ -194,7 +194,7 @@
         "questionTags": ["JS"]
       },
       {
-        "questionUuid": 3,
+        "questionUuid": 18,
         "questionTitle": "topic-react What is the difference between == and ===?",
         "questionDescription": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
         "questionAnswer": "== compares values. === compares both type and value.",
@@ -212,7 +212,7 @@
     "setTags": ["React", "Redux", "Frontend", "StateManagement"],
     "setData": [
       {
-        "questionUuid": 1,
+        "questionUuid": 19,
         "questionTitle": "topic-react What is Javascript?",
         "questionDescription": "Can you spend 2 minutes explaing to me what JavaScript is",
         "questionAnswer": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
@@ -220,7 +220,7 @@
         "questionTags": ["JS", "TS", "React"]
       },
       {
-        "questionUuid": 2,
+        "questionUuid": 20,
         "questionTitle": "topic-react What is ECMAScript?",
         "questionDescription": "In a sentance, 'have you seen the latest ECMAScript changes?'",
         "questionAnswer": "It is a standard specification for scripting languages. JavaScript is based on ECMAScript.",
@@ -228,7 +228,7 @@
         "questionTags": ["JS"]
       },
       {
-        "questionUuid": 3,
+        "questionUuid": 21,
         "questionTitle": "topic-react What is the difference between == and ===?",
         "questionDescription": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
         "questionAnswer": "== compares values. === compares both type and value.",
@@ -251,7 +251,7 @@
     ],
     "setData": [
       {
-        "questionUuid": 1,
+        "questionUuid": 22,
         "questionTitle": "topic-react What is Javascript?",
         "questionDescription": "Can you spend 2 minutes explaing to me what JavaScript is",
         "questionAnswer": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
@@ -259,7 +259,7 @@
         "questionTags": ["JS", "TS", "React"]
       },
       {
-        "questionUuid": 2,
+        "questionUuid": 23,
         "questionTitle": "topic-react What is ECMAScript?",
         "questionDescription": "In a sentance, 'have you seen the latest ECMAScript changes?'",
         "questionAnswer": "It is a standard specification for scripting languages. JavaScript is based on ECMAScript.",
@@ -267,7 +267,7 @@
         "questionTags": ["JS"]
       },
       {
-        "questionUuid": 3,
+        "questionUuid": 24,
         "questionTitle": "topic-react What is the difference between == and ===?",
         "questionDescription": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
         "questionAnswer": "== compares values. === compares both type and value.",
@@ -285,7 +285,7 @@
     "setTags": ["TypeScript", "JavaScript", "TypeSafety", "Scalability"],
     "setData": [
       {
-        "questionUuid": 1,
+        "questionUuid": 25,
         "questionTitle": "topic-react What is Javascript?",
         "questionDescription": "Can you spend 2 minutes explaing to me what JavaScript is",
         "questionAnswer": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
@@ -293,7 +293,7 @@
         "questionTags": ["JS", "TS", "React"]
       },
       {
-        "questionUuid": 2,
+        "questionUuid": 26,
         "questionTitle": "topic-react What is ECMAScript?",
         "questionDescription": "In a sentance, 'have you seen the latest ECMAScript changes?'",
         "questionAnswer": "It is a standard specification for scripting languages. JavaScript is based on ECMAScript.",
@@ -301,7 +301,7 @@
         "questionTags": ["JS"]
       },
       {
-        "questionUuid": 3,
+        "questionUuid": 27,
         "questionTitle": "topic-react What is the difference between == and ===?",
         "questionDescription": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
         "questionAnswer": "== compares values. === compares both type and value.",
@@ -319,7 +319,7 @@
     "setTags": ["HTML", "CSS", "WebDevelopment", "Styling"],
     "setData": [
       {
-        "questionUuid": 1,
+        "questionUuid": 28,
         "questionTitle": "topic-react What is Javascript?",
         "questionDescription": "Can you spend 2 minutes explaing to me what JavaScript is",
         "questionAnswer": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
@@ -327,7 +327,7 @@
         "questionTags": ["JS", "TS", "React"]
       },
       {
-        "questionUuid": 2,
+        "questionUuid": 29,
         "questionTitle": "topic-react What is ECMAScript?",
         "questionDescription": "In a sentance, 'have you seen the latest ECMAScript changes?'",
         "questionAnswer": "It is a standard specification for scripting languages. JavaScript is based on ECMAScript.",
@@ -335,7 +335,7 @@
         "questionTags": ["JS"]
       },
       {
-        "questionUuid": 3,
+        "questionUuid": 30,
         "questionTitle": "topic-react What is the difference between == and ===?",
         "questionDescription": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
         "questionAnswer": "== compares values. === compares both type and value.",
@@ -353,7 +353,7 @@
     "setTags": ["Python", "Programming", "Scripting", "Development"],
     "setData": [
       {
-        "questionUuid": 1,
+        "questionUuid": 31,
         "questionTitle": "topic-react What is Javascript?",
         "questionDescription": "Can you spend 2 minutes explaing to me what JavaScript is",
         "questionAnswer": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
@@ -361,7 +361,7 @@
         "questionTags": ["JS", "TS", "React"]
       },
       {
-        "questionUuid": 2,
+        "questionUuid": 32,
         "questionTitle": "topic-react What is ECMAScript?",
         "questionDescription": "In a sentance, 'have you seen the latest ECMAScript changes?'",
         "questionAnswer": "It is a standard specification for scripting languages. JavaScript is based on ECMAScript.",
@@ -369,7 +369,7 @@
         "questionTags": ["JS"]
       },
       {
-        "questionUuid": 3,
+        "questionUuid": 33,
         "questionTitle": "topic-react What is the difference between == and ===?",
         "questionDescription": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
         "questionAnswer": "== compares values. === compares both type and value.",
@@ -387,7 +387,7 @@
     "setTags": ["JavaScript", "WebDevelopment", "Frontend", "Backend"],
     "setData": [
       {
-        "questionUuid": 1,
+        "questionUuid": 34,
         "questionTitle": "topic-JavaScript What is Javascript?",
         "questionDescription": "Can you spend 2 minutes explaining to me what JavaScript is",
         "questionAnswer": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
@@ -395,7 +395,7 @@
         "questionTags": ["JS", "TS", "React"]
       },
       {
-        "questionUuid": 2,
+        "questionUuid": 35,
         "questionTitle": "topic-JavaScript What is ECMAScript?",
         "questionDescription": "In a sentence, 'have you seen the latest ECMAScript changes?'",
         "questionAnswer": "It is a standard specification for scripting languages. JavaScript is based on ECMAScript.",
@@ -403,7 +403,7 @@
         "questionTags": ["JS"]
       },
       {
-        "questionUuid": 3,
+        "questionUuid": 36,
         "questionTitle": "topic-JavaScript What is the difference between == and ===?",
         "questionDescription": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
         "questionAnswer": "== compares values. === compares both type and value.",
@@ -421,7 +421,7 @@
     "setTags": ["TypeScript", "JavaScript", "TypeSafety", "Development"],
     "setData": [
       {
-        "questionUuid": 1,
+        "questionUuid": 37,
         "questionTitle": "topic-TypeScript What is TypeScript?",
         "questionDescription": "Can you spend 2 minutes explaining to me what TypeScript is",
         "questionAnswer": "It is a superset of JavaScript that adds strong typing and other features to the language.",
@@ -429,7 +429,7 @@
         "questionTags": ["TS", "JavaScript", "Frontend"]
       },
       {
-        "questionUuid": 2,
+        "questionUuid": 38,
         "questionTitle": "topic-TypeScript Why use TypeScript?",
         "questionDescription": "What are the advantages of using TypeScript over JavaScript?",
         "questionAnswer": "TypeScript provides static type-checking, which helps catch errors during development. It also offers better tooling and code maintainability.",
@@ -437,7 +437,7 @@
         "questionTags": ["TS", "JavaScript"]
       },
       {
-        "questionUuid": 3,
+        "questionUuid": 39,
         "questionTitle": "topic-TypeScript What is type safety?",
         "questionDescription": "Explain the concept of type safety in TypeScript.",
         "questionAnswer": "Type safety refers to the ability to catch type-related errors during compile-time rather than runtime, ensuring more robust code.",
@@ -455,7 +455,7 @@
     "setTags": ["JavaScript", "TypeScript", "React", "State", "Testing"],
     "setData": [
       {
-        "questionUuid": 1,
+        "questionUuid": 40,
         "questionTitle": "topic-react What is Javascript?",
         "questionDescription": "Can you spend 2 minutes explaing to me what JavaScript is",
         "questionAnswer": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
@@ -463,7 +463,7 @@
         "questionTags": ["JS", "TS", "React"]
       },
       {
-        "questionUuid": 2,
+        "questionUuid": 41,
         "questionTitle": "topic-react What is ECMAScript?",
         "questionDescription": "In a sentance, 'have you seen the latest ECMAScript changes?'",
         "questionAnswer": "It is a standard specification for scripting languages. JavaScript is based on ECMAScript.",
@@ -471,7 +471,7 @@
         "questionTags": ["JS"]
       },
       {
-        "questionUuid": 3,
+        "questionUuid": 42,
         "questionTitle": "topic-react What is the difference between == and ===?",
         "questionDescription": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
         "questionAnswer": "== compares values. === compares both type and value.",
