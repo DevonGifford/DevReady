@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { Button } from "../../../components/ui/button";
 import { TypeAnimation } from "react-type-animation";
+import Link from "next/link";
 
 const Hero = () => {
   return (
@@ -84,9 +85,11 @@ const Hero = () => {
 
           {/* LOGIN / DASHBOARD BUTTON - need to be dynamic in future 🎯 */}
           <div className="flex flex-col w-full gap-3 max-w-xl">
-            <Button type="button" variant="devfill" className="p-7 ">
-              Get Started Now
-            </Button>
+            <Link href={"/login"} className="flex flex-col w-full gap-3 max-w-xl">
+              <Button type="button" variant="devfill" className="p-7 ">
+                Get Started Now
+              </Button>
+            </Link>
 
             <Button
               type="button"

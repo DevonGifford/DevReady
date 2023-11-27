@@ -36,3 +36,7 @@ next-env.d.ts
 
 z.secret.md
 .env
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/

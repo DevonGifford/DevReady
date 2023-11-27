@@ -3,7 +3,7 @@ import FeatureBlock from "./_components/FeatureBlock";
 import Hero from "./_components/Hero";
 import ContentBlock from "./_components/ContentBlock";
 
-export default function Home() {
+export default function LandingPage() {
   return (
     <>
       <Hero />
