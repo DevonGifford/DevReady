@@ -2,11 +2,10 @@
 
 import Link from "next/link";
 import toast from "react-hot-toast";
-import { useContext } from "react";
 import { SidebarItem } from "./SidebarItem";
 import { UserFormHandler } from "./UserFormHandler";
+import { useModalContext } from "@/components/providers/ModalReducerProvider";
 
-import { LogoutModalContext } from "@/components/providers/LogoutProvider";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
@@ -21,24 +20,18 @@ import {
   ChevronsRight,
   Gauge,
   LogOut,
-  Settings,
   SettingsIcon,
   Trophy,
 } from "lucide-react";
 
 export const UserDropdown = () => {
+  const { modal, dispatch } = useModalContext();
+
   // 🎯 to-do-list : get user data
   //const { destruct, user, data } = useUserDataDevon();
 
   // 🎯 to-do-list : handle user Image (temp solution)
   const userImage = "/profile-placeholder-image.svg" || "real image";
-
-  const { openLogoutModal, setOpenLogoutModal } =
-    useContext(LogoutModalContext);
-
-  const openLogout = () => {
-    setOpenLogoutModal(!openLogoutModal);
-  };
 
   //👇🎯 testing toast notifications
   const ztmTest = () => {
@@ -103,7 +96,7 @@ export const UserDropdown = () => {
               >
                 <SettingsIcon className="shrink-0 h-[22px] w-[22px] mr-5 text-muted-foreground" />
               </div>
-                Update Profile
+              Update Profile
             </div>
             {/* <SidebarItem label="Update Profile" icon={Settings} isMaster /> */}
           </SheetTrigger>
@@ -124,7 +117,12 @@ export const UserDropdown = () => {
 
         {/* 👉 LOGOUT BUTTON */}
         {/* update with functionality 🎯 */}
-        <Button onClick={openLogout}> Logout </Button>
+        <Button
+          onClick={() => dispatch({ type: "OPEN_MODAL", modalType: "LOGOUT" })}
+        >
+          {" "}
+          Logout{" "}
+        </Button>
 
         {/* FOOTER USER LEVEL SUMMARY */}
         {/* update with link & seperate component? 🎯 */}

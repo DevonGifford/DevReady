@@ -2,6 +2,12 @@
 
 import React from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { SidebarItem } from "./SidebarItem";
+
+import { useModalContext } from "@/components/providers/ModalReducerProvider";
+
+import { Logo } from "@/components/Logo";
 import { Separator } from "@/components/ui/separator";
 import { Github, Linkedin, UserSquare } from "lucide-react";
 import {
@@ -11,22 +17,12 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-import { Logo } from "@/components/Logo";
-import { SidebarItem } from "./SidebarItem";
 import { sidebarQuickIndex, sidebarIndex } from "@/constants/sidebar-index";
-import { useRouter } from "next/navigation";
 
-interface SidebarProps {
-  openSearch: () => void;
-  openSettings: () => void;
-}
-
-export const Sidebar: React.FC<SidebarProps> = ({
-  openSearch,
-  openSettings,
-}) => {
+export const Sidebar = () => {
   const router = useRouter();
 
+  const { dispatch } = useModalContext();
 
   return (
     <div className="flex flex-col h-full">
@@ -43,13 +39,13 @@ export const Sidebar: React.FC<SidebarProps> = ({
               icon={icon as React.ElementType}
               onClick={() => {
                 if (label === "Search Questions") {
-                  openSearch();
+                  dispatch({ type: "OPEN_MODAL", modalType: "SEARCH" });
                 } else if (label === "Quick Settings") {
-                  openSettings();
+                  dispatch({ type: "OPEN_MODAL", modalType: "SETTINGS" });
                 } else if (label === "User Dashboard") {
-                  router.push('/user-dashboard')
+                  router.push("/user-dashboard");
                 } else if (label === "Create Flash Cards") {
-                  router.push('/create-flashcards');
+                  router.push("/create-flashcards");
                 }
               }}
               isMain={isMain}
