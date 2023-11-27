@@ -3,30 +3,24 @@
 import { cn } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 import { useMediaQuery } from "usehooks-ts";
-import { ElementRef, useEffect, useRef, useState, useContext } from "react";
-import { SettingsModalContext } from "@/components/providers/SettingsboxProvider";
-import { SearchModalContext } from "@/components/providers/SearchboxProvider";
+import { ElementRef, useEffect, useRef, useState } from "react";
 
 import { Sidebar } from "./Sidebar";
-import { ChevronLeft, MenuIcon } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
 import Navbar from "./Navbar";
 
 export const Navigation = () => {
   const pathname = usePathname();
   const isMobile = useMediaQuery("(max-width: 768px)"); //-track if screen width mobile-sized
   const isResizingRef = useRef(false); //-track if sidebar being resized
-  
+
   const sidebarRef = useRef<ElementRef<"aside">>(null);
   const navbarRef = useRef<ElementRef<"div">>(null);
 
   const [isResetting, setIsResetting] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(isMobile);
 
-  const { openSearchModal, setOpenSearchModal } =
-    useContext(SearchModalContext);
 
-  const { openSettingModal, setOpenSettingModal } =
-    useContext(SettingsModalContext);
 
   //✅ Trigger for mobile view
   useEffect(() => {
@@ -115,16 +109,6 @@ export const Navigation = () => {
     }
   };
 
-  // ✅ Open the searchbar Box
-  const openSearch = () => {
-    setOpenSearchModal(!openSearchModal);
-  };
-
-  // ✅ Open the settings Modal
-  const openSettings = () => {
-    setOpenSettingModal(!openSettingModal);
-  };
-
   return (
     <>
       <aside
@@ -147,7 +131,7 @@ export const Navigation = () => {
           <ChevronLeft className="h-6 w-6" />
         </div>
 
-        <Sidebar openSearch={openSearch} openSettings={openSettings} />
+        <Sidebar />
 
         {/* 👇 THE HORIZAONTAL SEPERATING LINE */}
         <div

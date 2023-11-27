@@ -1,8 +1,10 @@
 "use client";
-import { useEffect, useState, useContext } from "react";
-import { SettingsModalContext } from "@/components/providers/SettingsboxProvider";
+import { useEffect, useState } from "react";
 import { ModeToggle } from "../ThemeToggle";
+import { useModalContext } from "../providers/ModalReducerProvider";
 
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
 import {
   Dialog,
   DialogContent,
@@ -11,25 +13,29 @@ import {
   SettingSection,
   SettingTitle,
 } from "@/components/ui/dialog";
-import { Switch } from "@/components/ui/switch";
-import { Label } from "@/components/ui/label";
 
 export const SettingsModal = () => {
   const [isMounted, setIsMounted] = useState(false);
-  const { openSettingModal, setOpenSettingModal } =
-    useContext(SettingsModalContext);
+  const { modal, dispatch } = useModalContext();
 
   // ✅ listening if should be mounted
   useEffect(() => {
-    setIsMounted(true);
-  }, []);
+    if (modal.open && modal.type === "SETTINGS") {
+      setIsMounted(true);
+    } else {
+      setIsMounted(false);
+    }
+  }, [modal]);
 
   if (!isMounted) {
     return null;
   }
 
   return (
-    <Dialog open={openSettingModal} onOpenChange={setOpenSettingModal}>
+    <Dialog
+      open={modal.open}
+      onOpenChange={() => dispatch({ type: "CLOSE_MODAL" })}
+    >
       <DialogContent>
         <DialogHeader className="border-b py-3">
           <h2 className="text-lg font-medium">My settings</h2>
