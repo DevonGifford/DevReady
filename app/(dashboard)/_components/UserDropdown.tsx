@@ -23,9 +23,11 @@ import {
   SettingsIcon,
   Trophy,
 } from "lucide-react";
+import { useCustomToast } from "@/lib/useCustomToast";
 
 export const UserDropdown = () => {
   const { modal, dispatch } = useModalContext();
+  const customToast = useCustomToast();
 
   // 🎯 to-do-list : get user data
   //const { destruct, user, data } = useUserDataDevon();
@@ -36,6 +38,7 @@ export const UserDropdown = () => {
   //👇🎯 testing toast notifications
   const ztmTest = () => {
     toast.success("This is a Test notification 🎯🧪");
+    customToast("Hello?")
   };
 
   return (
