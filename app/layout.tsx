@@ -1,5 +1,6 @@
 "use client";
 
+import { SettingsReducerProvider } from "@/components/providers/SettingsReducerProvider";
 import { AuthContextProvider } from "@/components/providers/AuthProvider";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import ToasterProvider from "@/components/providers/ToasterProvider";
@@ -12,6 +13,7 @@ import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
+//🎯 to-do-list
 // 🤔 so I cant use meta data here and use client - use client is required in order to use authContext ... need to find a better space for metadata
 // export const metadata: Metadata = {
 //   title: "ZTMReady",
@@ -43,7 +45,7 @@ export default function RootLayout({
             disableTransitionOnChange
             storageKey="ztmready-theme"
           >
-            {children}
+            <SettingsReducerProvider>{children}</SettingsReducerProvider>
           </ThemeProvider>
         </AuthContextProvider>
       </body>

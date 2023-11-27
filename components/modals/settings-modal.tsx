@@ -1,7 +1,11 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ModeToggle } from "../ThemeToggle";
 import { useModalContext } from "../providers/ModalReducerProvider";
+import {
+  SettingsReducerContext,
+  ToggleAction,
+} from "../providers/SettingsReducerProvider";
 
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
@@ -17,6 +21,10 @@ import {
 export const SettingsModal = () => {
   const [isMounted, setIsMounted] = useState(false);
   const { modal, dispatch } = useModalContext();
+
+  const { state: toggleState, dispatch: toggleDispatch } = useContext(
+    SettingsReducerContext
+  );
 
   // ✅ listening if should be mounted
   useEffect(() => {
@@ -55,14 +63,17 @@ export const SettingsModal = () => {
           <SettingTitle>
             <Label>General Notifications 🎯</Label>
             <SettingDescription>
-              Do you want to turn on general notifcations?
+              Enable this to receive general notifications as toast alerts.
             </SettingDescription>
           </SettingTitle>
           <Switch
-          //checked={}
-          //onCheckedChange={}
-          //disabled
-          //aria-readonly
+            checked={toggleState.generalNotifications} // Use the toggle state
+            onCheckedChange={
+              () =>
+                toggleDispatch({
+                  type: "TOGGLE_GENERAL_NOTIFICATIONS",
+                } as ToggleAction) // Dispatch action to toggle the state
+            }
           />
         </SettingSection>
 
@@ -70,14 +81,17 @@ export const SettingsModal = () => {
           <SettingTitle>
             <Label>Hide correct answer 🎯</Label>
             <SettingDescription>
-              Disable the ability to check the correct answer until complete.
+              Disable the ability to see correct answers.
             </SettingDescription>
           </SettingTitle>
           <Switch
-          //checked={}
-          //onCheckedChange={}
-          //disabled
-          //aria-readonly
+            checked={toggleState.hideCorrectAnswer} // Use the toggle state
+            onCheckedChange={
+              () =>
+                toggleDispatch({
+                  type: "TOGGLE_HIDE_CORRECT_ANSWER",
+                } as ToggleAction) // Dispatch action to toggle the state
+            }
           />
         </SettingSection>
 
@@ -85,14 +99,17 @@ export const SettingsModal = () => {
           <SettingTitle>
             <Label>Log events 🎯</Label>
             <SettingDescription>
-              Do you want to see all log notifications
+              Enable this to see all event logs as toast notifications.
             </SettingDescription>
           </SettingTitle>
           <Switch
-          //checked={}
-          //onCheckedChange={}
-          //disabled
-          //aria-readonly
+            checked={toggleState.logEvents} // Use the toggle state
+            onCheckedChange={
+              () =>
+                toggleDispatch({
+                  type: "TOGGLE_LOG_EVENTS",
+                } as ToggleAction) // Dispatch action to toggle the state
+            }
           />
         </SettingSection>
 
@@ -100,16 +117,22 @@ export const SettingsModal = () => {
           <SettingTitle>
             <Label>Star Mentor 🎯</Label>
             <SettingDescription>
-              Are you a star mentor? Turn on admin functionality
+              Are you a star mentor? Turn on the admin functionality
             </SettingDescription>
           </SettingTitle>
           <Switch
-            //checked={}
-            //onCheckedChange={}
+            checked={toggleState.starMentor} // Use the toggle state
+            onCheckedChange={
+              () =>
+                toggleDispatch({
+                  type: "TOGGLE_STAR_MENTOR",
+                } as ToggleAction) // Dispatch action to toggle the state
+            }
             disabled
             aria-readonly
           />
         </SettingSection>
+
       </DialogContent>
     </Dialog>
   );
