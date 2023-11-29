@@ -25,10 +25,10 @@ export const userProfileForms: Record<string, FormObject> = {
     component: <GoalsForm />,
     description: "Configure how you receive display.",
   },
-  Appearance: {
-    component: <AppearanceForm />,
-    description: "Configure appearance.",
-  },
+  // Appearance: {
+  //   component: <AppearanceForm />,
+  //   description: "Configure appearance.",
+  // },
   Notifications: {
     component: <NotificationsForm />,
     description: "Configure how you receive notifications.",
