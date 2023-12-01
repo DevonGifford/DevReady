@@ -30,9 +30,9 @@ export default function DatabaseViewer() {
         <p>Hello</p>
         <div className="py-10">
           {data ? (
-            <DataTable columns={columns} data={data} /> // Render DataTable when data is available
+            <DataTable columns={columns} data={data} /> //-render DataTable when data is available
           ) : (
-            <Spinner size={"screen"} />
+            <Spinner size={"screen"} /> //-render Loading Animation while waiting for data
           )}
         </div>
       </div>
