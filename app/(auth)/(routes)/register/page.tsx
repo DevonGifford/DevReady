@@ -16,6 +16,7 @@ function Page(): JSX.Element {
   // ⌛ Handle Form Submission - REGISTER
   const handleForm = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
+    console.log("🎯event_log:  🗝auth/login-page:  Started Register Process ");
 
     //- Attempt to sign up with provided email and password
     const { result, error } = await register(email, password);
@@ -23,15 +24,16 @@ function Page(): JSX.Element {
     if (error) {
       //  - Display and log any sign-up errors
       //🎯 create different errors for different messages.
-      console.log(error);
-      toast.error("Hmmm... something went wrong - please try again"); //🎯 clean this up
+      console.log("🎯event_log:  🗝Register Page:  somethig went wrong:", error);
+      toast.error("Hmmm... something went wrong  - please try again"); //🎯 clean this up
       return;
     }
 
-    //- Sign up successful
-    // 🎯 udpate user-auth context
-    console.log("✅ user has been successfully created with firebase"); //🎯remove
-    console.log("Here is the result from firebase:", result); //🎯remove
+    //- Register successful
+    console.log(
+      "🎯event_log:  🗝Register Page:  user has been successfully created with firebase - result:",
+      result
+    );
     toast.success(
       "Successfully registered and logged in.  This needs an onboarding process..."
     );
