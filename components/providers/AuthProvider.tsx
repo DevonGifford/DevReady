@@ -53,25 +53,33 @@ export const AuthContextProvider = ({
         "🎯event_log:  🔑authProvider/onAuthStateChanged:  💢 Triggered"
       );
       if (user) {
-        setUser({
-          email: user.email,
-          uid: user.uid,
-        });
+        try {
+          setUser({
+            email: user.email,
+            uid: user.uid,
+          });
+        } catch (error) {
+          console.log(
+            "🎯event_log:  🔑authProvider/onAuthStateChanged:   ❌ Error fetching user profile from firestore:",
+            error
+          );
+        }
       } else {
         setUser({ email: null, uid: null });
+        console.log(
+          "🎯event_log:  🔑authProvider/onAuthStateChanged:   ⚠ The user context has been set to null"
+        );
       }
-    });
 
-    setLoading(false);
+      setLoading(false);
+    });
 
     return () => unsubscribe();
   }, []);
 
   // ✅ HANDLE REGISTER NEW USER
   const register = async (email: string, password: string) => {
-    console.log(
-      "🎯event_log:  🔑authProvider/register:  💢 Triggered"
-    );
+    console.log("🎯event_log:  🔑authProvider/register:  💢 Triggered");
 
     try {
       console.log(
@@ -120,9 +128,7 @@ export const AuthContextProvider = ({
 
   // ✅ HANDLE USER LOGIN
   const logIn = async (email: string, password: string) => {
-    console.log(
-      "🎯event_log:  🔑authProvider/login:  💢 Triggered "
-    );
+    console.log("🎯event_log:  🔑authProvider/login:  💢 Triggered ");
     try {
       const { user } = await signInWithEmailAndPassword(auth, email, password);
 
@@ -146,15 +152,16 @@ export const AuthContextProvider = ({
         );
       }
     } catch (loginError: any) {
-      console.error("🎯event_log:  🔑authProvider/login:  ❌ Error occurred during login:", loginError.message);
+      console.error(
+        "🎯event_log:  🔑authProvider/login:  ❌ Error occurred during login:",
+        loginError.message
+      );
     }
   };
 
   // ✅ HANLDE USER LOGOUT
   const logOut = async () => {
-    console.log(
-      "🎯event_log:  🔑authProvider/logout:    💢 Triggered "
-    );
+    console.log("🎯event_log:  🔑authProvider/logout:    💢 Triggered ");
     setUser({ email: null, uid: null });
     return await signOut(auth);
   };
