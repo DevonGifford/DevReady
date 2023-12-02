@@ -36,6 +36,8 @@ const AuthContext = createContext<AuthContextProps>({
 // - directly returns result of useContext explicitly defining any type.
 export const useAuth = () => useContext<any>(AuthContext);
 
+// 🎯to-do-list:  update sessionStorage? (encrypted?)
+
 export const AuthContextProvider = ({
   children,
 }: {
@@ -47,6 +49,9 @@ export const AuthContextProvider = ({
   // ✅ UPDATING AUTH-STATE ON AUTH CHANGE
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
+      console.log(
+        "🎯event_log:  🔑authProvider/onAuthStateChanged:  💢 Triggered"
+      );
       if (user) {
         setUser({
           email: user.email,
@@ -65,7 +70,7 @@ export const AuthContextProvider = ({
   // ✅ HANDLE REGISTER NEW USER
   const register = async (email: string, password: string) => {
     console.log(
-      "🎯event_log:  🔑authProvider/register:  Registration process triggered ⚡ "
+      "🎯event_log:  🔑authProvider/register:  💢 Triggered"
     );
 
     try {
@@ -84,14 +89,6 @@ export const AuthContextProvider = ({
         );
 
         try {
-          console.log(
-            "🎯event_log:  🔑authProvider/register: Document data - ",
-            "  user.uid: ",
-            user.uid,
-            "  email:  ",
-            email
-          );
-
           // - Create a new user document in firebase
           createUserDataProcess(user.uid, {
             uuid: user.uid,
@@ -99,22 +96,24 @@ export const AuthContextProvider = ({
           });
         } catch (creationError) {
           console.error(
-            "🎯event_log:  🔑authProvider/register:  Error creating user document:",
+            "🎯event_log:  🔑authProvider/register:  ❌ Error creating user document:",
             creationError
           );
           // Handle creation error here (retry or handle it as needed)
         }
       }
-
       // - Return user on successful registration
+      console.log(
+        "🎯event_log:  🔑authProvider/register:  ✔ successfully registered user "
+      );
       return { result: user };
     } catch (registrationError) {
+      // - Return error if registration fails
       console.error(
-        "🎯event_log:  🔑authProvider/register:  Error registering user:",
+        "🎯event_log:  🔑authProvider/register:  ❌ error registering user:",
         registrationError
       );
 
-      // - Return error if registration fails
       return { error: registrationError };
     }
   };
@@ -122,7 +121,7 @@ export const AuthContextProvider = ({
   // ✅ HANDLE USER LOGIN
   const logIn = async (email: string, password: string) => {
     console.log(
-      "🎯event_log:  🔑authProvider/login:   Login process triggered "
+      "🎯event_log:  🔑authProvider/login:  💢 Triggered "
     );
     try {
       const { user } = await signInWithEmailAndPassword(auth, email, password);
@@ -131,37 +130,30 @@ export const AuthContextProvider = ({
         console.log(
           "🎯event_log:  🔑authProvider/login:   Updating user login time"
         );
-        const lastLogin = new Date().toISOString();
 
         try {
           updateUserLoginTime(user.uid);
           return { result: user };
         } catch (updateError: any) {
           console.error(
-            "🚫 Error occurred during lastLogin update:",
+            "🎯event_log:  🔑authProvider/login:  ❌ Error occurred during lastLogin update:",
             updateError.message
           );
-          // 🎯to-do-list: Return specific error message for update error 🤔
-          // return { error: updateError.message };
         }
       } else {
         console.log(
-          "🎯event_log:  🔑authProvider/login:  User not found during login"
+          "🎯event_log:  🔑authProvider/login:  ❌ User not found during login"
         );
-        // 🎯to-do-list: Return error message if user object is null 🤔
-        // return { error: "User not found" };
       }
     } catch (loginError: any) {
-      console.error("🚫 Error occurred during login:", loginError.message);
-      // 🎯to-do-list: Return specific error message for login error 🤔
-      // return { error: loginError.message };
+      console.error("🎯event_log:  🔑authProvider/login:  ❌ Error occurred during login:", loginError.message);
     }
   };
 
   // ✅ HANLDE USER LOGOUT
   const logOut = async () => {
     console.log(
-      "🎯event_log:  🔑authProvider/logout:  Logout process triggered "
+      "🎯event_log:  🔑authProvider/logout:    💢 Triggered "
     );
     setUser({ email: null, uid: null });
     return await signOut(auth);

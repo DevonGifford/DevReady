@@ -2,7 +2,6 @@
 
 import { useEffect, useReducer } from "react";
 import { useRouter } from "next/navigation";
-
 import { useAuth } from "@/components/providers/AuthProvider";
 import { Navigation } from "./_components/Navigation";
 
@@ -21,11 +20,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
   const [modal, dispatch] = useReducer(modalReducer, initialState);
 
   // ✅ If not authenticated, redirect to the home page
-  // 🎯 to-do-list:  There has to be a better way to handle this...
-  // - If the user is not authenticated, redirect to the home page
-  //? this gives the page 2 seconds to finalise auth check before kicking user
-  //? the way auth is handled is, user will see loading spinner
-  //? thinking I will need to find a way to persist the userAuth
+  // 🎯 to-do-list:  improvement & persisting auth state
   useEffect(() => {
     let timeoutId: ReturnType<typeof setTimeout>;
 
