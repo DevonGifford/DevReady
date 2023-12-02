@@ -1,9 +1,7 @@
 "use client";
 
-import toast from "react-hot-toast";
 import { useEffect, useReducer } from "react";
 import { useRouter } from "next/navigation";
-
 import { useAuth } from "@/components/providers/AuthProvider";
 import { Navigation } from "./_components/Navigation";
 
@@ -16,25 +14,26 @@ import {
   modalReducer,
 } from "@/components/providers/ModalReducerProvider";
 
-
 const MainLayout = ({ children }: { children: React.ReactNode }) => {
-  const { user } = useAuth();
   const router = useRouter();
-
+  const { user } = useAuth();
   const [modal, dispatch] = useReducer(modalReducer, initialState);
 
-  // // ✅ Handle loading state while authentication is being checked
-  // - this is now being handled in the authProvider
-
   // ✅ If not authenticated, redirect to the home page
-  // 🎯 to do list
-  //- this results in a flashing of content - I need to figure it out
+  // 🎯 to-do-list:  improvement & persisting auth state
   useEffect(() => {
-    // If the user is not authenticated, redirect to the home page
+    let timeoutId: ReturnType<typeof setTimeout>;
+
     if (!user || !user.uid) {
-      toast.error("Woops - Something went wrong - please login again");
-      router.push("/");
+      timeoutId = setTimeout(() => {
+        console.log("🎯event_log: AUTH FAILED - please login again");
+        router.push("/");
+      }, 2500); // 2500 milliseconds = 2.5 seconds
     }
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
   }, [user, router]);
 
   return (
