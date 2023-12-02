@@ -2,6 +2,7 @@
 
 import { SettingsReducerProvider } from "@/components/providers/SettingsReducerProvider";
 import { AuthContextProvider } from "@/components/providers/AuthProvider";
+import { UserContextProvider } from "@/components/providers/UserProvider";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import ToasterProvider from "@/components/providers/ToasterProvider";
 
@@ -38,15 +39,17 @@ export default function RootLayout({
       <body className={inter.className}>
         <ToasterProvider />
         <AuthContextProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="light"
-            enableSystem
-            disableTransitionOnChange
-            storageKey="ztmready-theme"
-          >
-            <SettingsReducerProvider>{children}</SettingsReducerProvider>
-          </ThemeProvider>
+          <UserContextProvider>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="light"
+              enableSystem
+              disableTransitionOnChange
+              storageKey="ztmready-theme"
+            >
+              <SettingsReducerProvider>{children}</SettingsReducerProvider>
+            </ThemeProvider>
+          </UserContextProvider>
         </AuthContextProvider>
       </body>
     </html>

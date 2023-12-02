@@ -16,6 +16,7 @@ function LoginPage(): JSX.Element {
   // ⌛ Handle Form Submission - LOGIN
   const handleForm = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
+    console.log("🎯event_log:  🗝auth/login-page/submit:  💢 Triggered ");
 
     // - Attempt to login with provided email and password
     const { result, error } = await logIn(email, password);
@@ -23,14 +24,20 @@ function LoginPage(): JSX.Element {
     if (error) {
       //  - Display and log any sign-in errors
       //🎯 create different errors for different messages.
-      console.log(error);
-      toast.error("Incorrect credentials, please try again.");
+      console.log(
+        "🎯event_log:   🗝auth/login-page/submit:  ❌ Error in attempting to login: ",
+        error
+      );
+      toast.error("Incorrect credentials, please try again.");  //-no context, no custom toast 
       return;
     }
 
     // - Sign in successful
-    console.log("✅ user has been successfully validated with firebase"); //🎯remove
-    toast.success("Successfully signed in");
+    console.log(
+      "🎯event_log:   🗝auth/login-page/submit:  ✔ Sign in successful - firebase result:  ",
+      result
+    );
+    toast.success("Successfully signed in");  //-no context, no custom toast
 
     // - Redirect to the home page
     router.push("/dashboard");
