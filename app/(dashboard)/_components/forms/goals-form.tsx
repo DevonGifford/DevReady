@@ -2,10 +2,10 @@
 
 import * as z from "zod";
 import toast from "react-hot-toast";
+import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Input } from "@/components/ui/input";
@@ -160,14 +160,16 @@ export function GoalsForm() {
             </FormItem>
           )}
         />
-
-        <Button
-          type="submit"
-          variant={"devfill"}
-          className="rounded-lg text-sm md:text-sm p-2"
-        >
-          Set your goal
-        </Button>
+        <div className="flex gap-5">
+          <Button
+            type="submit"
+            variant={"devfill"}
+            className="rounded-lg text-sm md:text-sm p-2"
+          >
+            Set your goal
+          </Button>
+          <Button variant={"outline"}>mark goal as achieved!</Button>
+        </div>
       </form>
     </Form>
   );

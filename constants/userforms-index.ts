@@ -1,42 +1,5 @@
-import React from "react";
-import { AccountForm } from "@/app/(dashboard)/_components/forms/account-form";
-import { ProfileForm } from "@/app/(dashboard)/_components/forms/profile-form";
-import { AppearanceForm } from "@/app/(dashboard)/_components/forms/appearance-form";
-import { NotificationsForm } from "@/app/(dashboard)/_components/forms/notification-form";
-import { GoalsForm } from "@/app/(dashboard)/_components/forms/goals-form";
 
-
-// 👇 Handle Forms 
-export interface FormObject {
-  component: React.ReactNode;
-  description: string;
-}
-
-export const userProfileForms: Record<string, FormObject> = {
-  Account: {
-    component: <AccountForm />,
-    description: "Configure your account.",
-  },
-  Profile: {
-    component: <ProfileForm />,
-    description: "Configure how you receive notifications.",
-  },
-  Goals: {
-    component: <GoalsForm />,
-    description: "Configure how you receive display.",
-  },
-  // Appearance: {
-  //   component: <AppearanceForm />,
-  //   description: "Configure appearance.",
-  // },
-  Notifications: {
-    component: <NotificationsForm />,
-    description: "Configure how you receive notifications.",
-  },
-};
-
-
-// 👇 Account-form 
+// 👇 Profile-form 
 export const countriesList = [
   { label: "United States", value: "US" },
   { label: "Canada", value: "CA" },
@@ -75,7 +38,7 @@ export const languages = [
 
 
 
-// 👇 Profile-form 
+// 👇 Account-form 
 export const careerList = [
   { label: "Frontend Developer" },
   { label: "Fullstack Developer" },
@@ -143,7 +106,8 @@ export const skillsList = [
 ] as const;
 
 
-// 👇 Appearance-form
+// 👇 Appearance-form  
+//🎯 to-do-list removed appearance form - remove this 
 export const sidebarItems = [
   {
     id: "recents",

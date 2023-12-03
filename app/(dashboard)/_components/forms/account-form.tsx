@@ -1,26 +1,21 @@
 "use client";
 
 import * as z from "zod";
+import toast from "react-hot-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import Link from "next/link";
-import { cn } from "@/lib/utils";
+import { UseFormSetValue, useForm } from "react-hook-form";
 
-import { Input } from "@/components/ui/input";
-import { Switch } from "@/components/ui/switch";
+import { cn } from "@/lib/utils";
+import { Slider } from "@/components/ui/slider";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { CheckCheckIcon, CheckIcon } from "lucide-react";
 import {
   Popover,
-  PopoverTrigger,
   PopoverContent,
+  PopoverTrigger,
 } from "@/components/ui/popover";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import {
   Command,
   CommandEmpty,
@@ -37,17 +32,13 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+
 import {
-  CheckCheckIcon,
-  CheckIcon,
-  Github,
-  LinkIcon,
-  Linkedin,
-} from "lucide-react";
+  careerList,
+  programmingLanguagesList,
+  skillsList,
+} from "@/constants/userforms-index";
 
-import toast from "react-hot-toast";
-
-import { countriesList, languages } from "@/constants/navigation-index";
 
 const accountFormSchema = z.object({
   username: z
@@ -58,44 +49,35 @@ const accountFormSchema = z.object({
     .max(20, {
       message: "⚠ Username must not be longer than 20 characters.",
     }),
-  email: z
-    .string({
-      required_error: "⚠ Please select an email to display.",
-    })
-    .email(),
-  country: z.string({
-    required_error: "⚠ Please pick your country.",
+  career_title: z.string({
+    required_error: "⚠ Please pick your career .",
   }),
-  language: z.string({
-    required_error: "⚠ Please select a language.",
+  programming_lang: z.string({
+    required_error: "⚠ Please pick a language .",
   }),
-  urls: z
-    .object({
-      github: z.string().url().optional(),
-      linkedin: z.string().url().optional(),
-      website: z.string().url().optional(),
-    })
-    .refine((data) => Object.values(data).some(Boolean), {
-      message:
-        "⚠ At least one social media profile is required.",
-    }),
-  ztm_student: z.boolean().default(false).optional(),
-  star_mentor: z.boolean().default(false).optional(),
+  career_level: z.number().min(0, "⚠ Please set your level"),
+  experience_level: z.number().min(0, "⚠ Please set your level"),
+  skills_list: z.array(z.string()),
 });
-
 type AccountFormValues = z.infer<typeof accountFormSchema>;
 
 const defaultValues: Partial<AccountFormValues> = {
   // 🎯 to-do-list
   // - will be a database / API call
+  // career_title: {user.name},
+  // bio: {user.bio},
 };
 
 export function AccountForm() {
   const form = useForm<AccountFormValues>({
     resolver: zodResolver(accountFormSchema),
     defaultValues,
-    mode: "onChange",
   });
+
+  const handleSkillList = (selectedSkill: string, prevSkills: string[]) => {
+    // 🎯 to-do-list
+    //-I still need to figure out a way to manage the data as form data
+  };
 
   function onSubmit(data: AccountFormValues) {
     // 🎯 to-do-list
@@ -109,69 +91,50 @@ export function AccountForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <FormField
-          control={form.control}
-          name="username"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Name</FormLabel>
-              <FormDescription>
-                This is your public display name. It can be your real name or a
-                pseudonym. You can only change this once every 30 days.
-              </FormDescription>
-              <FormControl>
-                <Input placeholder="shadcn" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormDescription>
-                You can manage verified email addresses in your{" "}
-                <Link
-                  // 🎯 update - manage email
-                  href="/"
-                >
-                  email settings
-                </Link>
-                .
-              </FormDescription>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select a verified email to display" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  {/* 🎯 This needs to update with users verified email addresses */}
-                  <SelectItem value="johndoe@example.com">
-                    johndoe@example.com
-                  </SelectItem>
-                  <SelectItem value="test@gmail.com">test@gmail.com</SelectItem>
-                  <SelectItem value="test@support.com">
-                    test@support.com
-                  </SelectItem>
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        {/* Language & location */}
-        <div className="flex flex-col md:flex-row gap-3 md:gap-10 mr-16">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full">
+        {/* USERNAME & USERIMAGE 🎯 */}
+        <div className="flex flex-col items-center gap-4 md:flex-row md:gap-10">
+          {/* USERNAME */}
           <FormField
             control={form.control}
-            name="language"
+            name="username"
             render={({ field }) => (
-              <FormItem className="flex flex-col rounded-lg border p-4">
-                <FormLabel>Language</FormLabel>
+              <FormItem>
+                <FormLabel>Name</FormLabel>
+                <FormDescription className="pb-1">
+                  This is your public display name. It can be your real name or
+                  a pseudonym.
+                </FormDescription>
+                <FormControl>
+                  <Input placeholder="shadcn" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          {/* USER IMAGE 🎯 */}
+          <div className="flex flex-col justify-center items-center border-2 w-[250px] h-[200px] ">
+            <p className="transform rotate-12  text-center">
+              Handle updating user image
+            </p>
+            <p className="transform rotate-12  text-center text-devready-green">
+              Coming soon
+            </p>
+          </div>
+        </div>
+
+        {/* CAREER AND LANGUAGE */}
+        <div className="flex flex-col justify-center items-center md:justify-normal md:flex-row gap-5 md:gap-24">
+          <FormField
+            control={form.control}
+            name="career_title"
+            render={({ field }) => (
+              <FormItem className="flex flex-col rounded-lg border p-4 space-y-1 w-[270px] ">
+                <FormLabel>Career Title</FormLabel>
+                <FormDescription>
+                  Pick your current or dream title.
+                </FormDescription>
                 <Popover>
                   <PopoverTrigger asChild>
                     <FormControl>
@@ -185,8 +148,8 @@ export function AccountForm() {
                         )}
                       >
                         {field.value
-                          ? languages.find(
-                              (language) => language.value === field.value
+                          ? careerList.find(
+                              (language) => language.label === field.value
                             )?.label
                           : "Select language"}
                         <CheckCheckIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
@@ -194,27 +157,27 @@ export function AccountForm() {
                     </FormControl>
                   </PopoverTrigger>
                   <PopoverContent className="w-[200px] p-0">
-                    <Command>
+                    <Command className=" overflow-y-auto max-h-[420px]">
                       <CommandInput placeholder="Search language..." />
                       <CommandEmpty>No language found.</CommandEmpty>
-                      <CommandGroup>
-                        {languages.map((language) => (
+                      <CommandGroup className="overflow-y-auto max-h-[300px]">
+                        {careerList.map((career) => (
                           <CommandItem
-                            value={language.label}
-                            key={language.value}
+                            value={career.label}
+                            key={career.label}
                             onSelect={() => {
-                              form.setValue("language", language.value);
+                              form.setValue("career_title", career.label);
                             }}
                           >
                             <CheckIcon
                               className={cn(
                                 "mr-2 h-4 w-4",
-                                language.value === field.value
+                                career.label === field.value
                                   ? "opacity-100"
                                   : "opacity-0"
                               )}
                             />
-                            {language.label}
+                            {career.label}
                           </CommandItem>
                         ))}
                       </CommandGroup>
@@ -227,10 +190,13 @@ export function AccountForm() {
           />
           <FormField
             control={form.control}
-            name="country"
+            name="programming_lang"
             render={({ field }) => (
-              <FormItem className="flex flex-col rounded-lg border p-4">
-                <FormLabel>Location</FormLabel>
+              <FormItem className="flex flex-col rounded-lg border p-4 space-y-1">
+                <FormLabel>Favorite Language</FormLabel>
+                <FormDescription>
+                  Pick your most proficient language.
+                </FormDescription>
                 <Popover>
                   <PopoverTrigger asChild>
                     <FormControl>
@@ -244,43 +210,39 @@ export function AccountForm() {
                         )}
                       >
                         {field.value
-                          ? countriesList.find(
-                              (country) => country.value === field.value
+                          ? programmingLanguagesList.find(
+                              (lang) => lang.label === field.value
                             )?.label
-                          : "Select country"}
+                          : "Select language"}
                         <CheckCheckIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                       </Button>
                     </FormControl>
                   </PopoverTrigger>
                   <PopoverContent className="w-[200px] p-0">
                     <Command className=" overflow-y-auto max-h-[420px]">
-                      <CommandInput placeholder="Search country..." />
-                      <CommandEmpty>No country found.</CommandEmpty>
-                      <CommandGroup className="overflow-y-auto max-h-[300px]">
-                        {countriesList.map((country) => (
+                      <CommandInput placeholder="Search language..." />
+                      <CommandEmpty>No language found.</CommandEmpty>
+                      <CommandGroup>
+                        {programmingLanguagesList.map((lang) => (
                           <CommandItem
-                            value={country.label}
-                            key={country.value}
+                            value={lang.label}
+                            key={lang.label}
                             onSelect={() => {
-                              form.setValue("country", country.value);
+                              form.setValue("programming_lang", lang.label);
                             }}
-                            // className=" overflow-y-auto max-h-[10px]"
                           >
                             <CheckIcon
                               className={cn(
                                 "mr-2 h-4 w-4",
-                                country.value === field.value
+                                lang.label === field.value
                                   ? "opacity-100"
                                   : "opacity-0"
                               )}
                             />
-                            {country.label}
+                            {lang.label}
                           </CommandItem>
                         ))}
                       </CommandGroup>
-                      {/* <h1 className="ml-10 text-primary/40">
-                        <MoreHorizontal />
-                      </h1> */}
                     </Command>
                   </PopoverContent>
                 </Popover>
@@ -289,112 +251,153 @@ export function AccountForm() {
             )}
           />
         </div>
-        {/* Connections */}
-        <div className="flex flex-col gap-2">
-          <FormField
-            control={form.control}
-            name="urls.github"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Connections</FormLabel>
+
+        {/* Career Level */}
+        <FormField
+          control={form.control}
+          name="career_level"
+          render={({ field: { value, onChange } }) => (
+            <FormItem className="space-y-1">
+              <div className="flex flex-col items-center md:items-start pb-2">
+                <FormLabel>Professional Stage</FormLabel>
                 <FormDescription>
-                  Connect with your community and make your profile stand out.
+                  Indicate your current professional stage.
                 </FormDescription>
-                <div className="flex flex-row justify-between items-center gap-3">
-                  <Github className="text-devready-green" size={20} />
-                  <FormControl className="w-full">
-                    <Input placeholder="GitHub profile" {...field} />
-                  </FormControl>
-                </div>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="urls.linkedin"
-            render={({ field }) => (
-              <FormItem>
-                <div className="flex flex-row justify-between items-center gap-3">
-                  <Linkedin className="text-devready-green" size={20} />
-                  <FormControl className="w-full">
-                    <Input placeholder="LinkedIn profile" {...field} />
-                  </FormControl>
-                </div>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="urls.website"
-            render={({ field }) => (
-              <FormItem>
-                <div className="flex flex-row justify-between items-center gap-3">
-                  <LinkIcon className="text-devready-green" size={20} />
-                  <FormControl className="w-full">
-                    <Input placeholder="Portfolio or project" {...field} />
-                  </FormControl>
-                </div>
+              </div>
 
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </div>
-        {/* Switches */}
-        <div className="flex flex-col gap-2">
-          <FormField
-            control={form.control}
-            name="ztm_student"
-            render={({ field }) => (
-              <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3">
-                <div className="">
-                  <FormLabel className="text-base">ZTM Alumni</FormLabel>
-                  <FormDescription>
-                    Are you currently a ZTM student or alumni?
-                  </FormDescription>
-                </div>
-                <FormControl>
-                  <Switch
-                    checked={field.value}
-                    onCheckedChange={field.onChange}
-                    // disabled
-                    // aria-readonly
-                  />
-                </FormControl>
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="star_mentor"
-            render={({ field }) => (
-              <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3">
-                <div className="">
-                  <FormLabel className="text-base">Star Mentor</FormLabel>
-                  <FormDescription>Are you a star mentor?</FormDescription>
-                </div>
-                <FormControl>
-                  <Switch
-                    checked={field.value}
-                    onCheckedChange={field.onChange}
-                    disabled
-                    aria-readonly
-                  />
-                </FormControl>
-              </FormItem>
-            )}
-          />
-        </div>
+              <FormControl className="mx-4 w-11/12">
+                <Slider
+                  min={0}
+                  max={100}
+                  step={1}
+                  defaultValue={[defaultValues?.career_level || 0]}
+                  onValueChange={(vals) => {
+                    onChange(vals[0]);
+                  }}
+                />
+              </FormControl>
 
-        <Button
-          type="submit"
-          variant={"devfill"}
-          className="rounded-lg text-sm md:text-sm p-2"
-        >
-          Update account
-        </Button>
+              <div className="flex justify-between text-xs text-muted-foreground ml-1 sm:pr-8 md:pr-10 lg:pr-16 xl:pr-12">
+                <div className="flex flex-col text-center">
+                  <p>Aspiring</p>
+                  <p className="w-full">Dev</p>
+                </div>
+                <div className="flex flex-col items-center text-center">
+                  <p>Junior</p>
+                  <p>Dev</p>
+                </div>
+                <div className="flex flex-col items-center text-center">
+                  <p>Mid-Level</p>
+                  <p>Dev</p>
+                </div>
+                <div className="flex flex-col items-end text-center">
+                  <p>Senior</p>
+                  <p className="w-full">Dev</p>
+                </div>
+              </div>
+
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        {/* Experience level */}
+        <FormField
+          control={form.control}
+          name="experience_level"
+          render={({ field: { value, onChange } }) => (
+            <FormItem className="space-y-1">
+              <div className="flex flex-col items-center md:items-start pb-2">
+                <FormLabel>Experience Level</FormLabel>
+                <FormDescription>
+                  Indicate your experience in years of work.
+                </FormDescription>
+              </div>
+
+              <FormControl className="mx-4 w-11/12">
+                <Slider
+                  min={0}
+                  max={100}
+                  step={1}
+                  defaultValue={[defaultValues?.experience_level || 0]}
+                  onValueChange={(vals) => {
+                    onChange(vals[0]);
+                  }}
+                />
+              </FormControl>
+
+              <div className="flex justify-between text-xs text-muted-foreground ml-1 sm:pr-8 md:pr-10 lg:pr-16 xl:pr-12">
+                <div className="flex flex-col text-center">
+                  <p>&gt;6</p>
+                  <p className="w-full">Months</p>
+                </div>
+                <div className="flex flex-col items-center text-center">
+                  <p>1</p>
+                  <p>Year</p>
+                </div>
+                <div className="flex flex-col items-center text-center">
+                  <p>3</p>
+                  <p>Years</p>
+                </div>
+                <div className="flex flex-col items-end text-center">
+                  <p>5+</p>
+                  <p className="w-full">Years</p>
+                </div>
+              </div>
+
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        {/* Skills 🎯 */}
+        <FormField
+          control={form.control}
+          name="skills_list"
+          render={({ field: { value, onChange } }) => (
+            <FormItem className="space-y-1">
+              <div className="flex flex-col items-center text-center md:text-start md:items-start pb-2">
+                <FormLabel>Pick your proficient skills</FormLabel>
+                <FormDescription>
+                  Pick your most proficient skill set
+                </FormDescription>
+              </div>
+              <FormControl>
+                <ToggleGroup
+                  size={"sm"}
+                  variant="skill"
+                  type="multiple"
+                  className="flex flex-row flex-wrap"
+                  aria-label="Skills list"
+                >
+                  {skillsList.map((skill) => (
+                    <ToggleGroupItem
+                      key={skill.label}
+                      value={skill.label.toLowerCase()}
+                      aria-label={skill.label}
+                      //🎯 need to update onCLick functionality - handle form update
+                      onClick={() => handleSkillList}
+                    >
+                      {skill.label}
+                    </ToggleGroupItem>
+                  ))}
+                </ToggleGroup>
+              </FormControl>
+            </FormItem>
+          )}
+        />
+
+        {/* BUTTONS */}
+        <div className="flex flex-row justify-start gap-10">
+          <Button
+            type="submit"
+            variant={"devfill"}
+            className="rounded-lg text-sm md:text-sm p-2"
+          >
+            Update profile
+          </Button>
+          <Button variant={"outline"}> Reset Password </Button>
+        </div>
       </form>
     </Form>
   );

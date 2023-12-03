@@ -1,5 +1,7 @@
 "use client";
 
+//🎯 to-do-list:  removed appearance form  - should remove code?
+
 import * as z from "zod";
 import toast from "react-hot-toast";
 import { cn } from "@/lib/utils";
@@ -18,7 +20,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { sidebarItems } from "@/constants/navigation-index";
+import { sidebarItems } from "@/constants/userforms-index";
 
 const appearanceFormSchema = z.object({
   theme: z.enum(["light", "dark"], {

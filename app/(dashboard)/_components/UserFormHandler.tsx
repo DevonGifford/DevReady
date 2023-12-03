@@ -2,13 +2,41 @@ import React, { useState } from "react";
 import { cn } from "@/lib/utils";
 import { Separator } from "@/components/ui/separator";
 import { Button, buttonVariants } from "@/components/ui/button";
+
 import {
   SheetDescription,
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
 
-import { userProfileForms } from "@/constants/navigation-index";
+import { AccountForm } from "./forms/account-form";
+import { ProfileForm } from "./forms/profile-form";
+import { GoalsForm } from "./forms/goals-form";
+import { NotificationsForm } from "./forms/notification-form";
+
+interface FormObject {
+  component: React.ReactNode;
+  description: string;
+}
+
+const userProfileForms: Record<string, FormObject> = {
+  Account: {
+    component: <AccountForm />,
+    description: "Configure your account.",
+  },
+  Profile: {
+    component: <ProfileForm />,
+    description: "Configure how you receive notifications.",
+  },
+  Notifications: {
+    component: <NotificationsForm />,
+    description: "Configure how you receive notifications.",
+  },
+  Goals: {
+    component: <GoalsForm />,
+    description: "Configure how you receive display.",
+  },
+};
 
 export const UserFormHandler = () => {
   const [currentForm, setCurrentForm] = useState("Account");
