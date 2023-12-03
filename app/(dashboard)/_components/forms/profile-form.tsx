@@ -47,10 +47,10 @@ import { countriesList, languages } from "@/constants/userforms-index";
 const profileFormSchema = z.object({
   bio: z.string().max(160).min(4).optional(),
 
-  country: z.string({
+  location: z.string({
     required_error: "⚠ Please pick your country.",
   }),
-  language: z.string({
+  home_lang: z.string({
     required_error: "⚠ Please select a language.",
   }),
   urls: z
@@ -68,7 +68,6 @@ const profileFormSchema = z.object({
       additional: z.string().url().optional(),
     }),
   ztm_student: z.boolean().default(false).optional(),
-  star_mentor: z.boolean().default(false).optional(),
 });
 
 type ProfileFormValues = z.infer<typeof profileFormSchema>;
@@ -126,7 +125,7 @@ export function ProfileForm() {
         <div className="flex flex-col md:flex-row gap-3 md:gap-10 mr-16">
           <FormField
             control={form.control}
-            name="language"
+            name="home_lang"
             render={({ field }) => (
               <FormItem className="flex flex-col rounded-lg border p-4">
                 <FormLabel>Language</FormLabel>
@@ -161,7 +160,7 @@ export function ProfileForm() {
                             value={language.label}
                             key={language.value}
                             onSelect={() => {
-                              form.setValue("language", language.value);
+                              form.setValue("home_lang", language.value);
                             }}
                           >
                             <CheckIcon
@@ -185,7 +184,7 @@ export function ProfileForm() {
           />
           <FormField
             control={form.control}
-            name="country"
+            name="location"
             render={({ field }) => (
               <FormItem className="flex flex-col rounded-lg border p-4">
                 <FormLabel>Location</FormLabel>
@@ -220,7 +219,7 @@ export function ProfileForm() {
                             value={country.label}
                             key={country.value}
                             onSelect={() => {
-                              form.setValue("country", country.value);
+                              form.setValue("location", country.value);
                             }}
                             // className=" overflow-y-auto max-h-[10px]"
                           >
@@ -357,26 +356,6 @@ export function ProfileForm() {
                     onCheckedChange={field.onChange}
                     // disabled
                     // aria-readonly
-                  />
-                </FormControl>
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="star_mentor"
-            render={({ field }) => (
-              <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3">
-                <div className="">
-                  <FormLabel className="text-base">Star Mentor</FormLabel>
-                  <FormDescription>Are you a star mentor?</FormDescription>
-                </div>
-                <FormControl>
-                  <Switch
-                    checked={field.value}
-                    onCheckedChange={field.onChange}
-                    disabled
-                    aria-readonly
                   />
                 </FormControl>
               </FormItem>

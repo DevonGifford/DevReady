@@ -24,8 +24,8 @@ const notificationsFormSchema = z.object({
   }),
   
   communication_emails: z.boolean().default(false).optional(),
-  marketing_notifs: z.boolean().default(false).optional(),
-  newsletter_notifs: z.boolean().default(false).optional(),
+  marketing_emails: z.boolean().default(false).optional(),
+  newsletter_emails: z.boolean().default(false).optional(),
   
   push_notifs: z.boolean().default(false).optional(),
   mobile_notifs: z.boolean().default(false).optional(),
@@ -38,7 +38,7 @@ const defaultValues: Partial<NotificationsFormValues> = {
   // 👇 dev testing
   notif_level: "all",
   communication_emails: false,
-  marketing_notifs: false,
+  marketing_emails: false,
   push_notifs: false,
 };
 
@@ -138,7 +138,7 @@ export function NotificationsForm() {
             />
             <FormField
               control={form.control}
-              name="marketing_notifs"
+              name="marketing_emails"
               render={({ field }) => (
                 <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
                   <div className="space-y-0.5">
@@ -160,7 +160,7 @@ export function NotificationsForm() {
             />
             <FormField
               control={form.control}
-              name="newsletter_notifs"
+              name="newsletter_emails"
               render={({ field }) => (
                 <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
                   <div className="space-y-0.5">
