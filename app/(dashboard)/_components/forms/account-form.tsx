@@ -127,20 +127,24 @@ export function AccountForm() {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full">
         {/* USERNAME & USERIMAGE 🎯 */}
-        <div className="flex flex-col items-center gap-4 md:flex-row md:gap-10">
+        <div className="flex flex-col items-center gap-4 sm:flex-row sm:gap-10">
           {/* USERNAME */}
           <FormField
             control={form.control}
             name="username"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Name</FormLabel>
-                <FormDescription className="pb-1">
-                  This is your public display name. It can be your real name or
-                  a pseudonym.
+                <FormLabel className="flex text-center justify-center sm:justify-start">Name</FormLabel>
+                <FormDescription className="flex flex-col pb-1 whitespace-nowrap text-center sm:text-left">
+                  <p>This is your public display name.</p>
+                  <p>It can be your real name or a pseudonym.</p>
                 </FormDescription>
                 <FormControl>
-                  <Input placeholder="shadcn" {...field} />
+                  <Input
+                    placeholder="Anonymous"
+                    className="w-[300px] text-center sm:text-left"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
