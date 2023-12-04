@@ -2,9 +2,8 @@
 
 import * as z from "zod";
 import toast from "react-hot-toast";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { UserProfile } from "firebase/auth";
 import { UseFormSetValue, useForm } from "react-hook-form";
 
 import { useUserContext } from "@/components/providers/UserProvider";
@@ -42,6 +41,7 @@ import {
   skillsList,
 } from "@/constants/userforms-index";
 
+// 👇 FORM SCHEMA : Account Form
 const accountFormSchema = z.object({
   username: z
     .string()
@@ -51,6 +51,7 @@ const accountFormSchema = z.object({
     .max(20, {
       message: "⚠ Username must not be longer than 20 characters.",
     }),
+  userimage: z.string().optional(),
   career_title: z.string({
     required_error: "⚠ Please pick your career .",
   }),
@@ -62,54 +63,71 @@ const accountFormSchema = z.object({
   skills_list: z.array(z.string()).optional(),
 });
 type AccountFormValues = z.infer<typeof accountFormSchema>;
-
+// ⌛ PLACEHOLDER :  Default form values
 const defaultValues: Partial<AccountFormValues> = {
-  // 🎯 to-do-list
-  // - will be a database / API call
+  // 🎯 to-do-list: remove
 };
 
 export function AccountForm() {
   const { userProfile, updateUserDataProcess } = useUserContext();
+  const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
   const form = useForm<AccountFormValues>({
     resolver: zodResolver(accountFormSchema),
     defaultValues,
   });
 
-  //✅ SETTING FORM : fields with existing user profile data
+  // ✅ SET FORM VALUES - based on existing user profile context data
   useEffect(() => {
     if (userProfile) {
       form.setValue("username", userProfile.account.username || "");
+      form.setValue("userimage", userProfile.account.userimage || "");
       form.setValue("career_title", userProfile.account.career_title || "");
       form.setValue(
         "programming_lang",
         userProfile.account.programming_lang || ""
       );
-      // 🎯 to-do-list:  Set skills_list based on userProfile
+      form.setValue("career_level", userProfile.account.career_level || 0);
+      form.setValue(
+        "experience_level",
+        userProfile.account.experience_level || 0
+      );
+      // - handle skills_lists + local state
+      if (userProfile && userProfile.account.skills_list) {
+        setSelectedSkills(userProfile.account.skills_list || []);
+        form.setValue("skills_list", userProfile.account.skills_list || []);
+      }
     }
   }, [form, userProfile]);
 
-  // 🎯 to-do-list
-  const handleSkillList = (selectedSkill: string, prevSkills: string[]) => {
-    //-I still need to figure out a way to manage the data as form data
+  // ✅ HANDLE SKILL SELECTION - checks if skill exists in state, and handles click accordingly
+  const handleSkillList = (selectedSkill: string) => {
+    const updatedSkills = selectedSkills.includes(selectedSkill)
+      ? selectedSkills.filter((skill) => skill !== selectedSkill)
+      : [...selectedSkills, selectedSkill];
+    //- update local skills state + skills form field 
+    setSelectedSkills(updatedSkills);
+    form.setValue("skills_list", updatedSkills);
   };
 
-  // ⌛ SUBMIT FORM : work-in-progress
+  // ✅ SUBMIT FORM - submit account form
   function onSubmit(data: AccountFormValues) {
     console.log("account-form-submit triggered");
 
     if (userProfile) {
-      const updatedProfile: UserProfile = {
+      const updatedProfile = {
         account: {
           ...userProfile?.account,
-          username: data.username,
-          career_title: data.career_title,
-          programming_lang: data.programming_lang,
-          career_level: data.career_level,
-          experience_level: data.experience_level,
-          // Update other fields as needed
-          // ...
+          username: data.username || "",
+          userimage: data.userimage || "",
+          career_title: data.career_title || "",
+          programming_lang:
+            typeof data?.programming_lang === "string"
+              ? data.programming_lang
+              : "",
+          career_level: data.career_level || 0,
+          experience_level: data.experience_level || 0,
+          skills_list: data.skills_list || [],
         },
-        // ... (update other parts of the userProfile if necessary)
       };
 
       updateUserDataProcess(userProfile.uuid, updatedProfile)
@@ -125,7 +143,13 @@ export function AccountForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full">
+      <form
+        onSubmit={form.handleSubmit((data) => {
+          console.log("Form submitted with data:", data);
+          onSubmit(data);
+        })}
+        className="space-y-8 w-full"
+      >
         {/* USERNAME & USERIMAGE 🎯 */}
         <div className="flex flex-col items-center gap-4 sm:flex-row sm:gap-10">
           {/* USERNAME */}
@@ -134,7 +158,9 @@ export function AccountForm() {
             name="username"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="flex text-center justify-center sm:justify-start">Name</FormLabel>
+                <FormLabel className="flex text-center justify-center sm:justify-start">
+                  Name
+                </FormLabel>
                 <FormDescription className="flex flex-col pb-1 whitespace-nowrap text-center sm:text-left">
                   <p>This is your public display name.</p>
                   <p>It can be your real name or a pseudonym.</p>
@@ -411,10 +437,12 @@ export function AccountForm() {
                   {skillsList.map((skill) => (
                     <ToggleGroupItem
                       key={skill.label}
-                      value={skill.label.toLowerCase()}
-                      aria-label={skill.label}
-                      //🎯 need to update onCLick functionality - handle form update
-                      onClick={() => handleSkillList}
+                      value={skill.label}
+                      aria-label={`${skill.label} toggle`}
+                      onClick={() => handleSkillList(skill.label)}
+                      data-state={
+                        selectedSkills.includes(skill.label) ? "on" : "off"
+                      }
                     >
                       {skill.label}
                     </ToggleGroupItem>
