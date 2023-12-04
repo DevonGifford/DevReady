@@ -2,8 +2,10 @@
 
 import * as z from "zod";
 import toast from "react-hot-toast";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useUserContext } from "@/components/providers/UserProvider";
 
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
@@ -18,15 +20,17 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
+import { UserProfile } from "@/types/UserProfile";
+
 const notificationsFormSchema = z.object({
   notif_level: z.enum(["all", "profile", "none"], {
     required_error: "⚠ You need to select a notification type.",
   }),
-  
+
   communication_emails: z.boolean().default(false).optional(),
   marketing_emails: z.boolean().default(false).optional(),
   newsletter_emails: z.boolean().default(false).optional(),
-  
+
   push_notifs: z.boolean().default(false).optional(),
   mobile_notifs: z.boolean().default(false).optional(),
 });
@@ -35,35 +39,73 @@ type NotificationsFormValues = z.infer<typeof notificationsFormSchema>;
 const defaultValues: Partial<NotificationsFormValues> = {
   // 🎯 to-do-list
   // - will be a database / API call
-  // 👇 dev testing
-  notif_level: "all",
-  communication_emails: false,
-  marketing_emails: false,
-  push_notifs: false,
 };
 
 export function NotificationsForm() {
+  const { userProfile, updateUserDataProcess } = useUserContext();
   const form = useForm<NotificationsFormValues>({
     resolver: zodResolver(notificationsFormSchema),
     defaultValues,
   });
 
-  function onSubmit(data: NotificationsFormValues) {
-    // 🎯 to-do-list
-    //- update db
-    //- clost sheet
-    //- catch with toast notif's
-    toast.success("This is just a little test", {
-      position: "bottom-left",
-    });
-  }
 
-  /*
-    🎯 to-do-list
-    - this whole form is not linked to anything
-    - with exception of Event Logs 
-    - 
-  */
+  //✅ SETTING FORM : fields with existing user profile data
+  useEffect(() => {
+    if (userProfile) {
+        form.setValue('notif_level', userProfile.notifications.notif_level);
+      form.setValue(
+        "communication_emails",
+        userProfile.notifications.communication_emails || false
+      );
+      form.setValue(
+        "marketing_emails",
+        userProfile.notifications.marketing_emails || false
+      );
+      form.setValue(
+        "newsletter_emails",
+        userProfile.notifications.newsletter_emails || false
+      );
+      form.setValue(
+        "push_notifs",
+        userProfile.notifications.push_notifs || false
+      );
+      form.setValue(
+        "mobile_notifs",
+        userProfile.notifications.mobile_notifs || false
+      );
+
+      // 🎯 to-do-list:  Set skills_list based on userProfile
+    }
+  }, [form, userProfile]);
+
+  // ⌛ SUBMIT FORM : work-in-progress
+  function onSubmit(data: NotificationsFormValues) {
+    if (userProfile) {
+      const updatedProfile: UserProfile = {
+        // Assuming the structure of UserProfile here
+        ...userProfile,
+        notifications: {
+          ...userProfile?.notifications,
+          notif_level: data.notif_level,
+          communication_emails: data.communication_emails!,
+          marketing_emails: data.marketing_emails!,
+          newsletter_emails: data.newsletter_emails!,
+          push_notifs: data.push_notifs!,
+          mobile_notifs: data.mobile_notifs!,
+        },
+        // ... (update other parts of the userProfile if necessary)
+      };
+
+      updateUserDataProcess(userProfile.uuid, updatedProfile)
+        .then(() => {
+          toast.success("Profile updated successfully");
+        })
+        .catch((error) => {
+          toast.error("Failed to update profile");
+          console.error(error);
+        });
+    }
+  }
 
   return (
     <Form {...form}>
@@ -80,7 +122,7 @@ export function NotificationsForm() {
               <FormControl>
                 <RadioGroup
                   onValueChange={field.onChange}
-                  defaultValue={field.value}
+                  defaultValue={userProfile?.notifications.notif_level!}
                   className="flex flex-col space-y-1"
                 >
                   <FormItem className="flex items-center space-x-3 space-y-0">
@@ -92,7 +134,7 @@ export function NotificationsForm() {
 
                   <FormItem className="flex items-center space-x-3 space-y-0">
                     <FormControl>
-                      <RadioGroupItem value="level-change" />
+                      <RadioGroupItem value="profile" />
                     </FormControl>
                     <FormLabel className="font-normal">
                       Profile updates
@@ -111,77 +153,72 @@ export function NotificationsForm() {
             </FormItem>
           )}
         />
-        <div>
-          <h3 className="mb-4 text-lg font-medium">Email Notifications</h3>
-          <div className="space-y-4">
-            <FormField
-              control={form.control}
-              name="communication_emails"
-              render={({ field }) => (
-                <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
-                  <div className="space-y-0.5">
-                    <FormLabel className="text-base">
-                      Communication emails
-                    </FormLabel>
-                    <FormDescription>
-                      Receive emails about your account activity.
-                    </FormDescription>
-                  </div>
-                  <FormControl>
-                    <Switch
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                    />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="marketing_emails"
-              render={({ field }) => (
-                <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
-                  <div className="space-y-0.5">
-                    <FormLabel className="text-base">
-                      Marketing emails
-                    </FormLabel>
-                    <FormDescription>
-                      Receive emails about new products, features, and more.
-                    </FormDescription>
-                  </div>
-                  <FormControl>
-                    <Switch
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                    />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="newsletter_emails"
-              render={({ field }) => (
-                <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
-                  <div className="space-y-0.5">
-                    <FormLabel className="text-base">
-                      Newsletter emails
-                    </FormLabel>
-                    <FormDescription>
-                      Subscirbe to our quarterly open source community letter.
-                    </FormDescription>
-                  </div>
-                  <FormControl>
-                    <Switch
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                    />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-          </div>
+        <h3 className="mb-4 text-lg font-medium">Email Notifications</h3>
+        <div className="space-y-4">
+          <FormField
+            control={form.control}
+            name="communication_emails"
+            render={({ field }) => (
+              <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+                <div className="space-y-0.5">
+                  <FormLabel className="text-base">
+                    Communication emails
+                  </FormLabel>
+                  <FormDescription>
+                    Receive emails about your account activity.
+                  </FormDescription>
+                </div>
+                <FormControl>
+                  <Switch
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="marketing_emails"
+            render={({ field }) => (
+              <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+                <div className="space-y-0.5">
+                  <FormLabel className="text-base">Marketing emails</FormLabel>
+                  <FormDescription>
+                    Receive emails about new products, features, and more.
+                  </FormDescription>
+                </div>
+                <FormControl>
+                  <Switch
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="newsletter_emails"
+            render={({ field }) => (
+              <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+                <div className="space-y-0.5">
+                  <FormLabel className="text-base">Newsletter emails</FormLabel>
+                  <FormDescription>
+                    Subscirbe to our quarterly open source community letter.
+                  </FormDescription>
+                </div>
+                <FormControl>
+                  <Switch
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                </FormControl>
+              </FormItem>
+            )}
+          />
         </div>
+
         <h3 className="mb-4 text-lg font-medium">Mobile Notifications</h3>
         <div className="space-y-4">
           <FormField

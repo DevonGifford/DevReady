@@ -5,12 +5,14 @@ import toast from "react-hot-toast";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { useForm } from "react-hook-form";
+import { useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useUserContext } from "@/components/providers/UserProvider";
+
+import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
-import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { CalendarIcon } from "lucide-react";
 import {
   Popover,
   PopoverContent,
@@ -26,25 +28,29 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
+import { CalendarIcon } from "lucide-react";
+import { UserProfile } from "firebase/auth";
+
 const goalsFormSchema = z.object({
   goal_title: z
     .string()
-    .min(5, {
-      message: "⚠ Goal title must be at least 5 characters.",
+    .min(10, {
+      message: "⚠ Goal title must be at least 10 characters.",
     })
-    .max(50, {
-      message: "⚠ Goal title must not be longer than 50 characters.",
+    .max(35, {
+      message: "⚠ Goal title must not be longer than 35 characters.",
     }),
   goal_description: z
     .string()
     .min(10, {
       message: "⚠ Goal description must be at least 10 characters.",
     })
-    .max(140, {
-      message: "⚠ Goal description must not be longer than 140 characters.",
+    .max(240, {
+      message: "⚠ Goal description must not be longer than 240 characters.",
     }),
   goal_eta: z.date({
-    required_error: "⚠ An estimated completion date is required.",
+    required_error: "Please select a date and time",
+    invalid_type_error: "That's not a date!",
   }),
 });
 type GoalsFormValues = z.infer<typeof goalsFormSchema>;
@@ -55,19 +61,65 @@ const defaultValues: Partial<GoalsFormValues> = {
 };
 
 export function GoalsForm() {
+  const { userProfile, updateUserDataProcess } = useUserContext();
   const form = useForm<GoalsFormValues>({
     resolver: zodResolver(goalsFormSchema),
     defaultValues,
   });
 
+  //✅ SETTING FORM : fields with existing user profile data
+  useEffect(() => {
+    if (userProfile) {
+      form.setValue(
+        "goal_title",
+        userProfile.goals.current_goals.goal_title || ""
+      );
+      form.setValue(
+        "goal_description",
+        userProfile.goals.current_goals.goal_description || ""
+      );
+
+      // Check if goal_eta exists, use userProfile goal_eta, or today's date as a default
+      form.setValue(
+        "goal_eta",
+        userProfile.goals.current_goals.goal_eta
+          ? new Date(userProfile.goals.current_goals.goal_eta)
+          : new Date() // Today's date as the default
+      );
+    }
+  }, [userProfile, form]);
+
+  // ⌛ SUBMIT FORM :  work-in-progress
   function onSubmit(data: GoalsFormValues) {
-    // 🎯 to-do-list
-    //- update db
-    //- clost sheet
-    //- catch with toast notif's
-    toast.success("This is just a little test", {
-      position: "bottom-left",
-    });
+    console.log("goal-form-submit triggered")
+
+    if (userProfile) {
+      const updatedProfile: UserProfile = {
+        ...userProfile,
+        goals: {
+          ...userProfile.goals,
+          current_goals: {
+            ...userProfile.goals.current_goals,
+            goal_title: data.goal_title,
+            goal_description: data.goal_description,
+            goal_eta: data.goal_eta.toISOString(), // Store date in ISO format
+          },
+        },
+      };
+
+      updateUserDataProcess(userProfile.uuid, updatedProfile)
+        .then(() => {
+          toast.success("Goal updated successfully", {
+            position: "bottom-left",
+          });
+        })
+        .catch((error) => {
+          toast.error("Failed to update goal", {
+            position: "bottom-left",
+          });
+          console.error(error);
+        });
+    }
   }
 
   return (
@@ -84,11 +136,7 @@ export function GoalsForm() {
                 emails.
               </FormDescription>
               <FormControl>
-                <Input
-                  className=" text-devready-green"
-                  placeholder="Your name"
-                  {...field}
-                />
+                <Input placeholder="Your name" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -107,7 +155,6 @@ export function GoalsForm() {
               <FormControl>
                 <Textarea
                   placeholder="Tell us more about your goal"
-                  className="text-devready-green"
                   {...field}
                 />
               </FormControl>
@@ -128,13 +175,14 @@ export function GoalsForm() {
                 <PopoverTrigger asChild>
                   <FormControl>
                     <Button
-                      variant={"outline"}
+                      variant={"secondary"}
                       className={cn(
                         "w-[240px] pl-3 text-left font-normal",
                         !field.value && "text-muted-foreground"
                       )}
                     >
-                      {field.value ? (
+                      {field.value instanceof Date &&
+                      !isNaN(field.value.getTime()) ? (
                         format(field.value, "PPP")
                       ) : (
                         <span>Pick a date</span>

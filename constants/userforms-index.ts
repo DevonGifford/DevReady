@@ -1,6 +1,5 @@
-
 // 👇 Profile-form 
-export const countriesList = [
+export const locations = [
   { label: "United States", value: "US" },
   { label: "Canada", value: "CA" },
   { label: "United Kingdom", value: "GB" },
@@ -21,10 +20,9 @@ export const countriesList = [
   { label: "Turkey", value: "TR" },
   { label: "Argentina", value: "AR" },
   { label: "Egypt", value: "EG" },
-  // Add more countriesList as needed
 ] as const;
 
-export const languages = [
+export const home_languages = [
   { label: "English", value: "en" },
   { label: "French", value: "fr" },
   { label: "German", value: "de" },
@@ -65,38 +63,40 @@ export const programmingLanguagesList = [
 
 export const skillsList = [
   // Frontend Development
-  { label: "React.js" },
+  { label: "React" },
   { label: "Angular" },
-  { label: "Vue.js" },
+  { label: "Vue" },
   { label: "Svelte" },
-  { label: "Next.js" },
+  { label: "Next" },
+  { label: "Remix" },
 
   // Backend Development
-  { label: "Node.js" },
-  { label: "Express.js" },
+  { label: "Node" },
+  { label: "Express" },
   { label: "Django" },
   { label: "Flask" },
-  { label: "Ruby on Rails" },
-  { label: "ASP.NET" },
+  { label: "Ruby" },
+  { label: ".NET" },
 
   // Libraries
   { label: "Cypress" },
   { label: "Playwright" },
-  { label: "React Testing Library (RTL)" },
+  { label: "RTL" },
   { label: "Jest" },
   { label: "Vitest" },
   { label: "Redux" },
 
   // Data Engineering
-  { label: "Apache Hadoop" },
-  { label: "Apache Spark" },
-  { label: "SQL Databases" },
-  { label: "NoSQL Databases" },
+  { label: "Hadoop" },
+  { label: "Spark" },
+  { label: "SQL" },
+  { label: "NoSQL" },
+  { label: "MongoDB" },
 
   // Data Science
   { label: "NumPy" },
   { label: "Pandas" },
-  { label: "Scikit-learn" },
+  { label: "Scikit" },
 
   // Tools
   { label: "PowerBI" },

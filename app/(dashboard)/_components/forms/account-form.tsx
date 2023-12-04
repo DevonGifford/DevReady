@@ -2,9 +2,12 @@
 
 import * as z from "zod";
 import toast from "react-hot-toast";
+import { useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { UserProfile } from "firebase/auth";
 import { UseFormSetValue, useForm } from "react-hook-form";
 
+import { useUserContext } from "@/components/providers/UserProvider";
 import { cn } from "@/lib/utils";
 import { Slider } from "@/components/ui/slider";
 import { Button } from "@/components/ui/button";
@@ -39,7 +42,6 @@ import {
   skillsList,
 } from "@/constants/userforms-index";
 
-
 const accountFormSchema = z.object({
   username: z
     .string()
@@ -55,38 +57,70 @@ const accountFormSchema = z.object({
   programming_lang: z.string({
     required_error: "⚠ Please pick a language .",
   }),
-  career_level: z.number().min(0, "⚠ Please set your level"),
-  experience_level: z.number().min(0, "⚠ Please set your level"),
-  skills_list: z.array(z.string()),
+  career_level: z.number().min(0, "⚠ Please set your level").optional(),
+  experience_level: z.number().min(0, "⚠ Please set your level").optional(),
+  skills_list: z.array(z.string()).optional(),
 });
 type AccountFormValues = z.infer<typeof accountFormSchema>;
 
 const defaultValues: Partial<AccountFormValues> = {
   // 🎯 to-do-list
   // - will be a database / API call
-  // career_title: {user.name},
-  // bio: {user.bio},
 };
 
 export function AccountForm() {
+  const { userProfile, updateUserDataProcess } = useUserContext();
   const form = useForm<AccountFormValues>({
     resolver: zodResolver(accountFormSchema),
     defaultValues,
   });
 
+  //✅ SETTING FORM : fields with existing user profile data
+  useEffect(() => {
+    if (userProfile) {
+      form.setValue("username", userProfile.account.username || "");
+      form.setValue("career_title", userProfile.account.career_title || "");
+      form.setValue(
+        "programming_lang",
+        userProfile.account.programming_lang || ""
+      );
+      // 🎯 to-do-list:  Set skills_list based on userProfile
+    }
+  }, [form, userProfile]);
+
+  // 🎯 to-do-list
   const handleSkillList = (selectedSkill: string, prevSkills: string[]) => {
-    // 🎯 to-do-list
     //-I still need to figure out a way to manage the data as form data
   };
 
+  // ⌛ SUBMIT FORM : work-in-progress
   function onSubmit(data: AccountFormValues) {
-    // 🎯 to-do-list
-    //- update db
-    //- clost sheet
-    //- catch with toast notif's
-    toast.success("This is just a little test", {
-      position: "bottom-left",
-    });
+    console.log("account-form-submit triggered");
+
+    if (userProfile) {
+      const updatedProfile: UserProfile = {
+        account: {
+          ...userProfile?.account,
+          username: data.username,
+          career_title: data.career_title,
+          programming_lang: data.programming_lang,
+          career_level: data.career_level,
+          experience_level: data.experience_level,
+          // Update other fields as needed
+          // ...
+        },
+        // ... (update other parts of the userProfile if necessary)
+      };
+
+      updateUserDataProcess(userProfile.uuid, updatedProfile)
+        .then(() => {
+          toast.success("Profile updated successfully");
+        })
+        .catch((error) => {
+          toast.error("Failed to update profile");
+          console.error(error);
+        });
+    }
   }
 
   return (
@@ -125,15 +159,15 @@ export function AccountForm() {
         </div>
 
         {/* CAREER AND LANGUAGE */}
-        <div className="flex flex-col justify-center items-center md:justify-normal md:flex-row gap-5 md:gap-24">
+        <div className="flex flex-col items-center justify-center sm:justify-start sm:flex-row gap-3 md:gap-10 lg:gap-14 sm:mr-16">
           <FormField
             control={form.control}
             name="career_title"
             render={({ field }) => (
-              <FormItem className="flex flex-col rounded-lg border p-4 space-y-1 w-[270px] ">
+              <FormItem className="flex flex-col rounded-lg border p-4">
                 <FormLabel>Career Title</FormLabel>
                 <FormDescription>
-                  Pick your current or dream title.
+                  Pick your current or dream job title.
                 </FormDescription>
                 <Popover>
                   <PopoverTrigger asChild>
@@ -192,7 +226,7 @@ export function AccountForm() {
             control={form.control}
             name="programming_lang"
             render={({ field }) => (
-              <FormItem className="flex flex-col rounded-lg border p-4 space-y-1">
+              <FormItem className="flex flex-col rounded-lg border p-4">
                 <FormLabel>Favorite Language</FormLabel>
                 <FormDescription>
                   Pick your most proficient language.
@@ -270,7 +304,7 @@ export function AccountForm() {
                   min={0}
                   max={100}
                   step={1}
-                  defaultValue={[defaultValues?.career_level || 0]}
+                  defaultValue={[userProfile?.account.career_level!]}
                   onValueChange={(vals) => {
                     onChange(vals[0]);
                   }}
@@ -319,7 +353,7 @@ export function AccountForm() {
                   min={0}
                   max={100}
                   step={1}
-                  defaultValue={[defaultValues?.experience_level || 0]}
+                  defaultValue={[userProfile?.account.experience_level || 0]}
                   onValueChange={(vals) => {
                     onChange(vals[0]);
                   }}

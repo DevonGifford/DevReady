@@ -41,8 +41,9 @@ import {
   Trophy,
 } from "lucide-react";
 
-
-import { countriesList, languages } from "@/constants/userforms-index";
+import { locations, home_languages } from "@/constants/userforms-index";
+import { useUserContext } from "@/components/providers/UserProvider";
+import { useEffect } from "react";
 
 const profileFormSchema = z.object({
   bio: z.string().max(160).min(4).optional(),
@@ -57,16 +58,21 @@ const profileFormSchema = z.object({
     .object({
       github: z.string().url().optional(),
       linkedin: z.string().url().optional(),
-      website: z.string().url().optional(),
+      portfolio: z.string().url().optional(),
     })
     .refine((data) => Object.values(data).some(Boolean), {
       message: "⚠ At least one social media profile is required.",
-    }),
+    })
+    .optional(),
   projects: z
     .object({
       capstone: z.string().url().optional(),
       additional: z.string().url().optional(),
-    }),
+    })
+    .refine((data) => Object.values(data).some(Boolean), {
+      message: "⚠ At least one project is required.",
+    })
+    .optional(),
   ztm_student: z.boolean().default(false).optional(),
 });
 
@@ -78,25 +84,84 @@ const defaultValues: Partial<ProfileFormValues> = {
 };
 
 export function ProfileForm() {
+  const { userProfile, updateUserDataProcess } = useUserContext();
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileFormSchema),
     defaultValues,
     mode: "onChange",
   });
 
+  //✅ SETTING FORM : fields with existing user profile data
+  useEffect(() => {
+    if (userProfile) {
+      form.setValue("bio", userProfile.profile.bio || "");
+
+      form.setValue("location", userProfile.profile.location || "");
+
+      form.setValue("home_lang", userProfile.profile.home_lang || "");
+      form.setValue("urls.github", userProfile.profile.urls.github || "");
+      form.setValue("urls.linkedin", userProfile.profile.urls.linkedin || "");
+      form.setValue("urls.portfolio", userProfile.profile.urls.portfolio || "");
+      form.setValue(
+        "projects.capstone",
+        userProfile.profile.projects.capstone || ""
+      );
+      form.setValue(
+        "projects.additional",
+        userProfile.profile.projects.additional || ""
+      );
+      form.setValue("ztm_student", userProfile.profile.ztm_student || false);
+    }
+  }, [userProfile, form]);
+
+  // ⌛ SUBMIT FORM : work-in-progress
   function onSubmit(data: ProfileFormValues) {
-    // 🎯 to-do-list
-    //- update db
-    //- clost sheet
-    //- catch with toast notif's
-    toast.success("This is just a little test", {
-      position: "bottom-left",
-    });
+    console.log("profile-form-submit triggered");
+
+    if (userProfile) {
+      const updatedProfile = {
+        ...userProfile,
+        profile: {
+          ...userProfile.profile,
+          bio: data.bio || "",
+          location: data.location || "",
+          home_lang: data.home_lang || "",
+          urls: {
+            github: data.urls?.github || "",
+            linkedin: data.urls?.linkedin || "",
+            portfolio: data.urls?.portfolio || "",
+          },
+          projects: {
+            capstone: data.projects?.capstone || "",
+            additional: data.projects?.additional || "",
+          },
+          ztm_student: data.ztm_student || false,
+        },
+        // Add other profile fields if necessary
+      };
+
+      // Assuming updateUserDataProcess handles the update
+      updateUserDataProcess(userProfile.uuid, updatedProfile)
+        .then(() => {
+          toast.success("Profile updated successfully");
+          // Close the form, navigate, or perform other actions upon successful update
+        })
+        .catch((error) => {
+          toast.error("Failed to update profile");
+          console.error(error);
+        });
+    }
   }
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form
+        onSubmit={form.handleSubmit((data) => {
+          console.log("Form submitted with data:", data);
+          onSubmit(data);
+        })}
+        className="space-y-8"
+      >
         {/* Bio  */}
         <FormField
           control={form.control}
@@ -122,7 +187,7 @@ export function ProfileForm() {
         />
 
         {/* Language & location */}
-        <div className="flex flex-col md:flex-row gap-3 md:gap-10 mr-16">
+        <div className="flex flex-col sm:flex-row gap-3 md:gap-10 mr-16">
           <FormField
             control={form.control}
             name="home_lang"
@@ -142,7 +207,7 @@ export function ProfileForm() {
                         )}
                       >
                         {field.value
-                          ? languages.find(
+                          ? home_languages.find(
                               (language) => language.value === field.value
                             )?.label
                           : "Select language"}
@@ -155,7 +220,7 @@ export function ProfileForm() {
                       <CommandInput placeholder="Search language..." />
                       <CommandEmpty>No language found.</CommandEmpty>
                       <CommandGroup>
-                        {languages.map((language) => (
+                        {home_languages.map((language) => (
                           <CommandItem
                             value={language.label}
                             key={language.value}
@@ -201,7 +266,7 @@ export function ProfileForm() {
                         )}
                       >
                         {field.value
-                          ? countriesList.find(
+                          ? locations.find(
                               (country) => country.value === field.value
                             )?.label
                           : "Select country"}
@@ -214,7 +279,7 @@ export function ProfileForm() {
                       <CommandInput placeholder="Search country..." />
                       <CommandEmpty>No country found.</CommandEmpty>
                       <CommandGroup className="overflow-y-auto max-h-[300px]">
-                        {countriesList.map((country) => (
+                        {locations.map((country) => (
                           <CommandItem
                             value={country.label}
                             key={country.value}
@@ -285,7 +350,7 @@ export function ProfileForm() {
           />
           <FormField
             control={form.control}
-            name="urls.website"
+            name="urls.portfolio"
             render={({ field }) => (
               <FormItem>
                 <div className="flex flex-row justify-between items-center gap-3">

@@ -57,14 +57,14 @@ export interface UserProfile {
 }
 
 export const defaultUserProfile: UserProfile = {
-  uuid: "PhlFnsBd5jgI0WikUT5RlbdKNSI2",
-  email: "johndoe@example.com",
+  uuid: "",
+  email: "",
   user_role: "user",
-  created_at: "2023-01-01",
-  last_login: "2023-11-01",
+  created_at: "",
+  last_login: "",
 
   account: {
-    username: "johndoe123",
+    username: "testing account",
     userimage: "link_to_firebase_saved_image",
     career_title: null,
     programming_lang: null,
@@ -75,7 +75,7 @@ export const defaultUserProfile: UserProfile = {
 
   profile: {
     bio: null,
-    home_lang: "English",
+    home_lang: "",
     location: "",
     urls: {
       github: "",
