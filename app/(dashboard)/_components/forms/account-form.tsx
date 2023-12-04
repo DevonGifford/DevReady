@@ -65,7 +65,7 @@ const accountFormSchema = z.object({
 type AccountFormValues = z.infer<typeof accountFormSchema>;
 // ⌛ PLACEHOLDER :  Default form values
 const defaultValues: Partial<AccountFormValues> = {
-  // 🎯 to-do-list: remove
+  // 🎯 to-do-list : remove
 };
 
 export function AccountForm() {
@@ -104,7 +104,7 @@ export function AccountForm() {
     const updatedSkills = selectedSkills.includes(selectedSkill)
       ? selectedSkills.filter((skill) => skill !== selectedSkill)
       : [...selectedSkills, selectedSkill];
-    //- update local skills state + skills form field 
+    //- update local skills state + skills form field
     setSelectedSkills(updatedSkills);
     form.setValue("skills_list", updatedSkills);
   };

@@ -13,6 +13,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Textarea } from "@/components/ui/textarea";
+import { CalendarIcon } from "lucide-react";
 import {
   Popover,
   PopoverContent,
@@ -28,9 +29,9 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-import { CalendarIcon } from "lucide-react";
-import { UserProfile } from "firebase/auth";
+import { UserProfile } from "@/types/UserProfile";
 
+// 👇 FORM SCHEMA : Goals Form
 const goalsFormSchema = z.object({
   goal_title: z
     .string()
@@ -54,10 +55,9 @@ const goalsFormSchema = z.object({
   }),
 });
 type GoalsFormValues = z.infer<typeof goalsFormSchema>;
-
+// ⌛ PLACEHOLDER :  Default form values
 const defaultValues: Partial<GoalsFormValues> = {
-  // 🎯 to-do-list
-  // - will be a database / API call
+  // 🎯 to-do-list : remove
 };
 
 export function GoalsForm() {
@@ -67,7 +67,7 @@ export function GoalsForm() {
     defaultValues,
   });
 
-  //✅ SETTING FORM : fields with existing user profile data
+  // ✅ SETTING FORM VALUES -  based on exisitng user profile context data
   useEffect(() => {
     if (userProfile) {
       form.setValue(
@@ -79,7 +79,7 @@ export function GoalsForm() {
         userProfile.goals.current_goals.goal_description || ""
       );
 
-      // Check if goal_eta exists, use userProfile goal_eta, or today's date as a default
+      // - check if goal_eta exists, use userProfile goal_eta, or today's date as a default
       form.setValue(
         "goal_eta",
         userProfile.goals.current_goals.goal_eta
@@ -89,10 +89,50 @@ export function GoalsForm() {
     }
   }, [userProfile, form]);
 
-  // ⌛ SUBMIT FORM :  work-in-progress
-  function onSubmit(data: GoalsFormValues) {
-    console.log("goal-form-submit triggered")
+  // ✅ HANDLE GOAL ACHIEVED : saves and clears current goal
+  function onAchieved() {
+    console.log("goal-form-achieved triggered 🎇");
+    if (userProfile) {
+      const achievedGoalData: UserProfile = {
+        ...userProfile,
+        goals: {
+          ...userProfile.goals,
+          past_goals: [
+            {
+              goal_title: userProfile.goals.current_goals.goal_title,
+              goal_description:
+                userProfile.goals.current_goals.goal_description,
+              goal_eta: userProfile.goals.current_goals.goal_eta.toISOString(),
+            },
+            ...userProfile.goals.past_goals,
+          ],
+          current_goals: {
+            //- clear current_goals after achieving
+            goal_title: "",
+            goal_description: "",
+            goal_eta: new Date(),
+          },
+        },
+      };
 
+      updateUserDataProcess(userProfile.uuid, achievedGoalData)
+        .then(() => {
+          toast.success("Goal achieved: congratulations", {
+            position: "bottom-left",
+          });
+        })
+        .catch((error) => {
+          toast.error("Hmmmm something went wrong ...", {
+            position: "bottom-left",
+          });
+          console.error(error);
+        });
+    }
+  }
+
+  // ✅ SUBMIT FORM :  submit goals form
+  function onSubmit(data: GoalsFormValues) {
+    console.log("goal-form-submit triggered");
     if (userProfile) {
       const updatedProfile: UserProfile = {
         ...userProfile,
@@ -102,7 +142,7 @@ export function GoalsForm() {
             ...userProfile.goals.current_goals,
             goal_title: data.goal_title,
             goal_description: data.goal_description,
-            goal_eta: data.goal_eta.toISOString(), // Store date in ISO format
+            goal_eta: data.goal_eta, // Store date in ISO format
           },
         },
       };
@@ -124,7 +164,13 @@ export function GoalsForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form
+        onSubmit={form.handleSubmit((data) => {
+          console.log("Form submitted with data:", data);
+          onSubmit(data);
+        })}
+        className="space-y-8"
+      >
         <FormField
           control={form.control}
           name="goal_title"
@@ -216,7 +262,13 @@ export function GoalsForm() {
           >
             Set your goal
           </Button>
-          <Button variant={"outline"}>mark goal as achieved!</Button>
+          <Button
+            type="button"
+            onClick={() => onAchieved()}
+            variant={"outline"}
+          >
+            mark goal as achieved!
+          </Button>
         </div>
       </form>
     </Form>
