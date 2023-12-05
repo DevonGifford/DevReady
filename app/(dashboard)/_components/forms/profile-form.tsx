@@ -101,9 +101,18 @@ export function ProfileForm() {
       form.setValue("bio", userProfile.profile.bio || "");
       form.setValue("location", userProfile.profile.location);
       form.setValue("home_lang", userProfile.profile.home_lang);
-      form.setValue("urls.github", userProfile.profile.urls.github || undefined);
-      form.setValue("urls.linkedin", userProfile.profile.urls.linkedin || undefined);
-      form.setValue("urls.portfolio", userProfile.profile.urls.portfolio || undefined);
+      form.setValue(
+        "urls.github",
+        userProfile.profile.urls.github || undefined
+      );
+      form.setValue(
+        "urls.linkedin",
+        userProfile.profile.urls.linkedin || undefined
+      );
+      form.setValue(
+        "urls.portfolio",
+        userProfile.profile.urls.portfolio || undefined
+      );
       form.setValue(
         "projects.capstone",
         userProfile.profile.projects.capstone || undefined
@@ -118,10 +127,12 @@ export function ProfileForm() {
 
   // ✅ SUBMIT FORM : work-in-progress
   function onSubmit(data: ProfileFormValues) {
-    console.log("🎯event-log:  📝UserForm/profile-form/onSubmit:  💢 Triggered");
+    console.log(
+      "🎯event-log:  📝UserForm/profile-form/onSubmit:  💢 Triggered"
+    );
     if (userProfile) {
       setIsLoading(true); //- Set loading spinner
-      const updatedUserData : UserProfile = {
+      const updatedUserData: UserProfile = {
         ...userProfile,
         profile: {
           ...userProfile.profile,
@@ -142,33 +153,36 @@ export function ProfileForm() {
       };
 
       updateUserDataProcess(userProfile.uuid, updatedUserData)
-      .then(() => {
-        // - on success
-        console.log(
-          "🎯event-log:  📝UserForm/profile-form/onSubmit:  ✔ Success"
-        );
-        setIsLoading(false); //- Reset loading state
-        setSubmitted(true);  //- Set achieved state
+        .then(() => {
+          // - on success
+          console.log(
+            "🎯event-log:  📝UserForm/profile-form/onSubmit:  ✔ Success"
+          );
+          setIsLoading(false); //- Reset loading state
+          setSubmitted(true); //- Set achieved state
 
-        setTimeout(() => {
-          setSubmitted(false); //- Reset achieved state after a while
-        }, 2000);
-      })
-      .catch((error) => {
-        console.log(
-          "🎯event-log:  📝UserForm/profile-form/onSubmit:  ❌ Something went wrong, error: ",
-          error
-        );
-        setIsLoading(false); //- Reset loading state
-      });
+          setTimeout(() => {
+            setSubmitted(false); //- Reset achieved state after a while
+          }, 2000);
+        })
+        .catch((error) => {
+          console.log(
+            "🎯event-log:  📝UserForm/profile-form/onSubmit:  ❌ Something went wrong, error: ",
+            error
+          );
+          setIsLoading(false); //- Reset loading state
+        });
+    }
   }
-}
 
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit((data) => {
-          console.log("🎯event_log:  📝-form submitted with following form-data : ", data);
+          console.log(
+            "🎯event_log:  📝-form submitted with following form-data : ",
+            data
+          );
           onSubmit(data);
         })}
         className="space-y-8"
@@ -414,30 +428,28 @@ export function ProfileForm() {
           />
         </div>
         {/* Switches */}
-        <div className="flex flex-col gap-2">
-          <FormField
-            control={form.control}
-            name="ztm_student"
-            render={({ field }) => (
-              <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3">
-                <div className="">
-                  <FormLabel className="text-base">ZTM Alumni</FormLabel>
-                  <FormDescription>
-                    Are you currently a ZTM student or alumni?
-                  </FormDescription>
-                </div>
-                <FormControl>
-                  <Switch
-                    checked={field.value}
-                    onCheckedChange={field.onChange}
-                    // disabled
-                    // aria-readonly
-                  />
-                </FormControl>
-              </FormItem>
-            )}
-          />
-        </div>
+        <FormField
+          control={form.control}
+          name="ztm_student"
+          render={({ field }) => (
+            <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3">
+              <div className="">
+                <FormLabel className="text-base">ZTM Alumni</FormLabel>
+                <FormDescription>
+                  Are you currently a ZTM student or alumni?
+                </FormDescription>
+              </div>
+              <FormControl>
+                <Switch
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                  // disabled
+                  // aria-readonly
+                />
+              </FormControl>
+            </FormItem>
+          )}
+        />
 
         <Button
           type="submit"
@@ -445,13 +457,7 @@ export function ProfileForm() {
           disabled={isLoading}
           className="rounded-lg text-sm md:text-sm p-2"
         >
-          {isLoading ? (
-            <Spinner />
-          ) : submitted ? (
-            <Check />
-          ) : (
-            "Update profile"
-          )}
+          {isLoading ? <Spinner /> : submitted ? <Check /> : "Update profile"}
         </Button>
       </form>
     </Form>

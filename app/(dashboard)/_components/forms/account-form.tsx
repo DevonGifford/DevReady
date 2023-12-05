@@ -1,18 +1,19 @@
 "use client";
 
 import * as z from "zod";
-import toast from "react-hot-toast";
-import { useEffect, useState } from "react";
+import { cn } from "@/lib/utils";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { UseFormSetValue, useForm } from "react-hook-form";
+import { UserProfile } from "firebase/auth";
+import { useEffect, useState } from "react";
 
 import { useUserContext } from "@/components/providers/UserProvider";
-import { cn } from "@/lib/utils";
-import { Slider } from "@/components/ui/slider";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Slider } from "@/components/ui/slider";
+import { Spinner } from "@/components/Spinner";
+import { Check, CheckCheckIcon, CheckIcon } from "lucide-react";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import { CheckCheckIcon, CheckIcon } from "lucide-react";
 import {
   Popover,
   PopoverContent,
@@ -40,7 +41,6 @@ import {
   programmingLanguagesList,
   skillsList,
 } from "@/constants/userforms-index";
-import { UserProfile } from "firebase/auth";
 
 // 👇 FORM SCHEMA : Account Form
 const accountFormSchema = z.object({
@@ -49,8 +49,8 @@ const accountFormSchema = z.object({
     .min(5, {
       message: "⚠ Username must be at least 5 characters.",
     })
-    .max(14, {
-      message: "⚠ Username must not be longer than 14 characters.",
+    .max(16, {
+      message: "⚠ Username must not be longer than 16 characters.",
     }),
   userimage: z.string().optional(),
   career_title: z.string({
@@ -72,6 +72,8 @@ const defaultValues: Partial<AccountFormValues> = {
 export function AccountForm() {
   const { userProfile, updateUserDataProcess } = useUserContext();
   const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   // ✅ ZOD-FORM HOOK :  custom hook initializes a form instance,
   const form = useForm<AccountFormValues>({
@@ -89,10 +91,10 @@ export function AccountForm() {
         "programming_lang",
         userProfile.account.programming_lang || ""
       );
-      form.setValue("career_level", userProfile.account.career_level || 0);
+      form.setValue("career_level", userProfile.account.career_level || 1);
       form.setValue(
         "experience_level",
-        userProfile.account.experience_level || 0
+        userProfile.account.experience_level || 1
       );
       // - handle skills_lists + local state
       if (userProfile && userProfile.account.skills_list) {
@@ -102,7 +104,7 @@ export function AccountForm() {
     }
   }, [form, userProfile]);
 
-  // ✅ HANDLE SKILL SELECTION - checks if skill exists in state, and handles click accordingly
+  // ✅🎯 HANDLE SKILL SELECTION - checks if skill exists in state, and handles click accordingly
   const handleSkillList = (selectedSkill: string) => {
     const updatedSkills = selectedSkills.includes(selectedSkill)
       ? selectedSkills.filter((skill) => skill !== selectedSkill)
@@ -114,10 +116,13 @@ export function AccountForm() {
 
   // ✅ SUBMIT FORM - submit account form
   function onSubmit(data: AccountFormValues) {
-    console.log("account-form-submit triggered");
+    console.log(
+      "🎯event-log:  📝UserForm/account-form/onSubmit:  💢 Triggered"
+    );
 
     if (userProfile) {
-      const updatedUserData : UserProfile = {
+      setIsLoading(true); //- Set loading spinner
+      const updatedUserData: UserProfile = {
         account: {
           ...userProfile?.account,
           username: data.username || "",
@@ -135,11 +140,18 @@ export function AccountForm() {
 
       updateUserDataProcess(userProfile.uuid, updatedUserData)
         .then(() => {
-          toast.success("Profile updated successfully");
+          console.log(
+            "🎯event-log:  📝UserForm/account-form/onSubmit:  ✔ Success"
+          );
+          setIsLoading(false); //- Reset loading state
+          setSubmitted(true); //- Set achieved state
         })
         .catch((error) => {
-          toast.error("Failed to update profile");
-          console.error(error);
+          console.log(
+            "🎯event-log:  📝UserForm/account-form/onSubmit:  ❌ Something went wrong, error: ",
+            error
+          );
+          setIsLoading(false); //- Reset loading state
         });
     }
   }
@@ -148,7 +160,10 @@ export function AccountForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit((data) => {
-          console.log("🎯event_log:  📝-form submitted with following form-data : ", data);
+          console.log(
+            "🎯event_log:  📝-form submitted with following form-data : ",
+            data
+          );
           onSubmit(data);
         })}
         className="space-y-4 w-full"
@@ -457,13 +472,13 @@ export function AccountForm() {
         />
 
         {/* BUTTONS */}
-        <div className="flex flex-row justify-start gap-10 pt-10">
+        <div className="flex flex-row justify-start gap-8 pt-10">
           <Button
             type="submit"
             variant={"devfill"}
             className="rounded-lg text-sm md:text-sm p-2"
           >
-            Update profile
+            {isLoading ? <Spinner /> : submitted ? <Check /> : "Update account"}
           </Button>
           <Button variant={"outline"}> Reset Password </Button>
         </div>

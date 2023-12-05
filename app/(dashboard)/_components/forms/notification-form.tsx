@@ -107,7 +107,7 @@ export function NotificationsForm() {
             "🎯event-log:  📝UserForm/notifs-form/onSubmit:  ✔ Success"
           );
           setIsLoading(false); //- Reset loading state
-          setSubmitted(true);  //- Set achieved state
+          setSubmitted(true); //- Set achieved state
 
           setTimeout(() => {
             setSubmitted(false); //- Reset achieved state after a while
@@ -135,6 +135,7 @@ export function NotificationsForm() {
         })}
         className="space-y-4"
       >
+        {/* LIVE NOTIFICATIONS  */}
         <FormField
           control={form.control}
           name="notif_level"

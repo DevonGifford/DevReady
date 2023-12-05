@@ -192,6 +192,7 @@ export function GoalsForm() {
         })}
         className="space-y-8"
       >
+        {/* SET TITLE  */}
         <FormField
           control={form.control}
           name="goal_title"
@@ -208,6 +209,7 @@ export function GoalsForm() {
             </FormItem>
           )}
         />
+        {/* SET DESCRIPTION */}
         <FormField
           control={form.control}
           name="goal_description"
@@ -227,6 +229,7 @@ export function GoalsForm() {
             </FormItem>
           )}
         />
+        {/* SET DATE */}
         <FormField
           control={form.control}
           name="goal_eta"
@@ -274,6 +277,7 @@ export function GoalsForm() {
             </FormItem>
           )}
         />
+        {/* BUTTONS */}
         <div className="flex gap-5">
           <Button
             type="submit"

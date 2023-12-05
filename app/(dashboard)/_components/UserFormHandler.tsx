@@ -46,7 +46,7 @@ export const UserFormHandler = () => {
       <SheetHeader>
         <SheetTitle>Edit your profile</SheetTitle>
         <SheetDescription>
-          Make changes to your profile here. Click save when youre done.
+          Make changes to your profile here. Click update when youre done.
         </SheetDescription>
         {/* Handle Selecting Forms */}
         <div className="h-full overflow-y-auto flex space-y-8 pl-5 flex-row lg:space-x-12 lg:space-y-0 md:px-4 md:py-3">
