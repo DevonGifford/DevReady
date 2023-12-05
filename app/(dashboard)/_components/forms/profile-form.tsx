@@ -210,7 +210,6 @@ export function ProfileForm() {
             </FormItem>
           )}
         />
-
         {/* Language & location */}
         <div className="flex flex-col sm:flex-row gap-3 md:gap-10 mr-16">
           <FormField
@@ -311,7 +310,6 @@ export function ProfileForm() {
                             onSelect={() => {
                               form.setValue("location", country.value);
                             }}
-                            // className=" overflow-y-auto max-h-[10px]"
                           >
                             <CheckIcon
                               className={cn(
@@ -325,9 +323,6 @@ export function ProfileForm() {
                           </CommandItem>
                         ))}
                       </CommandGroup>
-                      {/* <h1 className="ml-10 text-primary/40">
-                        <MoreHorizontal />
-                      </h1> */}
                     </Command>
                   </PopoverContent>
                 </Popover>
@@ -336,7 +331,6 @@ export function ProfileForm() {
             )}
           />
         </div>
-
         {/* Connections */}
         <div className="flex flex-col gap-2">
           <FormField
@@ -384,7 +378,6 @@ export function ProfileForm() {
                     <Input placeholder="Portfolio website" {...field} />
                   </FormControl>
                 </div>
-
                 <FormMessage />
               </FormItem>
             )}
@@ -443,8 +436,6 @@ export function ProfileForm() {
                 <Switch
                   checked={field.value}
                   onCheckedChange={field.onChange}
-                  // disabled
-                  // aria-readonly
                 />
               </FormControl>
             </FormItem>

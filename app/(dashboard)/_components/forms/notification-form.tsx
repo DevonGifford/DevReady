@@ -245,7 +245,7 @@ export function NotificationsForm() {
             )}
           />
         </div>
-
+        {/* Mobile Notifications */}
         <h3 className="text-xl translate-y-2 font-semibold text-devready-green">
           Mobile Notifications
         </h3>
@@ -295,7 +295,7 @@ export function NotificationsForm() {
             )}
           />
         </div>
-
+        {/* BUTTON */}
         <Button
           type="submit"
           variant={"devfill"}

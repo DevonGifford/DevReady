@@ -105,32 +105,3 @@ export const skillsList = [
   { label: "Git/GitHub" },
 ] as const;
 
-
-// 👇 Appearance-form  
-//🎯 to-do-list removed appearance form - remove this 
-export const sidebarItems = [
-  {
-    id: "recents",
-    label: "Recents",
-  },
-  {
-    id: "home",
-    label: "Home",
-  },
-  {
-    id: "applications",
-    label: "Applications",
-  },
-  {
-    id: "desktop",
-    label: "Desktop",
-  },
-  {
-    id: "downloads",
-    label: "Downloads",
-  },
-  {
-    id: "documents",
-    label: "Documents",
-  },
-] as const;

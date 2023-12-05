@@ -118,8 +118,8 @@ export function GoalsForm() {
           console.log(
             "🎯event-log:  📝UserForm/goals-form/onAchieved:  ✔ Success"
           );
-          setIsAchieving(false);  //- Reset loading state
-          setAchieved(true);      //- Set achieved state
+          setIsAchieving(false); //- Reset loading state
+          setAchieved(true); //- Set achieved state
 
           setTimeout(() => {
             setAchieved(false); //- Reset achieved state after a while
@@ -161,7 +161,7 @@ export function GoalsForm() {
             "🎯event-log:  📝UserForm/goals-form/onSubmit:  ✔ Success"
           );
           setIsLoading(false); //- Reset loading state
-          setSubmitted(true);  //- Set achieved state
+          setSubmitted(true); //- Set achieved state
 
           setTimeout(() => {
             setSubmitted(false); //- Reset achieved state after a while

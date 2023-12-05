@@ -104,7 +104,7 @@ export function AccountForm() {
     }
   }, [form, userProfile]);
 
-  // ✅🎯 HANDLE SKILL SELECTION - checks if skill exists in state, and handles click accordingly
+  // ✅ HANDLE SKILL SELECTION - checks if skill exists in state, and handles click accordingly
   const handleSkillList = (selectedSkill: string) => {
     const updatedSkills = selectedSkills.includes(selectedSkill)
       ? selectedSkills.filter((skill) => skill !== selectedSkill)
@@ -113,6 +113,11 @@ export function AccountForm() {
     setSelectedSkills(updatedSkills);
     form.setValue("skills_list", updatedSkills);
   };
+
+  // 🎯 HANDLE USER IMAGE DATA - checks if user has default option or custom image
+  const handleUserImage = (defaultOption: string, newImage: string) => {
+    //  🎯 to-do-list:  add functionality to save data to firebase and set to Context (seperate from form)
+  }
 
   // ✅ SUBMIT FORM - submit account form
   function onSubmit(data: AccountFormValues) {
