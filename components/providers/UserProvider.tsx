@@ -48,27 +48,27 @@ export const UserContextProvider = ({
   // ✅ UPDATING USER-STATE ON AUTH CHANGE
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(async (user) => {
+      console.log(
+        "🎯event_log:  🎭UserContext/onAuthStateChanged:  💢 Triggered"
+      );
       if (user) {
-        console.log(
-          "🎯event_log:  🎭UserContext/onAuthStateChanged👀:  💢 Triggered"
-        );
         try {
-          // ⌛ TEMPORARY WAY OF HANDELING 
-          // -⏲ Fetch user data after a slight delay to allow Firestore to create the document on register: 
+          // ⌛ TEMPORARY WAY OF HANDELING
+          // -⏲ Fetch user data after a slight delay to allow Firestore to create the document on register:
           // -🤔 create registration flag?  No, this code will be impacted/updated with onboarding process.
           setTimeout(async () => {
             await fetchUserDataProcess(user.uid);
-          }, 2000); 
+          }, 2000);
         } catch (error) {
           console.log(
-            "🎯event_log:  🎭UserContext/onAuthStateChanged:   ❌ Error fetching user profile from firebase:",
+            "🎯event_log:  🎭UserContext/onAuthStateChanged:   ❌ Error:  Fetching user profile from firebase:",
             error
           );
         }
       } else {
         setUserProfile(null);
         console.log(
-          "🎯event_log:  🎭UserContext/onAuthStateChanged:  ⚠ The context has been set to null "
+          "🎯event_log:  🎭UserContext/onAuthStateChanged:  ⚠ Warning:  The user context has been set to null "
         );
       }
     });
@@ -95,12 +95,12 @@ export const UserContextProvider = ({
     try {
       const docSnapshot: DocumentSnapshot<Data> = await getDoc(docRef);
 
-      // - check if user doc exists and 
+      // - check if user doc exists and
       if (docSnapshot.exists()) {
         //- update the doc
         await updateDoc(docRef, data);
         console.log(
-          `🎯event_log:  🎭UserContext/updateUserDataProcess : Document ${documentId} updated successfully in collection ${collectionName}!`
+          `🎯event_log:  🎭UserContext/updateUserDataProcess:  ✔ Success:  Document ${documentId} updated successfully in collection ${collectionName}!`
         );
 
         // - Update the state
@@ -114,12 +114,12 @@ export const UserContextProvider = ({
         });
       } else {
         console.log(
-          `🎯event_log:  🎭UserContext/updateUserDataProcess ❌ ERROR:  Could not find the Document ${documentId} in collection ${collectionName}!`
+          `🎯event_log:  🎭UserContext/updateUserDataProcess ❌ Error:  Could not find the Document ${documentId} in collection ${collectionName}!`
         );
       }
     } catch (error: any) {
       console.error(
-        `🎯event_log:  🎭UserContext/updateUserDataProcess ❌ ERROR: updating/creating document ${documentId} in collection ${collectionName}: `,
+        `🎯event_log:  🎭UserContext/updateUserDataProcess ❌ Error:  Updating/creating document ${documentId} in collection ${collectionName}: `,
         error
       );
     }
@@ -127,7 +127,9 @@ export const UserContextProvider = ({
 
   // ✅  HANDLES FETCHING USER FIRESTORE DOC - checks if doc exists, sets to state
   const fetchUserDataProcess = async (userId: string) => {
-    console.log("🎯event_log:  🎭UserContext/fetchUserDataProcess :  💢 Triggered");
+    console.log(
+      "🎯event_log:  🎭UserContext/fetchUserDataProcess :  💢 Triggered"
+    );
     try {
       const userDocRef = doc(collection(db, "users"), userId);
       const userDocSnapshot = await getDoc(userDocRef);

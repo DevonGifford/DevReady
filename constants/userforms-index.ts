@@ -1,43 +1,5 @@
-import React from "react";
-import { AccountForm } from "@/app/(dashboard)/_components/forms/account-form";
-import { ProfileForm } from "@/app/(dashboard)/_components/forms/profile-form";
-import { AppearanceForm } from "@/app/(dashboard)/_components/forms/appearance-form";
-import { NotificationsForm } from "@/app/(dashboard)/_components/forms/notification-form";
-import { GoalsForm } from "@/app/(dashboard)/_components/forms/goals-form";
-
-
-// 👇 Handle Forms 
-export interface FormObject {
-  component: React.ReactNode;
-  description: string;
-}
-
-export const userProfileForms: Record<string, FormObject> = {
-  Account: {
-    component: <AccountForm />,
-    description: "Configure your account.",
-  },
-  Profile: {
-    component: <ProfileForm />,
-    description: "Configure how you receive notifications.",
-  },
-  Goals: {
-    component: <GoalsForm />,
-    description: "Configure how you receive display.",
-  },
-  // Appearance: {
-  //   component: <AppearanceForm />,
-  //   description: "Configure appearance.",
-  // },
-  Notifications: {
-    component: <NotificationsForm />,
-    description: "Configure how you receive notifications.",
-  },
-};
-
-
-// 👇 Account-form 
-export const countriesList = [
+// 👇 Profile-form 
+export const locations = [
   { label: "United States", value: "US" },
   { label: "Canada", value: "CA" },
   { label: "United Kingdom", value: "GB" },
@@ -58,10 +20,9 @@ export const countriesList = [
   { label: "Turkey", value: "TR" },
   { label: "Argentina", value: "AR" },
   { label: "Egypt", value: "EG" },
-  // Add more countriesList as needed
 ] as const;
 
-export const languages = [
+export const home_languages = [
   { label: "English", value: "en" },
   { label: "French", value: "fr" },
   { label: "German", value: "de" },
@@ -75,7 +36,7 @@ export const languages = [
 
 
 
-// 👇 Profile-form 
+// 👇 Account-form 
 export const careerList = [
   { label: "Frontend Developer" },
   { label: "Fullstack Developer" },
@@ -102,38 +63,40 @@ export const programmingLanguagesList = [
 
 export const skillsList = [
   // Frontend Development
-  { label: "React.js" },
+  { label: "React" },
   { label: "Angular" },
-  { label: "Vue.js" },
+  { label: "Vue" },
   { label: "Svelte" },
-  { label: "Next.js" },
+  { label: "Next" },
+  { label: "Remix" },
 
   // Backend Development
-  { label: "Node.js" },
-  { label: "Express.js" },
+  { label: "Node" },
+  { label: "Express" },
   { label: "Django" },
   { label: "Flask" },
-  { label: "Ruby on Rails" },
-  { label: "ASP.NET" },
+  { label: "Ruby" },
+  { label: ".NET" },
 
   // Libraries
   { label: "Cypress" },
   { label: "Playwright" },
-  { label: "React Testing Library (RTL)" },
+  { label: "RTL" },
   { label: "Jest" },
   { label: "Vitest" },
   { label: "Redux" },
 
   // Data Engineering
-  { label: "Apache Hadoop" },
-  { label: "Apache Spark" },
-  { label: "SQL Databases" },
-  { label: "NoSQL Databases" },
+  { label: "Hadoop" },
+  { label: "Spark" },
+  { label: "SQL" },
+  { label: "NoSQL" },
+  { label: "MongoDB" },
 
   // Data Science
   { label: "NumPy" },
   { label: "Pandas" },
-  { label: "Scikit-learn" },
+  { label: "Scikit" },
 
   // Tools
   { label: "PowerBI" },
@@ -142,31 +105,3 @@ export const skillsList = [
   { label: "Git/GitHub" },
 ] as const;
 
-
-// 👇 Appearance-form
-export const sidebarItems = [
-  {
-    id: "recents",
-    label: "Recents",
-  },
-  {
-    id: "home",
-    label: "Home",
-  },
-  {
-    id: "applications",
-    label: "Applications",
-  },
-  {
-    id: "desktop",
-    label: "Desktop",
-  },
-  {
-    id: "downloads",
-    label: "Downloads",
-  },
-  {
-    id: "documents",
-    label: "Documents",
-  },
-] as const;
