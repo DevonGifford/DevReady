@@ -48,8 +48,8 @@ const accountFormSchema = z.object({
     .min(5, {
       message: "⚠ Username must be at least 5 characters.",
     })
-    .max(20, {
-      message: "⚠ Username must not be longer than 20 characters.",
+    .max(14, {
+      message: "⚠ Username must not be longer than 14 characters.",
     }),
   userimage: z.string().optional(),
   career_title: z.string({
@@ -71,6 +71,8 @@ const defaultValues: Partial<AccountFormValues> = {
 export function AccountForm() {
   const { userProfile, updateUserDataProcess } = useUserContext();
   const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
+
+  // ✅ ZOD-FORM HOOK :  custom hook initializes a form instance,
   const form = useForm<AccountFormValues>({
     resolver: zodResolver(accountFormSchema),
     defaultValues,
@@ -148,10 +150,10 @@ export function AccountForm() {
           console.log("Form submitted with data:", data);
           onSubmit(data);
         })}
-        className="space-y-8 w-full"
+        className="space-y-4 w-full"
       >
         {/* USERNAME & USERIMAGE 🎯 */}
-        <div className="flex flex-col items-center gap-4 sm:flex-row sm:gap-10">
+        <div className="flex flex-col items-center gap-4 sm:flex-row sm:gap-10 ">
           {/* USERNAME */}
           <FormField
             control={form.control}
@@ -454,7 +456,7 @@ export function AccountForm() {
         />
 
         {/* BUTTONS */}
-        <div className="flex flex-row justify-start gap-10">
+        <div className="flex flex-row justify-start gap-10 pt-10">
           <Button
             type="submit"
             variant={"devfill"}

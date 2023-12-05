@@ -2,13 +2,15 @@
 
 import * as z from "zod";
 import toast from "react-hot-toast";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
 import { cn } from "@/lib/utils";
+import { useForm } from "react-hook-form";
+import { useEffect } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
 
+import { useUserContext } from "@/components/providers/UserProvider";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
+import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import {
   Popover,
@@ -42,12 +44,10 @@ import {
 } from "lucide-react";
 
 import { locations, home_languages } from "@/constants/userforms-index";
-import { useUserContext } from "@/components/providers/UserProvider";
-import { useEffect } from "react";
 
+// 👇 FORM SCHEMA : Profile Form
 const profileFormSchema = z.object({
   bio: z.string().max(160).min(4).optional(),
-
   location: z.string({
     required_error: "⚠ Please pick your country.",
   }),
@@ -75,16 +75,16 @@ const profileFormSchema = z.object({
     .optional(),
   ztm_student: z.boolean().default(false).optional(),
 });
-
 type ProfileFormValues = z.infer<typeof profileFormSchema>;
-
+// ⌛ PLACEHOLDER :  Default form values
 const defaultValues: Partial<ProfileFormValues> = {
-  // 🎯 to-do-list
-  // - will be a database / API call
+  // 🎯 to-do-list : remove
 };
 
 export function ProfileForm() {
   const { userProfile, updateUserDataProcess } = useUserContext();
+
+  // ✅ ZOD-FORM HOOK :  custom hook initializes a form instance,
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileFormSchema),
     defaultValues,
@@ -114,7 +114,7 @@ export function ProfileForm() {
     }
   }, [userProfile, form]);
 
-  // ⌛ SUBMIT FORM : work-in-progress
+  // ✅ SUBMIT FORM : work-in-progress
   function onSubmit(data: ProfileFormValues) {
     console.log("profile-form-submit triggered");
 
@@ -137,14 +137,11 @@ export function ProfileForm() {
           },
           ztm_student: data.ztm_student || false,
         },
-        // Add other profile fields if necessary
       };
 
-      // Assuming updateUserDataProcess handles the update
       updateUserDataProcess(userProfile.uuid, updatedProfile)
         .then(() => {
           toast.success("Profile updated successfully");
-          // Close the form, navigate, or perform other actions upon successful update
         })
         .catch((error) => {
           toast.error("Failed to update profile");

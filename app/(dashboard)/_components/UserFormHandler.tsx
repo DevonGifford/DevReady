@@ -49,7 +49,7 @@ export const UserFormHandler = () => {
           Make changes to your profile here. Click save when youre done.
         </SheetDescription>
         {/* Handle Selecting Forms */}
-        <div className="h-full overflow-y-auto flex space-y-8 flex-row lg:space-x-12 lg:space-y-0 md:px-4 md:py-3">
+        <div className="h-full overflow-y-auto flex space-y-8 pl-5 flex-row lg:space-x-12 lg:space-y-0 md:px-4 md:py-3">
           <aside className="-mx-3 lg:w-1/5 flex space-x-2 flex-row items-center justify-start sm:justify-normal sm:flex-row overflow-x-aut scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-200">
             {Object.keys(userProfileForms).map((key) => (
               <Button

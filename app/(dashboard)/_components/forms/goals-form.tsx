@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { useForm } from "react-hook-form";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useUserContext } from "@/components/providers/UserProvider";
 
@@ -13,7 +13,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Textarea } from "@/components/ui/textarea";
-import { CalendarIcon } from "lucide-react";
+import { CalendarIcon, Check } from "lucide-react";
 import {
   Popover,
   PopoverContent,
@@ -30,29 +30,25 @@ import {
 } from "@/components/ui/form";
 
 import { UserProfile } from "@/types/UserProfile";
+import { Spinner } from "@/components/Spinner";
+import { Timestamp } from "firebase/firestore";
 
 // 👇 FORM SCHEMA : Goals Form
 const goalsFormSchema = z.object({
   goal_title: z
     .string()
-    .min(10, {
-      message: "⚠ Goal title must be at least 10 characters.",
-    })
-    .max(35, {
-      message: "⚠ Goal title must not be longer than 35 characters.",
+    .max(45, {
+      message: "⚠ Goal title must not be longer than 45 characters.",
     }),
   goal_description: z
     .string()
-    .min(10, {
-      message: "⚠ Goal description must be at least 10 characters.",
-    })
     .max(240, {
       message: "⚠ Goal description must not be longer than 240 characters.",
     }),
   goal_eta: z.date({
     required_error: "Please select a date and time",
     invalid_type_error: "That's not a date!",
-  }),
+  })
 });
 type GoalsFormValues = z.infer<typeof goalsFormSchema>;
 // ⌛ PLACEHOLDER :  Default form values
@@ -62,6 +58,12 @@ const defaultValues: Partial<GoalsFormValues> = {
 
 export function GoalsForm() {
   const { userProfile, updateUserDataProcess } = useUserContext();
+  const [isLoading, setIsLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [isAchieving, setIsAchieving] = useState(false);
+  const [achieved, setAchieved] = useState(false);
+  
+  // ✅ ZOD-FORM HOOK :  custom hook initializes a form instance,
   const form = useForm<GoalsFormValues>({
     resolver: zodResolver(goalsFormSchema),
     defaultValues,
@@ -79,13 +81,11 @@ export function GoalsForm() {
         userProfile.goals.current_goals.goal_description || ""
       );
 
-      // - check if goal_eta exists, use userProfile goal_eta, or today's date as a default
-      form.setValue(
-        "goal_eta",
-        userProfile.goals.current_goals.goal_eta
-          ? new Date(userProfile.goals.current_goals.goal_eta)
-          : new Date() // Today's date as the default
-      );
+      // - convert firebase date to javascript date
+      const goalEtaContextData = userProfile.goals.current_goals.goal_eta;
+      const formattedDate = goalEtaContextData.toDate();
+
+      form.setValue("goal_eta", formattedDate || new Date());
     }
   }, [userProfile, form]);
 
@@ -93,6 +93,7 @@ export function GoalsForm() {
   function onAchieved() {
     console.log("goal-form-achieved triggered 🎇");
     if (userProfile) {
+      setIsAchieving(true); //- Set loading spinner
       const achievedGoalData: UserProfile = {
         ...userProfile,
         goals: {
@@ -102,29 +103,35 @@ export function GoalsForm() {
               goal_title: userProfile.goals.current_goals.goal_title,
               goal_description:
                 userProfile.goals.current_goals.goal_description,
-              goal_eta: userProfile.goals.current_goals.goal_eta.toISOString(),
+              goal_eta: userProfile.goals.current_goals.goal_eta,
             },
             ...userProfile.goals.past_goals,
           ],
           current_goals: {
-            //- clear current_goals after achieving
+            //- clear/reset current_goals after achieving
             goal_title: "",
             goal_description: "",
-            goal_eta: new Date(),
+            goal_eta: Timestamp.now(),  //-  firebase format
           },
         },
       };
 
       updateUserDataProcess(userProfile.uuid, achievedGoalData)
         .then(() => {
+          // - on success
           toast.success("Goal achieved: congratulations", {
             position: "bottom-left",
           });
+          setIsAchieving(false); //- Reset loading state
+          setAchieved(true); //- Set achieved state
+
+          setTimeout(() => {
+            setAchieved(false); //- Reset achieved state after a while
+          }, 2000);
         })
         .catch((error) => {
-          toast.error("Hmmmm something went wrong ...", {
-            position: "bottom-left",
-          });
+          //- on error
+          setIsAchieving(false); //- Reset loading state
           console.error(error);
         });
     }
@@ -134,6 +141,7 @@ export function GoalsForm() {
   function onSubmit(data: GoalsFormValues) {
     console.log("goal-form-submit triggered");
     if (userProfile) {
+      setIsLoading(true); //- Set loading spinner
       const updatedProfile: UserProfile = {
         ...userProfile,
         goals: {
@@ -142,23 +150,28 @@ export function GoalsForm() {
             ...userProfile.goals.current_goals,
             goal_title: data.goal_title,
             goal_description: data.goal_description,
-            goal_eta: data.goal_eta, // Store date in ISO format
+            goal_eta: Timestamp.fromDate(data.goal_eta), //- convert to firebase format
           },
         },
       };
 
       updateUserDataProcess(userProfile.uuid, updatedProfile)
         .then(() => {
-          toast.success("Goal updated successfully", {
-            position: "bottom-left",
-          });
+          // - on success
+          setIsLoading(false); //- Reset loading state
+          setSubmitted(true); //- Set achieved state
+
+          setTimeout(() => {
+            setSubmitted(false); //- Reset achieved state after a while
+          }, 2000);
         })
         .catch((error) => {
-          toast.error("Failed to update goal", {
-            position: "bottom-left",
-          });
+          //- on error
+          setIsLoading(false); //- Reset loading state
           console.error(error);
         });
+    } else {
+      console.log("No changes to submit.");
     }
   }
 
@@ -227,12 +240,13 @@ export function GoalsForm() {
                         !field.value && "text-muted-foreground"
                       )}
                     >
-                      {field.value instanceof Date &&
-                      !isNaN(field.value.getTime()) ? (
-                        format(field.value, "PPP")
-                      ) : (
-                        <span>Pick a date</span>
-                      )}
+                      <span>
+                        {field.value instanceof Date ? (
+                          <span>{field.value.toDateString()}</span>
+                        ) : (
+                          <span>Pick a date</span>
+                        )}
+                      </span>
                       <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                     </Button>
                   </FormControl>
@@ -258,16 +272,24 @@ export function GoalsForm() {
           <Button
             type="submit"
             variant={"devfill"}
+            disabled={isLoading}
             className="rounded-lg text-sm md:text-sm p-2"
           >
-            Set your goal
+            {isLoading ? <Spinner /> : submitted ? <Check /> : "Set your goal"}
           </Button>
           <Button
             type="button"
             onClick={() => onAchieved()}
             variant={"outline"}
+            disabled={isAchieving}
           >
-            mark goal as achieved!
+            {isAchieving ? (
+              <Spinner />
+            ) : achieved ? (
+              <Check />
+            ) : (
+              "Mark goal as achieved!"
+            )}
           </Button>
         </div>
       </form>

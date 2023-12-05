@@ -1,3 +1,5 @@
+import { Timestamp } from "firebase/firestore";
+
 export interface UserProfile {
   uuid: string;
   email: string;
@@ -39,7 +41,7 @@ export interface UserProfile {
     current_goals: {
       goal_title: string;
       goal_description: string;
-      goal_eta: Date;
+      goal_eta: Timestamp;
     };
     past_goals: {}[];
   };
@@ -94,7 +96,7 @@ export const defaultUserProfile: UserProfile = {
     current_goals: {
       goal_title: "",
       goal_description: "",
-      goal_eta: new Date(), // Date type for goal_eta
+      goal_eta: Timestamp.now(), // Date type for goal_eta
     },
     past_goals: [], // Empty array instead of an array with an empty object
   },

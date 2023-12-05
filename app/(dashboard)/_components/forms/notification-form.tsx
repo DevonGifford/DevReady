@@ -22,6 +22,7 @@ import {
 
 import { UserProfile } from "@/types/UserProfile";
 
+// 👇 FORM SCHEMA : Account Form
 const notificationsFormSchema = z.object({
   notif_level: z.enum(["all", "profile", "none"], {
     required_error: "⚠ You need to select a notification type.",
@@ -35,24 +36,24 @@ const notificationsFormSchema = z.object({
   mobile_notifs: z.boolean().default(false).optional(),
 });
 type NotificationsFormValues = z.infer<typeof notificationsFormSchema>;
-
+// ⌛ PLACEHOLDER :  Default form values
 const defaultValues: Partial<NotificationsFormValues> = {
-  // 🎯 to-do-list
-  // - will be a database / API call
+  // 🎯 to-do-list : remove
 };
 
 export function NotificationsForm() {
   const { userProfile, updateUserDataProcess } = useUserContext();
+
+  // ✅ ZOD-FORM HOOK :  custom hook initializes a form instance,
   const form = useForm<NotificationsFormValues>({
     resolver: zodResolver(notificationsFormSchema),
     defaultValues,
   });
 
-
-  //✅ SETTING FORM : fields with existing user profile data
+  //✅ SET FORM VALUES - fields with existing user profile data
   useEffect(() => {
     if (userProfile) {
-        form.setValue('notif_level', userProfile.notifications.notif_level);
+      form.setValue("notif_level", userProfile.notifications.notif_level);
       form.setValue(
         "communication_emails",
         userProfile.notifications.communication_emails || false
@@ -78,7 +79,7 @@ export function NotificationsForm() {
     }
   }, [form, userProfile]);
 
-  // ⌛ SUBMIT FORM : work-in-progress
+  // ✅ SUBMIT FORM - submit notifications form
   function onSubmit(data: NotificationsFormValues) {
     if (userProfile) {
       const updatedProfile: UserProfile = {
@@ -109,7 +110,13 @@ export function NotificationsForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form
+        onSubmit={form.handleSubmit((data) => {
+          console.log("Form submitted with data:", data);
+          onSubmit(data);
+        })}
+        className="space-y-8"
+      >
         <FormField
           control={form.control}
           name="notif_level"
