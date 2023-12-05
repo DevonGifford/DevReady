@@ -1,16 +1,16 @@
 "use client";
 
 import * as z from "zod";
-import toast from "react-hot-toast";
 import { cn } from "@/lib/utils";
 import { useForm } from "react-hook-form";
-import { useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect, useState } from "react";
 
 import { useUserContext } from "@/components/providers/UserProvider";
 import { Input } from "@/components/ui/input";
-import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
+import { Switch } from "@/components/ui/switch";
+import { Spinner } from "@/components/Spinner";
 import { Textarea } from "@/components/ui/textarea";
 import {
   Popover,
@@ -34,6 +34,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import {
+  Check,
   CheckCheckIcon,
   CheckIcon,
   Github,
@@ -43,12 +44,12 @@ import {
   Trophy,
 } from "lucide-react";
 
-import { locations, home_languages } from "@/constants/userforms-index";
 import { UserProfile } from "@/types/UserProfile";
+import { locations, home_languages } from "@/constants/userforms-index";
 
 // 👇 FORM SCHEMA : Profile Form
 const profileFormSchema = z.object({
-  bio: z.string().max(160).min(4).optional(),
+  bio: z.string().max(160).min(4),
   location: z.string({
     required_error: "⚠ Please pick your country.",
   }),
@@ -61,18 +62,18 @@ const profileFormSchema = z.object({
       linkedin: z.string().url().optional(),
       portfolio: z.string().url().optional(),
     })
-    .refine((data) => Object.values(data).some(Boolean), {
-      message: "⚠ At least one social media profile is required.",
-    })
+    // .refine((data) => Object.values(data).some(Boolean), {
+    //   message: "⚠ At least one social media profile is required.",
+    // })
     .optional(),
   projects: z
     .object({
       capstone: z.string().url().optional(),
       additional: z.string().url().optional(),
     })
-    .refine((data) => Object.values(data).some(Boolean), {
-      message: "⚠ At least one project is required.",
-    })
+    // .refine((data) => Object.values(data).some(Boolean), {
+    //   message: "⚠ At least one project is required.",
+    // })
     .optional(),
   ztm_student: z.boolean().default(false).optional(),
 });
@@ -84,6 +85,8 @@ const defaultValues: Partial<ProfileFormValues> = {
 
 export function ProfileForm() {
   const { userProfile, updateUserDataProcess } = useUserContext();
+  const [isLoading, setIsLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   // ✅ ZOD-FORM HOOK :  custom hook initializes a form instance,
   const form = useForm<ProfileFormValues>({
@@ -96,20 +99,18 @@ export function ProfileForm() {
   useEffect(() => {
     if (userProfile) {
       form.setValue("bio", userProfile.profile.bio || "");
-
-      form.setValue("location", userProfile.profile.location || "");
-
-      form.setValue("home_lang", userProfile.profile.home_lang || "");
-      form.setValue("urls.github", userProfile.profile.urls.github || "");
-      form.setValue("urls.linkedin", userProfile.profile.urls.linkedin || "");
-      form.setValue("urls.portfolio", userProfile.profile.urls.portfolio || "");
+      form.setValue("location", userProfile.profile.location);
+      form.setValue("home_lang", userProfile.profile.home_lang);
+      form.setValue("urls.github", userProfile.profile.urls.github || undefined);
+      form.setValue("urls.linkedin", userProfile.profile.urls.linkedin || undefined);
+      form.setValue("urls.portfolio", userProfile.profile.urls.portfolio || undefined);
       form.setValue(
         "projects.capstone",
-        userProfile.profile.projects.capstone || ""
+        userProfile.profile.projects.capstone || undefined
       );
       form.setValue(
         "projects.additional",
-        userProfile.profile.projects.additional || ""
+        userProfile.profile.projects.additional || undefined
       );
       form.setValue("ztm_student", userProfile.profile.ztm_student || false);
     }
@@ -117,9 +118,9 @@ export function ProfileForm() {
 
   // ✅ SUBMIT FORM : work-in-progress
   function onSubmit(data: ProfileFormValues) {
-    console.log("profile-form-submit triggered");
-
+    console.log("🎯event-log:  📝UserForm/profile-form/onSubmit:  💢 Triggered");
     if (userProfile) {
+      setIsLoading(true); //- Set loading spinner
       const updatedUserData : UserProfile = {
         ...userProfile,
         profile: {
@@ -141,15 +142,27 @@ export function ProfileForm() {
       };
 
       updateUserDataProcess(userProfile.uuid, updatedUserData)
-        .then(() => {
-          toast.success("Profile updated successfully");
-        })
-        .catch((error) => {
-          toast.error("Failed to update profile");
-          console.error(error);
-        });
-    }
+      .then(() => {
+        // - on success
+        console.log(
+          "🎯event-log:  📝UserForm/profile-form/onSubmit:  ✔ Success"
+        );
+        setIsLoading(false); //- Reset loading state
+        setSubmitted(true);  //- Set achieved state
+
+        setTimeout(() => {
+          setSubmitted(false); //- Reset achieved state after a while
+        }, 2000);
+      })
+      .catch((error) => {
+        console.log(
+          "🎯event-log:  📝UserForm/profile-form/onSubmit:  ❌ Something went wrong, error: ",
+          error
+        );
+        setIsLoading(false); //- Reset loading state
+      });
   }
+}
 
   return (
     <Form {...form}>
@@ -174,7 +187,7 @@ export function ProfileForm() {
               </div>
               <FormControl className="flex items-start sm:text-start">
                 <Textarea
-                  placeholder="Tell us a little bit about yourself"
+                  placeholder="Hello world, allow me to introduce myself..."
                   className="resize-none"
                   {...field}
                 />
@@ -354,7 +367,7 @@ export function ProfileForm() {
                 <div className="flex flex-row justify-between items-center gap-3">
                   <LinkIcon className="text-devready-green" size={20} />
                   <FormControl className="w-full">
-                    <Input placeholder="Portfolio or project" {...field} />
+                    <Input placeholder="Portfolio website" {...field} />
                   </FormControl>
                 </div>
 
@@ -429,9 +442,16 @@ export function ProfileForm() {
         <Button
           type="submit"
           variant={"devfill"}
+          disabled={isLoading}
           className="rounded-lg text-sm md:text-sm p-2"
         >
-          Update account
+          {isLoading ? (
+            <Spinner />
+          ) : submitted ? (
+            <Check />
+          ) : (
+            "Update profile"
+          )}
         </Button>
       </form>
     </Form>

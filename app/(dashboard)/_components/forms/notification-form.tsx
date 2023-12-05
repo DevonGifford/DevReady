@@ -1,14 +1,15 @@
 "use client";
 
 import * as z from "zod";
-import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useUserContext } from "@/components/providers/UserProvider";
 
-import { Button } from "@/components/ui/button";
+import { Check } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
+import { Button } from "@/components/ui/button";
+import { Spinner } from "@/components/Spinner";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
   Form,
@@ -21,8 +22,6 @@ import {
 } from "@/components/ui/form";
 
 import { UserProfile } from "@/types/UserProfile";
-import { Spinner } from "@/components/Spinner";
-import { Check } from "lucide-react";
 
 // 👇 FORM SCHEMA : Account Form
 const notificationsFormSchema = z.object({
@@ -108,7 +107,7 @@ export function NotificationsForm() {
             "🎯event-log:  📝UserForm/notifs-form/onSubmit:  ✔ Success"
           );
           setIsLoading(false); //- Reset loading state
-          setSubmitted(true); //- Set achieved state
+          setSubmitted(true);  //- Set achieved state
 
           setTimeout(() => {
             setSubmitted(false); //- Reset achieved state after a while
@@ -120,7 +119,6 @@ export function NotificationsForm() {
             error
           );
           setIsLoading(false); //- Reset loading state
-          console.error(error);
         });
     }
   }

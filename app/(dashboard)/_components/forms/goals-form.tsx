@@ -1,16 +1,16 @@
 "use client";
 
 import * as z from "zod";
-import toast from "react-hot-toast";
 import { cn } from "@/lib/utils";
-import { format } from "date-fns";
 import { useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
+import { Timestamp } from "firebase/firestore";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useUserContext } from "@/components/providers/UserProvider";
+import { useEffect, useState } from "react";
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Spinner } from "@/components/Spinner";
 import { Calendar } from "@/components/ui/calendar";
 import { Textarea } from "@/components/ui/textarea";
 import { CalendarIcon, Check } from "lucide-react";
@@ -30,8 +30,6 @@ import {
 } from "@/components/ui/form";
 
 import { UserProfile } from "@/types/UserProfile";
-import { Spinner } from "@/components/Spinner";
-import { Timestamp } from "firebase/firestore";
 
 // 👇 FORM SCHEMA : Goals Form
 const goalsFormSchema = z.object({
@@ -117,11 +115,11 @@ export function GoalsForm() {
       updateUserDataProcess(userProfile.uuid, achievedGoalData)
         .then(() => {
           // - on success
-          toast.success("Goal achieved: congratulations", {
-            position: "bottom-left",
-          });
-          setIsAchieving(false); //- Reset loading state
-          setAchieved(true); //- Set achieved state
+          console.log(
+            "🎯event-log:  📝UserForm/goals-form/onAchieved:  ✔ Success"
+          );
+          setIsAchieving(false);  //- Reset loading state
+          setAchieved(true);      //- Set achieved state
 
           setTimeout(() => {
             setAchieved(false); //- Reset achieved state after a while
@@ -129,8 +127,11 @@ export function GoalsForm() {
         })
         .catch((error) => {
           //- on error
+          console.log(
+            "🎯event-log:  📝UserForm/goals-form/onAchieved:  ❌ Something went wrong, error: ",
+            error
+          );
           setIsAchieving(false); //- Reset loading state
-          console.error(error);
         });
     }
   }
@@ -160,7 +161,7 @@ export function GoalsForm() {
             "🎯event-log:  📝UserForm/goals-form/onSubmit:  ✔ Success"
           );
           setIsLoading(false); //- Reset loading state
-          setSubmitted(true); //- Set achieved state
+          setSubmitted(true);  //- Set achieved state
 
           setTimeout(() => {
             setSubmitted(false); //- Reset achieved state after a while
