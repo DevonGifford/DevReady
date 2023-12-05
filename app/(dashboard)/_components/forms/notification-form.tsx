@@ -2,7 +2,7 @@
 
 import * as z from "zod";
 import toast from "react-hot-toast";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useUserContext } from "@/components/providers/UserProvider";
@@ -21,6 +21,8 @@ import {
 } from "@/components/ui/form";
 
 import { UserProfile } from "@/types/UserProfile";
+import { Spinner } from "@/components/Spinner";
+import { Check } from "lucide-react";
 
 // 👇 FORM SCHEMA : Account Form
 const notificationsFormSchema = z.object({
@@ -43,6 +45,8 @@ const defaultValues: Partial<NotificationsFormValues> = {
 
 export function NotificationsForm() {
   const { userProfile, updateUserDataProcess } = useUserContext();
+  const [isLoading, setIsLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   // ✅ ZOD-FORM HOOK :  custom hook initializes a form instance,
   const form = useForm<NotificationsFormValues>({
@@ -81,9 +85,10 @@ export function NotificationsForm() {
 
   // ✅ SUBMIT FORM - submit notifications form
   function onSubmit(data: NotificationsFormValues) {
+    console.log("🎯event-log:  📝UserForm/notifs-form/onSubmit:  💢 Triggered");
     if (userProfile) {
-      const updatedProfile: UserProfile = {
-        // Assuming the structure of UserProfile here
+      setIsLoading(true); //- Set loading spinner
+      const updatedUserData: UserProfile = {
         ...userProfile,
         notifications: {
           ...userProfile?.notifications,
@@ -94,15 +99,27 @@ export function NotificationsForm() {
           push_notifs: data.push_notifs!,
           mobile_notifs: data.mobile_notifs!,
         },
-        // ... (update other parts of the userProfile if necessary)
       };
 
-      updateUserDataProcess(userProfile.uuid, updatedProfile)
+      updateUserDataProcess(userProfile.uuid, updatedUserData)
         .then(() => {
-          toast.success("Profile updated successfully");
+          // - on success
+          console.log(
+            "🎯event-log:  📝UserForm/notifs-form/onSubmit:  ✔ Success"
+          );
+          setIsLoading(false); //- Reset loading state
+          setSubmitted(true); //- Set achieved state
+
+          setTimeout(() => {
+            setSubmitted(false); //- Reset achieved state after a while
+          }, 2000);
         })
         .catch((error) => {
-          toast.error("Failed to update profile");
+          console.log(
+            "🎯event-log:  📝UserForm/notifs-form/onSubmit:  ❌ Something went wrong, error: ",
+            error
+          );
+          setIsLoading(false); //- Reset loading state
           console.error(error);
         });
     }
@@ -112,20 +129,22 @@ export function NotificationsForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit((data) => {
-          console.log("Form submitted with data:", data);
+          console.log(
+            "🎯event_log:  📝-form submitted with following form-data : ",
+            data
+          );
           onSubmit(data);
         })}
-        className="space-y-8"
+        className="space-y-4"
       >
         <FormField
           control={form.control}
           name="notif_level"
           render={({ field }) => (
             <FormItem className="space-y-3 py-3">
-              <FormLabel className="mb-4 text-xl font-medium">
+              <FormLabel className="text-xl translate-y-2 font-semibold text-devready-green">
                 Live notifications
               </FormLabel>
-              <FormDescription></FormDescription>
               <FormControl>
                 <RadioGroup
                   onValueChange={field.onChange}
@@ -160,8 +179,10 @@ export function NotificationsForm() {
             </FormItem>
           )}
         />
-        <h3 className="mb-4 text-lg font-medium">Email Notifications</h3>
-        <div className="space-y-4">
+        <h3 className="text-xl translate-y-2 font-semibold text-devready-green">
+          Email Notifications
+        </h3>
+        <div className="space-y-3">
           <FormField
             control={form.control}
             name="communication_emails"
@@ -226,7 +247,9 @@ export function NotificationsForm() {
           />
         </div>
 
-        <h3 className="mb-4 text-lg font-medium">Mobile Notifications</h3>
+        <h3 className="text-xl translate-y-2 font-semibold text-devready-green">
+          Mobile Notifications
+        </h3>
         <div className="space-y-4">
           <FormField
             control={form.control}
@@ -277,9 +300,16 @@ export function NotificationsForm() {
         <Button
           type="submit"
           variant={"devfill"}
+          disabled={isLoading}
           className="rounded-lg text-sm md:text-sm p-2"
         >
-          Update notifications
+          {isLoading ? (
+            <Spinner />
+          ) : submitted ? (
+            <Check />
+          ) : (
+            "Update preferences"
+          )}
         </Button>
       </form>
     </Form>

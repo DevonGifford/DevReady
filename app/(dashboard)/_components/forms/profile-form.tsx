@@ -44,6 +44,7 @@ import {
 } from "lucide-react";
 
 import { locations, home_languages } from "@/constants/userforms-index";
+import { UserProfile } from "@/types/UserProfile";
 
 // 👇 FORM SCHEMA : Profile Form
 const profileFormSchema = z.object({
@@ -119,7 +120,7 @@ export function ProfileForm() {
     console.log("profile-form-submit triggered");
 
     if (userProfile) {
-      const updatedProfile = {
+      const updatedUserData : UserProfile = {
         ...userProfile,
         profile: {
           ...userProfile.profile,
@@ -139,7 +140,7 @@ export function ProfileForm() {
         },
       };
 
-      updateUserDataProcess(userProfile.uuid, updatedProfile)
+      updateUserDataProcess(userProfile.uuid, updatedUserData)
         .then(() => {
           toast.success("Profile updated successfully");
         })
@@ -154,7 +155,7 @@ export function ProfileForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit((data) => {
-          console.log("Form submitted with data:", data);
+          console.log("🎯event_log:  📝-form submitted with following form-data : ", data);
           onSubmit(data);
         })}
         className="space-y-8"

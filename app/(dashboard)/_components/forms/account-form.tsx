@@ -40,6 +40,7 @@ import {
   programmingLanguagesList,
   skillsList,
 } from "@/constants/userforms-index";
+import { UserProfile } from "firebase/auth";
 
 // 👇 FORM SCHEMA : Account Form
 const accountFormSchema = z.object({
@@ -116,7 +117,7 @@ export function AccountForm() {
     console.log("account-form-submit triggered");
 
     if (userProfile) {
-      const updatedProfile = {
+      const updatedUserData : UserProfile = {
         account: {
           ...userProfile?.account,
           username: data.username || "",
@@ -132,7 +133,7 @@ export function AccountForm() {
         },
       };
 
-      updateUserDataProcess(userProfile.uuid, updatedProfile)
+      updateUserDataProcess(userProfile.uuid, updatedUserData)
         .then(() => {
           toast.success("Profile updated successfully");
         })
@@ -147,7 +148,7 @@ export function AccountForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit((data) => {
-          console.log("Form submitted with data:", data);
+          console.log("🎯event_log:  📝-form submitted with following form-data : ", data);
           onSubmit(data);
         })}
         className="space-y-4 w-full"

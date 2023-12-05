@@ -35,20 +35,16 @@ import { Timestamp } from "firebase/firestore";
 
 // 👇 FORM SCHEMA : Goals Form
 const goalsFormSchema = z.object({
-  goal_title: z
-    .string()
-    .max(45, {
-      message: "⚠ Goal title must not be longer than 45 characters.",
-    }),
-  goal_description: z
-    .string()
-    .max(240, {
-      message: "⚠ Goal description must not be longer than 240 characters.",
-    }),
+  goal_title: z.string().max(45, {
+    message: "⚠ Goal title must not be longer than 45 characters.",
+  }),
+  goal_description: z.string().max(240, {
+    message: "⚠ Goal description must not be longer than 240 characters.",
+  }),
   goal_eta: z.date({
     required_error: "Please select a date and time",
     invalid_type_error: "That's not a date!",
-  })
+  }),
 });
 type GoalsFormValues = z.infer<typeof goalsFormSchema>;
 // ⌛ PLACEHOLDER :  Default form values
@@ -62,7 +58,7 @@ export function GoalsForm() {
   const [submitted, setSubmitted] = useState(false);
   const [isAchieving, setIsAchieving] = useState(false);
   const [achieved, setAchieved] = useState(false);
-  
+
   // ✅ ZOD-FORM HOOK :  custom hook initializes a form instance,
   const form = useForm<GoalsFormValues>({
     resolver: zodResolver(goalsFormSchema),
@@ -91,7 +87,9 @@ export function GoalsForm() {
 
   // ✅ HANDLE GOAL ACHIEVED : saves and clears current goal
   function onAchieved() {
-    console.log("goal-form-achieved triggered 🎇");
+    console.log(
+      "🎯event-log:  📝UserForm/goals-form/onAchieved:  💢 Triggered"
+    );
     if (userProfile) {
       setIsAchieving(true); //- Set loading spinner
       const achievedGoalData: UserProfile = {
@@ -111,7 +109,7 @@ export function GoalsForm() {
             //- clear/reset current_goals after achieving
             goal_title: "",
             goal_description: "",
-            goal_eta: Timestamp.now(),  //-  firebase format
+            goal_eta: Timestamp.now(), //-  firebase format
           },
         },
       };
@@ -139,10 +137,10 @@ export function GoalsForm() {
 
   // ✅ SUBMIT FORM :  submit goals form
   function onSubmit(data: GoalsFormValues) {
-    console.log("goal-form-submit triggered");
+    console.log("🎯event-log:  📝UserForm/goals-form/onSubmit:  💢 Triggered");
     if (userProfile) {
       setIsLoading(true); //- Set loading spinner
-      const updatedProfile: UserProfile = {
+      const updatedUserData: UserProfile = {
         ...userProfile,
         goals: {
           ...userProfile.goals,
@@ -155,9 +153,12 @@ export function GoalsForm() {
         },
       };
 
-      updateUserDataProcess(userProfile.uuid, updatedProfile)
+      updateUserDataProcess(userProfile.uuid, updatedUserData)
         .then(() => {
           // - on success
+          console.log(
+            "🎯event-log:  📝UserForm/goals-form/onSubmit:  ✔ Success"
+          );
           setIsLoading(false); //- Reset loading state
           setSubmitted(true); //- Set achieved state
 
@@ -167,8 +168,11 @@ export function GoalsForm() {
         })
         .catch((error) => {
           //- on error
+          console.log(
+            "🎯event-log:  📝UserForm/goals-form/onSubmit:  ❌ Something went wrong, error: ",
+            error
+          );
           setIsLoading(false); //- Reset loading state
-          console.error(error);
         });
     } else {
       console.log("No changes to submit.");
@@ -179,7 +183,10 @@ export function GoalsForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit((data) => {
-          console.log("Form submitted with data:", data);
+          console.log(
+            "🎯event_log:  📝-form submitted with following form-data : ",
+            data
+          );
           onSubmit(data);
         })}
         className="space-y-8"
@@ -191,11 +198,10 @@ export function GoalsForm() {
             <FormItem>
               <FormLabel>Goal Title</FormLabel>
               <FormDescription>
-                This is the name that will be displayed on your profile and in
-                emails.
+                Define your goal with a clear and concise title.
               </FormDescription>
               <FormControl>
-                <Input placeholder="Your name" {...field} />
+                <Input placeholder="Mastering react ..." {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -208,12 +214,11 @@ export function GoalsForm() {
             <FormItem>
               <FormLabel>Goal Title</FormLabel>
               <FormDescription>
-                This is the name that will be displayed on your profile and in
-                emails.
+                Elaborate on your goal and its significance in detail.
               </FormDescription>
               <FormControl>
                 <Textarea
-                  placeholder="Tell us more about your goal"
+                  placeholder="I will achieve this by doing this and that..."
                   {...field}
                 />
               </FormControl>
