@@ -1,19 +1,21 @@
 "use client";
 
 import * as z from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { UseFormSetValue, useForm } from "react-hook-form";
-
 import { cn } from "@/lib/utils";
-import { Slider } from "@/components/ui/slider";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect, useState } from "react";
+
+import { useUserContext } from "@/components/providers/UserProvider";
+import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Switch } from "@/components/ui/switch";
+import { Spinner } from "@/components/Spinner";
 import { Textarea } from "@/components/ui/textarea";
-import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
-import { CheckCheckIcon, CheckIcon } from "lucide-react";
 import {
   Popover,
-  PopoverContent,
   PopoverTrigger,
+  PopoverContent,
 } from "@/components/ui/popover";
 import {
   Command,
@@ -31,71 +33,191 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-
 import {
-  careerList,
-  programmingLanguagesList,
-  skillsList,
-} from "@/constants/navigation-index";
+  Check,
+  CheckCheckIcon,
+  CheckIcon,
+  Github,
+  LinkIcon,
+  Linkedin,
+  Medal,
+  Trophy,
+} from "lucide-react";
 
-import toast from "react-hot-toast";
+import { UserProfile } from "@/types/UserProfile";
+import { locations, home_languages } from "@/constants/userforms-index";
 
+// 👇 FORM SCHEMA : Profile Form
 const profileFormSchema = z.object({
-  career_title: z.string({
-    required_error: "⚠ Please pick your career .",
+  bio: z.string().max(160).min(4),
+  location: z.string({
+    required_error: "⚠ Please pick your country.",
   }),
-  programming_lang: z.string({
-    required_error: "⚠ Please pick a language .",
+  home_lang: z.string({
+    required_error: "⚠ Please select a language.",
   }),
-  bio: z.string().max(160).min(4).optional(),
-  career_level: z.number().min(0, "⚠ Please set your level"),
-  experience_level: z.number().min(0, "⚠ Please set your level"),
-  skills_list: z.array(z.string()),
+  urls: z
+    .object({
+      github: z.string().url().optional(),
+      linkedin: z.string().url().optional(),
+      portfolio: z.string().url().optional(),
+    })
+    // .refine((data) => Object.values(data).some(Boolean), {
+    //   message: "⚠ At least one social media profile is required.",
+    // })
+    .optional(),
+  projects: z
+    .object({
+      capstone: z.string().url().optional(),
+      additional: z.string().url().optional(),
+    })
+    // .refine((data) => Object.values(data).some(Boolean), {
+    //   message: "⚠ At least one project is required.",
+    // })
+    .optional(),
+  ztm_student: z.boolean().default(false).optional(),
 });
 type ProfileFormValues = z.infer<typeof profileFormSchema>;
-
+// ⌛ PLACEHOLDER :  Default form values
 const defaultValues: Partial<ProfileFormValues> = {
-  // 🎯 to-do-list
-  // - will be a database / API call
-  // career_title: {user.name},
-  // bio: {user.bio},
+  // 🎯 to-do-list : remove
 };
 
 export function ProfileForm() {
+  const { userProfile, updateUserDataProcess } = useUserContext();
+  const [isLoading, setIsLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+
+  // ✅ ZOD-FORM HOOK :  custom hook initializes a form instance,
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileFormSchema),
     defaultValues,
+    mode: "onChange",
   });
 
-  const handleSkillList = (selectedSkill: string, prevSkills: string[]) => {
-    // 🎯 to-do-list
-    //-I still need to figure out a way to manage the data as form data
-  };
+  //✅ SETTING FORM : fields with existing user profile data
+  useEffect(() => {
+    if (userProfile) {
+      form.setValue("bio", userProfile.profile.bio || "");
+      form.setValue("location", userProfile.profile.location);
+      form.setValue("home_lang", userProfile.profile.home_lang);
+      form.setValue(
+        "urls.github",
+        userProfile.profile.urls.github || undefined
+      );
+      form.setValue(
+        "urls.linkedin",
+        userProfile.profile.urls.linkedin || undefined
+      );
+      form.setValue(
+        "urls.portfolio",
+        userProfile.profile.urls.portfolio || undefined
+      );
+      form.setValue(
+        "projects.capstone",
+        userProfile.profile.projects.capstone || undefined
+      );
+      form.setValue(
+        "projects.additional",
+        userProfile.profile.projects.additional || undefined
+      );
+      form.setValue("ztm_student", userProfile.profile.ztm_student || false);
+    }
+  }, [userProfile, form]);
 
+  // ✅ SUBMIT FORM : work-in-progress
   function onSubmit(data: ProfileFormValues) {
-    // 🎯 to-do-list
-    //- update db
-    //- clost sheet
-    //- catch with toast notif's
-    toast.success("This is just a little test", {
-      position: "bottom-left",
-    });
+    console.log(
+      "🎯event-log:  📝UserForm/profile-form/onSubmit:  💢 Triggered"
+    );
+    if (userProfile) {
+      setIsLoading(true); //- Set loading spinner
+      const updatedUserData: UserProfile = {
+        ...userProfile,
+        profile: {
+          ...userProfile.profile,
+          bio: data.bio || "",
+          location: data.location || "",
+          home_lang: data.home_lang || "",
+          urls: {
+            github: data.urls?.github || "",
+            linkedin: data.urls?.linkedin || "",
+            portfolio: data.urls?.portfolio || "",
+          },
+          projects: {
+            capstone: data.projects?.capstone || "",
+            additional: data.projects?.additional || "",
+          },
+          ztm_student: data.ztm_student || false,
+        },
+      };
+
+      updateUserDataProcess(userProfile.uuid, updatedUserData)
+        .then(() => {
+          // - on success
+          console.log(
+            "🎯event-log:  📝UserForm/profile-form/onSubmit:  ✔ Success"
+          );
+          setIsLoading(false); //- Reset loading state
+          setSubmitted(true); //- Set achieved state
+
+          setTimeout(() => {
+            setSubmitted(false); //- Reset achieved state after a while
+          }, 2000);
+        })
+        .catch((error) => {
+          console.log(
+            "🎯event-log:  📝UserForm/profile-form/onSubmit:  ❌ Something went wrong, error: ",
+            error
+          );
+          setIsLoading(false); //- Reset loading state
+        });
+    }
   }
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full">
-        {/* CAREER AND LANGUAGE */}
-        <div className="flex flex-col justify-center items-center md:justify-normal md:flex-row gap-5 md:gap-24">
+      <form
+        onSubmit={form.handleSubmit((data) => {
+          console.log(
+            "🎯event_log:  📝-form submitted with following form-data : ",
+            data
+          );
+          onSubmit(data);
+        })}
+        className="space-y-8"
+      >
+        {/* Bio  */}
+        <FormField
+          control={form.control}
+          name="bio"
+          render={({ field }) => (
+            <FormItem className="space-y-1">
+              <div className="flex flex-col text-start pb-2">
+                <FormLabel className="text-start justify-start">Bio</FormLabel>
+                <FormDescription>
+                  Give a brief description of yourself and your learning journey
+                </FormDescription>
+              </div>
+              <FormControl className="flex items-start sm:text-start">
+                <Textarea
+                  placeholder="Hello world, allow me to introduce myself..."
+                  className="resize-none"
+                  {...field}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        {/* Language & location */}
+        <div className="flex flex-col sm:flex-row gap-3 md:gap-10 mr-16">
           <FormField
             control={form.control}
-            name="career_title"
+            name="home_lang"
             render={({ field }) => (
-              <FormItem className="flex flex-col rounded-lg border p-4 space-y-1 w-[270px] ">
-                <FormLabel>Career Title</FormLabel>
-                <FormDescription>
-                  Pick your current or dream title.
-                </FormDescription>
+              <FormItem className="flex flex-col rounded-lg border p-4">
+                <FormLabel>Language</FormLabel>
                 <Popover>
                   <PopoverTrigger asChild>
                     <FormControl>
@@ -109,8 +231,8 @@ export function ProfileForm() {
                         )}
                       >
                         {field.value
-                          ? careerList.find(
-                              (language) => language.label === field.value
+                          ? home_languages.find(
+                              (language) => language.value === field.value
                             )?.label
                           : "Select language"}
                         <CheckCheckIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
@@ -118,27 +240,27 @@ export function ProfileForm() {
                     </FormControl>
                   </PopoverTrigger>
                   <PopoverContent className="w-[200px] p-0">
-                    <Command className=" overflow-y-auto max-h-[420px]">
+                    <Command>
                       <CommandInput placeholder="Search language..." />
                       <CommandEmpty>No language found.</CommandEmpty>
-                      <CommandGroup className="overflow-y-auto max-h-[300px]">
-                        {careerList.map((career) => (
+                      <CommandGroup>
+                        {home_languages.map((language) => (
                           <CommandItem
-                            value={career.label}
-                            key={career.label}
+                            value={language.label}
+                            key={language.value}
                             onSelect={() => {
-                              form.setValue("career_title", career.label);
+                              form.setValue("home_lang", language.value);
                             }}
                           >
                             <CheckIcon
                               className={cn(
                                 "mr-2 h-4 w-4",
-                                career.label === field.value
+                                language.value === field.value
                                   ? "opacity-100"
                                   : "opacity-0"
                               )}
                             />
-                            {career.label}
+                            {language.label}
                           </CommandItem>
                         ))}
                       </CommandGroup>
@@ -151,13 +273,10 @@ export function ProfileForm() {
           />
           <FormField
             control={form.control}
-            name="programming_lang"
+            name="location"
             render={({ field }) => (
-              <FormItem className="flex flex-col rounded-lg border p-4 space-y-1">
-                <FormLabel>Favorite Language</FormLabel>
-                <FormDescription>
-                  Pick your most proficient language.
-                </FormDescription>
+              <FormItem className="flex flex-col rounded-lg border p-4">
+                <FormLabel>Location</FormLabel>
                 <Popover>
                   <PopoverTrigger asChild>
                     <FormControl>
@@ -171,36 +290,36 @@ export function ProfileForm() {
                         )}
                       >
                         {field.value
-                          ? programmingLanguagesList.find(
-                              (lang) => lang.label === field.value
+                          ? locations.find(
+                              (country) => country.value === field.value
                             )?.label
-                          : "Select language"}
+                          : "Select country"}
                         <CheckCheckIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                       </Button>
                     </FormControl>
                   </PopoverTrigger>
                   <PopoverContent className="w-[200px] p-0">
                     <Command className=" overflow-y-auto max-h-[420px]">
-                      <CommandInput placeholder="Search language..." />
-                      <CommandEmpty>No language found.</CommandEmpty>
-                      <CommandGroup>
-                        {programmingLanguagesList.map((lang) => (
+                      <CommandInput placeholder="Search country..." />
+                      <CommandEmpty>No country found.</CommandEmpty>
+                      <CommandGroup className="overflow-y-auto max-h-[300px]">
+                        {locations.map((country) => (
                           <CommandItem
-                            value={lang.label}
-                            key={lang.label}
+                            value={country.label}
+                            key={country.value}
                             onSelect={() => {
-                              form.setValue("programming_lang", lang.label);
+                              form.setValue("location", country.value);
                             }}
                           >
                             <CheckIcon
                               className={cn(
                                 "mr-2 h-4 w-4",
-                                lang.label === field.value
+                                country.value === field.value
                                   ? "opacity-100"
                                   : "opacity-0"
                               )}
                             />
-                            {lang.label}
+                            {country.label}
                           </CommandItem>
                         ))}
                       </CommandGroup>
@@ -212,167 +331,124 @@ export function ProfileForm() {
             )}
           />
         </div>
-        {/* Career Level */}
-        <FormField
-          control={form.control}
-          name="career_level"
-          render={({ field: { value, onChange } }) => (
-            <FormItem className="space-y-1">
-              <div className="flex flex-col items-center md:items-start pb-2">
-                <FormLabel>Professional Stage</FormLabel>
+        {/* Connections */}
+        <div className="flex flex-col gap-2">
+          <FormField
+            control={form.control}
+            name="urls.github"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Connections</FormLabel>
                 <FormDescription>
-                  Indicate your current professional stage.
+                  Connect with your community and make your profile stand out.
                 </FormDescription>
-              </div>
-
-              <FormControl className="mx-4 w-11/12">
-                <Slider
-                  min={0}
-                  max={100}
-                  step={1}
-                  defaultValue={[defaultValues?.career_level || 0]}
-                  onValueChange={(vals) => {
-                    onChange(vals[0]);
-                  }}
-                />
-              </FormControl>
-
-              <div className="flex justify-between text-xs text-muted-foreground ml-1 sm:pr-8 md:pr-10 lg:pr-16 xl:pr-12">
-                <div className="flex flex-col text-center">
-                  <p>Aspiring</p>
-                  <p className="w-full">Dev</p>
+                <div className="flex flex-row justify-between items-center gap-3">
+                  <Github className="text-devready-green" size={20} />
+                  <FormControl className="w-full">
+                    <Input placeholder="GitHub profile" {...field} />
+                  </FormControl>
                 </div>
-                <div className="flex flex-col items-center text-center">
-                  <p>Junior</p>
-                  <p>Dev</p>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="urls.linkedin"
+            render={({ field }) => (
+              <FormItem>
+                <div className="flex flex-row justify-between items-center gap-3">
+                  <Linkedin className="text-devready-green" size={20} />
+                  <FormControl className="w-full">
+                    <Input placeholder="LinkedIn profile" {...field} />
+                  </FormControl>
                 </div>
-                <div className="flex flex-col items-center text-center">
-                  <p>Mid-Level</p>
-                  <p>Dev</p>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="urls.portfolio"
+            render={({ field }) => (
+              <FormItem>
+                <div className="flex flex-row justify-between items-center gap-3">
+                  <LinkIcon className="text-devready-green" size={20} />
+                  <FormControl className="w-full">
+                    <Input placeholder="Portfolio website" {...field} />
+                  </FormControl>
                 </div>
-                <div className="flex flex-col items-end text-center">
-                  <p>Senior</p>
-                  <p className="w-full">Dev</p>
-                </div>
-              </div>
-
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        {/* Experience level */}
-        <FormField
-          control={form.control}
-          name="experience_level"
-          render={({ field: { value, onChange } }) => (
-            <FormItem className="space-y-1">
-              <div className="flex flex-col items-center md:items-start pb-2">
-                <FormLabel>Experience Level</FormLabel>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+        {/* Projects */}
+        <div className="flex flex-col gap-2">
+          <FormField
+            control={form.control}
+            name="projects.capstone"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Projects</FormLabel>
                 <FormDescription>
-                  Indicate your experience in years of work.
+                  Showcase your most proudest projects.
                 </FormDescription>
-              </div>
-
-              <FormControl className="mx-4 w-11/12">
-                <Slider
-                  min={0}
-                  max={100}
-                  step={1}
-                  defaultValue={[defaultValues?.experience_level || 0]}
-                  onValueChange={(vals) => {
-                    onChange(vals[0]);
-                  }}
-                />
-              </FormControl>
-
-              <div className="flex justify-between text-xs text-muted-foreground ml-1 sm:pr-8 md:pr-10 lg:pr-16 xl:pr-12">
-                <div className="flex flex-col text-center">
-                  <p>&gt;6</p>
-                  <p className="w-full">Months</p>
+                <div className="flex flex-row justify-between items-center gap-3">
+                  <Trophy className="text-devready-green" size={20} />
+                  <FormControl className="w-full">
+                    <Input placeholder="Capstone project" {...field} />
+                  </FormControl>
                 </div>
-                <div className="flex flex-col items-center text-center">
-                  <p>1</p>
-                  <p>Year</p>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="projects.additional"
+            render={({ field }) => (
+              <FormItem>
+                <div className="flex flex-row justify-between items-center gap-3">
+                  <Medal className="text-devready-green" size={20} />
+                  <FormControl className="w-full">
+                    <Input placeholder="Additional project" {...field} />
+                  </FormControl>
                 </div>
-                <div className="flex flex-col items-center text-center">
-                  <p>3</p>
-                  <p>Years</p>
-                </div>
-                <div className="flex flex-col items-end text-center">
-                  <p>5+</p>
-                  <p className="w-full">Years</p>
-                </div>
-              </div>
-
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        {/* Skills 🎯 */}
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+        {/* Switches */}
         <FormField
           control={form.control}
-          name="skills_list"
-          render={({ field: { value, onChange } }) => (
-            <FormItem className="space-y-1">
-              <div className="flex flex-col items-center text-center md:text-start md:items-start pb-2">
-                <FormLabel>Pick your proficient skills</FormLabel>
+          name="ztm_student"
+          render={({ field }) => (
+            <FormItem className="flex flex-row items-center justify-between rounded-lg border p-3">
+              <div className="">
+                <FormLabel className="text-base">ZTM Alumni</FormLabel>
                 <FormDescription>
-                  Pick your most proficient skill set
+                  Are you currently a ZTM student or alumni?
                 </FormDescription>
               </div>
               <FormControl>
-                <ToggleGroup
-                  size={"sm"}
-                  variant="skill"
-                  type="multiple"
-                  className="flex flex-row flex-wrap"
-                  aria-label="Skills list"
-                >
-                  {skillsList.map((skill) => (
-                    <ToggleGroupItem
-                      key={skill.label}
-                      value={skill.label.toLowerCase()}
-                      aria-label={skill.label}
-                      //🎯 need to update onCLick functionality - handle form update
-                      onClick={() => handleSkillList}
-                    >
-                      {skill.label}
-                    </ToggleGroupItem>
-                  ))}
-                </ToggleGroup>
-              </FormControl>
-            </FormItem>
-          )}
-        />
-        {/* Bio  */}
-        <FormField
-          control={form.control}
-          name="bio"
-          render={({ field }) => (
-            <FormItem className="space-y-1">
-              <div className="flex flex-col items-center text-center md:text-start md:items-start pb-2">
-                <FormLabel>Bio</FormLabel>
-                <FormDescription>
-                  Give a brief description of yourself and your learning journey
-                </FormDescription>
-              </div>
-              <FormControl className="flex items-center text-center sm:items-start sm:text-start">
-                <Textarea
-                  placeholder="Tell us a little bit about yourself"
-                  className="resize-none"
-                  {...field}
+                <Switch
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
                 />
               </FormControl>
-              <FormMessage />
             </FormItem>
           )}
         />
+
         <Button
           type="submit"
           variant={"devfill"}
+          disabled={isLoading}
           className="rounded-lg text-sm md:text-sm p-2"
         >
-          Update profile
+          {isLoading ? <Spinner /> : submitted ? <Check /> : "Update profile"}
         </Button>
       </form>
     </Form>

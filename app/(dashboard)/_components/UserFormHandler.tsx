@@ -8,7 +8,34 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 
-import { userProfileForms } from "@/constants/navigation-index";
+import { AccountForm } from "./forms/account-form";
+import { ProfileForm } from "./forms/profile-form";
+import { GoalsForm } from "./forms/goals-form";
+import { NotificationsForm } from "./forms/notification-form";
+
+interface FormObject {
+  component: React.ReactNode;
+  description: string;
+}
+
+const userProfileForms: Record<string, FormObject> = {
+  Account: {
+    component: <AccountForm />,
+    description: "Configure your account.",
+  },
+  Profile: {
+    component: <ProfileForm />,
+    description: "Configure how you receive notifications.",
+  },
+  Notifications: {
+    component: <NotificationsForm />,
+    description: "Configure how you receive notifications.",
+  },
+  Goals: {
+    component: <GoalsForm />,
+    description: "Configure how you receive display.",
+  },
+};
 
 export const UserFormHandler = () => {
   const [currentForm, setCurrentForm] = useState("Account");
@@ -18,10 +45,10 @@ export const UserFormHandler = () => {
       <SheetHeader>
         <SheetTitle>Edit your profile</SheetTitle>
         <SheetDescription>
-          Make changes to your profile here. Click save when youre done.
+          Make changes to your profile here. Click update when youre done.
         </SheetDescription>
         {/* Handle Selecting Forms */}
-        <div className="h-full overflow-y-auto flex space-y-8 flex-row lg:space-x-12 lg:space-y-0 md:px-4 md:py-3">
+        <div className="h-full overflow-y-auto flex space-y-8 pl-5 flex-row lg:space-x-12 lg:space-y-0 md:px-4 md:py-3">
           <aside className="-mx-3 lg:w-1/5 flex space-x-2 flex-row items-center justify-start sm:justify-normal sm:flex-row overflow-x-aut scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-200">
             {Object.keys(userProfileForms).map((key) => (
               <Button

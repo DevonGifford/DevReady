@@ -20,15 +20,13 @@ type Data = Record<string, any>;
 // 👇 Ensure the db object typing is Firestore
 const firestore: Firestore = db;
 
-// ✅ HELPER FUNCTION: creates/updates a specified document in a specified collection
+// ✅ HELPER FUNCTION: updates a specified document in a specified collection - or else breaks
 export const updateDocument = async (
   collectionName: CollectionName,
   documentId: DocumentId,
   data: Data
 ) => {
-  console.log(
-    "🎯event_log:  🔥utils/firestore/updateDocument/updateDocument:  💢 Triggered"
-  );
+  console.log("🎯event_log:  🔥utils/firestore/updateDocument:  💢 Triggered");
   const collectionRef = collection(firestore, collectionName);
   const docRef: DocumentReference<Data> = doc(collectionRef, documentId);
 
@@ -38,17 +36,20 @@ export const updateDocument = async (
     // - check if user doc exists and update or else create new
     if (docSnapshot.exists()) {
       await updateDoc(docRef, data);
-      console.log(
-        `🎯event_log:  🔥utils/firestore/updateDocument:  ✔ Success:  Document ${documentId} updated successfully in collection ${collectionName}!`
-      );
     } else {
-      await setDoc(docRef, data);
-      console.log(
-        `🎯event_log:  🔥utils/firestore/updateDocument:  ✔ Success:  Document ${documentId} created successfully in collection ${collectionName}!`
+      // -notfound case
+      console.error(
+        `🎯event_log:  🔥utils/firestore/updateDocument:  ❌ Error:  Document ${documentId} not found in collection ${collectionName}!`
       );
+      return false;
     }
+    // -success case
+    console.log(
+      `🎯event_log:  🔥utils/firestore/updateDocument:  ✔ Success:  Document ${documentId} updated successfully in collection ${collectionName}!`
+    );
     return true;
   } catch (error: any) {
+    // -error case
     console.error(
       `🎯event_log:  🔥utils/firestore/updateDocument:  ❌ Error:  Error updating/creating document ${documentId} in collection ${collectionName}: `,
       error
@@ -90,8 +91,8 @@ export const createUserDataProcess = async (
       //-manipulate the data
       const defaultUserData: Partial<UserProfile> = {
         ...userData,
-        createdAt: new Date().toISOString(),
-        lastLogin: new Date().toISOString(),
+        created_at: new Date().toISOString(),
+        last_login: new Date().toISOString(),
       };
       const mergedUserData = mergeUserDataWithDefaults(defaultUserData);
       console.log(

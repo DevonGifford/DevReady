@@ -217,3 +217,93 @@ This project is licensed under the [MIT License](🎯).
 
 <br>
  
+
+
+ 
+
+
+
+ONBOARDING = account
+-----------
+  username: "string",
+  userimage: "link_to_firebase_saved_image"   (upload functionality)
+  
+  career_title: string,
+  programming_lang: string,
+  
+  career_level: number,  (range)
+  experience_level: number, (range)
+  
+  skills_list: [],
+  
+SUBMIT BUTTON || SKIP BUTTON
+------------------------------------------------------------------------------
+
+
+
+
+
+
+
+ACCOUNT FORM *name change
+----------
+        * username: "johndoe123",
+  ADD     userimage: "link_to_firebase_saved_image",
+          career_title: null,
+          programming_lang: null,
+          career_level: 0,
+          experience_level: 0,
+  FIX     skills_list: [],
+
+SUBMIT BUTTON || RESET PASSWORD
+--------------------------------------------------------------------------
+
+
+
+PROFILE FORM *name change
+-----------
+        * bio: null,
+          home_lang: "English",
+          location: "",
+  FIX     age: 29,      //📝 slider - because why not  
+          urls: {github: "", linkedin: "", website: ""},
+          ztm_student: true,
+
+SUBMIT BUTTON 
+--------------------------------------------------------------------------
+  REMOVE  star_mentor
+  REMOVE  email
+
+
+
+
+GOALS FORM
+------
+- achieved and saved goals array
+- current goal object 
+- update user document typing
+- update firebase document 
+- should only be able to have one goal at a given moment 
+- submit button should read update goal 
+- date set should render pretty 
+- should have an achieved button - saves the goal 
+YOU SHOULD ONLY HAVE ONE GOAL AT A GIVEN MOMENT.
+
+
+
+NOTIFICATIONS 
+------------ 
+- Remove notify me aboutsection 
+- Add turn on hide toast notifications 
+
+- Refactor headings :  create seperate sections for
+  - LIVE NOTIFICATIONS
+    - general toast notifications (notify me about...)
+    - event logs   
+  - EMAIL NOTIFICATIONS
+    - communications 
+    - marketings 
+    - news letter
+  - MOBILE DIFF
+    - push notifications
+    - use differnet settings for mobile devices 
