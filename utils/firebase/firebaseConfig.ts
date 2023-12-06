@@ -3,6 +3,7 @@ import { initializeApp, getApps } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { EmailAuthProvider } from "firebase/auth";
 import { getAuth } from "firebase/auth";
+import { getStorage } from "firebase/storage";
 
 const firebaseConfig = {
     apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -19,7 +20,7 @@ let app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
 const provider = new EmailAuthProvider();
 const db = getFirestore(app);
 const auth = getAuth(app);
+const storage = getStorage(app);
 
-export { provider, auth };
+export { provider, auth, storage };
 export default db;
-
