@@ -1,57 +1,137 @@
 import {
-  collection,
-  addDoc,
-  serverTimestamp,
-  updateDoc,
-  Firestore,
-  DocumentReference,
-  doc,
-  DocumentSnapshot,
-  getDoc,
-} from "firebase/firestore";
-import {
   getDownloadURL,
   ref,
   updateMetadata,
   uploadBytes,
 } from "firebase/storage";
+import { storage } from "../firebase/firebaseConfig";
+import { updateUserImage } from "./userCollectionUtils";
 
-import db, { storage } from "../firebase/firebaseConfig";
-import { UserProfile } from "@/types/UserProfile";
-
-type Data = Record<string, any>;
 
 /**
- * Uploads the file to Firebase Storage.
+ * Soley uploads the file to Firebase Storage.
  * @param file Blob or ArrayBuffer to upload.
  * @param fileName Name for the uploaded file.
  * @returns Promise with the public URL of the uploaded file.
  */
-export const uploadRaw = async (file: Blob | ArrayBuffer, fileName: string) => {
+export const onlyUploadImage = async (
+  fileName: string,
+  file: Blob | ArrayBuffer
+) => {
   try {
-    console.log("uploadRaw  💢 Triggered");
+    console.log(
+      "🎯event_log:  🔥utils/firestore/onlyUploadImage:  💢 Triggered"
+    );
 
-    //- Upload image.
     const imageRef = ref(storage, `images/${fileName}`);
     const uploadImage = await uploadBytes(imageRef, file);
 
-    //- Create + upload file metadata.
     const newMetadata = {
       cacheControl: "public,max-age=2629800000", // 1 month
       contentType: uploadImage.metadata.contentType,
     };
     await updateMetadata(imageRef, newMetadata);
 
-    //- Get the image URL.
     const publicImageUrl = await getDownloadURL(imageRef);
+    console.log(
+      "🎯event_log:  🔥utils/firestore/onlyUploadImage:  ✔ Success - Image uploaded. Public URL:",
+      publicImageUrl
+    );
 
-    //- Success
-    console.log("uploadRaw  ✔  Success");
     return publicImageUrl;
   } catch (error) {
-    //- Error
-    console.log("uploadRaw  ❌  Error", error);
-    // 🎯to-do-list: Return something useful
+    console.error(
+      "🎯event_log:  🔥utils/firestore/onlyUploadImage:  ❌ Error - Image upload failed.",
+      error
+    );
+    throw error;
+  }
+};
+
+/**
+ * This will upload userimage to firebase and create a reference to image in users doc
+ * @param fileName Name for the uploaded file.
+ * @param file Blob or ArrayBuffer to upload.
+ * @param userDocId The users uuid.
+ * @returns Promise with the public URL of the uploaded file.
+ */
+export const uploadImageProcess = async (
+  fileName: string,
+  file: Blob | ArrayBuffer,
+  userDocId: string
+) => {
+  console.log(
+    "🎯event_log:  🔥utils/firestore/uploadImageProcess:  💢 Triggered"
+  );
+  try {
+    //👇 HANDLE UPLOADING IMAGE:
+    console.log(
+      "🎯event_log:  🔥utils/firestore/uploadImageProcess:  Uploading Image..."
+    );
+    let publicImageUrl = "";
+    const imageRef = ref(storage, `images/${fileName}`);
+
+    try {
+      const uploadImage = await uploadBytes(imageRef, file);
+
+      //- Create + upload file metadata.
+      try {
+        const newMetadata = {
+          cacheControl: "public,max-age=2629800000", // 1 month
+          contentType: uploadImage.metadata.contentType,
+        };
+        await updateMetadata(imageRef, newMetadata);
+
+        //👇 HANDLE UPDATING THE USER-DOCUMENT WITH IMAGE REFERENCE:
+        try {
+          //- Get the image URL.
+          publicImageUrl = await getDownloadURL(imageRef);
+          console.log(
+            "🎯event_log:  🔥utils/firestore/uploadImageProcess:  ✔  Successfully uploaded image to storage - publicImageUrl: ",
+            publicImageUrl
+          );
+          //- Update user document
+          console.log(
+            "🎯event_log:  🔥utils/firestore/uploadImageProcess:  Updating user document..."
+          );
+
+          console.log(
+            "[TEMP]🎯event_log:  🔥utils/firestore/uploadImageProcess:  ",
+            "Updating the following - ",
+            "userDocId: ",
+            userDocId,
+            "PublicImageUrl: ",
+            publicImageUrl
+          );
+          await updateUserImage(userDocId, publicImageUrl);
+        } catch (getUrlError) {
+          console.error(
+            "🎯event_log:  🔥utils/firestore/uploadImageProcess:  ❌ Error - Failed to get image URL.",
+            getUrlError
+          );
+          throw getUrlError;
+        }
+      } catch (updateMetaError) {
+        console.error(
+          "🎯event_log:  🔥utils/firestore/uploadImageProcess:  ❌ Error - Failed to update image metadata.",
+          updateMetaError
+        );
+        throw updateMetaError;
+      }
+    } catch (uploadError) {
+      console.error(
+        "🎯event_log:  🔥utils/firestore/uploadImageProcess:  ❌ Error - Image upload failed.",
+        uploadError
+      );
+      throw uploadError;
+    }
+
+    return publicImageUrl;
+  } catch (error) {
+    console.error(
+      "🎯event_log:  🔥utils/firestore/uploadImageProcess:  ❌ Error - Image upload process failed.",
+      error
+    );
     throw error;
   }
 };

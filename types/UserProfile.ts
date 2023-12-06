@@ -67,7 +67,7 @@ export const defaultUserProfile: UserProfile = {
 
   account: {
     username: "testing account",
-    userimage: "link_to_firebase_saved_image",
+    userimage: null,
     career_title: null,
     programming_lang: null,
     career_level: 0,

@@ -8,7 +8,7 @@ import { useModalContext } from "@/components/providers/ModalReducerProvider";
 
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import {
   DropdownMenu,
@@ -24,8 +24,10 @@ import {
   Trophy,
 } from "lucide-react";
 import { useCustomToast } from "@/lib/useCustomToast";
+import { useUserContext } from "@/components/providers/UserProvider";
 
 export const UserDropdown = () => {
+  const { userProfile } = useUserContext();
   const { modal, dispatch } = useModalContext();
   const customToast = useCustomToast();
 
@@ -33,12 +35,15 @@ export const UserDropdown = () => {
   //const { destruct, user, data } = useUserDataDevon();
 
   // 🎯 to-do-list : handle user Image (temp solution)
-  const userImage = "/profile-placeholder-image.svg" || "real image";
+  const userImage =
+    userProfile?.account.userimage || "/profile-placeholder-image.svg";
+  console.log("🎈userimage", userImage);
+  console.log("🎈userprofile", userProfile);
 
   //👇🎯 testing toast notifications
   const ztmTest = () => {
     toast.success("This is a Test notification 🎯🧪");
-    customToast("Hello?")
+    customToast("Hello?");
   };
 
   return (
@@ -47,11 +52,11 @@ export const UserDropdown = () => {
         <div role="button" className="flex items-center text-base">
           <div className="gap-x-1 flex items-center max-w-[200px]">
             <span className="text-start font-medium line-clamp-1">
-              {/* update 🎯 */}
-              Devon Gifford
+              {userProfile?.account.username}
             </span>
             <Avatar className="h-5 w-5">
-              <AvatarImage src={userImage} />
+              <AvatarImage src={userImage} alt="profile-picture" />
+              <AvatarFallback>ZTM</AvatarFallback>
             </Avatar>
             <ChevronsRight className="rotate-90 text-muted-foreground h-4 w-4" />
           </div>
@@ -74,11 +79,10 @@ export const UserDropdown = () => {
           <div className="space-y-1 p-2">
             <p className="text-sm line-clamp-1">
               {/* update 🎯 */}
-              Devon Gifford
+              {userProfile?.account.username}
             </p>
             <p className="text-xs font-medium leading-none text-muted-foreground">
-              {/* update 🎯 */}
-              devongifford@outlook.com
+              {userProfile?.email}
             </p>
           </div>
           <div className="rounded-md p-1">

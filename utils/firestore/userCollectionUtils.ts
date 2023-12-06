@@ -20,6 +20,61 @@ type Data = Record<string, any>;
 // 👇 Ensure the db object typing is Firestore
 const firestore: Firestore = db;
 
+// ✅ HELPER FUNCTION: updates the userimage field in a specified document
+export const updateUserImage = async (
+  documentId: DocumentId,
+  newImageUrl: string
+): Promise<boolean> => {
+  
+  console.log("🎯event_log:  🔥utils/firestore/updateUserImage:  💢 Triggered");
+
+  const collectionName: CollectionName = "users";
+  const collectionRef = collection(firestore, collectionName);
+  const docRef: DocumentReference<Data> = doc(collectionRef, documentId);
+
+  try {
+    const docSnapshot: DocumentSnapshot<Data> = await getDoc(docRef);
+
+    //- Check if user doc exists
+    if (docSnapshot.exists()) {
+      //- Get the existing data
+      const existingData = docSnapshot.data();
+      console.log("🎯event_log:  🔥utils/firestore/updateUserImage:  THIS IS THE OG DATA FROM DOC", existingData);
+
+      //- Update data with new imageURL
+      const updatedData = {
+        ...existingData,
+        account: {
+          ...existingData.account,
+          userimage: newImageUrl,
+        },
+      };
+
+      console.log("🎯event_log:  🔥utils/firestore/updateUserImage:  THIS IS THE UPDATED DATA TO BE SET IN DOC", updatedData);
+
+      //- Update doc
+      await updateDoc(docRef, updatedData);
+      console.log(
+        `🎯event_log:  🔥utils/firestore/updateUserImage:  ✔ User image updated successfully for document ${documentId}`
+      );
+      return true;
+    } else {
+      //- Document not found
+      console.error(
+        `🎯event_log:  🔥utils/firestore/updateUserImage:  ❌ Error: Document ${documentId} not found`
+      );
+      return false;
+    }
+  } catch (error: any) {
+    //- Error case
+    console.error(
+      `🎯event_log:  🔥utils/firestore/updateUserImage:  ❌ Error updating user image for document ${documentId}:`,
+      error
+    );
+    return false;
+  }
+};
+
 // ✅ HELPER FUNCTION: updates a specified document in a specified collection - or else breaks
 export const updateDocument = async (
   collectionName: CollectionName,
