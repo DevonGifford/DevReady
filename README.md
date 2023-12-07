@@ -252,6 +252,8 @@ While the authentication pages are already integrated, prioritizing the onboardi
 
 
 
+
+
 # CURRENT TICKET :  Implement User Onboarding Process  #20
 
 https://github.com/DevonGifford/ZtmReady--PortfolioProject/issues/20
@@ -305,6 +307,95 @@ As always, we prioritize thorough testing and validation of functionalities for 
 
 # My Notes During dev: 
 
-### 1. 
 
-### 2. 
+---
+
+### Onboarding Components
+**Files:**  `app\(auth)\_components`
+
+1. **`welcome-onboarding.tsx`**:
+   - **Purpose:** Create a welcoming experience for new users, collecting:
+     - Username
+     - Dream title
+
+2. **`data-onboarding.tsx`**:
+   - **Purpose:** Collect basic user data including:
+     - Current career level
+     - Years of experience
+     - Input fields for user information
+
+3. **`image-onboarding.tsx`**:
+   - **Purpose:** Manage user profile pictures:
+     - Provide default options
+     - Enable user uploads or selections for profile visuals
+
+**Note Data Utilization:**
+Collected data will personalize the user’s app experience, updating user context and setting initial SR (secret rating).
+
+---
+
+### Handling Routing and State
+**File:** `app\(auth)\(routes)\onboarding\page.tsx`
+
+Implemented conditional rendering and state storage within the UI to manage routing efficiently.
+
+Snippet Example:
+```tsx
+// Render 'go back to previous form' button or render first form
+{router.query.type ? (
+    <button onClick={() => router.back()}>
+        <ArrowLeftIcon /> Go Back
+    </button>
+) : (
+    <Intro key="intro" />
+)}
+
+// Conditional rendering based on router query
+{router.query.type === "data-onboarding" && <DataOnboardingPage />}
+{router.query.type === "image-onboarding" && <ImageOnboardingPage />}
+{router.query.type === "welcome-onbaording" && <WelcomeOnboardingPage />}
+```
+
+---
+
+### Logic for User State Handling
+
+Outlined steps to manage user state during the onboarding process:
+
+1. **Create Basic Onboarding Pages**:
+    - Develop necessary onboarding pages.
+    - Store entered information (e.g., username, dream title) in local state using `useState`.
+    - Create placeholder functions for form submissions.
+
+2. **Navigating to Data Collection Page**:
+    - Conditionally render the appropriate onboarding page based on user interaction.
+    - Update URL to include collected data on user interaction (e.g., `/onboarding/data?username=John&dreamTitle=Adventure`).
+
+3. **Retrieving Data on Data Collection Page**:
+    - Retrieve parameters from URL on `DataOnboardingPage` using `router.query`.
+    - Extract necessary data (username, dream title, etc.) for personalizing the user’s experience.
+
+4. **Handling Form Submissions (Data Collection Page)**:
+    - Update local state for user inputs (e.g., career level, years of experience) on form interaction.
+    - Update URL with new data on form submission (e.g., `/onboarding/image?username=John&careerLevel=Intermediate`).
+
+5. **Persisting Data (DB and Global State)**:
+    - Save data permanently (Firestore database).
+    - Update userContext with new data.
+
+---
+
+### Additional Changes and Updates
+
+- **Creating Constants for Onboarding Process**:  
+  `constants\onboarding-index.ts`
+  
+- **Updating Register to Route to Onboarding**:  
+  Implemented logic to direct users to the onboarding process.
+  
+- **Incorporating Framer Motion for Smooth Animations**:
+  *provide additional details later.*
+
+
+
+
