@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { auth } from "@/utils/firebase/firebaseConfig";
+import { auth } from "@/utils/firebase/firebase.config";
 import { Spinner } from "../Spinner";
 import {
   createUserWithEmailAndPassword,
@@ -10,7 +10,7 @@ import {
 import {
   createUserDataProcess,
   updateUserLoginTime,
-} from "@/utils/firestore/userCollectionUtils";
+} from "@/utils/firebase/firestore.utils";
 
 interface UserType {
   email: string | null;
