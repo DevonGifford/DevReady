@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
-import db, { auth } from "@/utils/firebase/firebaseConfig";
+import db, { auth } from "@/utils/firebase/firebase.config";
 import {
   DocumentReference,
   DocumentSnapshot,
@@ -76,7 +76,14 @@ export const UserContextProvider = ({
     return () => unsubscribe();
   }, []);
 
-  // ✅  HANDLES UPDATING USERS DOC - checks if doc exists, updates the doc & updates state
+  /**
+   * ✅ HANDLES UPDATING USER-DOC:
+   * Handles updating user document by checking if the document exists, updating it,
+   * and updating the state accordingly.
+   * @param {string} documentId - The ID of the document to update.
+   * @param {Partial<UserProfile>} newData - The new data to update in the user profile.
+   * @returns {Promise<void>} A Promise that resolves once the update process completes.
+   */
   const updateUserDataProcess = async (
     documentId: string,
     newData: Partial<UserProfile>
@@ -125,7 +132,13 @@ export const UserContextProvider = ({
     }
   };
 
-  // ✅  HANDLES FETCHING USER FIRESTORE DOC - checks if doc exists, sets to state
+  // 
+  /**
+   * ✅ HANDLES FETCHING USER-DOC 
+   * Handles fetching user firestore document by checking if the document exists and sets it to state.
+   * @param {string} userId - The ID of the user whose data is being fetched.
+   * @returns {Promise<void>} A Promise that resolves once the fetch process completes.
+   */
   const fetchUserDataProcess = async (userId: string) => {
     console.log(
       "🎯event_log:  🎭UserContext/fetchUserDataProcess :  💢 Triggered"

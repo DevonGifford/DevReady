@@ -4,51 +4,11 @@ import {
   updateMetadata,
   uploadBytes,
 } from "firebase/storage";
-import { storage } from "../firebase/firebaseConfig";
-import { updateUserImage } from "./userCollectionUtils";
-
-
-/**
- * Soley uploads the file to Firebase Storage.
- * @param file Blob or ArrayBuffer to upload.
- * @param fileName Name for the uploaded file.
- * @returns Promise with the public URL of the uploaded file.
- */
-export const onlyUploadImage = async (
-  fileName: string,
-  file: Blob | ArrayBuffer
-) => {
-  try {
-    console.log(
-      "🎯event_log:  🔥utils/firestore/onlyUploadImage:  💢 Triggered"
-    );
-
-    const imageRef = ref(storage, `images/${fileName}`);
-    const uploadImage = await uploadBytes(imageRef, file);
-
-    const newMetadata = {
-      cacheControl: "public,max-age=2629800000", // 1 month
-      contentType: uploadImage.metadata.contentType,
-    };
-    await updateMetadata(imageRef, newMetadata);
-
-    const publicImageUrl = await getDownloadURL(imageRef);
-    console.log(
-      "🎯event_log:  🔥utils/firestore/onlyUploadImage:  ✔ Success - Image uploaded. Public URL:",
-      publicImageUrl
-    );
-
-    return publicImageUrl;
-  } catch (error) {
-    console.error(
-      "🎯event_log:  🔥utils/firestore/onlyUploadImage:  ❌ Error - Image upload failed.",
-      error
-    );
-    throw error;
-  }
-};
+import { storage } from "./firebase.config";
+import { updateUserImage } from "./firestore.utils";
 
 /**
+ * ✅ UPLOAD IMAGE + UPDATE USER DOCUMENT
  * This will upload userimage to firebase and create a reference to image in users doc
  * @param fileName Name for the uploaded file.
  * @param file Blob or ArrayBuffer to upload.
@@ -130,6 +90,48 @@ export const uploadImageProcess = async (
   } catch (error) {
     console.error(
       "🎯event_log:  🔥utils/firestore/uploadImageProcess:  ❌ Error - Image upload process failed.",
+      error
+    );
+    throw error;
+  }
+};
+
+/**
+ * ✅ UPLOAD AN IMAGE
+ * - used in development
+ * Soley uploads the file to Firebase Storage.
+ * @param file Blob or ArrayBuffer to upload.
+ * @param fileName Name for the uploaded file.
+ * @returns Promise with the public URL of the uploaded file.
+ */
+export const onlyUploadImage = async (
+  fileName: string,
+  file: Blob | ArrayBuffer
+) => {
+  try {
+    console.log(
+      "🎯event_log:  🔥utils/firestore/onlyUploadImage:  💢 Triggered"
+    );
+
+    const imageRef = ref(storage, `images/${fileName}`);
+    const uploadImage = await uploadBytes(imageRef, file);
+
+    const newMetadata = {
+      cacheControl: "public,max-age=2629800000", // 1 month
+      contentType: uploadImage.metadata.contentType,
+    };
+    await updateMetadata(imageRef, newMetadata);
+
+    const publicImageUrl = await getDownloadURL(imageRef);
+    console.log(
+      "🎯event_log:  🔥utils/firestore/onlyUploadImage:  ✔ Success - Image uploaded. Public URL:",
+      publicImageUrl
+    );
+
+    return publicImageUrl;
+  } catch (error) {
+    console.error(
+      "🎯event_log:  🔥utils/firestore/onlyUploadImage:  ❌ Error - Image upload failed.",
       error
     );
     throw error;

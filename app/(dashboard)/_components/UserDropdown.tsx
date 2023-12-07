@@ -3,6 +3,8 @@
 import Link from "next/link";
 import toast from "react-hot-toast";
 import { SidebarItem } from "./SidebarItem";
+import { useUserContext } from "@/components/providers/UserProvider";
+import { useCustomToast } from "@/lib/useCustomToast";
 import { UserFormHandler } from "./UserFormHandler";
 import { useModalContext } from "@/components/providers/ModalReducerProvider";
 
@@ -23,24 +25,20 @@ import {
   SettingsIcon,
   Trophy,
 } from "lucide-react";
-import { useCustomToast } from "@/lib/useCustomToast";
-import { useUserContext } from "@/components/providers/UserProvider";
 
 export const UserDropdown = () => {
   const { userProfile } = useUserContext();
-  const { modal, dispatch } = useModalContext();
+  const { dispatch } = useModalContext();
   const customToast = useCustomToast();
 
-  // 🎯 to-do-list : get user data
-  //const { destruct, user, data } = useUserDataDevon();
 
-  // 🎯 to-do-list : handle user Image (temp solution)
+  // 🎯 to-do-list : improve handle user Image
+  // 🎯 - improve waiting for context to load 
+  // 🎯 - skeleton avatar while waiting to load
   const userImage =
     userProfile?.account.userimage || "/profile-placeholder-image.svg";
-  console.log("🎈userimage", userImage);
-  console.log("🎈userprofile", userProfile);
 
-  //👇🎯 testing toast notifications
+  //👇🎯 to-do-list: remove testing toast notifications
   const ztmTest = () => {
     toast.success("This is a Test notification 🎯🧪");
     customToast("Hello?");
@@ -51,10 +49,10 @@ export const UserDropdown = () => {
       <DropdownMenuTrigger asChild>
         <div role="button" className="flex items-center text-base">
           <div className="gap-x-1 flex items-center max-w-[200px]">
-            <span className="text-start font-medium line-clamp-1">
+            <span className="text-start font-medium line-clamp-1 text-lg">
               {userProfile?.account.username}
             </span>
-            <Avatar className="h-5 w-5">
+            <Avatar className="h-10 w-10">
               <AvatarImage src={userImage} alt="profile-picture" />
               <AvatarFallback>ZTM</AvatarFallback>
             </Avatar>
@@ -63,30 +61,27 @@ export const UserDropdown = () => {
         </div>
       </DropdownMenuTrigger>
       <DropdownMenuContent
-        className=" w-72 mr-3 pt-5 md:pt-0  flex flex-col space-y-4 p-3"
+        className=" w-72 mr-3 pt-5 md:pt-0 flex flex-col space-y-4 p-3"
         align="start"
         alignOffset={11}
         forceMount
       >
-        {/* <div className="flex flex-col space-y-4 p-2"> */}
         {/* HEADER - USER SUMMARY */}
-        {/* update with link & seperate component? 🎯 */}
         <div
           className="flex items-center justify-between gap-x-2 hover:cursor-pointer pt-3"
           //👇🎯temp
           onClick={ztmTest}
         >
           <div className="space-y-1 p-2">
-            <p className="text-sm line-clamp-1">
-              {/* update 🎯 */}
+            <p className="text-lg tracking-widest font-semibold line-clamp-1">
               {userProfile?.account.username}
             </p>
-            <p className="text-xs font-medium leading-none text-muted-foreground">
+            <p className="text-sm tracking-wider font-medium leading-none text-muted-foreground">
               {userProfile?.email}
             </p>
           </div>
           <div className="rounded-md p-1">
-            <Avatar className="h-10 w-10">
+            <Avatar className=" h-16 w-16">
               <AvatarImage src={userImage} />
             </Avatar>
           </div>
@@ -105,7 +100,6 @@ export const UserDropdown = () => {
               </div>
               Update Profile
             </div>
-            {/* <SidebarItem label="Update Profile" icon={Settings} isMaster /> */}
           </SheetTrigger>
           <SheetContent>
             <UserFormHandler />
@@ -123,7 +117,6 @@ export const UserDropdown = () => {
         </a>
 
         {/* 👉 LOGOUT BUTTON */}
-        {/* update with functionality 🎯 */}
         <Button
           onClick={() => dispatch({ type: "OPEN_MODAL", modalType: "LOGOUT" })}
         >

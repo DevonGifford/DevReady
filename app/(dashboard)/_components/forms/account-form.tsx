@@ -41,6 +41,7 @@ import {
   programmingLanguagesList,
   skillsList,
 } from "@/constants/userforms-index";
+import { ProfilePictureUploader } from "@/components/ProfilePictureUploader";
 
 // 👇 FORM SCHEMA : Account Form
 const accountFormSchema = z.object({
@@ -52,7 +53,6 @@ const accountFormSchema = z.object({
     .max(16, {
       message: "⚠ Username must not be longer than 16 characters.",
     }),
-  userimage: z.string().optional(),
   career_title: z.string({
     required_error: "⚠ Please pick your career .",
   }),
@@ -85,7 +85,6 @@ export function AccountForm() {
   useEffect(() => {
     if (userProfile) {
       form.setValue("username", userProfile.account.username || "");
-      form.setValue("userimage", userProfile.account.userimage || "");
       form.setValue("career_title", userProfile.account.career_title || "");
       form.setValue(
         "programming_lang",
@@ -114,11 +113,6 @@ export function AccountForm() {
     form.setValue("skills_list", updatedSkills);
   };
 
-  // 🎯 HANDLE USER IMAGE DATA - checks if user has default option or custom image
-  const handleUserImage = (defaultOption: string, newImage: string) => {
-    //  🎯 to-do-list:  add functionality to save data to firebase and set to Context (seperate from form)
-  }
-
   // ✅ SUBMIT FORM - submit account form
   function onSubmit(data: AccountFormValues) {
     console.log(
@@ -131,7 +125,6 @@ export function AccountForm() {
         account: {
           ...userProfile?.account,
           username: data.username || "",
-          userimage: data.userimage || "",
           career_title: data.career_title || "",
           programming_lang:
             typeof data?.programming_lang === "string"
@@ -150,6 +143,9 @@ export function AccountForm() {
           );
           setIsLoading(false); //- Reset loading state
           setSubmitted(true); //- Set achieved state
+          setTimeout(() => {
+            setSubmitted(false); //- Reset achieved state after a while
+          }, 2000);
         })
         .catch((error) => {
           console.log(
@@ -166,15 +162,15 @@ export function AccountForm() {
       <form
         onSubmit={form.handleSubmit((data) => {
           console.log(
-            "🎯event_log:  📝-form submitted with following form-data : ",
+            "🎯event_log:  📝-form submitted with following form-data: ",
             data
           );
           onSubmit(data);
         })}
-        className="space-y-4 w-full"
+        className="space-y-6 w-full -translate-y-5 sm:-translate-y-10 md:-translate-y-18 "
       >
         {/* USERNAME & USERIMAGE 🎯 */}
-        <div className="flex flex-col items-center gap-4 sm:flex-row sm:gap-10 ">
+        <div className="flex flex-col justify-between items-center gap-4 sm:flex-row max-w-3xl">
           {/* USERNAME */}
           <FormField
             control={form.control}
@@ -182,7 +178,7 @@ export function AccountForm() {
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="flex text-center justify-center sm:justify-start">
-                  Name
+                  Display Name
                 </FormLabel>
                 <FormDescription className="flex flex-col pb-1 whitespace-nowrap text-center sm:text-left">
                   <p>This is your public display name.</p>
@@ -201,18 +197,13 @@ export function AccountForm() {
           />
 
           {/* USER IMAGE 🎯 */}
-          <div className="flex flex-col justify-center items-center border-2 w-[250px] h-[200px] ">
-            <p className="transform rotate-12  text-center">
-              Handle updating user image
-            </p>
-            <p className="transform rotate-12  text-center text-devready-green">
-              Coming soon
-            </p>
+          <div className="flex h-[230px] sm:h-[250px] w-full max-w-sm justify-center sm:mb-5">
+            <ProfilePictureUploader userDocId={userProfile?.uuid!} />
           </div>
         </div>
 
         {/* CAREER AND LANGUAGE */}
-        <div className="flex flex-col items-center justify-center sm:justify-start sm:flex-row gap-3 md:gap-10 lg:gap-14 sm:mr-16">
+        <div className="flex flex-col items-center justify-center gap-5 sm:justify-between sm:flex-row max-w-3xl sm:pr-10">
           <FormField
             control={form.control}
             name="career_title"
@@ -229,7 +220,7 @@ export function AccountForm() {
                         variant="outline"
                         role="combobox"
                         className={cn(
-                          "w-[200px] justify-between",
+                          "w-[200px] justify-between mx-8",
                           !field.value &&
                             "text-muted-foreground text-devready-green"
                         )}
@@ -291,7 +282,7 @@ export function AccountForm() {
                         variant="outline"
                         role="combobox"
                         className={cn(
-                          "w-[200px] justify-between",
+                          "w-[200px] justify-between mx-8",
                           !field.value &&
                             "text-muted-foreground text-devready-green"
                         )}
@@ -339,142 +330,144 @@ export function AccountForm() {
           />
         </div>
 
-        {/* Career Level */}
-        <FormField
-          control={form.control}
-          name="career_level"
-          render={({ field: { value, onChange } }) => (
-            <FormItem className="space-y-1">
-              <div className="flex flex-col items-center md:items-start pb-2">
-                <FormLabel>Professional Stage</FormLabel>
-                <FormDescription>
-                  Indicate your current professional stage.
-                </FormDescription>
-              </div>
-
-              <FormControl className="mx-4 w-11/12">
-                <Slider
-                  min={0}
-                  max={100}
-                  step={1}
-                  defaultValue={[userProfile?.account.career_level!]}
-                  onValueChange={(vals) => {
-                    onChange(vals[0]);
-                  }}
-                />
-              </FormControl>
-
-              <div className="flex justify-between text-xs text-muted-foreground ml-1 sm:pr-8 md:pr-10 lg:pr-16 xl:pr-12">
-                <div className="flex flex-col text-center">
-                  <p>Aspiring</p>
-                  <p className="w-full">Dev</p>
+        <div className="flex flex-col gap-8 lg:mx-10 lg:pr-10 pt-3 ">
+          {/* Career Level */}
+          <FormField
+            control={form.control}
+            name="career_level"
+            render={({ field: { value, onChange } }) => (
+              <FormItem className="space-y-1">
+                <div className="flex flex-col items-center md:items-start pb-2">
+                  <FormLabel>Professional Stage</FormLabel>
+                  <FormDescription>
+                    Indicate your current professional stage.
+                  </FormDescription>
                 </div>
-                <div className="flex flex-col items-center text-center">
-                  <p>Junior</p>
-                  <p>Dev</p>
-                </div>
-                <div className="flex flex-col items-center text-center">
-                  <p>Mid-Level</p>
-                  <p>Dev</p>
-                </div>
-                <div className="flex flex-col items-end text-center">
-                  <p>Senior</p>
-                  <p className="w-full">Dev</p>
-                </div>
-              </div>
 
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+                <FormControl className="mx-4 w-11/12">
+                  <Slider
+                    min={0}
+                    max={100}
+                    step={1}
+                    defaultValue={[userProfile?.account.career_level!]}
+                    onValueChange={(vals) => {
+                      onChange(vals[0]);
+                    }}
+                  />
+                </FormControl>
 
-        {/* Experience level */}
-        <FormField
-          control={form.control}
-          name="experience_level"
-          render={({ field: { value, onChange } }) => (
-            <FormItem className="space-y-1">
-              <div className="flex flex-col items-center md:items-start pb-2">
-                <FormLabel>Experience Level</FormLabel>
-                <FormDescription>
-                  Indicate your experience in years of work.
-                </FormDescription>
-              </div>
-
-              <FormControl className="mx-4 w-11/12">
-                <Slider
-                  min={0}
-                  max={100}
-                  step={1}
-                  defaultValue={[userProfile?.account.experience_level || 0]}
-                  onValueChange={(vals) => {
-                    onChange(vals[0]);
-                  }}
-                />
-              </FormControl>
-
-              <div className="flex justify-between text-xs text-muted-foreground ml-1 sm:pr-8 md:pr-10 lg:pr-16 xl:pr-12">
-                <div className="flex flex-col text-center">
-                  <p>&gt;6</p>
-                  <p className="w-full">Months</p>
+                <div className="flex justify-between text-xs text-muted-foreground ml-1 sm:pr-8 md:pr-10 lg:pr-16 xl:pr-12">
+                  <div className="flex flex-col text-center">
+                    <p>Aspiring</p>
+                    <p className="w-full">Dev</p>
+                  </div>
+                  <div className="flex flex-col items-center text-center">
+                    <p>Junior</p>
+                    <p>Dev</p>
+                  </div>
+                  <div className="flex flex-col items-center text-center">
+                    <p>Mid-Level</p>
+                    <p>Dev</p>
+                  </div>
+                  <div className="flex flex-col items-end text-center">
+                    <p>Senior</p>
+                    <p className="w-full">Dev</p>
+                  </div>
                 </div>
-                <div className="flex flex-col items-center text-center">
-                  <p>1</p>
-                  <p>Year</p>
-                </div>
-                <div className="flex flex-col items-center text-center">
-                  <p>3</p>
-                  <p>Years</p>
-                </div>
-                <div className="flex flex-col items-end text-center">
-                  <p>5+</p>
-                  <p className="w-full">Years</p>
-                </div>
-              </div>
 
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-        {/* Skills 🎯 */}
-        <FormField
-          control={form.control}
-          name="skills_list"
-          render={({ field: { value, onChange } }) => (
-            <FormItem className="space-y-1">
-              <div className="flex flex-col items-center text-center md:text-start md:items-start pb-2">
-                <FormLabel>Pick your proficient skills</FormLabel>
-                <FormDescription>
-                  Pick your most proficient skill set
-                </FormDescription>
-              </div>
-              <FormControl>
-                <ToggleGroup
-                  size={"sm"}
-                  variant="skill"
-                  type="multiple"
-                  className="flex flex-row flex-wrap"
-                  aria-label="Skills list"
-                >
-                  {skillsList.map((skill) => (
-                    <ToggleGroupItem
-                      key={skill.label}
-                      value={skill.label}
-                      aria-label={`${skill.label} toggle`}
-                      onClick={() => handleSkillList(skill.label)}
-                      data-state={
-                        selectedSkills.includes(skill.label) ? "on" : "off"
-                      }
-                    >
-                      {skill.label}
-                    </ToggleGroupItem>
-                  ))}
-                </ToggleGroup>
-              </FormControl>
-            </FormItem>
-          )}
-        />
+          {/* Experience level */}
+          <FormField
+            control={form.control}
+            name="experience_level"
+            render={({ field: { value, onChange } }) => (
+              <FormItem className="space-y-1">
+                <div className="flex flex-col items-center md:items-start pb-2">
+                  <FormLabel>Experience Level</FormLabel>
+                  <FormDescription>
+                    Indicate your experience in years of work.
+                  </FormDescription>
+                </div>
+
+                <FormControl className="mx-4 w-11/12">
+                  <Slider
+                    min={0}
+                    max={100}
+                    step={1}
+                    defaultValue={[userProfile?.account.experience_level || 0]}
+                    onValueChange={(vals) => {
+                      onChange(vals[0]);
+                    }}
+                  />
+                </FormControl>
+
+                <div className="flex justify-between text-xs text-muted-foreground ml-1 sm:pr-8 md:pr-10 lg:pr-16 xl:pr-12">
+                  <div className="flex flex-col text-center">
+                    <p>&gt;6</p>
+                    <p className="w-full">Months</p>
+                  </div>
+                  <div className="flex flex-col items-center text-center">
+                    <p>1</p>
+                    <p>Year</p>
+                  </div>
+                  <div className="flex flex-col items-center text-center">
+                    <p>3</p>
+                    <p>Years</p>
+                  </div>
+                  <div className="flex flex-col items-end text-center">
+                    <p>5+</p>
+                    <p className="w-full">Years</p>
+                  </div>
+                </div>
+
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          {/* Skills 🎯 */}
+          <FormField
+            control={form.control}
+            name="skills_list"
+            render={({ field: { value, onChange } }) => (
+              <FormItem className="space-y-1">
+                <div className="flex flex-col items-center text-center md:text-start md:items-start pb-2">
+                  <FormLabel>Pick your proficient skills</FormLabel>
+                  <FormDescription>
+                    Pick your most proficient skill set
+                  </FormDescription>
+                </div>
+                <FormControl>
+                  <ToggleGroup
+                    size={"sm"}
+                    variant="skill"
+                    type="multiple"
+                    className="flex flex-row flex-wrap"
+                    aria-label="Skills list"
+                  >
+                    {skillsList.map((skill) => (
+                      <ToggleGroupItem
+                        key={skill.label}
+                        value={skill.label}
+                        aria-label={`${skill.label} toggle`}
+                        onClick={() => handleSkillList(skill.label)}
+                        data-state={
+                          selectedSkills.includes(skill.label) ? "on" : "off"
+                        }
+                      >
+                        {skill.label}
+                      </ToggleGroupItem>
+                    ))}
+                  </ToggleGroup>
+                </FormControl>
+              </FormItem>
+            )}
+          />
+        </div>
 
         {/* BUTTONS */}
         <div className="flex flex-row justify-start gap-8 pt-10">

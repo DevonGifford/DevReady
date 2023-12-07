@@ -1,5 +1,5 @@
 import { UserProfile, defaultUserProfile } from "@/types/UserProfile";
-import db from "../firebase/firebaseConfig";
+import db from "./firebase.config";
 import {
   Firestore,
   collection,
@@ -20,12 +20,18 @@ type Data = Record<string, any>;
 // 👇 Ensure the db object typing is Firestore
 const firestore: Firestore = db;
 
-// ✅ HELPER FUNCTION: updates the userimage field in a specified document
+/**
+ * ✅ HELPER FUNCTION:
+ * -UserImage process
+ * Updates the user image field in a specified document.
+ * @param {string} documentId - The ID of the document to be updated.
+ * @param {string} newImageUrl - The URL of the new user image.
+ * @returns {Promise<boolean>} - A promise indicating whether the update was successful.
+ */
 export const updateUserImage = async (
   documentId: DocumentId,
   newImageUrl: string
 ): Promise<boolean> => {
-  
   console.log("🎯event_log:  🔥utils/firestore/updateUserImage:  💢 Triggered");
 
   const collectionName: CollectionName = "users";
@@ -39,7 +45,10 @@ export const updateUserImage = async (
     if (docSnapshot.exists()) {
       //- Get the existing data
       const existingData = docSnapshot.data();
-      console.log("🎯event_log:  🔥utils/firestore/updateUserImage:  THIS IS THE OG DATA FROM DOC", existingData);
+      console.log(
+        "🎯event_log:  🔥utils/firestore/updateUserImage:  THIS IS THE OG DATA FROM DOC",
+        existingData
+      );
 
       //- Update data with new imageURL
       const updatedData = {
@@ -50,7 +59,10 @@ export const updateUserImage = async (
         },
       };
 
-      console.log("🎯event_log:  🔥utils/firestore/updateUserImage:  THIS IS THE UPDATED DATA TO BE SET IN DOC", updatedData);
+      console.log(
+        "🎯event_log:  🔥utils/firestore/updateUserImage:  THIS IS THE UPDATED DATA TO BE SET IN DOC",
+        updatedData
+      );
 
       //- Update doc
       await updateDoc(docRef, updatedData);
@@ -75,7 +87,13 @@ export const updateUserImage = async (
   }
 };
 
-// ✅ HELPER FUNCTION: updates a specified document in a specified collection - or else breaks
+/**
+ * ✅ HELPER FUNCTION:
+ * Updates a specified document in a specified collection or creates a new document if not found.
+ * @param {string} collectionName - The name of the collection.
+ * @param {string} documentId - The ID of the document to be updated.
+ * @param {object} data - The data to be updated or created.
+ */
 export const updateDocument = async (
   collectionName: CollectionName,
   documentId: DocumentId,
@@ -113,7 +131,14 @@ export const updateDocument = async (
   }
 };
 
-// ✅ AUTH/REGISTER HELPER FUNCTION : helps create default user data in registration process.
+//
+/**
+ * ✅ AUTH HELPER FUNCTION:
+ * -register process
+ * Merges provided user data with default user profile data.
+ * @param {Partial<UserProfile>} userData - Partial user data to merge.
+ * @returns {UserProfile} - Merged user profile data.
+ */
 export const mergeUserDataWithDefaults = (
   userData: Partial<UserProfile>
 ): UserProfile => {
@@ -123,7 +148,13 @@ export const mergeUserDataWithDefaults = (
   };
 };
 
-// ✅ AUTH/REGISTER HELPER FUNCTION : creates a new user doc in registration process.
+/**
+ * ✅ AUTH HELPER FUNCTION:
+ * -register process
+ * Creates a new user document in the registration process.
+ * @param {string} documentId - The ID of the document to be created.
+ * @param {Partial<UserProfile>} userData - Partial user data for document creation.
+ */
 export const createUserDataProcess = async (
   documentId: string,
   userData: Partial<UserProfile>
@@ -176,7 +207,12 @@ export const createUserDataProcess = async (
   }
 };
 
-// ✅ AUTH/LOGIN HELPER FUNCTION :  updates users login-time in logging in process.
+/**
+ * ✅ AUTH HELPER FUNCTION:
+ * -login process
+ * Updates the user's login time during the login process.
+ * @param {string} documentId - The ID of the document to be updated.
+ */
 export const updateUserLoginTime = async (documentId: string) => {
   console.log(
     "🎯 event_log:  🔥utils/firestore/updateUserLoginTime:  💢 Triggered"
@@ -192,9 +228,6 @@ export const updateUserLoginTime = async (documentId: string) => {
       // - Update users document with new login data
       const lastLogin = new Date().toISOString();
       await updateDoc(docRef, { lastLogin });
-
-      // -Update the state with the newly created user data
-      // 🎯 to-do-list:  logic will be added in updating user-profile-form update ()
 
       console.log(
         `🎯 event_log:  🔥utils/firestore/updateUserLoginTime: ✔ Success -  Updated Document ${documentId} with new login time:  ${lastLogin}!`
@@ -212,7 +245,15 @@ export const updateUserLoginTime = async (documentId: string) => {
   }
 };
 
-// ⌛✅ SPEACIAL ONE-TIME FUNCTION:  creates a new collection based on input TypeScript type
+// 
+/**
+ * ⌛✅ SPEACIAL ONE-TIME FUNCTION:
+ * -used for development
+ * Creates a new collection based on input TypeScript type.
+ * @param {string} collectionName - The name of the collection to be created.
+ * @param {DocumentData} data - Data to be added to the collection.
+ * @returns {Promise<boolean>} - A promise indicating whether the collection creation was successful.
+ */
 export const createCollection = async <T extends DocumentData>(
   collectionName: string,
   data: T
