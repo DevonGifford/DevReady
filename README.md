@@ -222,88 +222,40 @@ This project is licensed under the [MIT License](🎯).
  
 
 
+(feature/user-profile-image-firebase)
 
-ONBOARDING = account
------------
-  username: "string",
-  userimage: "link_to_firebase_saved_image"   (upload functionality)
-  
-  career_title: string,
-  programming_lang: string,
-  
-  career_level: number,  (range)
-  experience_level: number, (range)
-  
-  skills_list: [],
-  
-SUBMIT BUTTON || SKIP BUTTON
-------------------------------------------------------------------------------
+Create New User Image Component with Firebase Integration
+Enhance User Experience with Custom Profile Images
+Description
+This ticket aims to enhance the user experience by allowing users to personalize their profiles with custom images. It involves integrating Firebase for image storage, ensuring error-free functionality, and updating UI elements. Focusing on testing, documentation, and delivering a polished feature.
 
+Tasks
+Firebase Backend and Storage Setup:
 
+ Configure Firebase to handle image uploads and storage.
+ Implement secure authentication and access rules.
+User Context Update:
 
+ Integrate the user image component with existing user context data.
+ Ensure seamless synchronization between user data and profile images.
+Image Selection Options:
+Design and implement a component where users can:
 
+ Upload their own photos.
+ Choose from predefined default images.
+Error Handling:
+Implement robust error handling mechanisms.
 
+ Handle scenarios such as failed uploads, network issues, and invalid image formats.
+UI Elements Update:
+Update relevant UI elements across the app to display user images:
 
+ Navigation bar icon.
+ User dropdown menu.
+ Dashboard.
+ Onboarding.
+Testing Considerations:
+Plan and execute unit testing for the new component. Ensure seamless integration with existing features.
 
-ACCOUNT FORM *name change
-----------
-        * username: "johndoe123",
-  ADD     userimage: "link_to_firebase_saved_image",
-          career_title: null,
-          programming_lang: null,
-          career_level: 0,
-          experience_level: 0,
-  FIX     skills_list: [],
-
-SUBMIT BUTTON || RESET PASSWORD
---------------------------------------------------------------------------
-
-
-
-PROFILE FORM *name change
------------
-        * bio: null,
-          home_lang: "English",
-          location: "",
-  FIX     age: 29,      //📝 slider - because why not  
-          urls: {github: "", linkedin: "", website: ""},
-          ztm_student: true,
-
-SUBMIT BUTTON 
---------------------------------------------------------------------------
-  REMOVE  star_mentor
-  REMOVE  email
-
-
-
-
-GOALS FORM
-------
-- achieved and saved goals array
-- current goal object 
-- update user document typing
-- update firebase document 
-- should only be able to have one goal at a given moment 
-- submit button should read update goal 
-- date set should render pretty 
-- should have an achieved button - saves the goal 
-YOU SHOULD ONLY HAVE ONE GOAL AT A GIVEN MOMENT.
-
-
-
-NOTIFICATIONS 
------------- 
-- Remove notify me aboutsection 
-- Add turn on hide toast notifications 
-
-- Refactor headings :  create seperate sections for
-  - LIVE NOTIFICATIONS
-    - general toast notifications (notify me about...)
-    - event logs   
-  - EMAIL NOTIFICATIONS
-    - communications 
-    - marketings 
-    - news letter
-  - MOBILE DIFF
-    - push notifications
-    - use differnet settings for mobile devices 
+Documentation
+Document the component’s functionality, usage, and configuration.
