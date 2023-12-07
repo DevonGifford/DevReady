@@ -132,9 +132,8 @@ export const UserContextProvider = ({
     }
   };
 
-  // 
   /**
-   * ✅ HANDLES FETCHING USER-DOC 
+   * ✅ HANDLES FETCHING USER-DOC
    * Handles fetching user firestore document by checking if the document exists and sets it to state.
    * @param {string} userId - The ID of the user whose data is being fetched.
    * @returns {Promise<void>} A Promise that resolves once the fetch process completes.

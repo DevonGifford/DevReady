@@ -25,15 +25,15 @@ import {
   SettingsIcon,
   Trophy,
 } from "lucide-react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export const UserDropdown = () => {
   const { userProfile } = useUserContext();
   const { dispatch } = useModalContext();
   const customToast = useCustomToast();
 
-
   // 🎯 to-do-list : improve handle user Image
-  // 🎯 - improve waiting for context to load 
+  // 🎯 - improve waiting for context to load
   // 🎯 - skeleton avatar while waiting to load
   const userImage =
     userProfile?.account.userimage || "/profile-placeholder-image.svg";
@@ -49,13 +49,23 @@ export const UserDropdown = () => {
       <DropdownMenuTrigger asChild>
         <div role="button" className="flex items-center text-base">
           <div className="gap-x-1 flex items-center max-w-[200px]">
-            <span className="text-start font-medium line-clamp-1 text-lg">
-              {userProfile?.account.username}
-            </span>
-            <Avatar className="h-10 w-10">
-              <AvatarImage src={userImage} alt="profile-picture" />
-              <AvatarFallback>ZTM</AvatarFallback>
-            </Avatar>
+            {userProfile ? (
+              <>
+                <span className="text-start font-medium line-clamp-1 text-lg">
+                  {userProfile.account.username}
+                </span>
+                <Avatar className="h-10 w-10">
+                  <AvatarImage src={userImage} alt="profile-picture" />
+                  <AvatarFallback>ZTM</AvatarFallback>
+                </Avatar>
+              </>
+            ) : (
+              //-Shows skeleton when userProfile is not available
+              <div className="flex flex-row space-x-2 justify-center items-center">
+                <Skeleton className="h-5 w-28" />
+                <Skeleton className="h-10 w-10 rounded-full" />
+              </div>
+            )}
             <ChevronsRight className="rotate-90 text-muted-foreground h-4 w-4" />
           </div>
         </div>

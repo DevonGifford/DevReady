@@ -2,16 +2,14 @@ import { useState, ChangeEvent, useRef } from "react";
 import { uploadImageProcess } from "@/utils/firebase/storage.utils";
 import { Avatar, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
+import { Spinner } from "./Spinner";
 
 interface PPProps {
   userDocId: string;
 }
 
 export const ProfilePictureUploader: React.FC<PPProps> = ({ userDocId }) => {
-  //- manage files
   const fileRef = useRef(null);
-
-  //-manage ui
   const [isUploading, setIsUploading] = useState(false); //-handles spinner state
   const [showAvatar, setShowAvatar] = useState(false); //-handles contional rendering for UPLOAD vs. UPLOADED
   const [newAvatar, setNewAvatar] = useState(""); //-handles storing the uploaded image url
@@ -28,6 +26,13 @@ export const ProfilePictureUploader: React.FC<PPProps> = ({ userDocId }) => {
       try {
         setIsUploading(true);
 
+        //-Check if the selected file is an image // 🎯 to do list improve this
+        if (!imageData[0].type.startsWith("image/")) {
+          console.log("Invalid file format. Please select an image.");
+          setIsUploading(false);
+          return;
+        }
+
         const response = await uploadImageProcess(
           userDocId,
           imageData[0],
@@ -35,22 +40,40 @@ export const ProfilePictureUploader: React.FC<PPProps> = ({ userDocId }) => {
         );
 
         if (response) {
-          console.log(
-            "Setting the response from uploadImageProcess to state - here is the res",
-            response
-          );
           setNewAvatar(response);
           e.target.value = ""; // Clear the file upload value.
+          setShowAvatar(true); // Flip the toggle
           setIsUploading(false);
-          setShowAvatar(true); // Flip the toggle state
         } else {
-          console.log("Something went wrong with the upload");
+          console.log(
+            "🎯 event_log:  🔥ProfilePictureUploader/handleFileUplaod:  ❌ Error:  Something went wrong with the upload"
+          );
         }
-      } catch (error) {
-        console.error("Error occurred during upload:", error);
+      } catch (error: any) {
+        console.error("Error occurred during upload:", error.message);
+        //- Handle specific error cases:
+        if (error === "storage/canceled") {
+          console.log(
+            "🎯 event_log:  🔥ProfilePictureUploader/handleFileUplaod:  ❌ Error:  User canceled the upload",
+            error
+          );
+        } else if (error.code === "storage/unauthenticated") {
+          console.log(
+            "🎯 event_log:  🔥ProfilePictureUploader/handleFileUplaod:  ❌ Error:  User is unauthenticated",
+            error
+          );
+        } else {
+          console.log(
+            "🎯 event_log:  🔥ProfilePictureUploader/handleFileUplaod:  ❌ Error:  Unknown error:",
+            error
+          );
+        }
+        setIsUploading(false);
       }
     } else {
-      console.log("No image data found");
+      console.log(
+        "🎯 event_log:  🔥ProfilePictureUploader/handleFileUplaod:  ❌ Error:  No image data found"
+      );
     }
   };
 
@@ -65,7 +88,9 @@ export const ProfilePictureUploader: React.FC<PPProps> = ({ userDocId }) => {
         {/* <h3 className="text-lg font-semibold">Upload Profile Picture</h3> */}
 
         <div className="flex flex-col items-center justify-center text-center border-2 aspect-square p-5">
-          {!showAvatar ? (
+          {isUploading ? (
+            <Spinner size={"icon"} />
+          ) : !showAvatar ? (
             <div className="flex items-center justify-center w-full h-full">
               <label
                 htmlFor="dropzone-file"
