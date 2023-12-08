@@ -1,16 +1,16 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import DataOnboardingPage from "../../_components/data-onboarding";
-import ImageOnboardingPage from "../../_components/image-onboarding";
-import WelcomeOnboardingPage from "../../_components/welcome-onboarding";
+import UserOnboardingCareer from "../../_components/userCareer-onboarding";
+import UserOnboardingImage from "../../_components/userImage-onboarding";
+import UserOnboardingWelcome from "../../_components/userWelcome-onboarding";
 import { ArrowLeftIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function OnboardingFormHandler() {
   const router = useRouter();
-  const searchParams = useSearchParams()
-  const pageId = searchParams.get('pageId')
+  const searchParams = useSearchParams();
+  const pageId = searchParams.get("pageId");
   return (
     <>
       <div className="flex h-screen flex-col items-center justify-center max-w-3xl mx-auto overflow-x-hidden">
@@ -42,18 +42,20 @@ export default function OnboardingFormHandler() {
             <ArrowLeftIcon /> Go Back
           </Button>
         ) : (
-          <WelcomeOnboardingPage key="intro" />
+            <UserOnboardingWelcome key="intro" />
+            // <UserOnboardingCareer key="data-onboarding" />
+            // <UserOnboardingImage key="image-onboarding" />
         )}
 
         {/* Conditional rendering based on router query */}
         {pageId === "data-onboarding" && (
-          <DataOnboardingPage key="data-onboarding" />
+          <UserOnboardingCareer key="data-onboarding" />
         )}
         {pageId === "image-onboarding" && (
-          <ImageOnboardingPage key="image-onboarding" />
+          <UserOnboardingImage key="image-onboarding" />
         )}
         {pageId === "welcome-onbaording" && (
-          <WelcomeOnboardingPage key="welcome-onbaording" />
+          <UserOnboardingWelcome key="welcome-onbaording" />
         )}
       </div>
     </>

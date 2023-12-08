@@ -87,7 +87,7 @@ export const ProfilePictureUploader: React.FC<PPProps> = ({ userDocId }) => {
       <div className="flex flex-col justify-center items-center scale-75 lg:scale-100">
         {/* <h3 className="text-lg font-semibold">Upload Profile Picture</h3> */}
 
-        <div className="flex flex-col items-center justify-center text-center border-2 aspect-square p-5">
+        <div className="flex flex-col items-center justify-center text-center aspect-square p-5">
           {isUploading ? (
             <Spinner size={"icon"} />
           ) : !showAvatar ? (
