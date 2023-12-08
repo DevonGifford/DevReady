@@ -27,6 +27,14 @@ export default function OnboardingFormHandler() {
           />
         </div>
 
+        {/* Conditional rendering based on router query */}
+        {pageId === "data-onboarding" && (
+          <UserOnboardingCareer key="data-onboarding" />
+        )}
+        {pageId === "image-onboarding" && (
+          <UserOnboardingImage key="image-onboarding" />
+        )}
+
         {/* Render 'go back to previous form' button or render first form */}
         {pageId ? (
           <Button
@@ -38,24 +46,14 @@ export default function OnboardingFormHandler() {
                 "🎯event-log:  👋onboardingFormHandler/root:  Back Buton Clicked"
               );
             }}
+            className="text-xs font-bold translate-y-1/2"
           >
-            <ArrowLeftIcon /> Go Back
+            <ArrowLeftIcon size={16}/> Go Back
           </Button>
         ) : (
-            <UserOnboardingWelcome key="intro" />
-            // <UserOnboardingCareer key="data-onboarding" />
-            // <UserOnboardingImage key="image-onboarding" />
-        )}
-
-        {/* Conditional rendering based on router query */}
-        {pageId === "data-onboarding" && (
-          <UserOnboardingCareer key="data-onboarding" />
-        )}
-        {pageId === "image-onboarding" && (
-          <UserOnboardingImage key="image-onboarding" />
-        )}
-        {pageId === "welcome-onbaording" && (
-          <UserOnboardingWelcome key="welcome-onbaording" />
+          <UserOnboardingWelcome key="intro" />
+          // <UserOnboardingCareer key="data-onboarding" />  //👉 for development use
+          // <UserOnboardingImage key="image-onboarding" />  //👉 for development use
         )}
       </div>
     </>

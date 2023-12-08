@@ -63,17 +63,34 @@ export default function UserOnboardingWelcome() {
   });
 
   // ⌛ SUBMIT FORM -
-  function onSubmit(data: WelcomeOnboardingValues) {
-    console.log("🎯event-log:  📝onboarding/career/onSubmit:  💢 Triggered");
+  async function onSubmit(data: WelcomeOnboardingValues) {
+    console.log("🎯event-log:  📝onboarding/welcome/onSubmit:  💢 Triggered");
 
-    console.log("here is the data submitted in this form");
+    const queryParams = {
+      pageId: "data-onboarding",
+      username: data.username,
+      career_title: data.career_title,
+      // Add other form fields (if user clicks back) ?
+    };
+
+    const queryString = new URLSearchParams(queryParams).toString();
+    console.log(
+      "🎯event-log:  📝onboarding/welcome/onSubmit:",
+      "🔗 new quereyParams",
+      queryParams,
+      "🔗 new quereyString",
+      queryString
+    );
+
+    // Update the URL with the form data as query parameters
+    router.push(`?${queryString}`);
   }
 
   return (
     <>
-      <div className="z-10 flex flex-col items-center text-center sm:mx-auto -translate-y-10 md:-translate-y-20">
+      <div className="z-10 flex flex-col items-center text-center sm:mx-auto -translate-y-12 lg:-translate-y-20">
         {/* HEADING */}
-        <div className="flex flex-col justify-center text-center items-center gap-2 text-2xl pb-5 sm:text-3xl sm:pb-8 md:text-4xl md:pb-10 sm:mx-10">
+        <div className="flex flex-col justify-center text-center items-center gap-2 text-2xl pb-8 sm:text-3xl sm:pb-10 md:text-4xl md:pb-12 sm:mx-16">
           <h1 className="font-display text-xl sm:text-3xl md:text-4xl font-bold transition-colors">
             Welcome to your{" "}
             <span className="font-display text-devready-green">
@@ -95,23 +112,48 @@ export default function UserOnboardingWelcome() {
               );
               onSubmit(data);
             })}
-            className="flex flex-col justify-center items-center text-center space-y-[calc(100vw-95vw)] lg:space-y-16 w-full  "
+            className="flex flex-col justify-center items-center text-center space-y-[calc(100vw-90vw)] lg:space-y-16 w-full  "
           >
             <FormField
               control={form.control}
               name="username"
               render={({ field }) => (
                 <FormItem className="flex flex-col justify-center items-center text-center">
-                  <FormLabel className="flex text-center justify-center capitalize text-lg">
+                  <FormLabel className="capitalize text-lg font-bold">
                     Enter a display name
                   </FormLabel>
 
                   <FormControl>
-                    <Input
-                      placeholder="Anonymous"
-                      className="w-[150px] text-center bg-transparent border-none "
-                      {...field}
-                    />
+                    <div className="border-b-2 border-gray-500 px-4">
+                      <Input
+                        className={`
+                      w-[150px] 
+                      bg-transparent
+                      font-semibold 
+                      text-muted-foreground 
+                      text-base
+                      text-center
+                      text-devready-green
+                      placeholder:text-devready-green
+                      placeholder:italic
+                      outline-none
+                      border-none
+                      ring-none
+                      ring-transparent
+                      focus:ring-none
+                      focus:ring-offset-0;
+                      focus-visible:outline-none
+                      focus-visible:ring-transparent
+                      focus-visible:ring-none
+                      focus-visible:ring-offset-transparent
+                      ring-offset-transparent
+                      `}
+                        placeholder=""
+                        autoComplete="off"
+                        autoFocus
+                        {...field}
+                      />
+                    </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -123,7 +165,7 @@ export default function UserOnboardingWelcome() {
               name="career_title"
               render={({ field }) => (
                 <FormItem className="flex flex-col justify-center items-center text-center">
-                  <FormLabel className="capitalize text-lg">
+                  <FormLabel className="capitalize text-lg font-bold">
                     Pick your dream career
                   </FormLabel>
 
@@ -131,27 +173,28 @@ export default function UserOnboardingWelcome() {
                     <PopoverTrigger asChild>
                       <FormControl>
                         <Button
-                          variant={"ghost"}
+                          variant={"link"}
                           role="combobox"
                           className={cn(
-                            " flex flex-col text-base rounded-full",
+                            " flex flex-col text-base rounded-full text-devready-green font-semibold italic hover:no-underline",
                             !field.value &&
-                              "text-muted-foreground text-devready-green"
+                              "text-muted-foreground text-devready-green animate-pulse"
                           )}
                         >
-                          {field.value
-                            ? careerList.find(
-                                (language) => language.label === field.value
-                              )?.label
-                            : ""}
-                          <ChevronDown className="h-10 w-10 font-bold shrink-0 pt-1" />
+                          {field.value ? (
+                            careerList.find(
+                              (language) => language.label === field.value
+                            )?.label
+                          ) : (
+                            <ChevronDown className="h-10 w-10 font-bold shrink-0 pt-2" />
+                          )}
                         </Button>
                       </FormControl>
                     </PopoverTrigger>
                     <PopoverContent className="w-[200px] p-0">
                       <Command className=" overflow-y-auto max-h-[420px]">
-                        <CommandInput placeholder="Search language..." />
-                        <CommandEmpty>No language found.</CommandEmpty>
+                        <CommandInput placeholder="Search careers..." />
+                        <CommandEmpty>more coming soon ...</CommandEmpty>
                         <CommandGroup className="overflow-y-auto max-h-[300px]">
                           {careerList.map((career) => (
                             <CommandItem
@@ -180,6 +223,14 @@ export default function UserOnboardingWelcome() {
                 </FormItem>
               )}
             />
+
+            <Button
+              type="submit"
+              className="px-10 font-medium text-base"
+              onClick={() => {}}
+            >
+              Next page
+            </Button>
           </form>
         </Form>
       </div>
