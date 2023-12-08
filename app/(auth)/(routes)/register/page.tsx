@@ -35,11 +35,11 @@ function Page(): JSX.Element {
       result
     );
     toast.success(
-      "Successfully registered and logged in."
+      "Successfully registered."
     );
 
     //- Redirect to the home page
-    router.push("/dashboard");
+    router.push("/onboarding");
   };
 
   return (
@@ -49,7 +49,7 @@ function Page(): JSX.Element {
         <h1 className="text-3xl text-devready-green font-bold">
           Create a new account
         </h1>
-        <p className="pt-3">
+        <p className="pt-3 text-sm">
           <em>
             If it be not to come, it will be now. If it be not now, yet it will
             come – the readiness is all 🧠
