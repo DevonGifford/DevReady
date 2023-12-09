@@ -1,14 +1,13 @@
 "use client";
 
 import * as z from "zod";
-import { cn } from "@/lib/utils";
 import { useRouter, useSearchParams } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { motion } from "framer-motion";
 
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { useForm } from "react-hook-form";
-// import { Switch } from "@/components/ui/switch";
 import {
   Form,
   FormControl,
@@ -18,6 +17,8 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+
+import { EXIT_NORMAL_ALL } from "@/constants/onboarding-index";
 
 // 👇 FORM SCHEMA : Data Onboarding Form
 const userCareerFormSchema = z.object({
@@ -33,7 +34,7 @@ const defaultValues: Partial<UserOnboardingValues> = {
 
 export default function UserOnbaordingCareer() {
   const router = useRouter();
-  const searchParams = useSearchParams()
+  const searchParams = useSearchParams();
 
   // ✅ ZOD-FORM HOOK :  custom hook initializes form instance,
   const form = useForm<UserOnboardingValues>({
@@ -47,8 +48,8 @@ export default function UserOnbaordingCareer() {
 
     const queryParams = {
       pageId: "image-onboarding",
-      username: searchParams.get('username')!,
-      career_title: searchParams.get('career_title')!,
+      username: searchParams.get("username")!,
+      career_title: searchParams.get("career_title")!,
       career_level: data.career_level?.toString() || "",
       experience_level: data.experience_level?.toString() || "",
     };
@@ -70,12 +71,22 @@ export default function UserOnbaordingCareer() {
     <div className="z-10 mx-5 flex flex-col items-center text-center sm:mx-auto">
       {/* HEADING */}
       <div className="flex flex-col justify-center text-center items-center gap-2 text-2xl pb-8 sm:text-3xl sm:pb-12 md:text-4xl md:pb-16">
-        <h1 className="font-display font-bold  transition-colors ">
+        <motion.h1
+          className="font-display font-bold  transition-colors "
+          initial={{ opacity: 0, x: "100vw" }}
+          animate={{
+            opacity: 1,
+            x: 0,
+            transition: { duration: 0.8, ease: "easeInOut", delay: 0.2 },
+          }}
+          exit={EXIT_NORMAL_ALL.exit}
+          transition={EXIT_NORMAL_ALL.exit.transition}
+        >
           Set your{" "}
           <span className="font-display text-devready-green">
             current level
           </span>
-        </h1>
+        </motion.h1>
       </div>
 
       <Form {...form}>
@@ -94,47 +105,59 @@ export default function UserOnbaordingCareer() {
             control={form.control}
             name="career_level"
             render={({ field: { value, onChange } }) => (
-              <FormItem className="space-y-2 py-1">
-                <div className="flex flex-col items-center pb-4 tracking-wider">
-                  <FormLabel>Professional Stage</FormLabel>
-                  <FormDescription>
-                    Indicate your current professional stage.
-                  </FormDescription>
-                </div>
+              <motion.div
+                className="font-display font-bold  transition-colors "
+                initial={{ opacity: 0, x: "100vw" }}
+                animate={{
+                  opacity: 1,
+                  x: 0,
+                  transition: { duration: 0.8, ease: "easeInOut", delay: 0.4 },
+                }}
+                exit={EXIT_NORMAL_ALL.exit}
+                transition={EXIT_NORMAL_ALL.exit.transition}
+              >
+                <FormItem className="space-y-2 py-1">
+                  <div className="flex flex-col items-center pb-4 tracking-wider">
+                    <FormLabel>Professional Stage</FormLabel>
+                    <FormDescription>
+                      Indicate your current professional stage.
+                    </FormDescription>
+                  </div>
 
-                <FormControl className="mx-4 w-11/12">
-                  <Slider
-                    min={0}
-                    max={100}
-                    step={1}
-                    defaultValue={[0]}
-                    onValueChange={(vals) => {
-                      onChange(vals[0]);
-                    }}
-                  />
-                </FormControl>
+                  <FormControl className="mx-4 w-11/12">
+                    <Slider
+                      min={0}
+                      max={100}
+                      step={1}
+                      defaultValue={[0]}
+                      onValueChange={(vals) => {
+                        onChange(vals[0]);
+                      }}
+                    />
+                  </FormControl>
 
-                <div className="flex justify-between text-xs text-muted-foreground ml-1 pr-[calc(100vw+1rem]">
-                  <div className="flex flex-col text-center">
-                    <p>Aspiring</p>
-                    <p className="w-full">Dev</p>
+                  <div className="flex justify-between text-xs text-muted-foreground ml-1 pr-[calc(100vw+1rem]">
+                    <div className="flex flex-col text-center">
+                      <p>Aspiring</p>
+                      <p className="w-full">Dev</p>
+                    </div>
+                    <div className="flex flex-col items-center text-center">
+                      <p>Junior</p>
+                      <p>Dev</p>
+                    </div>
+                    <div className="flex flex-col items-center text-center">
+                      <p>Mid-Level</p>
+                      <p>Dev</p>
+                    </div>
+                    <div className="flex flex-col items-end text-center">
+                      <p>Senior</p>
+                      <p className="w-full">Dev</p>
+                    </div>
                   </div>
-                  <div className="flex flex-col items-center text-center">
-                    <p>Junior</p>
-                    <p>Dev</p>
-                  </div>
-                  <div className="flex flex-col items-center text-center">
-                    <p>Mid-Level</p>
-                    <p>Dev</p>
-                  </div>
-                  <div className="flex flex-col items-end text-center">
-                    <p>Senior</p>
-                    <p className="w-full">Dev</p>
-                  </div>
-                </div>
 
-                <FormMessage />
-              </FormItem>
+                  <FormMessage />
+                </FormItem>
+              </motion.div>
             )}
           />
 
@@ -143,81 +166,81 @@ export default function UserOnbaordingCareer() {
             control={form.control}
             name="experience_level"
             render={({ field: { value, onChange } }) => (
-              <FormItem className="space-y-2 py-2">
-                <div className="flex flex-col items-center pb-4 tracking-wider">
-                  <FormLabel>Experience Level</FormLabel>
-                  <FormDescription>
-                    Indicate your experience in years of work.
-                  </FormDescription>
-                </div>
+              <motion.div
+                className="font-display font-bold  transition-colors "
+                initial={{ opacity: 0, x: "100vw" }}
+                animate={{
+                  opacity: 1,
+                  x: 0,
+                  transition: { duration: 0.8, ease: "easeInOut", delay: 0.6 },
+                }}
+                exit={EXIT_NORMAL_ALL.exit}
+                transition={EXIT_NORMAL_ALL.exit.transition}
+              >
+                <FormItem className="space-y-2 py-2">
+                  <div className="flex flex-col items-center pb-4 tracking-wider">
+                    <FormLabel>Experience Level</FormLabel>
+                    <FormDescription>
+                      Indicate your experience in years of work.
+                    </FormDescription>
+                  </div>
 
-                <FormControl className="mx-4 w-11/12">
-                  <Slider
-                    min={0}
-                    max={100}
-                    step={1}
-                    defaultValue={[0]}
-                    onValueChange={(vals) => {
-                      onChange(vals[0]);
-                    }}
-                  />
-                </FormControl>
+                  <FormControl className="mx-4 w-11/12">
+                    <Slider
+                      min={0}
+                      max={100}
+                      step={1}
+                      defaultValue={[0]}
+                      onValueChange={(vals) => {
+                        onChange(vals[0]);
+                      }}
+                    />
+                  </FormControl>
 
-                <div className="flex justify-between text-xs text-muted-foreground ml-1 pr-[calc(100vw+1rem]">
-                  <div className="flex flex-col text-center">
-                    <p>&gt;6</p>
-                    <p className="w-full">Months</p>
+                  <div className="flex justify-between text-xs text-muted-foreground ml-1 pr-[calc(100vw+1rem]">
+                    <div className="flex flex-col text-center">
+                      <p>&gt;6</p>
+                      <p className="w-full">Months</p>
+                    </div>
+                    <div className="flex flex-col items-center text-center">
+                      <p>1</p>
+                      <p>Year</p>
+                    </div>
+                    <div className="flex flex-col items-center text-center">
+                      <p>3</p>
+                      <p>Years</p>
+                    </div>
+                    <div className="flex flex-col items-end text-center">
+                      <p>5+</p>
+                      <p className="w-full">Years</p>
+                    </div>
                   </div>
-                  <div className="flex flex-col items-center text-center">
-                    <p>1</p>
-                    <p>Year</p>
-                  </div>
-                  <div className="flex flex-col items-center text-center">
-                    <p>3</p>
-                    <p>Years</p>
-                  </div>
-                  <div className="flex flex-col items-end text-center">
-                    <p>5+</p>
-                    <p className="w-full">Years</p>
-                  </div>
-                </div>
 
-                <FormMessage />
-              </FormItem>
+                  <FormMessage />
+                </FormItem>
+              </motion.div>
             )}
           />
 
-          {/* Switches */}
-          {/* <div className="flex flex-row justify-center items-center">
-              <FormField
-                control={form.control}
-                name="ztm_student"
-                render={({ field }) => (
-                  <FormItem className="flex flex-row gap-6 md:gap-10 justify-between rounded-lg border p-3 ">
-                    <div className="text-start">
-                      <FormLabel className="text-base">ZTM Alumni</FormLabel>
-                      <FormDescription className="text-xs md:text-sm pt-1">
-                        Currently a ZTM student or alumni?
-                      </FormDescription>
-                    </div>
-                    <FormControl>
-                      <Switch
-                        checked={field.value}
-                        onCheckedChange={field.onChange}
-                      />
-                    </FormControl>
-                  </FormItem>
-                )}
-              />
-            </div> */}
-
-          <Button
-            type="submit"
-            className="px-10 font-medium text-base"
-            onClick={() => {}}
+          <motion.div
+            className="font-display font-bold  transition-colors "
+            initial={{ opacity: 0, x: "100vw" }}
+            animate={{
+              opacity: 1,
+              x: 0,
+              transition: { duration: 0.8, ease: "easeInOut", delay: 0.8 },
+            }}
+            exit={EXIT_NORMAL_ALL.exit}
+            transition={EXIT_NORMAL_ALL.exit.transition}
           >
-            Next page
-          </Button>
+            <Button
+              type="submit"
+              className="px-10 font-medium text-base"
+              onClick={() => {}}
+            >
+              Next page
+            </Button>
+          </motion.div>
         </form>
       </Form>
     </div>
