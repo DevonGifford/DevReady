@@ -46,7 +46,10 @@ export const AuthContextProvider = ({
   const [user, setUser] = useState<UserType>({ email: null, uid: null });
   const [loading, setLoading] = useState<Boolean>(true);
 
-  // ✅ UPDATING AUTH-STATE ON AUTH CHANGE
+  /**
+   * ✅ UPDATING AUTH-STATE - Handles the auth state change event.
+   * @returns {void}
+   */
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       console.log(
@@ -77,7 +80,12 @@ export const AuthContextProvider = ({
     return () => unsubscribe();
   }, []);
 
-  // ✅ HANDLE REGISTER NEW USER
+  /**
+   * ✅ HANDLE REGISTER NEW USER - Registers a new user.
+   * @param {string} email - The user's email.
+   * @param {string} password - The user's password.
+   * @returns {Promise<{ result?: any, error?: any }>} A Promise with the registration result or error.
+   */
   const register = async (email: string, password: string) => {
     console.log("🎯event_log:  🔑authProvider/register:  💢 Triggered");
 
@@ -126,7 +134,12 @@ export const AuthContextProvider = ({
     }
   };
 
-  // ✅ HANDLE USER LOGIN
+  /**
+   * ✅ HANDLE USER LOGIN - Logs in a user.
+   * @param {string} email - The user's email.
+   * @param {string} password - The user's password.
+   * @returns {Promise<void>} A Promise that resolves once the login process completes.
+   */
   const logIn = async (email: string, password: string) => {
     console.log("🎯event_log:  🔑authProvider/login:  💢 Triggered ");
     try {
@@ -159,7 +172,10 @@ export const AuthContextProvider = ({
     }
   };
 
-  // ✅ HANLDE USER LOGOUT
+  /**
+   * ✅ HANLDE USER LOGOUT - Logs out the current user.
+   * @returns {Promise<void>} A Promise that resolves once the logout process completes.
+   */
   const logOut = async () => {
     console.log("🎯event_log:  🔑authProvider/logout:    💢 Triggered ");
     setUser({ email: null, uid: null });

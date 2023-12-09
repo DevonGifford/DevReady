@@ -13,30 +13,29 @@ import {
 import { UserProfile } from "@/types/UserProfile";
 
 type Data = Record<string, any>;
-
 type UserContextProps = {
   userProfile: UserProfile | null;
+  updateUserProfile: (userProfile: Partial<UserProfile>) => Promise<void>;
   fetchUserDataProcess: (userId: string) => Promise<void>;
   updateUserDataProcess: (
     documentId: string,
     userProfile: Partial<UserProfile>
   ) => Promise<void>;
 };
-
 // 👇 USER CONTEXT => exposing following...
 const UserContext = createContext<UserContextProps>({
   userProfile: null,
+  updateUserProfile: async () => {},
   fetchUserDataProcess: async () => {},
   updateUserDataProcess: async () => {},
 });
-
-// - Explicit Return:
-// - allows for additional code/logic to be added inside function before returning context
+// 📌 Explicit Return:
+// 📌 allows for additional code/logic to be added inside function before returning context
 export const useUserContext = () => {
   return useContext(UserContext);
 };
 
-// 🎯to-do-list:  update sessionStorage? (encrypted?)
+// 🎯🔮 to-do-list:  update sessionStorage? (encrypted?)
 
 export const UserContextProvider = ({
   children,
@@ -77,9 +76,54 @@ export const UserContextProvider = ({
   }, []);
 
   /**
+   * ✅ HANDLES UPDATING CONTEXT:
+   * Updates the user profile in the context with new data.
+   * @param {Partial<UserProfile>} newData - The new data to update in the user profile.
+   * @returns {Promise<void>} A Promise that resolves once the update process completes.
+   */
+  const updateUserProfile = async (newData: Partial<UserProfile>) => {
+    console.log("🎯event_log:  🎭UserContext/updateUserProfile: 💢 Triggered");
+    try {
+      if (!userProfile) {
+        console.error(
+          `🎯event_log:  🎭UserContext/updateUserProfile:  ❌ Error:  cannot access user context.`
+        );
+        return;
+      }
+
+      console.log(
+        "🦺event_log:  🎭UserContext/updateUserProfile:  Current userProfile",
+        userProfile
+      );
+      console.log(
+        "🦺event_log:  🎭UserContext/updateUserProfile:  New data to be updated",
+        newData
+      );
+
+      //👇 Merge the existing profile with the new data
+      const updatedProfile = { ...userProfile, ...newData };
+      console.log(
+        "🦺event_log:  🎭UserContext/updateUserProfile:  Updated profile after merge",
+        updatedProfile
+      );
+
+      //👇 Update the userProfile state with the merged profile
+      setUserProfile(updatedProfile);
+      console.log(
+        "🎯event_log:  🎭UserContext/updateUserProfile:  ✔  Success:  Successfully updated userProfile - new data:",
+        updatedProfile
+      );
+    } catch (error) {
+      console.error(
+        "🎯event_log:  🎭UserContext/updateUserProfile:  ❌ Error:  Error updating userProfile",
+        error
+      );
+    }
+  };
+
+  /**
    * ✅ HANDLES UPDATING USER-DOC:
-   * Handles updating user document by checking if the document exists, updating it,
-   * and updating the state accordingly.
+   * Handles updating user document by checking if the document exists, updating it, and updating the state accordingly.
    * @param {string} documentId - The ID of the document to update.
    * @param {Partial<UserProfile>} newData - The new data to update in the user profile.
    * @returns {Promise<void>} A Promise that resolves once the update process completes.
@@ -166,6 +210,7 @@ export const UserContextProvider = ({
 
   const userContextValue: UserContextProps = {
     userProfile,
+    updateUserProfile,
     updateUserDataProcess,
     fetchUserDataProcess,
   };

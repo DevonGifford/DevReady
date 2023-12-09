@@ -21,12 +21,12 @@ export const uploadImageProcess = async (
   userDocId: string
 ) => {
   console.log(
-    "🎯event_log:  🔥utils/firestore/uploadImageProcess:  💢 Triggered"
+    "🎯event_log:  🔥utils/firestore/storage/uploadImageProcess:  💢 Triggered"
   );
   try {
     //👇 HANDLE UPLOADING IMAGE:
     console.log(
-      "🎯event_log:  🔥utils/firestore/uploadImageProcess:  Uploading Image..."
+      "🎯event_log:  🔥utils/firestore/storage/uploadImageProcess:  Uploading Image..."
     );
     let publicImageUrl = "";
     const imageRef = ref(storage, `images/${fileName}`);
@@ -47,40 +47,32 @@ export const uploadImageProcess = async (
           //- Get the image URL.
           publicImageUrl = await getDownloadURL(imageRef);
           console.log(
-            "🎯event_log:  🔥utils/firestore/uploadImageProcess:  ✔  Successfully uploaded image to storage - publicImageUrl: ",
+            "🎯event_log:  🔥utils/firestore/storage/uploadImageProcess:  ✔  Successfully uploaded image to storage - publicImageUrl: ",
             publicImageUrl
           );
           //- Update user document
           console.log(
-            "🎯event_log:  🔥utils/firestore/uploadImageProcess:  Updating user document..."
+            "🎯event_log:  🔥utils/firestore/storage/uploadImageProcess:  Updating user document..."
           );
 
-          console.log(
-            "[TEMP]🎯event_log:  🔥utils/firestore/uploadImageProcess:  ",
-            "Updating the following - ",
-            "userDocId: ",
-            userDocId,
-            "PublicImageUrl: ",
-            publicImageUrl
-          );
           await updateUserImage(userDocId, publicImageUrl);
         } catch (getUrlError) {
           console.error(
-            "🎯event_log:  🔥utils/firestore/uploadImageProcess:  ❌ Error - Failed to get image URL.",
+            "🎯event_log:  🔥utils/firestore/storage/uploadImageProcess:  ❌ Error - Failed to get image URL.",
             getUrlError
           );
           throw getUrlError;
         }
       } catch (updateMetaError) {
         console.error(
-          "🎯event_log:  🔥utils/firestore/uploadImageProcess:  ❌ Error - Failed to update image metadata.",
+          "🎯event_log:  🔥utils/firestore/storage/uploadImageProcess:  ❌ Error - Failed to update image metadata.",
           updateMetaError
         );
         throw updateMetaError;
       }
     } catch (uploadError) {
       console.error(
-        "🎯event_log:  🔥utils/firestore/uploadImageProcess:  ❌ Error - Image upload failed.",
+        "🎯event_log:  🔥utils/firestore/storage/uploadImageProcess:  ❌ Error - Image upload failed.",
         uploadError
       );
       throw uploadError;
@@ -89,7 +81,7 @@ export const uploadImageProcess = async (
     return publicImageUrl;
   } catch (error) {
     console.error(
-      "🎯event_log:  🔥utils/firestore/uploadImageProcess:  ❌ Error - Image upload process failed.",
+      "🎯event_log:  🔥utils/firestore/storage/uploadImageProcess:  ❌ Error - Image upload process failed.",
       error
     );
     throw error;
@@ -110,7 +102,7 @@ export const onlyUploadImage = async (
 ) => {
   try {
     console.log(
-      "🎯event_log:  🔥utils/firestore/onlyUploadImage:  💢 Triggered"
+      "🎯event_log:  🔥utils/firestore/storage/onlyUploadImage:  💢 Triggered"
     );
 
     const imageRef = ref(storage, `images/${fileName}`);
@@ -124,14 +116,14 @@ export const onlyUploadImage = async (
 
     const publicImageUrl = await getDownloadURL(imageRef);
     console.log(
-      "🎯event_log:  🔥utils/firestore/onlyUploadImage:  ✔ Success - Image uploaded. Public URL:",
+      "🎯event_log:  🔥utils/firestore/storage/onlyUploadImage:  ✔ Success - Image uploaded. Public URL:",
       publicImageUrl
     );
 
     return publicImageUrl;
   } catch (error) {
     console.error(
-      "🎯event_log:  🔥utils/firestore/onlyUploadImage:  ❌ Error - Image upload failed.",
+      "🎯event_log:  🔥utils/firestore/storage/onlyUploadImage:  ❌ Error - Image upload failed.",
       error
     );
     throw error;

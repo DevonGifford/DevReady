@@ -16,36 +16,26 @@ export default function UserOnboardingImage() {
   const [isLoading, setIsLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-  const username = searchParams.get("username");
-  const career_title = searchParams.get("career_title");
-  const career_level = searchParams.get("career_level");
-  const experience_level = searchParams.get("experience_level");
-
-  console.log("username", username);
-  console.log("career_title", career_title);
-  console.log("career_level", career_level);
-  console.log("experience_level", experience_level);
-
-  // ⌛ HANDLE COMPLETE BUTTON:
+  // ✅ SUBMIT ONBOARDING DATA :  updates the usercontext, db and then routes to dashboard:
   const handleCompleteOnboarding = () => {
     console.log(
       "🎯event-log:  👋onboarding/image/handleCompleteOnboarding:  💢 Triggered"
     );
 
-    //👇 handle user data (partial)
+    //👇 handling the user data
     if (userProfile) {
-      setIsLoading(true); //- Set loading spinner
+      setIsLoading(true); //-Set loading spinner
       const updatedUserData: Partial<UserProfile> = {
         account: {
-          ...userProfile?.account,
-          username: username || "",
-          career_title: career_title || "",
-          career_level: Number(career_level) || 0,
-          experience_level: Number(experience_level) || 0,
+          ...userProfile.account,
+          username: searchParams.get("username") || "",
+          career_title: searchParams.get("career_title") || "",
+          career_level: Number(searchParams.get("career_level")) || 0,
+          experience_level: Number(searchParams.get("experience_level")) || 0,
+          userimage: userProfile.account.userimage || "",
         },
       };
-
-      //👇 update context & userdoc
+      //👇 update userContext & userDatabase
       updateUserDataProcess(userProfile.uuid, updatedUserData)
         .then(() => {
           console.log(
@@ -54,11 +44,12 @@ export default function UserOnboardingImage() {
           setIsLoading(false); //- Reset loading state
           setSubmitted(true); //- Set achieved state
           setTimeout(() => {
-            setSubmitted(false); //- Reset achieved state after a while
-            //- send user to dashboard
-          }, 2000);
-          router.push('/dashboard')
+            setSubmitted(false); //- Reset achieved (timeout)
+          }, 1500);
+          //👇 send user to dashboard
+          router.push("/dashboard");
         })
+        // ✖ Handle error states
         .catch((error) => {
           console.log(
             "🎯event-log:  👋onboarding/image/handleCompleteOnboarding:  ❌ Something went wrong, error: ",
@@ -66,7 +57,7 @@ export default function UserOnboardingImage() {
           );
           setIsLoading(false); //- Reset loading state
         });
-      } else {
+    } else {
       console.log(
         "🎯event-log:  👋onboarding/image/handleCompleteOnboarding:  ❌ Hmmm something went wrong in registration: "
       );
@@ -93,12 +84,11 @@ export default function UserOnboardingImage() {
 
       <ProfilePictureUploader userDocId={userProfile?.uuid!} />
 
-      {/* <div className="h-[230px] border-2 w-full max-w-sm justify-center sm:mb-5">
-        {" "}
-      </div> */}
-
-      <Button className="px-10 font-medium text-base" onClick={handleCompleteOnboarding}>
-      {isLoading ? <Spinner /> : submitted ? <Check /> : "Complete"}
+      <Button
+        className="px-10 font-medium text-base"
+        onClick={handleCompleteOnboarding}
+      >
+        {isLoading ? <Spinner /> : submitted ? <Check /> : "Complete"}
       </Button>
     </div>
   );
