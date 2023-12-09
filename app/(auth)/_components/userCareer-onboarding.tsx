@@ -42,7 +42,7 @@ export default function UserOnbaordingCareer() {
     defaultValues,
   });
 
-  // ⌛ SUBMIT FORM -
+  // ✅ SUBMIT ONBOARDING FORM - Navigates to the next onboarding page with submitted data.
   function onSubmit(data: UserOnboardingValues) {
     console.log("🎯event-log:  📝onboarding/career/onSubmit:  💢 Triggered");
 
@@ -55,15 +55,6 @@ export default function UserOnbaordingCareer() {
     };
 
     const queryString = new URLSearchParams(queryParams).toString();
-    console.log(
-      "🎯event-log:  📝onboarding/career/onSubmit:",
-      "🔗 new quereyParams",
-      queryParams,
-      "🔗 new quereyString",
-      queryString
-    );
-
-    // Update the URL with the form data as query parameters
     router.push(`?${queryString}`);
   }
 
@@ -93,7 +84,7 @@ export default function UserOnbaordingCareer() {
         <form
           onSubmit={form.handleSubmit((data) => {
             console.log(
-              "🎯event_log:  📝-form submitted with following form-data: ",
+              "🎯event_log:  👋📝 Onboarding orm submitted - form-data:  ",
               data
             );
             onSubmit(data);
@@ -222,6 +213,7 @@ export default function UserOnbaordingCareer() {
             )}
           />
 
+          {/* SUBMIT BUTTON */}
           <motion.div
             className="font-display font-bold  transition-colors "
             initial={{ opacity: 0, x: "100vw" }}

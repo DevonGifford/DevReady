@@ -45,18 +45,14 @@ export default function OnboardingFormHandler() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5, delay: 1.5 }}
               exit={EXIT_NORMAL_ALL.exit}
-              // transition={EXIT_NORMAL_ALL.exit.transition}
             >
               <Button
+                className="text-xs font-bold translate-y-1/2"
                 variant={"outline"}
                 size={"sm"}
                 onClick={() => {
                   router.back();
-                  console.log(
-                    "🎯event-log:  👋onboardingFormHandler/root:  Back Buton Clicked"
-                  );
                 }}
-                className="text-xs font-bold translate-y-1/2"
               >
                 <ArrowLeftIcon size={16} /> Go Back
               </Button>

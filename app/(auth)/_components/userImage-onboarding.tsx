@@ -105,7 +105,8 @@ export default function UserOnboardingImage() {
           <br />
         </motion.p>
       </div>
-
+      
+      {/* CUSTOM IMAGE UPLOADER */}
       <motion.div
         initial={{ opacity: 0, x: "100vw" }}
         animate={{
@@ -118,7 +119,8 @@ export default function UserOnboardingImage() {
       >
         <ProfilePictureUploader userDocId={userProfile?.uuid!} />
       </motion.div>
-
+      
+      {/* ONBOARDING_COMPLETE SUBMIT BUTTON */}
       <motion.div
         initial={{ opacity: 0, x: "100vw" }}
         animate={{

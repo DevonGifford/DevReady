@@ -63,7 +63,7 @@ export default function UserOnboardingWelcome() {
     defaultValues,
   });
 
-  // ⌛ SUBMIT FORM -
+  // ✅ SUBMIT ONBOARDING FORM - Navigates to the next onboarding page with submitted data.
   async function onSubmit(data: WelcomeOnboardingValues) {
     console.log("🎯event-log:  📝onboarding/welcome/onSubmit:  💢 Triggered");
 
@@ -71,19 +71,9 @@ export default function UserOnboardingWelcome() {
       pageId: "data-onboarding",
       username: data.username,
       career_title: data.career_title,
-      // Add other form fields (if user clicks back) ?
     };
 
     const queryString = new URLSearchParams(queryParams).toString();
-    console.log(
-      "🎯event-log:  📝onboarding/welcome/onSubmit:",
-      "🔗 new quereyParams",
-      queryParams,
-      "🔗 new quereyString",
-      queryString
-    );
-
-    // Update the URL with the form data as query parameters
     router.push(`?${queryString}`);
   }
 
@@ -95,10 +85,10 @@ export default function UserOnboardingWelcome() {
           <motion.h1
             className="font-display text-xl sm:text-3xl md:text-4xl font-bold transition-colors"
             variants={{
-              hidden: { opacity: 0, scale: 1.8 }, // Starting slightly smaller
+              hidden: { opacity: 0, scale: 1.8 },
               show: {
                 opacity: 1,
-                scale: 1, // Full scale
+                scale: 1,
                 transition: {
                   duration: 1.4,
                   type: "spring",
@@ -142,13 +132,14 @@ export default function UserOnboardingWelcome() {
           <form
             onSubmit={form.handleSubmit((data) => {
               console.log(
-                "🎯event_log:  📝-form submitted with following form-data: ",
+                "🎯event_log:  👋📝 Onboarding form submitted - form-data : ",
                 data
               );
               onSubmit(data);
             })}
             className="flex flex-col justify-center items-center text-center space-y-[calc(100vw-90vw)] lg:space-y-16 w-full  "
           >
+            {/* USERNAME */}
             <motion.div
               variants={{
                 hidden: { opacity: 0, y: 20 },
@@ -209,7 +200,7 @@ export default function UserOnboardingWelcome() {
                 )}
               />
             </motion.div>
-
+            {/* CAREER TITLE */}
             <motion.div
               variants={{
                 hidden: { opacity: 0, y: 20 },
@@ -288,7 +279,7 @@ export default function UserOnboardingWelcome() {
                 )}
               />
             </motion.div>
-
+            {/* SUBMIT BUTTON */}
             <motion.div
               variants={{
                 hidden: { opacity: 0, y: 20 },
