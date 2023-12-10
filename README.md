@@ -224,178 +224,110 @@ This project is licensed under the [MIT License](🎯).
 
 # Ticket Handling Strategy
 
-### Branch Plan Overview
+### Segmented Actionable Items:
 
-I've devised a structured approach to handle next tickets. Here's the breakdown of my plan:
+#### 1. **Integration of React Form Library:**
+   - [ ] Research and choose a suitable React form library (e.g., Formik, React Hook Form).
+   - [ ] Integrate the selected library into the project structure.
+   - [ ] Implement basic form structures for login and registration.
 
-### Ticket Segmentation
+#### 2. **Utilize Zod for Validation:**
+   - [ ] Integrate Zod library into the project.
+   - [ ] Define validation schemas for login and registration fields.
+   - [ ] Implement validation logic in forms to enforce schema.
 
-1. **Feature: User Onboarding Implementation**
-   - **Branch Name:** `feature/user-onboarding-implementation`
-   - **Objective:** Adding a new feature for guiding new users during registration and determining their initial platform level.
-   - **Reasoning:** This feature enhances our app by collecting additional user information and establishing a smooth onboarding process.
+#### 3. **Review and Analyze Existing Pages:**
+   - [ ] Identify UI/UX issues, usability concerns, and potential areas for enhancement.
+   - [ ] Document observations and propose changes for better user experience.
 
-2. **Refactor/Enhance: Authentication Pages**
-   - **Branch Name:** `refactor/enhance-authentication-pages`
-   - **Objective:** Improving the structure, error handling, and validation in the Login and Register pages.
-   - **Reasoning:** This task focuses on refining our existing authentication processes, ensuring robustness and reliability.
+#### 4. **Implement Error Handling Mechanisms:**
+   - [ ] Identify possible error scenarios (e.g., incorrect credentials, server errors).
+   - [ ] Implement error messages and visual feedback for users.
+   - [ ] Ensure error states are properly managed and communicated.
 
-### Sequential Approach
+#### 5. **Refactor UI Components:**
+   - [ ] Modify UI elements to accommodate new form structures and error handling.
+   - [ ] Ensure consistency and alignment with design/UI team guidelines.
+   - [ ] Update layout to match onboarding layout via `layout.tsx`.
+   - [ ] Add a better background image to match onboarding styles.
+   - [ ] Incorporate Framer Motion for enhanced animations.
+   - [ ] Break forms up into header, form, and footer sections for reusability across pages.
 
-**Order of Implementation:**
-   - **Priority 1:** Start with the `feature/user-onboarding-implementation` branch to introduce the onboarding feature.
-   - **Priority 2:** Following the completion of the onboarding implementation, move to the `refactor/enhance-authentication-pages` branch. This will serve as a cleanup and optimization phase for entire authentication processes - thus setting up for cleaner testing phase .
+#### 6. **User Profile Management Integration:**
+   - [ ] Create functions to manage user documents within Firebase upon registration.
+   - [ ] Connect user authentication with User Profile Context for data retrieval.
+   - [ ] Implement error handling for user data retrieval and document creation.
 
-### Interdependency Consideration
+### Considerations to Address:
 
-While the authentication pages are already integrated, prioritizing the onboarding feature might be for the best. It allows me to build upon existing functionality and then refine authentication process comprehensively.
+1. **Documentation and Testing:**
+   - [ ] Comprehensive documentation for integration steps, error handling mechanisms, and context implementation details.
+   - [ ] Thorough testing covering various use cases, error scenarios, and CRUD operations within Firebase.
+
+2. **Cross-Compatibility Testing:**
+   - [ ] Ensure alignment and consistency with design/UI guidelines post-refactoring.
+   - [ ] Test across browsers and devices for optimal performance and responsiveness.
+
+4. **Future Reference and Maintenance:**
+   - [ ] Prioritize detailed documentation for future maintenance and reference.
 
 
+# CURRENT TICKET :  Clean up Login/Register pages #19
 
+### Summary
 
+This ticket aims to refactor the existing Login and Register pages to enhance their structure, error handling, and validation. Tasks involve integrating the React form library, utilizing Zod for validation, implementing error handling mechanisms, and refining UI components.
 
-# CURRENT TICKET :  Implement User Onboarding Process  #20
+In simple terms, this implementation aims to improve the Login and Register pages' structure and user experience by establishing standardized form handling and validation.
 
-https://github.com/DevonGifford/ZtmReady--PortfolioProject/issues/20
-
-### Summary:
-
-This ticket outlines the process of establishing an onboarding process for new users during registration. The tasks involved include defining onboarding questions, integrating the questionnaire with the registration flow, developing mechanisms for data collection and storage, defining the logic for level determination, and providing user feedback.
-
-In layman’s terms, this implementation “Helps our app guide new users during registration. It sets up a process to collect additional information about users and determine their initial level.”
-
-As always, we prioritize thorough testing and validation of functionalities for robustness and reliability, along with comprehensive documentation for clarity and future reference.
-
-<br/>
+Thorough testing, validation, and comprehensive documentation are prioritized for reliability and future reference.
 
 ---
 
-### Research Onboarding & Define Questions
-- [ ] **Create Targeted Questions:** Gather user information for determining their initial platform level.
-- [ ] **Research Best Practices:** Explore potential examples or libraries with smooth user interaction and flashy UI.
 
-### Integration with Registration and FireStore DB
-- [ ] **Incorporate Questionnaire:** Integrate the onboarding questionnaire smoothly within the registration flow to gather additional user information.
-- [ ] **Secure Data Collection:** Develop secure mechanisms to collect and store user responses securely in the Firestore Database.
-- [ ] **Implement Robust Validation:** Ensure thorough error handling and validation processes to maintain accurate data for level determination.
+### Integrate React Form Library & Zod for Validation
+- [ ] **Incorporate React Form Library**:  
+Implement the React form library for standardized form management.
+- [ ] **Utilize Zod for Validation**:  
+Enforce data validation using the Zod library for both Login and Register forms.
 
-### Post Onboarding Logic
-- [ ] **Provide User Feedback:** Offer clear and informative feedback to users based on their onboarding responses, ensuring a better understanding of the initial level determination.
-- [ ] **Define Level Algorithm:** Establish the algorithm or logic to derive the user’s initial platform level based on collected data.
-- [ ] **Final Submission Functionality:** Create a function for updating the Firebase database upon onboarding completion, followed by user redirection to the login page.
-- [ ] **Post-Login Data Retrieval:** Develop a process to fetch data from Firebase during login, store it in session storage, and update the user context.
+
+### Assessment of Current Pages
+- [ ] **Review and Analyze Pages**:  
+Review and analyze the existing Login and Register pages to identify areas for improvement.
+- [ ] **Develop Robust Error Handling**:  
+Implement robust error handling mechanisms for invalid inputs and authentication failures.
+- [ ] **Refactor UI Components**:  
+Update UI components as needed to align with revised form handling and validation logic.
+
+
+### Task from User Profile Management with Firebase Integration Ticket
+
+- [ ] **Create New User Document on Registration**:  
+Develop functions to create a new user document within Firebase upon registration, allowing seamless user profile management.
+- [ ] **Integrate Authentication with User Profile Context**:  
+Connect user authentication with the User Profile Context to retrieve and load user profile data upon login within the Login and Register pages.
+- [ ] **Implement Error Handling for Data Retrieval**:  
+Add robust error handling mechanisms to manage any issues arising during user data retrieval, document creation or processing, ensuring a smooth user experience.
+
 
 ### Testing Considerations
-- [ ] **Comprehensive Testing:** Conduct exhaustive end-to-end (E2E), integration, and unit tests to ensure the robust functionality of the onboarding process across diverse scenarios and inputs.
-
-
-<br/>
+- [ ] **Perform Extensive Testing**:  
+Thoroughly test the updated pages, covering various use cases and error scenarios.
+- [ ] **Test CRUD Operations**:  
+Validate the functionality of CRUD operations within Firebase for user profiles.
+- [ ] **Validate Context Integration**:  
+Ensure accurate updates within the User Profile Context based on changes in user profile data.
+- [ ] **Data Persistence Testing**:  
+Verify the persistence of user settings across sessions by retrieving them from Firebase during subsequent logins.
 
 ---
 
 ### Additional Considerations
+- **Collaboration with Design/UI Team**: Ensure consistency in user experience post-refactoring.
+- **Cross-Compatibility Testing**: Test across browsers and devices for optimal performance.
 
-- Collaborate with UX/UI teams to ensure the seamless integration of the forms with the application’s design and user experience.
-- Prioritize security measures to safeguard user data and prevent unauthorized access during CRUD operations.
-
-**Consider Documenting** the following:
-
-- **Onboarding Questions**: Detail the questions asked during the onboarding process.
-- **Data Storage Methods**: Document the methods used for data collection and storage.
-- **Level Determination Logic**: Describe the logic or algorithm used to determine the user’s initial level.
-
-
-# My Notes During dev: 
-
-
----
-
-### Onboarding Components
-**Files:**  `app\(auth)\_components`
-
-1. **`welcome-onboarding.tsx`**:
-   - **Purpose:** Create a welcoming experience for new users, collecting:
-     - Username
-     - Dream title
-
-2. **`data-onboarding.tsx`**:
-   - **Purpose:** Collect basic user data including:
-     - Current career level
-     - Years of experience
-     - Input fields for user information
-
-3. **`image-onboarding.tsx`**:
-   - **Purpose:** Manage user profile pictures:
-     - Provide default options
-     - Enable user uploads or selections for profile visuals
-
-**Note Data Utilization:**
-Collected data will personalize the user’s app experience, updating user context and setting initial SR (secret rating).
-
----
-
-### Handling Routing and State
-**File:** `app\(auth)\(routes)\onboarding\page.tsx`
-
-Implemented conditional rendering and state storage within the UI to manage routing efficiently.
-
-Snippet Example:
-```tsx
-// Render 'go back to previous form' button or render first form
-{router.query.type ? (
-    <button onClick={() => router.back()}>
-        <ArrowLeftIcon /> Go Back
-    </button>
-) : (
-    <Intro key="intro" />
-)}
-
-// Conditional rendering based on router query
-{router.query.type === "data-onboarding" && <DataOnboardingPage />}
-{router.query.type === "image-onboarding" && <ImageOnboardingPage />}
-{router.query.type === "welcome-onbaording" && <WelcomeOnboardingPage />}
-```
-
----
-
-### Logic for User State Handling
-
-Outlined steps to manage user state during the onboarding process:
-
-1. **Create Basic Onboarding Pages**:
-    - Develop necessary onboarding pages.
-    - Store entered information (e.g., username, dream title) in local state using `useState`.
-    - Create placeholder functions for form submissions.
-
-2. **Navigating to Data Collection Page**:
-    - Conditionally render the appropriate onboarding page based on user interaction.
-    - Update URL to include collected data on user interaction (e.g., `/onboarding/data?username=John&dreamTitle=Adventure`).
-
-3. **Retrieving Data on Data Collection Page**:
-    - Retrieve parameters from URL on `DataOnboardingPage` using `router.query`.
-    - Extract necessary data (username, dream title, etc.) for personalizing the user’s experience.
-
-4. **Handling Form Submissions (Data Collection Page)**:
-    - Update local state for user inputs (e.g., career level, years of experience) on form interaction.
-    - Update URL with new data on form submission (e.g., `/onboarding/image?username=John&careerLevel=Intermediate`).
-
-5. **Persisting Data (DB and Global State)**:
-    - Save data permanently (Firestore database).
-    - Update userContext with new data.
-
----
-
-### Additional Changes and Updates
-
-- **Creating Constants for Onboarding Process**:  
-  `constants\onboarding-index.ts`
-  
-- **Updating Register to Route to Onboarding**:  
-  Implemented logic to direct users to the onboarding process.
-  
-- **Incorporating Framer Motion for Smooth Animations**:
-  *provide additional details later.*
-
-
-
-
+**Consider Documenting** the following:
+- **Integration Steps**: Detail the steps for integrating the React form library, Zod validation, and User Profile Context with Firebase.
+- **Error Handling Mechanisms**: Document implemented error handling for invalid inputs, authentication failures, and data retrieval.
+- **Context Implementation Details**: Document User Profile Context implementation, its Firebase interactions, and its data handling mechanisms.

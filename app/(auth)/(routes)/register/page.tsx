@@ -1,114 +1,191 @@
 "use client";
 
-import Link from "next/link";
-import toast from "react-hot-toast";
+import { z } from "zod";
+import { useAuth } from "@/components/providers/AuthProvider";
+import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { useAuth } from "@/components/providers/AuthProvider";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+import toast from "react-hot-toast";
+import AuthFormHeader from "../../_components/authFormHeader";
+import AuthFormFooter from "../../_components/authFormFooter";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Spinner } from "@/components/Spinner";
+import { Check } from "lucide-react";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 
-function Page(): JSX.Element {
+// 👇 FORM SCHEMA : Register Form
+const registerFormSchema = z.object({
+  email: z.string().email("Invalid email format").min(1, "Email is required"),
+  password: z.string().min(8, "Password must be at least 8 characters"),
+});
+type RegisterFormValues = z.infer<typeof registerFormSchema>;
+
+function RegisterPage(): JSX.Element {
   const router = useRouter();
-  const { register } = useAuth();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const { register: registerUser } = useAuth();
+  const [isLoading, setIsLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
-  // ⌛ Handle Form Submission - REGISTER
-  const handleForm = async (event: { preventDefault: () => void }) => {
-    event.preventDefault();
+  // ✅ ZOD-FORM HOOK :  custom hook initializes a form instance
+  const form = useForm<RegisterFormValues>({
+    resolver: zodResolver(registerFormSchema),
+  });
+
+  // ✅ SUBMIT FORM - submit register form
+  const onSubmit = async ({
+    email,
+    password,
+  }: {
+    email: string;
+    password: string;
+  }) => {
     console.log("🎯event_log:  🗝auth/register-page/submit:  💢 Triggered ");
 
-    //- Attempt to sign up with provided email and password
-    const { result, error } = await register(email, password);
+    try {
+      setIsLoading(true); //- Set loading spinner
+      const { result, error } = await registerUser(email, password);
 
-    if (error) {
-      //  - Display and log any sign-up errors
-      //🎯 create different errors for different messages.
-      console.log("🎯event_log:  🗝auth/register-page/submit:  ❌ somethig went wrong:", error);
-      toast.error("Hmmm... something went wrong  - please try again"); //🎯 clean this up
-      return;
+      if (error) {
+        //- Handle specific error scenarios with appropriate messages
+        switch (error.code) {
+          case "auth/email-already-in-use":
+            toast.error(
+              "This email is already in use. Please use a different email."
+            );
+            break;
+          case "auth/invalid-email":
+            toast.error("Please provide a valid email.");
+            break;
+          case "auth/weak-password":
+            toast.error(
+              "The password provided is too weak. Please use a stronger password."
+            );
+            break;
+          //🤔 more conditions?
+          default:
+            toast.error("Hmmm... something went wrong. Please try again.");
+            break;
+        }
+      } else {
+        //- Handle successful registration
+        console.log(
+          "🎯event_log:  🗝auth/register-page/submit:  ✔ user has been successfully created - firebase result: ",
+          result
+        );
+        setIsLoading(false); //- Reset loading state
+        setSubmitted(true); //- Set achieved state
+        setTimeout(() => {
+          setSubmitted(false); //- Reset achieved state after a while
+          toast.success("Successfully registered.");
+          router.push("/onboarding");
+        }, 1000);
+      }
+    } catch (error) {
+      //- Handle other unexpected errors
+      console.error(
+        "🎯event_log:  🗝auth/register-page/submit:  ❌ something went wrong:",
+        error
+      );
+      toast.error("Hmmm... something went wrong. Please try again.");
+      setIsLoading(false); //- Reset loading state
     }
-
-    //- Register successful
-    console.log(
-      "🎯event_log:  🗝auth/register-page/submit:  ✔ user has been successfully created - firebase result: ",
-      result
-    );
-    toast.success(
-      "Successfully registered."
-    );
-
-    //- Redirect to the home page
-    router.push("/onboarding");
   };
 
   return (
-    <div className="w-96 rounded shadow p-6">
+    <div className="w-96 p-6">
       {/* HEADER */}
-      <div className="flex flex-col mb-8">
-        <h1 className="text-3xl text-devready-green font-bold">
-          Create a new account
-        </h1>
-        <p className="pt-3 text-sm">
-          <em>
-            If it be not to come, it will be now. If it be not now, yet it will
-            come – the readiness is all 🧠
-            <br />
-          </em>
-        </p>
-      </div>
+      <AuthFormHeader type="register" />
 
-      <form onSubmit={handleForm} className="rounded space-y-4">
-        {/* EMAIL */}
-        <div>
-          <label htmlFor="email" className="block mb-1 font-medium">
-            Email
-          </label>
-          <input
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            type="email"
+      <Form {...form}>
+        <form
+          className="rounded space-y-4"
+          onSubmit={form.handleSubmit((data) => {
+            console.log(
+              "🎯event_log:  📝 register form submitted with following form-data: ",
+              data
+            );
+            onSubmit(data);
+          })}
+        >
+          {/* EMAIL */}
+          <FormField
+            control={form.control}
             name="email"
-            id="email"
-            placeholder="example@gmail.com"
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-primary leading-tight focus:outline-none focus:shadow-outline"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="flex justify-start">
+                  Email Address
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    placeholder="email"
+                    id="email"
+                    type="email"
+                    className="text-left"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
           />
-        </div>
-        {/* PASSWORD */}
-        <div>
-          <label htmlFor="password" className="block mb-1 font-medium">
-            Password
-          </label>
-          <input
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            type="password"
+          {/* PASSWORD */}
+          <FormField
+            control={form.control}
             name="password"
-            id="password"
-            placeholder="password"
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-primary leading-tight focus:outline-none focus:shadow-outline"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="flex justify-start">
+                  Secret Password
+                </FormLabel>
+                <FormControl>
+                  <Input
+                    className="text-left"
+                    required
+                    type="password"
+                    id="password"
+                    placeholder="password"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
           />
-        </div>
-        {/* SUBMIT BUTTON */}
-        <Button type="submit" variant="devfill" className="w-full rounded">
-          Register
-        </Button>
-        {/* LINKS */}
-        <div className="flex flex-col py-4">
-          <Link href="/">
-            <Button type="button" variant="outline">
-              Back to Home Page
-            </Button>
-          </Link>
-          <Link href="/login">
-            <Button type="button" variant="outline">
-              Already have an account?
-            </Button>
-          </Link>
-        </div>
-      </form>
+
+          {/* REMEMBER ME CHECKBOX 🎯 */}
+          <div className="flex items-center space-x-2 ml-2 text-sm">
+            <Checkbox id="terms" />
+            <label
+              htmlFor="terms"
+              className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            >
+              Remember me
+            </label>
+          </div>
+
+          {/* SUBMIT BUTTON */}
+          <Button type="submit" variant="devfill" className="w-full rounded">
+            {isLoading ? <Spinner /> : submitted ? <Check /> : "Register"}
+          </Button>
+        </form>
+      </Form>
+
+      {/* FOOTER */}
+      <AuthFormFooter type="register" />
     </div>
   );
 }
 
-export default Page;
+export default RegisterPage;
