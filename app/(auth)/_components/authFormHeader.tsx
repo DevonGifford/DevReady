@@ -21,9 +21,9 @@ const AuthFormHeader: React.FC<AuthFormHeaderProps> = ({ type }) => {
   const { title, content } = headerContent[type];
 
   return (
-    <div className="flex flex-col mb-8">
+    <div className="flex flex-col mb-4">
       <h1 className="text-3xl text-devready-green font-bold">{title}</h1>
-      <p className="pt-3">{content}</p>
+      <p className="pt-3 italic text-sm">{content}</p>
     </div>
   );
 };

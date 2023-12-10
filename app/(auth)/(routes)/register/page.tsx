@@ -103,7 +103,7 @@ function RegisterPage(): JSX.Element {
   };
 
   return (
-    <div className="w-96 rounded shadow p-4 mx-2">
+    <div className="w-96 p-6">
       {/* HEADER */}
       <AuthFormHeader type="register" />
 
@@ -165,7 +165,7 @@ function RegisterPage(): JSX.Element {
           />
 
           {/* REMEMBER ME CHECKBOX 🎯 */}
-          <div className="flex items-center space-x-2 ml-2">
+          <div className="flex items-center space-x-2 ml-2 text-sm">
             <Checkbox id="terms" />
             <label
               htmlFor="terms"
