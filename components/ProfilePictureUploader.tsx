@@ -3,6 +3,8 @@ import { uploadImageProcess } from "@/utils/firebase/storage.utils";
 import { Avatar, AvatarImage } from "./ui/avatar";
 import { Button } from "./ui/button";
 import { Spinner } from "./Spinner";
+import { useUserContext } from "./providers/UserProvider";
+import { UserProfile } from "@/types/UserProfile";
 
 interface PPProps {
   userDocId: string;
@@ -10,6 +12,7 @@ interface PPProps {
 
 export const ProfilePictureUploader: React.FC<PPProps> = ({ userDocId }) => {
   const fileRef = useRef(null);
+  const { updateUserProfile, userProfile } = useUserContext();
   const [isUploading, setIsUploading] = useState(false); //-handles spinner state
   const [showAvatar, setShowAvatar] = useState(false); //-handles contional rendering for UPLOAD vs. UPLOADED
   const [newAvatar, setNewAvatar] = useState(""); //-handles storing the uploaded image url
@@ -26,23 +29,36 @@ export const ProfilePictureUploader: React.FC<PPProps> = ({ userDocId }) => {
       try {
         setIsUploading(true);
 
-        //-Check if the selected file is an image // 🎯 to do list improve this
+        // 👇 Check if the selected file is an image
         if (!imageData[0].type.startsWith("image/")) {
           console.log("Invalid file format. Please select an image.");
           setIsUploading(false);
           return;
         }
 
+        // 👇 Upload the image
         const response = await uploadImageProcess(
           userDocId,
           imageData[0],
           userDocId
         );
 
+        // 👇 Update the state
         if (response) {
           setNewAvatar(response);
-          e.target.value = ""; // Clear the file upload value.
-          setShowAvatar(true); // Flip the toggle
+          if (userProfile) {
+            const newData: UserProfile = {
+              ...userProfile,
+              account: {
+                ...userProfile?.account,
+                userimage: response,
+              },
+            };
+
+            updateUserProfile(newData); //-update userContext
+          }
+          e.target.value = ""; //- clear the file upload value.
+          setShowAvatar(true); //- show custom avatar
           setIsUploading(false);
         } else {
           console.log(
@@ -87,7 +103,7 @@ export const ProfilePictureUploader: React.FC<PPProps> = ({ userDocId }) => {
       <div className="flex flex-col justify-center items-center scale-75 lg:scale-100">
         {/* <h3 className="text-lg font-semibold">Upload Profile Picture</h3> */}
 
-        <div className="flex flex-col items-center justify-center text-center border-2 aspect-square p-5">
+        <div className="flex flex-col items-center justify-center text-center aspect-square p-5">
           {isUploading ? (
             <Spinner size={"icon"} />
           ) : !showAvatar ? (
