@@ -6,6 +6,8 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/components/providers/AuthProvider";
 import { Button } from "@/components/ui/button";
+import AuthFormHeader from "../../_components/authFormHeader";
+import AuthFormFooter from "../../_components/authFormFooter";
 
 function Page(): JSX.Element {
   const router = useRouter();
@@ -24,7 +26,10 @@ function Page(): JSX.Element {
     if (error) {
       //  - Display and log any sign-up errors
       //🎯 create different errors for different messages.
-      console.log("🎯event_log:  🗝auth/register-page/submit:  ❌ somethig went wrong:", error);
+      console.log(
+        "🎯event_log:  🗝auth/register-page/submit:  ❌ somethig went wrong:",
+        error
+      );
       toast.error("Hmmm... something went wrong  - please try again"); //🎯 clean this up
       return;
     }
@@ -34,9 +39,7 @@ function Page(): JSX.Element {
       "🎯event_log:  🗝auth/register-page/submit:  ✔ user has been successfully created - firebase result: ",
       result
     );
-    toast.success(
-      "Successfully registered."
-    );
+    toast.success("Successfully registered.");
 
     //- Redirect to the home page
     router.push("/onboarding");
@@ -45,18 +48,7 @@ function Page(): JSX.Element {
   return (
     <div className="w-96 rounded shadow p-6">
       {/* HEADER */}
-      <div className="flex flex-col mb-8">
-        <h1 className="text-3xl text-devready-green font-bold">
-          Create a new account
-        </h1>
-        <p className="pt-3 text-sm">
-          <em>
-            If it be not to come, it will be now. If it be not now, yet it will
-            come – the readiness is all 🧠
-            <br />
-          </em>
-        </p>
-      </div>
+      <AuthFormHeader type="register" />
 
       <form onSubmit={handleForm} className="rounded space-y-4">
         {/* EMAIL */}
@@ -93,20 +85,10 @@ function Page(): JSX.Element {
         <Button type="submit" variant="devfill" className="w-full rounded">
           Register
         </Button>
-        {/* LINKS */}
-        <div className="flex flex-col py-4">
-          <Link href="/">
-            <Button type="button" variant="outline">
-              Back to Home Page
-            </Button>
-          </Link>
-          <Link href="/login">
-            <Button type="button" variant="outline">
-              Already have an account?
-            </Button>
-          </Link>
-        </div>
       </form>
+
+      {/* FOOTER */}
+      <AuthFormFooter type="register" />
     </div>
   );
 }

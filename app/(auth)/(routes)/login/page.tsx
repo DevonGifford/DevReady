@@ -1,11 +1,15 @@
 "use client";
 
-import Link from "next/link";
+import * as z from "zod";
 import toast from "react-hot-toast";
+import Link from "next/link";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/components/providers/AuthProvider";
 import { Button } from "@/components/ui/button";
+import AuthFormHeader from "../../_components/authFormHeader";
+import AuthFormFooter from "../../_components/authFormFooter";
 
 function LoginPage(): JSX.Element {
   const router = useRouter();
@@ -28,7 +32,7 @@ function LoginPage(): JSX.Element {
         "🎯event_log:   🗝auth/login-page/submit:  ❌ Error in attempting to login: ",
         error
       );
-      toast.error("Incorrect credentials, please try again.");  //-no context, no custom toast 
+      toast.error("Incorrect credentials, please try again."); //-no context, no custom toast
       return;
     }
 
@@ -37,7 +41,7 @@ function LoginPage(): JSX.Element {
       "🎯event_log:   🗝auth/login-page/submit:  ✔ Sign in successful - firebase result:  ",
       result
     );
-    toast.success("Successfully signed in");  //-no context, no custom toast
+    toast.success("Successfully signed in"); //-no context, no custom toast
 
     // - Redirect to the home page
     router.push("/dashboard");
@@ -46,15 +50,7 @@ function LoginPage(): JSX.Element {
   return (
     <div className="w-96 rounded shadow p-6">
       {/* HEADER */}
-      <div className="flex flex-col mb-8">
-        <h1 className="text-3xl text-devready-green font-bold">
-          Login to your account
-        </h1>
-        <p className="pt-3">
-          By improving 1% a day, after 70 days ... <br />
-          <em> you will have doubled your skill level 🧠</em>
-        </p>
-      </div>
+      <AuthFormHeader type="login" />
 
       <form onSubmit={handleForm} className="rounded space-y-4">
         {/* EMAIL */}
@@ -91,20 +87,10 @@ function LoginPage(): JSX.Element {
         <Button type="submit" variant="devfill" className="w-full rounded">
           Login
         </Button>
-        {/* LINKS */}
-        <div className="flex flex-col py-4">
-          <Link href="/">
-            <Button type="button" variant="outline">
-              Back to Home Page
-            </Button>
-          </Link>
-          <Link href="/register">
-            <Button type="button" variant="outline">
-              Dont have an account?
-            </Button>
-          </Link>
-        </div>
       </form>
+
+      {/* FOOTER */}
+      <AuthFormFooter type="login" />
     </div>
   );
 }
