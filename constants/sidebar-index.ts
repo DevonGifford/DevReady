@@ -20,7 +20,6 @@ import {
   FileCode2,
   Home,
 } from "lucide-react";
-import { Router, useRouter } from "next/router";
 
 interface SidebarItemProps {
   label: string;
