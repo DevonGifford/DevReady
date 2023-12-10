@@ -26,7 +26,7 @@ import {
 
 // 👇 FORM SCHEMA : Register Form
 const registerFormSchema = z.object({
-  email: z.string().email("Invalid email format").nonempty("Email is required"),
+  email: z.string().email("Invalid email format").min(1, "Email is required"),
   password: z.string().min(8, "Password must be at least 8 characters"),
 });
 type RegisterFormValues = z.infer<typeof registerFormSchema>;
@@ -54,25 +54,50 @@ function RegisterPage(): JSX.Element {
 
     try {
       setIsLoading(true); //- Set loading spinner
-      const { result } = await registerUser(email, password);
+      const { result, error } = await registerUser(email, password);
 
-      console.log(
-        "🎯event_log:  🗝auth/register-page/submit:  ✔ user has been successfully created - firebase result: ",
-        result
-      );
-      setIsLoading(false); //- Reset loading state
-      setSubmitted(true); //- Set achieved state
-      setTimeout(() => {
-        setSubmitted(false); //- Reset achieved state after a while
-        toast.success("Successfully registered.");
-        router.push("/onboarding");
-      }, 1000);
+      if (error) {
+        //- Handle specific error scenarios with appropriate messages
+        switch (error.code) {
+          case "auth/email-already-in-use":
+            toast.error(
+              "This email is already in use. Please use a different email."
+            );
+            break;
+          case "auth/invalid-email":
+            toast.error("Please provide a valid email.");
+            break;
+          case "auth/weak-password":
+            toast.error(
+              "The password provided is too weak. Please use a stronger password."
+            );
+            break;
+          //🤔 more conditions?
+          default:
+            toast.error("Hmmm... something went wrong. Please try again.");
+            break;
+        }
+      } else {
+        //- Handle successful registration
+        console.log(
+          "🎯event_log:  🗝auth/register-page/submit:  ✔ user has been successfully created - firebase result: ",
+          result
+        );
+        setIsLoading(false); //- Reset loading state
+        setSubmitted(true); //- Set achieved state
+        setTimeout(() => {
+          setSubmitted(false); //- Reset achieved state after a while
+          toast.success("Successfully registered.");
+          router.push("/onboarding");
+        }, 1000);
+      }
     } catch (error) {
+      //- Handle other unexpected errors
       console.error(
         "🎯event_log:  🗝auth/register-page/submit:  ❌ something went wrong:",
         error
       );
-      toast.error("Hmmm... something went wrong  - please try again");
+      toast.error("Hmmm... something went wrong. Please try again.");
       setIsLoading(false); //- Reset loading state
     }
   };

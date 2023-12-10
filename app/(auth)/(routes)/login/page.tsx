@@ -26,7 +26,7 @@ import {
 
 // 👇 FORM SCHEMA : Login Form
 const loginFormSchema = z.object({
-  email: z.string().email("Invalid email format").nonempty("Email is required"),
+  email: z.string().email("Invalid email format").min(1, "Email is required"),
   password: z.string().min(8, "Password must be at least 8 characters"),
 });
 type LoginFormValues = z.infer<typeof loginFormSchema>;
@@ -68,12 +68,20 @@ function LoginPage(): JSX.Element {
         // - Redirect to the home page
         router.push("/dashboard");
       }, 1000);
-    } catch (error) {
+    } catch (error: any) { 
       console.log(
         "🎯event_log:   🗝auth/login-page/submit:  ❌ Error in attempting to login: ",
         error
       );
-      toast.error("Incorrect credentials, please try again."); //-no context, no custom toast
+      
+      let errorMessage = "Incorrect credentials, please try again."; //-Default error message
+      if (error && error.code === "auth/user-not-found") {
+        errorMessage = "User not found. Please check your credentials.";
+      } else if (error && error.code === "auth/wrong-password") {
+        errorMessage = "Incorrect password. Please try again.";
+      } 
+      //🤔 more conditions? 
+      toast.error(errorMessage);
       setIsLoading(false); //- Reset loading state
     }
   };
