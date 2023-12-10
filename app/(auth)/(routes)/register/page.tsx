@@ -1,15 +1,20 @@
 "use client";
 
-import Link from "next/link";
-import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
+import { z } from "zod";
 import { useAuth } from "@/components/providers/AuthProvider";
-import { Button } from "@/components/ui/button";
+import { useForm } from "react-hook-form";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+import toast from "react-hot-toast";
 import AuthFormHeader from "../../_components/authFormHeader";
 import AuthFormFooter from "../../_components/authFormFooter";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Spinner } from "@/components/Spinner";
+import { Check } from "lucide-react";
 import {
   Form,
   FormControl,
@@ -18,11 +23,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Checkbox } from "@/components/ui/checkbox";
-import { useState } from "react";
-import { Spinner } from "@/components/Spinner";
-import { Check } from "lucide-react";
 
 // 👇 FORM SCHEMA : Register Form
 const registerFormSchema = z.object({
