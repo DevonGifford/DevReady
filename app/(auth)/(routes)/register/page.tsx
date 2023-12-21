@@ -131,7 +131,6 @@ function RegisterPage(): JSX.Element {
                   <Input
                     placeholder="email"
                     id="email"
-                    type="email"
                     className="text-left"
                     {...field}
                   />
@@ -152,7 +151,6 @@ function RegisterPage(): JSX.Element {
                 <FormControl>
                   <Input
                     className="text-left"
-                    required
                     type="password"
                     id="password"
                     placeholder="password"
