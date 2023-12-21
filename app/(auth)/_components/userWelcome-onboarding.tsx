@@ -44,9 +44,7 @@ const userOnboardingFormSchema = z.object({
     .max(16, {
       message: "Username must not be longer than 16 characters.",
     }),
-  career_title: z.string({
-    required_error: "You've got to dream Jack.",
-  }),
+  career_title: z.string(),
 });
 type WelcomeOnboardingValues = z.infer<typeof userOnboardingFormSchema>;
 // ⌛ PLACEHOLDER :  Default form values
@@ -81,7 +79,7 @@ export default function UserOnboardingWelcome() {
     <>
       <div className="z-10 flex flex-col items-center text-center sm:mx-auto -translate-y-12 lg:-translate-y-20 ">
         {/* HEADING */}
-        <div className="flex flex-col justify-center text-center items-center gap-2 text-2xl pb-8 sm:text-3xl sm:pb-10 md:text-4xl md:pb-12 sm:mx-16">
+        <div data-testid='welcome-header' className="flex flex-col justify-center text-center items-center gap-2 text-2xl pb-8 sm:text-3xl sm:pb-10 md:text-4xl md:pb-12 sm:mx-16">
           <motion.h1
             className="font-display text-xl sm:text-3xl md:text-4xl font-bold transition-colors"
             variants={{
@@ -191,6 +189,7 @@ export default function UserOnboardingWelcome() {
                           placeholder=""
                           autoComplete="off"
                           autoFocus
+                          aria-label="display-name"
                           {...field}
                         />
                       </div>

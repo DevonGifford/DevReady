@@ -68,19 +68,19 @@ function LoginPage(): JSX.Element {
         // - Redirect to the home page
         router.push("/dashboard");
       }, 1000);
-    } catch (error: any) { 
+    } catch (error: any) {
       console.log(
         "🎯event_log:   🗝auth/login-page/submit:  ❌ Error in attempting to login: ",
         error
       );
-      
+
       let errorMessage = "Incorrect credentials, please try again."; //-Default error message
       if (error && error.code === "auth/user-not-found") {
         errorMessage = "User not found. Please check your credentials.";
       } else if (error && error.code === "auth/wrong-password") {
         errorMessage = "Incorrect password. Please try again.";
-      } 
-      //🤔 more conditions? 
+      }
+      //🤔 more conditions?
       toast.error(errorMessage);
       setIsLoading(false); //- Reset loading state
     }
@@ -115,12 +115,12 @@ function LoginPage(): JSX.Element {
                   <Input
                     placeholder="email"
                     id="email"
-                    type="email"
+
                     className="text-left"
                     {...field}
                   />
                 </FormControl>
-                <FormMessage />
+                <FormMessage data-testid="email-error" />
               </FormItem>
             )}
           />
@@ -136,14 +136,13 @@ function LoginPage(): JSX.Element {
                 <FormControl>
                   <Input
                     className="text-left"
-                    required
                     type="password"
                     id="password"
                     placeholder="password"
                     {...field}
                   />
                 </FormControl>
-                <FormMessage />
+                <FormMessage data-testid="password-error" />
               </FormItem>
             )}
           />

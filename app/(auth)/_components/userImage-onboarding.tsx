@@ -12,6 +12,7 @@ import { Check } from "lucide-react";
 
 import { EXIT_NORMAL_ALL } from "@/constants/onboarding-index";
 import { UserProfile } from "@/types/UserProfile";
+import toast from "react-hot-toast";
 
 export default function UserOnboardingImage() {
   const router = useRouter();
@@ -60,6 +61,7 @@ export default function UserOnboardingImage() {
             error
           );
           setIsLoading(false); //- Reset loading state
+          toast.error("Something went wrong")
         });
     } else {
       console.log(

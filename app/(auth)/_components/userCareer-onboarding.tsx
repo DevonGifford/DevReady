@@ -117,6 +117,7 @@ export default function UserOnbaordingCareer() {
 
                   <FormControl className="mx-4 w-11/12">
                     <Slider
+                      data-testId="professional-stage"
                       min={0}
                       max={100}
                       step={1}
@@ -178,6 +179,7 @@ export default function UserOnbaordingCareer() {
 
                   <FormControl className="mx-4 w-11/12">
                     <Slider
+                      data-testId="experience-level"
                       min={0}
                       max={100}
                       step={1}
