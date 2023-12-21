@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { QuizQuestion } from "@/types/databaseSchema";
-import { columns } from "./columns";
-import { DataTable } from "./data-table";
+import { columns } from "./_components/columns";
+import { DataTable } from "./_components/data-table";
 import { fetchAllQuestions } from "@/lib/fetchAllQuestions";
 import { Spinner } from "@/components/Spinner";
 
