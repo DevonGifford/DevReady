@@ -217,37 +217,3 @@ This project is licensed under the [MIT License](🎯).
 
 <br>
  
-
-# Login testing
- 
-### Unit Tests:
-- [ ] **Form Validation Tests**:
-  - [ ] Validate `loginFormSchema` for email and password inputs.
-  - [ ] Test validation error messages for different input scenarios.
-
-- [ ] **Form Submission Tests**:
-  - [ ] Simulate form submission with successful login.
-  - [ ] Verify handling of incorrect email/password combinations.
-  - [ ] Test error handling for different Firebase authentication errors.
-
-- [ ] **Rendering Tests**:
-  - [ ] Ensure component renders without errors.
-  - [ ] Verify rendering of UI elements (headers, labels, inputs, buttons, etc.).
-
-- [ ] **Event Handling Tests**:
-  - [ ] Test user interactions such as typing, clicking, and form submission.
-  
-### Integration Tests:
-- [ ] **AuthProvider Integration**:
-  - [ ] Mock `useAuth` hook to simulate authentication scenarios.
-  - [ ] Verify component behavior based on authentication outcomes.
-
-- [ ] **Router Integration**:
-  - [ ] Mock router (`next/navigation`) to test navigation upon login success or failure.
-
-- [ ] **Form Library Integration**:
-  - [ ] Test integration of `react-hook-form` with `zodResolver`.
-  - [ ] Validate error display based on form validation results.
-
-### Snapshot Tests:
-- [ ] Capture snapshots for the overall structure of the rendered component.
