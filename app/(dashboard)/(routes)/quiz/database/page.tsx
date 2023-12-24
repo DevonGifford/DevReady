@@ -26,8 +26,12 @@ export default function DatabaseViewer() {
   return (
     <>
       <div className="h-full mx-10 flex flex-col items-center justify-center space-y-4">
-        Database of all quizzes will go here.... 🎯💣🤔
-        <p>Hello</p>
+        <div>
+          <h2 className="text-2xl font-bold tracking-tight">Question Database</h2>
+          <p className="text-muted-foreground">
+            Here&apos;s a list of all the questions on ZTM Ready!
+          </p>
+        </div>
         <div className="py-10">
           {data ? (
             <DataTable columns={columns} data={data} /> //-render DataTable when data is available
@@ -39,3 +43,4 @@ export default function DatabaseViewer() {
     </>
   );
 }
+ 

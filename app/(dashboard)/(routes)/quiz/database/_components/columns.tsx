@@ -3,27 +3,20 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { QuizQuestion } from "@/types/databaseSchema";
 import AssociatedTags from "@/components/AssociatedTags";
-import { Button } from "@/components/ui/button";
-import { ArrowUpDown } from "lucide-react";
+import { DataTableColumnHeader } from "./column-header";
 
 export const columns: ColumnDef<QuizQuestion>[] = [
   {
     accessorKey: "questionTitle",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Question Title
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Question Title" />
+    ),
   },
   {
     accessorKey: "questionDifficulty",
-    header: () => <div className="text-right">Difficulty</div>,
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Difficulty" />
+    ),
     cell: ({ row }) => {
       const level = row.original.questionDifficulty;
       let formattedLevel;
@@ -46,7 +39,9 @@ export const columns: ColumnDef<QuizQuestion>[] = [
   },
   {
     accessorKey: "questionTags",
-    header: () => <div className="text-right">Tags</div>,
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Tags" />
+    ),
     cell: ({ row }) => {
       const rowTags = row.original.questionTags;
 
