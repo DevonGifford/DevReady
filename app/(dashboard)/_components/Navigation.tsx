@@ -57,7 +57,7 @@ export const Navigation = () => {
     let newWidth = event.clientX;
 
     if (newWidth < 270) newWidth = 270; //-Minimum width constraint
-    if (newWidth > 600) newWidth = 600; //-Maximum width constraint
+    if (newWidth > 500) newWidth = 500; //-Maximum width constraint
 
     if (sidebarRef.current && navbarRef.current) {
       sidebarRef.current.style.width = `${newWidth}px`; //👉 Set sidebar width
@@ -82,7 +82,7 @@ export const Navigation = () => {
       setIsResetting(true);
 
       //👉 Set sidebar width
-      sidebarRef.current.style.width = isMobile ? "100%" : "500px";
+      sidebarRef.current.style.width = isMobile ? "100%" : "333px";
       //👉 Set navbar width based on sidebar width
       navbarRef.current.style.setProperty(
         "width",

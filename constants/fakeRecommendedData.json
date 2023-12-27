@@ -1,0 +1,64 @@
+[
+  {
+    "label": "Create Flash Cards",
+    "icon": "PlusCircle",
+    "href": "/create-flashcards"
+  },
+  {
+    "label": "Frontend Interview",
+    "icon": "MonitorSmartphone",
+    "href": "/interviews"
+  },
+  {
+    "label": "Backend Interview",
+    "icon": "DatabaseBackup",
+    "href": "/interviews"
+  },
+  {
+    "label": "Fullstack Interview",
+    "icon": "AlignVerticalJustifyStart",
+    "href": "/coming-soon"
+  },
+  {
+    "label": "Interview with AI Hiring Manager",
+    "icon": "BrainCircuit",
+    "href": "/coming-soon"
+  },
+
+  {
+    "label": "Remix Bootcamp",
+    "icon": "ScrollText",
+    "customIcon": "ZTM-logo.png",
+    "href": "/coming-soon"
+  },
+  {
+    "label": "The Complete Web Developer",
+    "icon": "ScrollText",
+    "customIcon": "ZTM-logo.png",
+    "href": "/coming-soon"
+  },
+  {
+    "label": "Complete Junior to Senior Web Developer",
+    "icon": "ScrollText",
+    "customIcon": "ZTM-logo.png",
+    "href": "/coming-soon"
+  },
+  {
+    "label": "Complete Python Developer",
+    "icon": "ScrollText",
+    "customIcon": "ZTM-logo.png",
+    "href": "/coming-soon"
+  },
+  {
+    "label": "JavaScript: The Advanced Concepts",
+    "icon": "ScrollText",
+    "customIcon": "ZTM-logo.png",
+    "href": "/coming-soon"
+  },
+  {
+    "label": "TypeScript Bootcamp: Zero to Mastery",
+    "icon": "ScrollText",
+    "customIcon": "ZTM-logo.png",
+    "href": "/coming-soon"
+  }
+]
