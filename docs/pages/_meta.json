@@ -1,0 +1,27 @@
+{
+  "index": "Welcome",
+  "gettingStarted": "Getting Started",
+
+  "ArchitectureOverview": "Project Architecture",
+
+  "TechnicalDocuments": "Technical Documentation",
+
+  "ContributionGuides": "Contribution Guides",
+  
+  "faq": "Troubleshooting & FAQs",
+
+
+  "security": "Security and Privacy",
+  "legal": "Legal and Licensing",
+
+  "about": {
+    "title": "About",
+    "type": "page"
+  },
+  "contact": {
+    "title": "Contact ↗",
+    "type": "page",
+    "href": "https://github.com/DevonGifford",
+    "newWindow": true
+  }
+}
