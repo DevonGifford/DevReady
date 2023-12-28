@@ -1,0 +1,101 @@
+# Getting Started 🎈
+
+
+## Getting Started
+
+## Installation
+
+Provide step-by-step instructions on how to install and set up your project. Include any prerequisites, dependencies, or system requirements.
+
+### Example:
+
+1. **Clone the Repository:**
+   ```bash
+   git clone <repository_url>
+   ```
+
+2. **Install Dependencies:**
+   ```bash
+   cd project_folder
+   npm install   # or yarn install
+   ```
+
+## Configuration
+
+Explain any necessary configurations or setup required before using the project.
+
+### Example:
+
+1. **Environment Variables:**
+   - Create a `.env` file and define required environment variables like API keys or configuration settings.
+
+2. **Configuration Files:**
+   - Modify specific configuration files according to your environment or needs.
+
+## Usage
+
+Provide basic instructions on how to use your project or its main features. Include code snippets or examples if applicable.
+
+### Example:
+
+1. **Starting the Application:**
+   - Run the application with:
+     ```bash
+     npm start   # or yarn start
+     ```
+
+2. **Accessing the Application:**
+   - Open your browser and go to `http://localhost:3000` to view the application.
+
+## Troubleshooting
+
+Include a section for common issues users might encounter and their solutions. This could also link to a separate troubleshooting guide if it's extensive.
+
+### Example:
+
+- **Port Already in Use:**
+  If you encounter an error stating the port is already in use:
+  - Terminate any process using the port or change the port number in the configuration file.
+
+## Next Steps
+
+Provide guidance on where users can find more information, contribute, or seek support.
+
+### Example:
+
+- **Documentation:** For more in-depth details, refer to the complete documentation available [here](link_to_full_documentation).
+- **Contributing:** Interested in contributing? Check out our guidelines [here](link_to_contributing_guidelines).
+- **Support:** If you encounter any issues or have questions, reach out to us [here](link_to_support_channel).
+
+---
+
+
+```js filename="demo.js" {3} copy
+let a = 1;
+
+console.log(a);
+```
+
+## Component
+
+import { useState } from 'react'
+
+{/* Import CSS modules */}
+import styles from '../components/counters.module.css'
+
+export const Counter = () => {
+  const [count, setCount] = useState(0);
+  return (
+    <div>
+      <button onClick={() => setCount(count + 1)} className={styles.counter}>Clicked {count} times</button>
+    </div>
+  );
+};
+
+<Counter/>
+
+## External Component
+
+import Counters from '../components/counters'
+
+<Counters />
