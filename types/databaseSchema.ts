@@ -1,4 +1,4 @@
-interface Question {
+export interface QuizzQuestion {
   uuid: number;
   questionTitle: string;
   questionDescription?: string;
@@ -7,17 +7,17 @@ interface Question {
   questionTags: string[];
 }
 
-interface MockData {
+export interface DatabaseSchema {
   uuid: string;
   setType: string;
   setTitle: string;
   setDescription: string;
   setImage?: string;
   setTags: string[];
-  setData: Question[];
+  setData: QuizzQuestion[];
 }
 
-const quickSampleDatabaseData: MockData[] = [
+const quickSampleDatabaseData: DatabaseSchema[] = [
   {
     uuid: "interview-frontend",
     setType: "interview",

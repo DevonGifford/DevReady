@@ -1,11 +1,15 @@
+'use client';
+
+import { DatabaseContextProvider } from "@/components/providers/DatabaseProvider";
+
 export default function FlashCardsLayout({
-    children,
+  children,
 }: {
-    children: React.ReactNode;
+  children: React.ReactNode;
 }) {
-    return (
-        <>
-        {children}
-        </>
-    )
+  return (
+    <>
+      <DatabaseContextProvider>{children}</DatabaseContextProvider>
+    </>
+  );
 }
