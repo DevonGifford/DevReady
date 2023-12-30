@@ -1,14 +1,15 @@
 "use client"; //👈 req for error boundary
 
-import React from "react";
 import { notFound, useRouter, useSearchParams } from "next/navigation";
-import questionsData from "@/constants/TestQuestion.json";
-import QuizComponent from "../_components/flashcard-quizz";
 import { useDatabaseContext } from "@/components/providers/DatabaseProvider";
-import QuizWelcome from "../_components/quizWelcome";
 import { Button } from "@/components/ui/button";
-import { ArrowLeftIcon, LucideXSquare } from "lucide-react";
+import { LucideXSquare } from "lucide-react";
+
+import QuizComponent from "../_components/flashcard-quizz";
+import QuizWelcome from "../_components/quizWelcome";
 import QuizResults from "../_components/quizResults";
+
+import questionsData from "@/constants/TestQuestion.json"; // 👈🦺 Temporary solution for development purposes (mock Data)
 
 interface Question {
   id: number;
@@ -18,30 +19,36 @@ interface Question {
 
 function FlashcardGame({ params }: { params: { quizzId: string } }) {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const { database } = useDatabaseContext();
-  const pageId = searchParams.get("pageId");
-  const paramsQuizzId = params.quizzId;
+  const searchParams = useSearchParams();
 
-  // 👇⏳ Temp solution for development
-  const testQuestions: Question[] = questionsData;
+  const paramsQuizzId = params.quizzId;      // 👈 Reference, check and fetch data from local DB
+  const pageId = searchParams.get("pageId"); // 👈 Renders different component pages accordingly
 
+  const testQuestions: Question[] = questionsData;  // 👈🦺 Temporary solution for development purposes (mock Data)
+
+
+  // ✅ FIND QUIZZ IN DB BASED ON QUEREY STRING
   if (database) {
-    // 👇 Assuming database is an array of quiz data objects
+    // 👇 array of quizz data objects
     const selectedQuizz = database.find(
       (entry) => entry.uuid === paramsQuizzId
     );
   }
+
+  // ✅ SERVE NOT FOUND IF NOT FOUND IN DB
   // 👇 If the selected quizz ID doesn't match any in the database, redirect to a not-found page
   if (!paramsQuizzId) {
     notFound();
   }
 
-  // 👇 Run History check and custom quizz creation
-  // 🎯🔮
+  // ✅🔮 Run CUSTOM SORTING ALGORITHM HERE
+  // 🎯 todolist:
+  // - History check and custom quizz creation
+  // - (or maybe call from the quiz context?)
 
   return (
-    <div className="h-full flex flex-col items-center justify-center space-y-4">
+    <div className="flex flex-col h-auto py-24 md:h-screen items-center justify-center space-y-4 overflow-scroll">
       {/* Conditional rendering based on router query */}
       {pageId === "active-quiz" && (
         <QuizComponent key="quiz" questions={testQuestions} />

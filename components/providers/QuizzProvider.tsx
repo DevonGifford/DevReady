@@ -2,11 +2,11 @@
 
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { Spinner } from "../Spinner";
-import { QuizResults, QuizSchema } from "@/types/quizzSchema";
+import { QuizResultsSchema, QuizSchema } from "@/types/quizzSchema";
 
 type QuizzContextProps = {
   quizData: QuizSchema | undefined;
-  quizResults: QuizResults | undefined;
+  quizResults: QuizResultsSchema | undefined;
   generateQuizData: () => {};
   updateResults: () => {};
   updateUser: () => {};
@@ -31,7 +31,7 @@ export const QuizContextProvider = ({
   children: React.ReactNode;
 }) => {
   const [quizData, setQuizData] = useState<QuizSchema>();
-  const [quizResults, setQuizResults] = useState<QuizResults>();
+  const [quizResults, setQuizResults] = useState<QuizResultsSchema>();
   const [loading, setLoading] = useState<Boolean>(true);
 
   // ✅ Initialization context logic here...

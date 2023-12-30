@@ -14,7 +14,7 @@ export interface QuizSchema {
   questions: QuizQuestions[];
 }
 
-export interface QuizResults {
+export interface QuizResultsSchema {
   quizUuid: string; // References the UUID of the quiz
   questionUuid: number; // References the UUID of the answered question
   userAnswer: string; // User's answer to the question
