@@ -4,8 +4,37 @@ import { ColumnDef } from "@tanstack/react-table";
 import { QuizQuestion } from "@/types/databaseSchema";
 import AssociatedTags from "@/components/AssociatedTags";
 import { DataTableColumnHeader } from "./column-header";
+import { difficulty, types } from "@/constants/data-table-index";
+import TagIcons from "./data-table-tag-icons";
 
 export const columns: ColumnDef<QuizQuestion>[] = [
+  {
+    accessorKey: "questionType",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Type" />
+    ),
+    cell: ({ row }) => {
+      const type = types.find(
+        (type) => type.value === row.getValue("questionType")
+      );
+
+      if (!type) {
+        return <div className="flex flex-row ">none</div>;
+      }
+
+      return (
+        <div className="flex items-center">
+          {type.icon && (
+            <type.icon className="mr-2 h-4 w-4 text-muted-foreground" />
+          )}
+          <span>{type.label}</span>
+        </div>
+      );
+    },
+    filterFn: (row, id, value) => {
+      return value.includes(row.getValue(id));
+    },
+  },
   {
     accessorKey: "questionTitle",
     header: ({ column }) => (
@@ -18,23 +47,23 @@ export const columns: ColumnDef<QuizQuestion>[] = [
       <DataTableColumnHeader column={column} title="Difficulty" />
     ),
     cell: ({ row }) => {
-      const level = row.original.questionDifficulty;
-      let formattedLevel;
-
-      switch (level) {
-        case 1:
-          formattedLevel = "Easy";
-          break;
-        case 2:
-          formattedLevel = "Medium";
-          break;
-        case 3:
-          formattedLevel = "Hard";
-          break;
-        default:
-          formattedLevel = "?";
+      const level = difficulty.find(
+        (level) => level.value === row.getValue("questionDifficulty")
+      );
+      if (!level) {
+        return <div className="flex flex-row ">none</div>;
       }
-      return <div className="flex flex-row ">{formattedLevel}</div>;
+      return (
+        <div className="flex items-center">
+          {level.icon && (
+            <level.icon className="mr-2 h-4 w-4 text-muted-foreground" />
+          )}
+          <span>{level.label}</span>
+        </div>
+      );
+    },
+    filterFn: (row, id, value) => {
+      return value.includes(row.getValue(id));
     },
   },
   {
@@ -47,7 +76,7 @@ export const columns: ColumnDef<QuizQuestion>[] = [
 
       return (
         <div className="flex flex-row gap-2 text-right font-medium justify-end">
-          <AssociatedTags data={rowTags} />
+          <TagIcons data={rowTags} />
         </div>
       );
     },
