@@ -5,6 +5,7 @@
     <h3>Currently a work in progress</h3>
   <a href='https://ztm-ready-portfolio-project.vercel.app/', target='_blank'>
     <h5>live demo</h5>
+    <h5>live docs</h5>
   </a>
     <hr>
     <h6>
@@ -101,7 +102,7 @@ By embracing the spirit of open collaboration, the platform extends an open invi
   Create and share sets within the community-driven database.
 
 - **Course Recommendations**: <br>
-  Suggest ZTM courses based on user data - quizz results and onboarding info.
+  Suggest ZTM courses based on user data - quiz results and onboarding info.
 
 - **OpenAI Integration**: <br>
   Incorporate a trained OpenAI API bot for interactive interviews.
@@ -216,3 +217,5 @@ This project is licensed under the [MIT License](🎯).
 </details>
 
 <br>
+
+init: feature branch - feat/integrate-frontend-flashcard-flow

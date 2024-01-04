@@ -17,7 +17,7 @@ module.exports = {
     },
     extend: {
       colors: {
-        "devready-green": '#ff165a',
+        "devready-green": "#ff165a",
         green: {
           50: "#f51666",
           90: "#ff165a",
@@ -87,10 +87,14 @@ module.exports = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: 0 },
         },
+        flipHorizontal: {
+          "50%": { transform: "rotateY(90deg)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "hflip": "flipHorizontal 2s ease-out"
       },
       backgroundImage: {
         "bg-img-info1": "url('/landingpage/feature-images/info-img1.jpeg')",
@@ -98,10 +102,10 @@ module.exports = {
         "bg-img-info3": "url('/landingpage/feature-images/info-img3.jpg')",
         "bg-img-info4": "url('/landingpage/feature-images/info-img4.jpg')",
         "bg-img-1": "url('/img-1.png')",
-        "bg-img-2": "url('/img-2.png')",  
-        "feature-bg": "url('/feature-bg.png')",   // white pattern
-        "pattern": "url('/pattern.png')",           // dark pattern
-        "pattern-2": "url('/pattern-bg.png')",    // line and icon
+        "bg-img-2": "url('/img-2.png')",
+        "feature-bg": "url('/feature-bg.png')", // white pattern
+        pattern: "url('/pattern.png')", // dark pattern
+        "pattern-2": "url('/pattern-bg.png')", // line and icon
       },
       screens: {
         xs: "400px",
