@@ -3,7 +3,8 @@ export interface QuizQuestion {
   questionTitle: string;
   questionDescription?: string;
   questionAnswer: string;
-  questionDifficulty: number;
+  questionDifficulty?: string; //change to string - i.e. Hard, Medium, Easy, Other
+  questionType?: string; //related - i.e. Interview, Bootcamp, Topic, Other/Custom
   questionTags: string[];
 }
 
@@ -40,7 +41,7 @@ export const quickSampleDatabaseData: DatabaseSchema[] = [
           "Can you spend 2 minutes explaining to me what JavaScript is",
         questionAnswer:
           "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
-        questionDifficulty: 1,
+        questionDifficulty: "Hard",
         questionTags: ["JS", "TS", "React"],
       },
       // ... (other questions)
