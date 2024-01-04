@@ -15,15 +15,6 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import {
   Table,
   TableBody,
@@ -34,7 +25,7 @@ import {
 } from "@/components/ui/table";
 
 import { DataTablePagination } from "./data-table-pagination";
-import { DataTableViewOptions } from "./data-table-view-options";
+import { DataTableToolbar } from "./data-table-toolbar";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -77,19 +68,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <div>
-      <div className="w-full flex items-center py-4">
-        <Input
-          placeholder="Filter questions..."
-          value={
-            (table.getColumn("questionTitle")?.getFilterValue() as string) ?? ""
-          }
-          onChange={(event) =>
-            table.getColumn("questionTitle")?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm"
-        />
-      </div>
-      <DataTableViewOptions table={table} />
+      <DataTableToolbar table={table} />
       <div className="w-full rounded-md border">
         <Table className=" lg:min-w-full">
           <TableHeader>
