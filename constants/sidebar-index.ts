@@ -19,6 +19,7 @@ import {
   Sparkles,
   FileCode2,
   Home,
+  Vault,
 } from "lucide-react";
 
 interface SidebarItemProps {
@@ -54,6 +55,7 @@ export const sidebarQuickIndex: SidebarItemProps[] = [
   },
   { label: "Quick Settings", icon: Settings },
   { label: "User Dashboard", icon: Gauge },
+  { label: "Question Vault", icon: Vault },
   {
     label: "Create Flash Cards",
     icon: PlusCircle,

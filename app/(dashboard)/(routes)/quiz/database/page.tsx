@@ -7,7 +7,7 @@ import { DataTable } from "./_components/data-table";
 import { fetchAllQuestions } from "@/lib/fetchAllQuestions";
 import { Spinner } from "@/components/Spinner";
 
-export default function DatabaseViewer() {
+export default function QuestionVault() {
   const [data, setData] = useState<QuizQuestion[] | null>(null);
 
   useEffect(() => {
@@ -25,14 +25,14 @@ export default function DatabaseViewer() {
 
   return (
     <>
-      <div className="h-full mx-10 flex flex-col items-center justify-center space-y-4">
+      <div className="flex flex-col h-auto py-24 justify-center mx-10 ">
         <div>
-          <h2 className="text-2xl font-bold tracking-tight">Question Database</h2>
+          <h2 className="text-2xl font-bold tracking-tight">Question Vault</h2>
           <p className="text-muted-foreground">
             Here&apos;s a list of all the questions on ZTM Ready!
           </p>
         </div>
-        <div className="py-10">
+        <div className="py-6 relative items-center">
           {data ? (
             <DataTable columns={columns} data={data} /> //-render DataTable when data is available
           ) : (

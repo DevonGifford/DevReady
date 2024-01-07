@@ -20,13 +20,13 @@ export const tags = [
   {
     label: "html",
     value: "HTML",
-    customIcon: "html-css.png",
+    customIcon: "html.png",
     href: "quiz/topic-html-css",
   },
   {
     label: "css",
     value: "CSS",
-    customIcon: "html-css.png",
+    customIcon: "css.png",
     href: "quiz/topic-html-css",
   },
 ];

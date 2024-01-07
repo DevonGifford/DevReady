@@ -20,18 +20,20 @@ export function DataTableToolbar<TData>({
   const isFiltered = table.getState().columnFilters.length > 0;
 
   return (
-    <div className="flex items-center justify-between">
-      <div className="flex flex-1 items-center space-x-2">
-        <div className="flex flex-col">
-          <Input
-            placeholder="Filter tasks..."
-            value={(table.getColumn("title")?.getFilterValue() as string) ?? ""}
-            onChange={(event) =>
-              table.getColumn("title")?.setFilterValue(event.target.value)
-            }
-            className="h-8 w-[150px] lg:w-[250px]"
-          />
-          <div className="flex flex-row">
+    <div className="flex items-center justify-between py-1">
+      <div className="flex flex-col items-center lg:flex-row flex-1">
+        {/* FILTER BY SEARCH */}
+        <Input
+          className="w-[250px] lg:w-[250px] focus-visible:ring-2 mb-1.5"
+          placeholder="Filter questions..."
+          value={(table.getColumn("questionTitle")?.getFilterValue() as string) ?? ""}
+          onChange={(event) =>
+            table.getColumn("questionTitle")?.setFilterValue(event.target.value)
+          }
+        />
+        <div className="flex flex-row w-full justify-between">
+          <div className="lg:ml-2 flex flex-row">
+            {/* FILTER BY DIFFICULTY */}
             {table.getColumn("questionDifficulty") && (
               <DataTableFilter
                 column={table.getColumn("questionDifficulty")}
@@ -39,7 +41,7 @@ export function DataTableToolbar<TData>({
                 options={difficulty}
               />
             )}
-            {/* //🔮 adding filtering by tags */}
+            {/* 🔮FILTER BY TAGS */}
             {/* {table.getColumn("questionTags") && (
               <DataTableFilter
                 column={table.getColumn("questionTags")}
@@ -47,6 +49,7 @@ export function DataTableToolbar<TData>({
                 options={tags}
               />
             )} */}
+            {/* FILTER BY TYPE */}
             {table.getColumn("questionType") && (
               <DataTableFilter
                 column={table.getColumn("questionType")}
@@ -54,21 +57,22 @@ export function DataTableToolbar<TData>({
                 options={types}
               />
             )}
+            {/* RESET FILTER BUTTON */}
+            {isFiltered && (
+              <Button
+                variant="ghost"
+                onClick={() => table.resetColumnFilters()}
+                className="h-8 px-2 lg:px-3"
+              >
+                Reset
+                <PlusCircle className="ml-2 h-4 w-4" />
+              </Button>
+            )}
+            {/* COLUMN SELECTOR */}
           </div>
+          <DataTableViewOptions table={table} />
         </div>
-
-        {isFiltered && (
-          <Button
-            variant="ghost"
-            onClick={() => table.resetColumnFilters()}
-            className="h-8 px-2 lg:px-3"
-          >
-            Reset
-            <PlusCircle className="ml-2 h-4 w-4" />
-          </Button>
-        )}
       </div>
-      <DataTableViewOptions table={table} />
     </div>
   );
 }

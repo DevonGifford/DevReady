@@ -2,7 +2,6 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import { QuizQuestion } from "@/types/databaseSchema";
-import AssociatedTags from "@/components/AssociatedTags";
 import { DataTableColumnHeader } from "./column-header";
 import { difficulty, types } from "@/constants/data-table-index";
 import TagIcons from "./data-table-tag-icons";
