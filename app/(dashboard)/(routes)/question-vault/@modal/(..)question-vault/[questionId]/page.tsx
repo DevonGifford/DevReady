@@ -6,10 +6,10 @@ import { notFound } from "next/navigation";
 import { QuizQuestion } from "@/types/databaseSchema";
 import { Spinner } from "@/components/Spinner";
 import { findQuestionByUuid } from "@/lib/findQuestionByUuid";
-
+import Modal from "@/components/modals/question-modal";
 import QuestionCardPreview from "@/components/QuestionCardPreview";
 
-function QuestionView({ params }: { params: { questionId: number } }) {
+function QuestionPreview({ params }: { params: { questionId: number } }) {
   const [isLoadingData, setIsLoadingData] = useState(true);
   const [questionData, setQuestionData] = useState<QuizQuestion | null>(null);
 
@@ -37,23 +37,25 @@ function QuestionView({ params }: { params: { questionId: number } }) {
   }, []);
 
   return (
-    <div className="container my-10 mx-auto flex flex-col h-auto py-24 items-center justify-center space-y-4 ">
-      <div className="w-11/12 md:w-4/6 max-w-xl mx-auto">
-        {isLoadingData ? (
-          <>
-            <p>Loading...</p>
-            <Spinner size={"screen"} />
-          </>
-        ) : questionData ? (
-          <>
-            <QuestionCardPreview questionData={questionData} />
-          </>
-        ) : (
-          <p>No data found</p> // Customize
-        )}
+    <Modal>
+      <div className="container mx-auto flex flex-col h-auto items-center justify-center space-y-4 hide-scrollbar ">
+        <div className="w-full h-auto mx-auto">
+          {isLoadingData ? (
+            <>
+              <p>Loading...</p>
+              <Spinner size={"screen"} />
+            </>
+          ) : questionData ? (
+            <>
+              <QuestionCardPreview questionData={questionData} />
+            </>
+          ) : (
+            <p>No data found</p> // Customize
+          )}
+        </div>
       </div>
-    </div>
+    </Modal>
   );
 }
 
-export default QuestionView;
+export default QuestionPreview;
