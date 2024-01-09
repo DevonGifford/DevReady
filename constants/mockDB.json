@@ -8,31 +8,94 @@
     "setTags": ["HTML/CSS", "js", "ts", "react", "Testing"],
     "setData": [
       {
-        "questionUuid": 1,
-        "questionTitle": "FE - What is Javascript?",
-        "questionDescription": "Can you spend 2 minutes explaing to me what JavaScript is",
-        "questionAnswer": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
+        "questionUuid": 900,
+        "questionTitle": "Explain the concept of Virtual DOM in React.",
+        "questionDescription": "Provide an explanation of the Virtual DOM and how it works in the context of React.",
+        "questionAnswer": "The Virtual DOM in React is a lightweight copy of the actual DOM. React uses it to optimize rendering by updating only the parts of the actual DOM that have changed. Changes are first applied to the Virtual DOM, and React calculates the most efficient way to update the real DOM, minimizing performance impact.",
         "questionDifficulty": "medium",
         "questionType": "interview",
-        "questionTags": ["js", "ts", "react"]
+        "questionTags": ["react", "frontend"]
       },
       {
-        "questionUuid": 2,
-        "questionTitle": "FE - What is ECMAScript?",
-        "questionDescription": "In a sentance, 'have you seen the latest ECMAScript changes?'",
-        "questionAnswer": "It is a standard specification for scripting languages. JavaScript is based on ECMAScript.",
-        "questionDifficulty": "hard",
+        "questionUuid": 901,
+        "questionTitle": "What is the purpose of JSX in React?",
+        "questionDescription": "Explain the role of JSX (JavaScript XML) in React and how it contributes to building user interfaces.",
+        "questionAnswer": "JSX is a syntax extension for JavaScript used in React to describe the structure of UI components. It allows developers to write HTML-like code within JavaScript, making it more readable and concise. JSX is then transpiled to JavaScript for execution, enabling the creation of React elements and facilitating the rendering of UI components.",
+        "questionDifficulty": "medium",
         "questionType": "interview",
-        "questionTags": ["js"]
+        "questionTags": ["react", "jsx", "frontend"]
       },
       {
-        "questionUuid": 3,
-        "questionTitle": "FE - What is the difference between == and ===?",
-        "questionDescription": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
-        "questionAnswer": "== compares values. === compares both type and value.",
-        "questionDifficulty": "hard",
+        "questionUuid": 902,
+        "questionTitle": "Explain the concept of state in React.",
+        "questionDescription": "Describe what 'state' means in the context of React and how it is used to manage component data.",
+        "questionAnswer": "In React, 'state' is a JavaScript object that represents the current condition or data of a component. It influences a component's rendering and behavior. State can be modified using the 'setState' method, triggering a re-render of the component. State is essential for creating dynamic and interactive user interfaces in React applications.",
+        "questionDifficulty": "medium",
         "questionType": "interview",
-        "questionTags": ["js", "ts"]
+        "questionTags": ["react", "frontend", "state"]
+      },
+      {
+        "questionUuid": 903,
+        "questionTitle": "What is the significance of the useEffect hook in React?",
+        "questionDescription": "Discuss the purpose and usage of the useEffect hook in React functional components.",
+        "questionAnswer": "The useEffect hook in React is used for handling side effects in functional components. It replaces lifecycle methods like componentDidMount, componentDidUpdate, and componentWillUnmount. It allows you to perform tasks such as data fetching, subscriptions, or manually changing the DOM after a component renders. The useEffect hook takes a function as its argument, and this function is executed after every render.",
+        "questionDifficulty": "medium",
+        "questionType": "interview",
+        "questionTags": ["react", "frontend", "hooks"]
+      },
+      {
+        "questionUuid": 904,
+        "questionTitle": "Explain the concept of responsive web design.",
+        "questionDescription": "Define what responsive web design is and why it is important in modern web development.",
+        "questionAnswer": "Responsive web design is an approach to web development that ensures a web application or site's layout and functionality adapt to different screen sizes and devices. The goal is to provide an optimal viewing experience, with easy navigation and readability, regardless of the device being used. Responsive design uses techniques like flexible grids, media queries, and flexible images to achieve adaptability.",
+        "questionDifficulty": "medium",
+        "questionType": "interview",
+        "questionTags": ["frontend", "web design"]
+      },
+      {
+        "questionUuid": 905,
+        "questionTitle": "What is the role of CSS preprocessors in frontend development?",
+        "questionDescription": "Discuss the purpose and advantages of using CSS preprocessors in the development of frontend applications.",
+        "questionAnswer": "CSS preprocessors, such as Sass or Less, extend the functionality of regular CSS by introducing features like variables, nesting, and mixins. They help streamline and organize stylesheets, making them more maintainable and scalable. Preprocessors also enable the use of logic and functions within stylesheets, enhancing the developer's ability to create dynamic and efficient styles for web applications.",
+        "questionDifficulty": "medium",
+        "questionType": "interview",
+        "questionTags": ["frontend", "css", "preprocessors"]
+      },
+      {
+        "questionUuid": 906,
+        "questionTitle": "Explain the concept of lazy loading in frontend development.",
+        "questionDescription": "Describe what lazy loading is and how it can benefit frontend applications.",
+        "questionAnswer": "Lazy loading is a technique used in frontend development to defer the loading of non-essential or secondary resources until they are actually needed. This can significantly improve page load times and reduce initial loading times for users. In web applications, lazy loading is often applied to images, scripts, or other assets that are not crucial for the initial view, allowing the core content to load quickly.",
+        "questionDifficulty": "medium",
+        "questionType": "interview",
+        "questionTags": ["frontend", "lazy loading"]
+      },
+      {
+        "questionUuid": 907,
+        "questionTitle": "What are the key principles of a mobile-first design approach?",
+        "questionDescription": "Discuss the fundamental principles of designing websites or applications with a mobile-first approach.",
+        "questionAnswer": "The mobile-first design approach emphasizes starting the design process with mobile devices in mind and progressively enhancing for larger screens. Key principles include prioritizing mobile-friendly features, using a responsive layout, optimizing performance for mobile networks, and ensuring a seamless user experience on small screens. Mobile-first design improves accessibility and ensures that the application performs well across various devices.",
+        "questionDifficulty": "medium",
+        "questionType": "interview",
+        "questionTags": ["frontend", "mobile-first", "web design"]
+      },
+      {
+        "questionUuid": 908,
+        "questionTitle": "Explain the role of a frontend framework in web development.",
+        "questionDescription": "Describe how frontend frameworks contribute to the development of modern web applications.",
+        "questionAnswer": "Frontend frameworks, such as React, Angular, or Vue.js, provide pre-built components, a structured architecture, and tools to streamline the development of web applications. They facilitate efficient state management, component reusability, and the creation of interactive user interfaces. Frontend frameworks also offer a standardized way to manage application logic, handle routing, and interact with backend services, leading to more maintainable and scalable codebases.",
+        "questionDifficulty": "medium",
+        "questionType": "interview",
+        "questionTags": ["frontend", "frameworks", "web development"]
+      },
+      {
+        "questionUuid": 909,
+        "questionTitle": "What is the purpose of a content delivery network (CDN) in frontend development?",
+        "questionDescription": "Discuss the role of CDNs and how they contribute to optimizing the performance of frontend applications.",
+        "questionAnswer": "A Content Delivery Network (CDN) is a network of distributed servers that work together to deliver web content, such as images, stylesheets, and scripts, to users based on their geographical location. CDNs enhance the performance of frontend applications by reducing latency and accelerating the loading of assets. They store copies of content on multiple servers worldwide, ensuring users can access resources from a server closest to them, resulting in faster load times and improved user experience.",
+        "questionDifficulty": "medium",
+        "questionType": "interview",
+        "questionTags": ["frontend", "CDN", "performance optimization"]
       }
     ]
   },
@@ -45,31 +108,188 @@
     "setTags": ["Backend", "Node"],
     "setData": [
       {
-        "questionUuid": 4,
-        "questionTitle": "BE - What is Javascript?",
-        "questionDescription": "Can you spend 2 minutes explaing to me what JavaScript is",
-        "questionAnswer": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
-        "questionDifficulty": "hard",
+        "questionUuid": 910,
+        "questionTitle": "Explain the concept of RESTful API and its key principles.",
+        "questionDescription": "Define what a RESTful API is and discuss the fundamental principles that make an API RESTful.",
+        "questionAnswer": "A RESTful API (Representational State Transfer) is an architectural style for designing networked applications. Key principles include stateless communication, resource-based endpoints, uniform interfaces, client-server architecture, and the use of standard HTTP methods (GET, POST, PUT, DELETE). RESTful APIs aim for simplicity, scalability, and a clear separation of concerns between clients and servers.",
+        "questionDifficulty": "medium",
         "questionType": "interview",
-        "questionTags": ["js", "ts", "react"]
+        "questionTags": ["backend", "API", "REST"]
       },
       {
-        "questionUuid": 5,
-        "questionTitle": "BE - What is ECMAScript?",
-        "questionDescription": "In a sentance, 'have you seen the latest ECMAScript changes?'",
-        "questionAnswer": "It is a standard specification for scripting languages. JavaScript is based on ECMAScript.",
-        "questionDifficulty": "hard",
+        "questionUuid": 911,
+        "questionTitle": "What is the role of a database index, and how does it improve query performance?",
+        "questionDescription": "Discuss the purpose of database indexing and its impact on the performance of queries in a backend system.",
+        "questionAnswer": "A database index is a data structure that enhances the speed of data retrieval operations on a database table. Indexing works by creating a separate structure that allows the database engine to locate and access specific rows quickly. Indexes significantly improve query performance by reducing the number of rows that need to be scanned, resulting in faster search and retrieval operations. However, it's essential to consider the trade-offs, as indexes also impact insert and update operations.",
+        "questionDifficulty": "medium",
         "questionType": "interview",
-        "questionTags": ["js"]
+        "questionTags": ["backend", "database", "indexing"]
       },
       {
-        "questionUuid": 6,
-        "questionTitle": "BE - What is the difference between == and ===?",
-        "questionDescription": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
-        "questionAnswer": "== compares values. === compares both type and value.",
-        "questionDifficulty": "hard",
+        "questionUuid": 912,
+        "questionTitle": "Explain the difference between SQL and NoSQL databases.",
+        "questionDescription": "Compare and contrast SQL (relational) and NoSQL (non-relational) databases, highlighting their strengths and use cases.",
+        "questionAnswer": "SQL databases follow a structured, tabular format, enforcing a predefined schema and supporting complex queries. NoSQL databases, on the other hand, provide a more flexible, schema-less structure, suitable for handling large volumes of unstructured data. SQL databases are ideal for applications requiring strict consistency and complex relationships, while NoSQL databases excel in scenarios demanding scalability, high performance, and the ability to handle diverse data types.",
+        "questionDifficulty": "medium",
         "questionType": "interview",
-        "questionTags": ["js", "ts"]
+        "questionTags": ["backend", "databases", "SQL", "NoSQL"]
+      },
+      {
+        "questionUuid": 913,
+        "questionTitle": "Discuss the significance of caching in a backend system.",
+        "questionDescription": "Explain how caching contributes to improving the performance and responsiveness of a backend application.",
+        "questionAnswer": "Caching involves storing copies of frequently accessed or computationally expensive data in a temporary storage area. In a backend system, caching reduces the need to regenerate or fetch data repeatedly, resulting in faster response times. It improves performance by minimizing the workload on databases and other resources. Common caching strategies include in-memory caching, content delivery network (CDN) caching, and database query result caching.",
+        "questionDifficulty": "medium",
+        "questionType": "interview",
+        "questionTags": ["backend", "caching", "performance optimization"]
+      },
+      {
+        "questionUuid": 914,
+        "questionTitle": "Explain the role of middleware in a backend application.",
+        "questionDescription": "Define what middleware is and discuss its importance in handling requests and responses in a backend system.",
+        "questionAnswer": "Middleware in a backend application refers to software components that sit between the application's core logic and the underlying infrastructure. It plays a crucial role in processing, modifying, or enhancing requests and responses. Middleware functions can perform tasks such as authentication, logging, error handling, and data transformation. They allow developers to modularize application features and add functionality to the request-response cycle without modifying the core application logic.",
+        "questionDifficulty": "medium",
+        "questionType": "interview",
+        "questionTags": ["backend", "middleware"]
+      },
+      {
+        "questionUuid": 915,
+        "questionTitle": "Discuss the concept of ORM (Object-Relational Mapping) in backend development.",
+        "questionDescription": "Explain what ORM is and how it facilitates interaction with relational databases in a backend application.",
+        "questionAnswer": "Object-Relational Mapping (ORM) is a technique that allows developers to interact with relational databases using object-oriented programming languages. ORM frameworks map database tables to classes and database records to objects, providing a higher-level, object-oriented interface for database operations. ORM simplifies database interactions, abstracts SQL queries, and enhances code readability and maintainability.",
+        "questionDifficulty": "medium",
+        "questionType": "interview",
+        "questionTags": ["backend", "ORM", "database"]
+      },
+      {
+        "questionUuid": 916,
+        "questionTitle": "What is the purpose of load balancing in a backend infrastructure?",
+        "questionDescription": "Define load balancing and discuss how it contributes to optimizing the distribution of incoming traffic in a backend system.",
+        "questionAnswer": "Load balancing involves distributing incoming network traffic across multiple servers to ensure optimal resource utilization, maximize throughput, and minimize response time. In a backend infrastructure, load balancers play a crucial role in achieving high availability, fault tolerance, and scalability. They prevent individual servers from being overwhelmed, distribute workloads evenly, and redirect traffic away from unhealthy or overloaded servers.",
+        "questionDifficulty": "medium",
+        "questionType": "interview",
+        "questionTags": ["backend", "load balancing", "scalability"]
+      },
+      {
+        "questionUuid": 917,
+        "questionTitle": "Explain the concept of microservices architecture in backend development.",
+        "questionDescription": "Define what microservices architecture is and discuss its benefits and challenges in building scalable backend systems.",
+        "questionAnswer": "Microservices architecture is an approach to designing and building software as a collection of small, independent services. Each service is responsible for a specific business capability and communicates with others through well-defined APIs. Microservices offer benefits such as improved scalability, independent deployment, and easier maintenance. However, they also pose challenges in terms of increased complexity, inter-service communication, and data consistency.",
+        "questionDifficulty": "medium",
+        "questionType": "interview",
+        "questionTags": ["backend", "microservices", "architecture"]
+      },
+      {
+        "questionUuid": 918,
+        "questionTitle": "Discuss the role of security measures in a backend application.",
+        "questionDescription": "Explain the importance of implementing security measures and best practices to safeguard a backend system.",
+        "questionAnswer": "Security measures in a backend application are crucial to protect sensitive data, prevent unauthorized access, and ensure the integrity of the system. Best practices include data encryption, secure communication protocols (HTTPS), input validation, proper authentication mechanisms, and regular security audits. Implementing these measures helps mitigate risks, comply with regulations, and build trust with users.",
+        "questionDifficulty": "medium",
+        "questionType": "interview",
+        "questionTags": ["backend", "security"]
+      },
+      {
+        "questionUuid": 919,
+        "questionTitle": "Explain the concept of containerization and its advantages in backend development.",
+        "questionDescription": "Define what containerization is and discuss how it provides benefits such as scalability and portability in a backend environment.",
+        "questionAnswer": "Containerization is a lightweight form of virtualization that encapsulates an application and its dependencies in a standardized unit called a container. Containers provide isolation, portability, and consistency across different environments. Tools like Docker enable developers to package applications with their dependencies, ensuring consistent deployment and scaling. Containerization simplifies the management of complex backend systems and enhances scalability, making it easier to deploy and scale applications in various environments.",
+        "questionDifficulty": "medium",
+        "questionType": "interview",
+        "questionTags": ["backend", "containerization", "Docker"]
+      },
+      {
+        "questionUuid": 920,
+        "questionTitle": "Explain the concept of serverless architecture in backend development.",
+        "questionDescription": "Define what serverless architecture is and discuss its advantages and limitations in building scalable and cost-effective backend systems.",
+        "questionAnswer": "Serverless architecture is an approach where developers build and run applications without managing the underlying server infrastructure. In a serverless model, cloud providers automatically manage server provisioning, scaling, and maintenance. It offers benefits such as cost efficiency, automatic scaling, and reduced operational overhead. However, serverless also introduces challenges related to function duration, state management, and limited control over the underlying infrastructure.",
+        "questionDifficulty": "medium",
+        "questionType": "interview",
+        "questionTags": ["backend", "serverless", "cloud"]
+      },
+      {
+        "questionUuid": 921,
+        "questionTitle": "Discuss the importance of version control systems in backend development.",
+        "questionDescription": "Explain why version control systems (e.g., Git) are essential in managing source code and collaborative development in a backend project.",
+        "questionAnswer": "Version control systems play a crucial role in tracking changes to source code, enabling collaboration among developers, and ensuring the integrity of a codebase. Git, a widely used version control system, allows multiple developers to work on the same project concurrently, tracks changes, facilitates branching and merging, and provides a history of code modifications. Version control enhances code organization, rollback capabilities, and collaboration across distributed teams.",
+        "questionDifficulty": "medium",
+        "questionType": "interview",
+        "questionTags": ["backend", "version control", "Git"]
+      },
+      {
+        "questionUuid": 922,
+        "questionTitle": "Explain the principles of SOLID in object-oriented design and their significance in backend development.",
+        "questionDescription": "Define each principle in the SOLID acronym (Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, Dependency Inversion) and discuss their importance in designing maintainable and scalable backend systems.",
+        "questionAnswer": "SOLID is a set of principles in object-oriented design aimed at creating more maintainable and scalable software. Single Responsibility ensures that a class has only one reason to change. Open/Closed encourages classes to be open for extension but closed for modification. Liskov Substitution focuses on substitutability of derived classes for their base classes. Interface Segregation suggests that clients should not be forced to depend on interfaces they do not use. Dependency Inversion promotes high-level modules not depending on low-level modules but on abstractions. Following these principles improves code quality, maintainability, and extensibility in backend development.",
+        "questionDifficulty": "medium",
+        "questionType": "interview",
+        "questionTags": [
+          "backend",
+          "SOLID principles",
+          "object-oriented design"
+        ]
+      },
+      {
+        "questionUuid": 923,
+        "questionTitle": "Discuss the role of WebSockets in a backend system and their advantages over traditional HTTP communication.",
+        "questionDescription": "Explain what WebSockets are, and highlight their benefits in enabling real-time communication in a backend application compared to traditional HTTP-based communication.",
+        "questionAnswer": "WebSockets provide a full-duplex communication channel over a single, long-lived connection, allowing real-time bidirectional communication between clients and servers. Unlike traditional HTTP, where each request establishes a new connection, WebSockets maintain a persistent connection, enabling instant data exchange. This makes them well-suited for applications requiring low-latency, real-time updates, and interactive features. WebSockets reduce overhead, eliminate the need for repeated connections, and enhance the efficiency of real-time backend systems.",
+        "questionDifficulty": "medium",
+        "questionType": "interview",
+        "questionTags": ["backend", "WebSockets", "real-time communication"]
+      },
+      {
+        "questionUuid": 924,
+        "questionTitle": "Explain the concept of a reverse proxy in a backend infrastructure.",
+        "questionDescription": "Define what a reverse proxy is and discuss its role in enhancing security, load balancing, and performance in a backend system.",
+        "questionAnswer": "A reverse proxy is a server that sits between client devices and a web server, forwarding client requests to the server. It acts as an intermediary, handling tasks such as load balancing, SSL termination, and caching. Reverse proxies enhance security by hiding server details, improve performance by serving static content, and enable load balancing across multiple servers to distribute incoming traffic. They play a crucial role in optimizing backend infrastructure for scalability and security.",
+        "questionDifficulty": "medium",
+        "questionType": "interview",
+        "questionTags": [
+          "backend",
+          "reverse proxy",
+          "security",
+          "load balancing"
+        ]
+      },
+      {
+        "questionUuid": 925,
+        "questionTitle": "Discuss the principles of DRY (Don't Repeat Yourself) and their application in backend code.",
+        "questionDescription": "Define the DRY principle and explain how adhering to it contributes to maintainable and efficient backend code.",
+        "questionAnswer": "The DRY principle encourages developers to avoid duplicating code by abstracting common functionality into reusable components. DRY promotes code reusability, reduces redundancy, and ensures that changes can be made in a single place. In backend development, adhering to the DRY principle leads to more maintainable, modular, and scalable code. It also improves the consistency of the codebase and reduces the likelihood of introducing errors due to duplicated logic.",
+        "questionDifficulty": "medium",
+        "questionType": "interview",
+        "questionTags": ["backend", "DRY principle", "code maintainability"]
+      },
+      {
+        "questionUuid": 926,
+        "questionTitle": "Explain the concept of a message queue in backend systems.",
+        "questionDescription": "Define what a message queue is and discuss its role in enabling asynchronous communication and decoupling components in a backend architecture.",
+        "questionAnswer": "A message queue is a communication mechanism that allows different parts of a system to communicate by sending and receiving messages. In a backend system, a message queue facilitates asynchronous communication between decoupled components. It ensures that tasks are executed independently, enhancing scalability, fault tolerance, and responsiveness. Message queues prevent components from directly relying on each other, reducing dependencies and promoting a more resilient backend architecture.",
+        "questionDifficulty": "medium",
+        "questionType": "interview",
+        "questionTags": [
+          "backend",
+          "message queue",
+          "asynchronous communication"
+        ]
+      },
+      {
+        "questionUuid": 927,
+        "questionTitle": "Discuss the role of unit testing in backend development and its benefits.",
+        "questionDescription": "Explain why unit testing is essential in backend development and discuss the advantages it brings to the quality and maintainability of code.",
+        "questionAnswer": "Unit testing involves testing individual units or components of a backend application in isolation to ensure they function correctly. It helps identify bugs early in the development process, promotes code reliability, and facilitates code changes without introducing regressions. Unit testing in backend development contributes to better code quality, easier debugging, and increased confidence in the software's correctness. It is a crucial practice in building robust and maintainable backend systems.",
+        "questionDifficulty": "medium",
+        "questionType": "interview",
+        "questionTags": ["backend", "unit testing", "code quality"]
+      },
+      {
+        "questionUuid": 928,
+        "questionTitle": "Explain the concept of database normalization and its significance in backend design.",
+        "questionDescription": "Define what database normalization is and discuss how it contributes to efficient data organization and retrieval in a backend system.",
+        "questionAnswer": "Database normalization is the process of organizing data in a relational database to reduce redundancy and improve data integrity. It involves dividing large tables into smaller, related tables and defining relationships between them. Normalization minimizes data duplication, reduces the risk of anomalies, and enhances data consistency. In backend design, adhering to normalization principles leads to more efficient storage, faster queries, and a structured database schema that reflects the logical relationships between entities.",
+        "questionDifficulty": "medium",
+        "questionType": "interview",
+        "questionTags": ["backend", "database normalization", "database design"]
       }
     ]
   },
@@ -82,31 +302,340 @@
     "setTags": ["ts", "react", "Node", "Databases"],
     "setData": [
       {
-        "questionUuid": 7,
-        "questionTitle": "BE - What is Javascript?",
-        "questionDescription": "Can you spend 2 minutes explaing to me what JavaScript is",
-        "questionAnswer": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
-        "questionDifficulty": "hard",
+        "questionUuid": 930,
+        "questionTitle": "Explain the concept of CORS (Cross-Origin Resource Sharing) and its significance in fullstack development.",
+        "questionDescription": "Define what CORS is and discuss how it facilitates or restricts cross-origin communication between frontend and backend components in a fullstack application.",
+        "questionAnswer": "CORS is a security feature implemented by web browsers to control cross-origin HTTP requests initiated by web pages. In fullstack development, CORS plays a crucial role in enabling or restricting cross-origin communication between the frontend (running on one domain) and the backend (running on another domain). It involves the use of HTTP headers to allow or deny cross-origin requests, preventing potential security threats such as unauthorized data access.",
+        "questionDifficulty": "medium",
         "questionType": "interview",
-        "questionTags": ["js", "ts", "react"]
+        "questionTags": ["fullstack", "CORS", "security"]
       },
       {
-        "questionUuid": 8,
-        "questionTitle": "BE - What is ECMAScript?",
-        "questionDescription": "In a sentance, 'have you seen the latest ECMAScript changes?'",
-        "questionAnswer": "It is a standard specification for scripting languages. JavaScript is based on ECMAScript.",
-        "questionDifficulty": "hard",
+        "questionUuid": 931,
+        "questionTitle": "Discuss the challenges and strategies for session management in a fullstack application.",
+        "questionDescription": "Explain the complexities associated with session management in a fullstack development environment and discuss strategies to ensure secure and efficient user sessions.",
+        "questionAnswer": "Session management in fullstack applications involves handling user sessions across both frontend and backend components. Challenges include maintaining session state, preventing session hijacking, and ensuring secure session storage. Strategies may involve using secure cookies, implementing session tokens, and incorporating measures like HTTPS. Balancing the trade-off between security and performance is crucial in designing effective session management solutions for fullstack applications.",
+        "questionDifficulty": "medium",
         "questionType": "interview",
-        "questionTags": ["js"]
+        "questionTags": ["fullstack", "session management", "security"]
       },
       {
-        "questionUuid": 9,
-        "questionTitle": "BE - What is the difference between == and ===?",
-        "questionDescription": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
-        "questionAnswer": "== compares values. === compares both type and value.",
-        "questionDifficulty": "hard",
+        "questionUuid": 932,
+        "questionTitle": "Explain the concept of API versioning and its relevance in a fullstack development environment.",
+        "questionDescription": "Define what API versioning is and discuss its importance in maintaining backward compatibility and evolving APIs in a fullstack application.",
+        "questionAnswer": "API versioning is the practice of managing and maintaining different versions of an API to ensure backward compatibility and smooth transitions for clients. In fullstack development, where frontend and backend components interact through APIs, versioning is crucial to prevent breaking changes and allow gradual adoption of new features. It enables developers to introduce updates without disrupting existing clients and fosters a more adaptable and scalable fullstack architecture.",
+        "questionDifficulty": "medium",
         "questionType": "interview",
-        "questionTags": ["js", "ts"]
+        "questionTags": ["fullstack", "API versioning", "backend", "frontend"]
+      },
+      {
+        "questionUuid": 933,
+        "questionTitle": "Discuss the role of GraphQL in fullstack development and its advantages over traditional REST APIs.",
+        "questionDescription": "Explain what GraphQL is and highlight its benefits in facilitating efficient data fetching and communication between frontend and backend components in a fullstack application.",
+        "questionAnswer": "GraphQL is a query language for APIs that enables clients to request only the data they need. In fullstack development, GraphQL addresses some limitations of traditional REST APIs by reducing over-fetching and under-fetching of data. It allows frontend components to specify their data requirements, leading to more efficient communication with the backend. GraphQL's flexibility and introspective nature make it a powerful tool for building modern and responsive fullstack applications.",
+        "questionDifficulty": "medium",
+        "questionType": "interview",
+        "questionTags": ["fullstack", "GraphQL", "APIs"]
+      },
+      {
+        "questionUuid": 934,
+        "questionTitle": "Explain the challenges and strategies for handling authentication in a fullstack application.",
+        "questionDescription": "Discuss the complexities associated with implementing authentication across frontend and backend components in a fullstack development environment and suggest strategies for ensuring secure user authentication.",
+        "questionAnswer": "Authentication in fullstack applications involves verifying the identity of users across both frontend and backend layers. Challenges include secure transmission of credentials, session management, and protection against common attacks like CSRF and XSS. Strategies may include token-based authentication, secure storage practices, and adherence to security best practices. Implementing a robust authentication mechanism is essential for ensuring the integrity and confidentiality of user data in a fullstack environment.",
+        "questionDifficulty": "medium",
+        "questionType": "interview",
+        "questionTags": ["fullstack", "authentication", "security"]
+      },
+      {
+        "questionUuid": 935,
+        "questionTitle": "Discuss the role of microservices architecture in fullstack development and its advantages over monolithic architectures.",
+        "questionDescription": "Explain what microservices architecture is and highlight its benefits in building scalable, maintainable, and loosely coupled fullstack applications.",
+        "questionAnswer": "Microservices architecture is an architectural style that structures an application as a collection of small, independent services. In fullstack development, microservices offer advantages such as improved scalability, flexibility, and ease of maintenance. Each microservice operates independently and communicates through APIs, allowing teams to work on different services simultaneously. This architectural approach enhances the resilience and agility of fullstack applications, especially in complex and evolving systems.",
+        "questionDifficulty": "medium",
+        "questionType": "interview",
+        "questionTags": ["fullstack", "microservices", "architecture"]
+      },
+      {
+        "questionUuid": 936,
+        "questionTitle": "Explain the concept of state management in a fullstack application and discuss popular strategies for handling state.",
+        "questionDescription": "Define what state management is and discuss how it is handled in a fullstack development environment, including popular tools and strategies.",
+        "questionAnswer": "State management involves handling and synchronizing the state of an application, particularly relevant in fullstack development where frontend and backend components share state. Popular strategies include local state management, global state management using libraries like Redux, and server-side state management. Choosing an appropriate strategy depends on factors such as application complexity, scalability requirements, and the need for real-time updates between frontend and backend components.",
+        "questionDifficulty": "medium",
+        "questionType": "interview",
+        "questionTags": ["fullstack", "state management", "frontend", "backend"]
+      },
+      {
+        "questionUuid": 937,
+        "questionTitle": "Discuss the challenges and best practices for handling cross-cutting concerns in a fullstack application.",
+        "questionDescription": "Explain what cross-cutting concerns are and discuss the challenges associated with addressing them in a fullstack development environment. Share best practices for managing cross-cutting concerns effectively.",
+        "questionAnswer": "Cross-cutting concerns are aspects of a software application that affect multiple components, such as logging, authentication, and error handling. In fullstack development, these concerns need to be addressed consistently across frontend and backend layers. Challenges include code duplication and maintaining consistency. Best practices involve using aspect-oriented programming (AOP), creating reusable libraries, and adopting design patterns to encapsulate cross-cutting concerns and promote a more modular and maintainable fullstack architecture.",
+        "questionDifficulty": "medium",
+        "questionType": "interview",
+        "questionTags": [
+          "fullstack",
+          "cross-cutting concerns",
+          "best practices"
+        ]
+      },
+      {
+        "questionUuid": 938,
+        "questionTitle": "Explain the concept of containerization in a fullstack development environment and discuss its advantages.",
+        "questionDescription": "Define what containerization is and discuss how it facilitates consistency, scalability, and deployment in a fullstack application.",
+        "questionAnswer": "Containerization is a lightweight and portable way to package, distribute, and run applications. In fullstack development, containerization using tools like Docker provides advantages such as consistency across development and production environments, efficient resource utilization, and simplified deployment workflows. Containers encapsulate an application and its dependencies, ensuring that it runs consistently across different environments. Container orchestration tools like Kubernetes further enhance the scalability and manageability of containerized fullstack applications.",
+        "questionDifficulty": "medium",
+        "questionType": "interview",
+        "questionTags": [
+          "fullstack",
+          "containerization",
+          "Docker",
+          "Kubernetes"
+        ]
+      },
+      {
+        "questionUuid": 939,
+        "questionTitle": "Discuss the role of WebSockets in fullstack development and how they enhance real-time communication between frontend and backend components.",
+        "questionDescription": "Explain what WebSockets are and highlight their significance in enabling bidirectional, real-time communication in a fullstack application.",
+        "questionAnswer": "WebSockets are a communication protocol that enables bidirectional, real-time communication between a client and a server. In fullstack development, WebSockets play a crucial role in facilitating instant updates and interactions between frontend and backend components. Unlike traditional HTTP requests, WebSockets allow data to be pushed from the server to the client and vice versa. This makes them ideal for building responsive and interactive features in fullstack applications, such as chat applications, live notifications, and collaborative editing.",
+        "questionDifficulty": "medium",
+        "questionType": "interview",
+        "questionTags": ["fullstack", "WebSockets", "real-time communication"]
+      },
+      {
+        "questionUuid": 940,
+        "questionTitle": "Explain the concept of serverless architecture in fullstack development and discuss its advantages and challenges.",
+        "questionDescription": "Define what serverless architecture is and discuss how it impacts the development of both frontend and backend components in a fullstack application. Highlight the advantages and potential challenges associated with adopting serverless architecture.",
+        "questionAnswer": "Serverless architecture is an approach where the cloud provider manages the infrastructure, and developers focus on writing code. In fullstack development, serverless impacts both frontend and backend components by abstracting away server management tasks. Advantages include automatic scaling, cost efficiency, and faster development cycles. Challenges may involve dealing with cold starts, managing stateless functions, and understanding the pricing model of serverless platforms. Overall, serverless architecture offers a paradigm shift in building fullstack applications.",
+        "questionDifficulty": "medium",
+        "questionType": "interview",
+        "questionTags": [
+          "fullstack",
+          "serverless architecture",
+          "cloud computing"
+        ]
+      },
+      {
+        "questionUuid": 941,
+        "questionTitle": "Discuss the concept of Progressive Web Apps (PWAs) in fullstack development and their impact on user experience.",
+        "questionDescription": "Explain what Progressive Web Apps (PWAs) are and how they enhance the user experience in a fullstack application. Discuss the key features and considerations when implementing PWAs in both frontend and backend layers.",
+        "questionAnswer": "Progressive Web Apps (PWAs) are web applications that provide a native app-like experience while being accessed through a web browser. In fullstack development, PWAs enhance user experience by offering features like offline access, push notifications, and fast loading times. Key considerations include implementing a responsive design, utilizing service workers for offline capabilities, and optimizing performance. PWAs bridge the gap between web and mobile applications, providing a seamless experience for users across devices.",
+        "questionDifficulty": "medium",
+        "questionType": "interview",
+        "questionTags": ["fullstack", "PWAs", "user experience"]
+      },
+      {
+        "questionUuid": 942,
+        "questionTitle": "Explain the concept of load balancing in a fullstack application and discuss its importance for scalability and performance.",
+        "questionDescription": "Define what load balancing is and discuss how it contributes to scalability and performance optimization in a fullstack development environment. Highlight the key considerations and strategies for implementing load balancing.",
+        "questionAnswer": "Load balancing is the distribution of incoming network traffic across multiple servers to ensure no single server bears too much load. In fullstack development, load balancing is crucial for scalability and performance optimization. It prevents server overload, improves response times, and enhances fault tolerance. Key considerations include selecting an appropriate load balancing algorithm, distributing traffic based on server health, and handling session persistence. Implementing load balancing strategies is essential for building robust and scalable fullstack applications.",
+        "questionDifficulty": "medium",
+        "questionType": "interview",
+        "questionTags": [
+          "fullstack",
+          "load balancing",
+          "scalability",
+          "performance"
+        ]
+      },
+      {
+        "questionUuid": 943,
+        "questionTitle": "Discuss the role of content delivery networks (CDNs) in fullstack development and how they optimize the delivery of assets.",
+        "questionDescription": "Explain what content delivery networks (CDNs) are and how they contribute to optimizing the delivery of assets in a fullstack application. Discuss their impact on frontend and backend components.",
+        "questionAnswer": "Content Delivery Networks (CDNs) are distributed networks of servers that work together to deliver web content to users based on their geographic location. In fullstack development, CDNs optimize the delivery of assets, such as images, stylesheets, and scripts, by caching them on servers closer to the end-users. This reduces latency, improves load times, and enhances the overall performance of both frontend and backend components. Integrating CDNs is a common practice for achieving a faster and more reliable fullstack application.",
+        "questionDifficulty": "medium",
+        "questionType": "interview",
+        "questionTags": ["fullstack", "CDN", "performance optimization"]
+      },
+      {
+        "questionUuid": 944,
+        "questionTitle": "Explain the concept of DevOps in a fullstack development environment and discuss its significance for collaboration and continuous delivery.",
+        "questionDescription": "Define what DevOps is and discuss how it fosters collaboration between frontend and backend teams in a fullstack application. Highlight the key principles and practices associated with implementing DevOps in the development lifecycle.",
+        "questionAnswer": "DevOps is a set of practices that combines software development (Dev) and IT operations (Ops) to shorten the development lifecycle and deliver high-quality software continuously. In fullstack development, DevOps facilitates collaboration by breaking down silos between frontend and backend teams. Key principles include automation, continuous integration, continuous delivery, and monitoring. DevOps practices aim to improve efficiency, reduce time-to-market, and enhance the overall quality of fullstack applications.",
+        "questionDifficulty": "medium",
+        "questionType": "interview",
+        "questionTags": [
+          "fullstack",
+          "DevOps",
+          "collaboration",
+          "continuous delivery"
+        ]
+      },
+      {
+        "questionUuid": 945,
+        "questionTitle": "Discuss the challenges and strategies for handling data consistency in a fullstack application with distributed databases.",
+        "questionDescription": "Explain the complexities associated with maintaining data consistency in a fullstack development environment where data is distributed across multiple databases. Discuss strategies to ensure data consistency and integrity.",
+        "questionAnswer": "In fullstack development with distributed databases, ensuring data consistency becomes challenging due to the decentralized nature of data storage. Challenges include dealing with network partitions, maintaining atomicity, and handling conflicting updates. Strategies for ensuring data consistency involve implementing distributed transactions, employing consensus algorithms, and adopting event sourcing patterns. Achieving a balance between consistency, availability, and partition tolerance is crucial in designing robust fullstack applications with distributed databases.",
+        "questionDifficulty": "medium",
+        "questionType": "interview",
+        "questionTags": [
+          "fullstack",
+          "data consistency",
+          "distributed databases"
+        ]
+      },
+      {
+        "questionUuid": 946,
+        "questionTitle": "Explain the concept of feature toggles (feature flags) in fullstack development and discuss how they impact continuous deployment.",
+        "questionDescription": "Define what feature toggles (feature flags) are and discuss their role in enabling continuous deployment in a fullstack application. Highlight considerations and best practices when implementing feature toggles.",
+        "questionAnswer": "Feature toggles, also known as feature flags, are a software development technique that allows developers to modify system behavior without changing code. In fullstack development, feature toggles play a key role in enabling continuous deployment by decoupling feature releases from code deployments. Considerations include implementing toggle management, monitoring toggles in production, and establishing a strategy for toggles' lifecycle. Feature toggles provide flexibility and control, allowing teams to release features incrementally and test them in a production-like environment.",
+        "questionDifficulty": "medium",
+        "questionType": "interview",
+        "questionTags": [
+          "fullstack",
+          "feature toggles",
+          "continuous deployment"
+        ]
+      },
+      {
+        "questionUuid": 947,
+        "questionTitle": "Discuss the role of API gateways in a fullstack application architecture and their impact on communication between frontend and backend components.",
+        "questionDescription": "Explain what API gateways are and how they facilitate communication between frontend and backend components in a fullstack development environment. Discuss the advantages and challenges associated with using API gateways.",
+        "questionAnswer": "API gateways act as intermediaries between frontend and backend services, centralizing the management of APIs in a fullstack application. They handle tasks such as authentication, authorization, request routing, and response aggregation. In fullstack development, API gateways enhance security, scalability, and maintainability. Challenges may include potential single points of failure and increased complexity. However, the advantages of improved control and monitoring make API gateways valuable components in fullstack architectures.",
+        "questionDifficulty": "medium",
+        "questionType": "interview",
+        "questionTags": ["fullstack", "API gateways", "communication"]
+      },
+      {
+        "questionUuid": 948,
+        "questionTitle": "Explain the concept of microservices in a fullstack development environment and discuss their impact on scalability and maintainability.",
+        "questionDescription": "Define what microservices are and discuss how they contribute to scalability and maintainability in a fullstack application. Highlight key considerations and challenges associated with implementing a microservices architecture.",
+        "questionAnswer": "Microservices are an architectural style where an application is composed of small, independent services that communicate through APIs. In fullstack development, microservices contribute to scalability by allowing individual services to scale independently. They enhance maintainability by facilitating easier updates and reducing dependencies. Considerations include defining clear service boundaries, managing data consistency, and addressing challenges in distributed systems. Adopting a microservices architecture requires careful planning to reap the benefits of scalability and maintainability.",
+        "questionDifficulty": "medium",
+        "questionType": "interview",
+        "questionTags": [
+          "fullstack",
+          "microservices",
+          "scalability",
+          "maintainability"
+        ]
+      },
+      {
+        "questionUuid": 949,
+        "questionTitle": "Discuss the importance of automated testing in a fullstack development environment and highlight key testing strategies for both frontend and backend components.",
+        "questionDescription": "Explain the significance of automated testing in ensuring the quality of a fullstack application. Discuss key testing strategies for frontend and backend layers, including unit testing, integration testing, and end-to-end testing.",
+        "questionAnswer": "Automated testing is essential in fullstack development to ensure the reliability and quality of both frontend and backend components. Unit testing focuses on testing individual units of code, integration testing verifies interactions between components, and end-to-end testing validates the entire application workflow. Testing strategies may include using testing frameworks, mocking dependencies, and implementing continuous integration. Automated testing helps catch bugs early, facilitates faster development cycles, and contributes to building robust and maintainable fullstack applications.",
+        "questionDifficulty": "medium",
+        "questionType": "interview",
+        "questionTags": ["fullstack", "automated testing", "testing strategies"]
+      },
+      {
+        "questionUuid": 950,
+        "questionTitle": "Explain the concept of containerization in fullstack development and discuss how container orchestration tools enhance scalability and deployment.",
+        "questionDescription": "Define what containerization is and discuss its role in fullstack applications. Explore how container orchestration tools, such as Kubernetes, contribute to scalability, deployment, and management of containerized applications.",
+        "questionAnswer": "Containerization involves encapsulating an application and its dependencies into isolated containers for efficient deployment and scalability. In fullstack development, containerization streamlines consistency across different environments. Container orchestration tools, like Kubernetes, automate container deployment, scaling, and management. They enhance scalability by dynamically allocating resources based on demand and simplify deployment workflows. Considerations include defining container specifications, configuring orchestration settings, and managing containerized applications' lifecycle.",
+        "questionDifficulty": "medium",
+        "questionType": "interview",
+        "questionTags": [
+          "fullstack",
+          "containerization",
+          "Kubernetes",
+          "scalability",
+          "deployment"
+        ]
+      },
+      {
+        "questionUuid": 951,
+        "questionTitle": "Discuss the concept of GraphQL in fullstack development and compare it with traditional REST APIs. Highlight scenarios where GraphQL excels.",
+        "questionDescription": "Explain what GraphQL is and its role in fullstack applications. Compare GraphQL with traditional REST APIs, emphasizing scenarios where GraphQL provides advantages. Discuss considerations when choosing between GraphQL and REST.",
+        "questionAnswer": "GraphQL is a query language and runtime for APIs that allows clients to request only the data they need. In fullstack development, GraphQL offers more flexibility compared to traditional REST APIs, as clients can define the structure of the response. GraphQL excels in scenarios where bandwidth is a concern, and clients have varying data requirements. Considerations for choosing between GraphQL and REST include the nature of the application, client requirements, and ease of integration with existing systems.",
+        "questionDifficulty": "medium",
+        "questionType": "interview",
+        "questionTags": ["fullstack", "GraphQL", "REST APIs"]
+      },
+      {
+        "questionUuid": 952,
+        "questionTitle": "Explain the role of WebSockets in a fullstack application and discuss how they enable real-time communication between frontend and backend components.",
+        "questionDescription": "Define what WebSockets are and discuss their significance in achieving real-time communication in fullstack development. Explore use cases where WebSockets are preferable over traditional HTTP requests.",
+        "questionAnswer": "WebSockets provide a full-duplex communication channel over a single, long-lived connection, enabling real-time data transfer between frontend and backend components. In fullstack development, WebSockets are crucial for applications requiring low-latency updates, such as chat applications and live dashboards. They outperform traditional HTTP requests in scenarios where frequent and immediate data updates are necessary. Considerations include handling connection states, implementing fallback mechanisms, and optimizing for scalability in applications using WebSockets.",
+        "questionDifficulty": "medium",
+        "questionType": "interview",
+        "questionTags": ["fullstack", "WebSockets", "real-time communication"]
+      },
+      {
+        "questionUuid": 953,
+        "questionTitle": "Discuss the importance of caching strategies in a fullstack application and highlight common caching mechanisms for frontend and backend layers.",
+        "questionDescription": "Explain the significance of caching in improving performance in a fullstack development environment. Discuss common caching strategies for frontend components, backend APIs, and databases.",
+        "questionAnswer": "Caching plays a crucial role in enhancing performance in fullstack applications by reducing redundant computations and data fetching. For frontend components, browser caching, content delivery network (CDN) caching, and client-side caching are common strategies. In the backend, caching can be implemented at the API level using response caching and at the database level using techniques like query result caching. Choosing the appropriate caching strategy depends on factors such as data volatility, access patterns, and application requirements.",
+        "questionDifficulty": "medium",
+        "questionType": "interview",
+        "questionTags": ["fullstack", "caching", "performance optimization"]
+      },
+      {
+        "questionUuid": 954,
+        "questionTitle": "Explain the concept of state management in a fullstack application and discuss popular state management solutions for frontend frameworks.",
+        "questionDescription": "Define what state management is in the context of fullstack development. Discuss the challenges associated with state management in frontend frameworks and explore popular solutions.",
+        "questionAnswer": "State management involves managing and synchronizing the state of an application across different components. In fullstack development, frontend frameworks often face challenges in handling complex state interactions. Popular state management solutions include centralized state management libraries like Redux in React, Vuex in Vue.js, and NgRx in Angular. These libraries provide a predictable state container and help manage the flow of data within the frontend components of a fullstack application.",
+        "questionDifficulty": "medium",
+        "questionType": "interview",
+        "questionTags": [
+          "fullstack",
+          "state management",
+          "frontend frameworks",
+          "Redux",
+          "Vuex",
+          "NgRx"
+        ]
+      },
+      {
+        "questionUuid": 955,
+        "questionTitle": "Discuss the role of Single Sign-On (SSO) in a fullstack application and its impact on user authentication and authorization.",
+        "questionDescription": "Explain what Single Sign-On (SSO) is and discuss how it simplifies user authentication and authorization in a fullstack development environment. Explore considerations and best practices when implementing SSO.",
+        "questionAnswer": "Single Sign-On (SSO) is an authentication process that allows a user to access multiple applications with a single set of login credentials. In fullstack development, SSO simplifies user authentication and authorization by centralizing these processes. Considerations include choosing a secure identity provider, implementing industry-standard protocols like OAuth 2.0, and handling user sessions securely. SSO enhances user experience, reduces password fatigue, and improves security in fullstack applications.",
+        "questionDifficulty": "medium",
+        "questionType": "interview",
+        "questionTags": [
+          "fullstack",
+          "Single Sign-On",
+          "SSO",
+          "authentication",
+          "authorization"
+        ]
+      },
+      {
+        "questionUuid": 956,
+        "questionTitle": "Explain the concept of WebAssembly (Wasm) in fullstack development and discuss its role in improving frontend performance.",
+        "questionDescription": "Define what WebAssembly (Wasm) is and discuss how it contributes to improving frontend performance in fullstack applications. Explore use cases and considerations when integrating WebAssembly into a fullstack project.",
+        "questionAnswer": "WebAssembly (Wasm) is a binary instruction format that enables high-performance execution of code on web browsers. In fullstack development, WebAssembly improves frontend performance by allowing developers to run low-level, optimized code directly in the browser. Use cases include computationally intensive tasks, such as gaming, simulations, or video editing. Considerations when integrating WebAssembly involve understanding the security model, interacting with JavaScript, and assessing the impact on development workflows.",
+        "questionDifficulty": "medium",
+        "questionType": "interview",
+        "questionTags": ["fullstack", "WebAssembly", "frontend performance"]
+      },
+      {
+        "questionUuid": 957,
+        "questionTitle": "Discuss the challenges and solutions for handling cross-origin resource sharing (CORS) in a fullstack application.",
+        "questionDescription": "Explain what Cross-Origin Resource Sharing (CORS) is and discuss challenges associated with it in fullstack development. Explore solutions and best practices for handling CORS-related issues.",
+        "questionAnswer": "Cross-Origin Resource Sharing (CORS) is a security feature implemented by web browsers to control resource access across different origins. In fullstack development, challenges arise when frontend applications make requests to APIs hosted on different domains. Solutions include configuring server headers, handling preflight requests, and utilizing server-side proxies. Best practices involve understanding the CORS policy, securing APIs, and configuring servers to allow specific origins. Properly addressing CORS-related issues ensures seamless communication between frontend and backend components.",
+        "questionDifficulty": "medium",
+        "questionType": "interview",
+        "questionTags": ["fullstack", "CORS", "security"]
+      },
+      {
+        "questionUuid": 958,
+        "questionTitle": "Explain the role of a reverse proxy in a fullstack application and discuss how it enhances security, load balancing, and request routing.",
+        "questionDescription": "Define what a reverse proxy is and discuss its significance in a fullstack development environment. Explore how reverse proxies contribute to security, load balancing, and request routing.",
+        "questionAnswer": "A reverse proxy is a server that sits between client devices and backend servers, forwarding client requests to the appropriate backend server and returning the response. In fullstack development, reverse proxies enhance security by hiding backend server details, facilitate load balancing by distributing requests among multiple servers, and enable efficient request routing. Considerations include configuring SSL termination, implementing caching strategies, and managing routing rules. Incorporating a reverse proxy improves the overall performance, security, and scalability of a fullstack application.",
+        "questionDifficulty": "medium",
+        "questionType": "interview",
+        "questionTags": [
+          "fullstack",
+          "reverse proxy",
+          "security",
+          "load balancing",
+          "request routing"
+        ]
+      },
+      {
+        "questionUuid": 959,
+        "questionTitle": "Discuss the concept of serverless architecture in a fullstack development context and highlight its benefits and considerations.",
+        "questionDescription": "Explain what serverless architecture is and discuss its application in fullstack development. Highlight the benefits and considerations when adopting a serverless approach.",
+        "questionAnswer": "Serverless architecture is an approach where developers focus on writing code without managing the underlying infrastructure. In fullstack development, serverless platforms like AWS Lambda or Azure Functions allow running code in response to events without provisioning or maintaining servers. Benefits include automatic scaling, cost efficiency, and reduced operational overhead. Considerations involve understanding cold starts, managing dependencies, and choosing suitable use cases. Adopting a serverless approach in fullstack applications can lead to increased development speed and resource optimization.",
+        "questionDifficulty": "medium",
+        "questionType": "interview",
+        "questionTags": [
+          "fullstack",
+          "serverless architecture",
+          "benefits",
+          "considerations"
+        ]
       }
     ]
   },
@@ -120,30 +649,39 @@
     "setData": [
       {
         "questionUuid": 10,
-        "questionTitle": "topic-react What is Javascript?",
-        "questionDescription": "Can you spend 2 minutes explaing to me what JavaScript is",
-        "questionAnswer": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
-        "questionDifficulty": "hard",
+        "questionTitle": "Discuss the role of Loader Functions in the Remix Framework and how they contribute to efficient data fetching.",
+        "questionDescription": "Define what Loader Functions are in the context of the Remix Framework. Explore how Loader Functions contribute to efficient data fetching and server rendering, especially in scenarios with dynamic data requirements.",
+        "questionAnswer": "Loader Functions in Remix serve as the mechanism for loading data before rendering a page. They run on the server, allowing you to fetch data from various sources, such as APIs or databases, and pass it to the corresponding components. Loader Functions contribute to efficient data fetching by allowing granular control over what data is loaded for each page. This approach enhances performance and ensures that only the necessary data is fetched for each specific route.",
+        "questionDifficulty": "easy",
         "questionType": "course",
-        "questionTags": ["js", "ts", "react"]
+        "questionTags": ["remix"]
       },
       {
         "questionUuid": 11,
-        "questionTitle": "topic-react What is ECMAScript?",
-        "questionDescription": "In a sentance, 'have you seen the latest ECMAScript changes?'",
-        "questionAnswer": "It is a standard specification for scripting languages. JavaScript is based on ECMAScript.",
-        "questionDifficulty": "hard",
+        "questionTitle": "Explain how Remix Framework handles code splitting and its impact on optimizing web application performance.",
+        "questionDescription": "Describe the approach taken by Remix for code splitting and its significance in optimizing web application performance. Discuss the benefits of code splitting in terms of initial load times and user experience.",
+        "questionAnswer": "Remix Framework employs automatic code splitting to break down the JavaScript bundle into smaller, more manageable pieces. This technique optimizes web application performance by loading only the code required for the current page. As users navigate through the application, Remix dynamically fetches additional code, reducing initial load times and improving overall responsiveness. Code splitting in Remix is a key strategy for delivering a faster and more efficient user experience, especially in large-scale applications.",
+        "questionDifficulty": "easy",
         "questionType": "course",
-        "questionTags": ["js"]
+        "questionTags": ["remix"]
       },
       {
         "questionUuid": 12,
-        "questionTitle": "topic-react What is the difference between == and ===?",
-        "questionDescription": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
-        "questionAnswer": "== compares values. === compares both type and value.",
-        "questionDifficulty": "hard",
+        "questionTitle": "Discuss the role of React Server Components in the Remix Framework and how they contribute to a more interactive user experience.",
+        "questionDescription": "Define what React Server Components are and how Remix utilizes them to enhance interactivity in web applications. Explore scenarios where using React Server Components is beneficial for a richer user experience.",
+        "questionAnswer": "React Server Components, introduced by Remix, enable developers to build highly interactive user interfaces while maintaining the benefits of server rendering. These components allow parts of a page to be interactive on the server, enhancing responsiveness without sacrificing SEO advantages. In Remix, React Server Components contribute to a more interactive user experience by enabling server-rendered interactive elements. They are particularly beneficial in scenarios where a balance between interactivity and server rendering is crucial for optimal performance.",
+        "questionDifficulty": "easy",
         "questionType": "course",
-        "questionTags": ["js", "ts"]
+        "questionTags": ["remix"]
+      },
+      {
+        "questionUuid": 13,
+        "questionTitle": "Explain the role of the Data tab in the Remix Developer Tools and how it aids in debugging and optimizing data fetching.",
+        "questionDescription": "Define what the Data tab is in the Remix Developer Tools and discuss its significance in the development workflow. Explore how the Data tab aids developers in debugging, analyzing, and optimizing data fetching strategies in a Remix project.",
+        "questionAnswer": "The Data tab in Remix Developer Tools provides insights into the data fetching lifecycle of a page. It allows developers to inspect and understand how data is loaded for a specific route, aiding in debugging and optimization. Developers can analyze the performance of Loader Functions, identify potential bottlenecks, and optimize data fetching strategies. The Data tab is a valuable tool for ensuring efficient data loading and enhancing the overall performance of a Remix project.",
+        "questionDifficulty": "easy",
+        "questionType": "course",
+        "questionTags": ["remix"]
       }
     ]
   },
@@ -156,17 +694,8 @@
     "setTags": ["WebDevelopment", "Frontend", "Backend", "FullStack"],
     "setData": [
       {
-        "questionUuid": 13,
-        "questionTitle": "topic-react What is Javascript?",
-        "questionDescription": "Can you spend 2 minutes explaing to me what JavaScript is",
-        "questionAnswer": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
-        "questionDifficulty": "hard",
-        "questionType": "bootcamp",
-        "questionTags": ["js", "ts", "react"]
-      },
-      {
         "questionUuid": 14,
-        "questionTitle": "topic-react What is ECMAScript?",
+        "questionTitle": "What is ECMAScript?",
         "questionDescription": "In a sentance, 'have you seen the latest ECMAScript changes?'",
         "questionAnswer": "It is a standard specification for scripting languages. JavaScript is based on ECMAScript.",
         "questionDifficulty": "hard",
@@ -175,7 +704,7 @@
       },
       {
         "questionUuid": 15,
-        "questionTitle": "topic-react What is the difference between == and ===?",
+        "questionTitle": "What is the difference between == and ===?",
         "questionDescription": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
         "questionAnswer": "== compares values. === compares both type and value.",
         "questionDifficulty": "hard",
@@ -194,30 +723,30 @@
     "setData": [
       {
         "questionUuid": 16,
-        "questionTitle": "topic-react What is Javascript?",
-        "questionDescription": "Can you spend 2 minutes explaing to me what JavaScript is",
-        "questionAnswer": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
-        "questionDifficulty": "hard",
+        "questionTitle": "Explain the concept of microservices in a fullstack development environment and discuss their impact on scalability and maintainability.",
+        "questionDescription": "Define what microservices are and discuss how they contribute to scalability and maintainability in a fullstack application. Highlight key considerations and challenges associated with implementing a microservices architecture.",
+        "questionAnswer": "Microservices are an architectural style where an application is composed of small, independent services that communicate through APIs. In fullstack development, microservices contribute to scalability by allowing individual services to scale independently. They enhance maintainability by facilitating easier updates and reducing dependencies. Considerations include defining clear service boundaries, managing data consistency, and addressing challenges in distributed systems. Adopting a microservices architecture requires careful planning to reap the benefits of scalability and maintainability.",
+        "questionDifficulty": "medium",
         "questionType": "course",
-        "questionTags": ["js", "ts", "react"]
+        "questionTags": ["jts"]
       },
       {
         "questionUuid": 17,
-        "questionTitle": "topic-react What is ECMAScript?",
-        "questionDescription": "In a sentance, 'have you seen the latest ECMAScript changes?'",
-        "questionAnswer": "It is a standard specification for scripting languages. JavaScript is based on ECMAScript.",
-        "questionDifficulty": "hard",
+        "questionTitle": "Explain the concept of load balancing in a fullstack application and discuss its importance for scalability and performance.",
+        "questionDescription": "Define what load balancing is and discuss how it contributes to scalability and performance optimization in a fullstack development environment. Highlight the key considerations and strategies for implementing load balancing.",
+        "questionAnswer": "Load balancing is the distribution of incoming network traffic across multiple servers to ensure no single server bears too much load. In fullstack development, load balancing is crucial for scalability and performance optimization. It prevents server overload, improves response times, and enhances fault tolerance. Key considerations include selecting an appropriate load balancing algorithm, distributing traffic based on server health, and handling session persistence. Implementing load balancing strategies is essential for building robust and scalable fullstack applications.",
+        "questionDifficulty": "medium",
         "questionType": "course",
-        "questionTags": ["js"]
+        "questionTags": ["jts"]
       },
       {
         "questionUuid": 18,
-        "questionTitle": "topic-react What is the difference between == and ===?",
-        "questionDescription": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
-        "questionAnswer": "== compares values. === compares both type and value.",
-        "questionDifficulty": "hard",
+        "questionTitle": "Discuss the role of content delivery networks (CDNs) in fullstack development and how they optimize the delivery of assets.",
+        "questionDescription": "Explain what content delivery networks (CDNs) are and how they contribute to optimizing the delivery of assets in a fullstack application. Discuss their impact on frontend and backend components.",
+        "questionAnswer": "Content Delivery Networks (CDNs) are distributed networks of servers that work together to deliver web content to users based on their geographic location. In fullstack development, CDNs optimize the delivery of assets, such as images, stylesheets, and scripts, by caching them on servers closer to the end-users. This reduces latency, improves load times, and enhances the overall performance of both frontend and backend components. Integrating CDNs is a common practice for achieving a faster and more reliable fullstack application.",
+        "questionDifficulty": "medium",
         "questionType": "course",
-        "questionTags": ["js", "ts"]
+        "questionTags": ["jts"]
       }
     ]
   },
@@ -231,30 +760,30 @@
     "setData": [
       {
         "questionUuid": 19,
-        "questionTitle": "topic-react What is Javascript?",
-        "questionDescription": "Can you spend 2 minutes explaing to me what JavaScript is",
-        "questionAnswer": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
-        "questionDifficulty": "hard",
+        "questionTitle": "What is React?",
+        "questionDescription": "Explain the basic concept of React and its role in creating user interfaces.",
+        "questionAnswer": "React is an open-source JavaScript frontend library for creating user interfaces. It uses a component-based approach to create complicated, interactive web and mobile user interfaces. Developing single-page applications with React is effortless, especially using the integrated toolchain called Create React App.",
+        "questionDifficulty": "easy",
         "questionType": "bootcamp",
-        "questionTags": ["js", "ts", "react"]
+        "questionTags": ["react"]
       },
       {
         "questionUuid": 20,
-        "questionTitle": "topic-react What is ECMAScript?",
-        "questionDescription": "In a sentance, 'have you seen the latest ECMAScript changes?'",
-        "questionAnswer": "It is a standard specification for scripting languages. JavaScript is based on ECMAScript.",
-        "questionDifficulty": "hard",
+        "questionTitle": "What are the advantages of React?",
+        "questionDescription": "Discuss the advantages of using React in web development.",
+        "questionAnswer": "React offers increased performance with Virtual DOM, JSX for readable and writable code, works on both the client and server side, easy integration with other frameworks, and simplicity in writing unit tests.",
+        "questionDifficulty": "easy",
         "questionType": "bootcamp",
-        "questionTags": ["js"]
+        "questionTags": ["react"]
       },
       {
         "questionUuid": 21,
-        "questionTitle": "topic-react What is the difference between == and ===?",
-        "questionDescription": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
-        "questionAnswer": "== compares values. === compares both type and value.",
-        "questionDifficulty": "hard",
+        "questionTitle": "What is JSX?",
+        "questionDescription": "Define JSX and explain its role in React development.",
+        "questionAnswer": "JSX is a syntax extension to JavaScript that describes what the UI should look like with the full power of JavaScript. It provides syntactic sugar for the React.createElement() function and gets compiled to React.createElement() calls.",
+        "questionDifficulty": "easy",
         "questionType": "bootcamp",
-        "questionTags": ["js", "ts"]
+        "questionTags": ["react", "js"]
       }
     ]
   },
@@ -268,30 +797,30 @@
     "setData": [
       {
         "questionUuid": 22,
-        "questionTitle": "topic-react What is Javascript?",
-        "questionDescription": "Can you spend 2 minutes explaing to me what JavaScript is",
-        "questionAnswer": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
+        "questionTitle": "Explain the concept of currying in JavaScript and provide an example demonstrating its use in functional programming.",
+        "questionDescription": "Define currying in the context of JavaScript and discuss how it enhances functional programming. Present a practical example showcasing the application of currying to solve a problem or create more reusable and expressive code.",
+        "questionAnswer": "Currying is a technique in functional programming where a function that takes multiple arguments is transformed into a series of functions that each take a single argument. This allows for partial application and creates more composable and reusable functions. An example of currying is converting a function that adds two numbers (add(x, y)) into a curried version (addCurried(x)(y)), enabling partial application for enhanced flexibility and functional composition.",
         "questionDifficulty": "hard",
         "questionType": "course",
-        "questionTags": ["js", "ts", "react"]
+        "questionTags": ["js"]
       },
       {
         "questionUuid": 23,
-        "questionTitle": "topic-react What is ECMAScript?",
-        "questionDescription": "In a sentance, 'have you seen the latest ECMAScript changes?'",
-        "questionAnswer": "It is a standard specification for scripting languages. JavaScript is based on ECMAScript.",
+        "questionTitle": "Discuss the concept of recursion in JavaScript and provide a scenario where using recursion is beneficial.",
+        "questionDescription": "Define recursion in the context of JavaScript and elaborate on its role in solving problems. Present a scenario or use case where employing recursion is not only suitable but also offers advantages over alternative approaches.",
+        "questionAnswer": "Recursion is a programming concept where a function calls itself in its own definition. In JavaScript, recursion is often used for tasks that can be broken down into smaller, similar subtasks. For example, a recursive function can be employed to calculate the factorial of a number or traverse a nested data structure. Recursion is beneficial in scenarios where a problem naturally decomposes into smaller instances of the same problem, leading to concise and elegant code.",
         "questionDifficulty": "hard",
         "questionType": "course",
         "questionTags": ["js"]
       },
       {
         "questionUuid": 24,
-        "questionTitle": "topic-react What is the difference between == and ===?",
-        "questionDescription": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
-        "questionAnswer": "== compares values. === compares both type and value.",
+        "questionTitle": "Explore a challenging JavaScript concept, such as event loop intricacies or closures, and provide an in-depth explanation along with a real-world example.",
+        "questionDescription": "Select a complex JavaScript concept, such as aspects of the event loop or closures, and provide a detailed explanation. Illustrate the concept with a real-world example to demonstrate its practical implications and challenges.",
+        "questionAnswer": "One challenging JavaScript concept is the event loop, a crucial part of the runtime environment. The event loop manages the execution of code, handling asynchronous tasks through callback queues and the call stack. Understanding the event loop is essential for effective asynchronous programming. Another complex concept is closures, where functions retain access to variables from their containing scope even after the scope has finished executing. This can lead to powerful patterns but may also introduce challenges in managing memory and unexpected behavior.",
         "questionDifficulty": "hard",
         "questionType": "course",
-        "questionTags": ["js", "ts"]
+        "questionTags": ["js"]
       }
     ]
   },
@@ -305,30 +834,30 @@
     "setData": [
       {
         "questionUuid": 25,
-        "questionTitle": "topic-react What is Javascript?",
-        "questionDescription": "Can you spend 2 minutes explaing to me what JavaScript is",
-        "questionAnswer": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
-        "questionDifficulty": "hard",
+        "questionTitle": "Explain TypeScript and its use?",
+        "questionDescription": "Provide an overview of TypeScript, its development, and how it enhances JavaScript with static typing.",
+        "questionAnswer": "TypeScript is an open-source language extending JavaScript with type annotations. It catches errors during compilation, ensuring safer code. It offers scalability, integration with JavaScript frameworks, and features like namespaces and decorators.",
+        "questionDifficulty": "easy",
         "questionType": "course",
-        "questionTags": ["js", "ts", "react"]
+        "questionTags": ["ts"]
       },
       {
         "questionUuid": 26,
-        "questionTitle": "topic-react What is ECMAScript?",
-        "questionDescription": "In a sentance, 'have you seen the latest ECMAScript changes?'",
-        "questionAnswer": "It is a standard specification for scripting languages. JavaScript is based on ECMAScript.",
-        "questionDifficulty": "hard",
+        "questionTitle": "Can you tell the names of some of the built-in types in TypeScript?",
+        "questionDescription": "List some common built-in types in TypeScript and their purposes.",
+        "questionAnswer": "TypeScript has built-in types like 'any', 'boolean', 'number', 'string', 'null', 'undefined', and 'void'. Each serves a specific purpose, allowing developers to enforce type safety.",
+        "questionDifficulty": "easy",
         "questionType": "course",
-        "questionTags": ["js"]
+        "questionTags": ["ts"]
       },
       {
         "questionUuid": 27,
-        "questionTitle": "topic-react What is the difference between == and ===?",
-        "questionDescription": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
-        "questionAnswer": "== compares values. === compares both type and value.",
-        "questionDifficulty": "hard",
+        "questionTitle": "Give an example of generics in TypeScript?",
+        "questionDescription": "Demonstrate the usage of generics in TypeScript with an example.",
+        "questionAnswer": "Generics in TypeScript enable the creation of reusable components. They allow functions, classes, or interfaces to work with different types while maintaining static typing.",
+        "questionDifficulty": "easy",
         "questionType": "course",
-        "questionTags": ["js", "ts"]
+        "questionTags": ["ts"]
       }
     ]
   },
@@ -341,31 +870,220 @@
     "setTags": ["HTML", "CSS", "WebDevelopment", "Styling"],
     "setData": [
       {
-        "questionUuid": 28,
-        "questionTitle": "topic-react What is Javascript?",
-        "questionDescription": "Can you spend 2 minutes explaing to me what JavaScript is",
-        "questionAnswer": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
-        "questionDifficulty": "hard",
+        "questionUuid": 101,
+        "questionTitle": "What is CSS Box model?",
+        "questionDescription": "Briefly talk about what it is, consists of, and its purpose.",
+        "questionAnswer": "The box model is a box that wraps around every HTML element. The box contains content, padding, border, and margin. Kudos if you could discuss each point in detail.",
+        "questionDifficulty": "easy",
         "questionType": "topic",
-        "questionTags": ["js", "ts", "react"]
+        "questionTags": ["css"]
       },
       {
-        "questionUuid": 29,
-        "questionTitle": "topic-react What is ECMAScript?",
-        "questionDescription": "In a sentance, 'have you seen the latest ECMAScript changes?'",
-        "questionAnswer": "It is a standard specification for scripting languages. JavaScript is based on ECMAScript.",
-        "questionDifficulty": "hard",
+        "questionUuid": 102,
+        "questionTitle": "What is a CSS sprite?",
+        "questionDescription": "Explain the concept of CSS sprites and how they optimize web page loading.",
+        "questionAnswer": "CSS sprites combine multiple images into one single larger image. This would only require one server request resulting in a faster loading time. Without CSS sprites, each image will send out individual server requests.",
+        "questionDifficulty": "medium",
         "questionType": "topic",
-        "questionTags": ["js"]
+        "questionTags": ["css"]
       },
       {
-        "questionUuid": 30,
-        "questionTitle": "topic-react What is the difference between == and ===?",
-        "questionDescription": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
-        "questionAnswer": "== compares values. === compares both type and value.",
-        "questionDifficulty": "hard",
+        "questionUuid": 103,
+        "questionTitle": "What is a CSS preprocessor?",
+        "questionDescription": "Explain the concept of a CSS preprocessor and its benefits.",
+        "questionAnswer": "A CSS preprocessor is a program that lets you generate CSS from the preprocessor’s own unique syntax. There are many CSS preprocessors to choose from, and each one will add some features that don’t exist in pure CSS such as variables, mixin, nesting selector, and many more. These features make the CSS structure more readable and easier to maintain.",
+        "questionDifficulty": "medium",
         "questionType": "topic",
-        "questionTags": ["js", "ts"]
+        "questionTags": ["css"]
+      },
+      {
+        "questionUuid": 104,
+        "questionTitle": "Explain the concept of specificity in CSS.",
+        "questionDescription": "Discuss how browsers decide which CSS property values are the most relevant to an element using specificity.",
+        "questionAnswer": "Specificity is the means by which browsers decide which CSS property values are the most relevant to an element that will be applied. Specificity applies a weight to a given CSS declaration, determined by the number of each selector type in the matching selector. When multiple declarations have equal specificity, the last declaration found in the CSS is applied to the element.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["css"]
+      },
+      {
+        "questionUuid": 105,
+        "questionTitle": "What is !important?",
+        "questionDescription": "Explain the usage of !important in CSS styles.",
+        "questionAnswer": "Important is used to provide more weight (importance) than normal property. It is used for overriding other styles that are declared elsewhere in order to achieve a certain design. We can think of important as the main priority, so it needs to be applied and ignore other rules.",
+        "questionDifficulty": "easy",
+        "questionType": "topic",
+        "questionTags": ["css"]
+      },
+      {
+        "questionUuid": 106,
+        "questionTitle": "Explain the difference between visibility: hidden and display: none?",
+        "questionDescription": "Discuss the distinctions between the CSS properties visibility: hidden and display: none.",
+        "questionAnswer": "visibility: hidden hides the element but it occupies space and affects the layout of the document. display: none also hides the element but does not occupy space. It will not affect the layout of the document.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["css"]
+      },
+      {
+        "questionUuid": 107,
+        "questionTitle": "What does box-sizing: border-box do?",
+        "questionDescription": "Explain the purpose of the CSS property box-sizing: border-box.",
+        "questionAnswer": "This tells the browser to account for any border and padding with the element's width and height. This makes dealing with the sizes of elements much easier. It will also eliminate a number of pitfalls you can stumble while laying out your content.",
+        "questionDifficulty": "easy",
+        "questionType": "topic",
+        "questionTags": ["css"]
+      },
+      {
+        "questionUuid": 108,
+        "questionTitle": "What is the difference between inline, inline-block, and block?",
+        "questionDescription": "Discuss the characteristics of inline, inline-block, and block elements in CSS.",
+        "questionAnswer": "Block elements always start on a new line. They will also take space of an entire row. Inline elements don't start on a new line, These elements appear on the same line with the content and tags beside them. Inline-block elements are similar to inline elements, except they can have padding and margins added on all four sides.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["css"]
+      },
+      {
+        "questionUuid": 109,
+        "questionTitle": "What is pseudo-element?",
+        "questionDescription": "Explain the concept of pseudo-elements in CSS.",
+        "questionAnswer": "A pseudo-element allows you to manipulate parts of an element in a special way. You can use only one pseudo-element in a selector, but it must appear after the simple selectors in the statement.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["css"]
+      },
+      {
+        "questionUuid": 110,
+        "questionTitle": "What is pseudo-class?",
+        "questionDescription": "Discuss the role and usage of pseudo-classes in CSS.",
+        "questionAnswer": "A pseudo-class is a selector that selects elements that are in a specific state. Like regular classes, you can chain together as many pseudo-classes as you want in a selector.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["css"]
+      },
+      {
+        "questionUuid": 111,
+        "questionTitle": "What are the different ways to position a certain element in CSS?",
+        "questionDescription": "Discuss the various positioning options provided by CSS for elements.",
+        "questionAnswer": "CSS provides various positioning options: static (default flow), relative (adjustment relative to itself), absolute (removed from flow, positioned relative to ancestor), fixed (positioned relative to viewport), and sticky (hybrid of relative and fixed).",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["css"]
+      },
+      {
+        "questionUuid": 112,
+        "questionTitle": "What is the difference between Flexbox and Grid?",
+        "questionDescription": "Compare the features and use cases of Flexbox and Grid as CSS layout tools.",
+        "questionAnswer": "Flexbox and Grid are CSS layout tools. Flexbox is one-dimensional, creating row or column layouts. Grid is two-dimensional, handling both rows and columns. Flexbox is suitable for basic layouts, Grid for defining grids and placing content. They can be combined for more complex designs.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["css"]
+      },
+      {
+        "questionUuid": 113,
+        "questionTitle": "What are HTML Entities?",
+        "questionDescription": "Explain the concept of HTML entities and their usage.",
+        "questionAnswer": "HTML entities are a piece of text (\"string\") that begins with an ampersand (&) and ends with a semicolon (;). They are frequently used to display reserved (which would otherwise be interpreted as HTML code), and invisible characters (like non-breaking spaces).",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["html"]
+      },
+      {
+        "questionUuid": 114,
+        "questionTitle": "What are semantic elements in HTML?",
+        "questionDescription": "Describe semantic elements in HTML and provide examples.",
+        "questionAnswer": "Semantic elements are HTML elements that represent their meaning to the browser and developer about their contents. Elements like <header>, <footer>, and <article> are semantic elements.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["html"]
+      },
+      {
+        "questionUuid": 115,
+        "questionTitle": "What are meta tags?",
+        "questionDescription": "Explain the purpose of meta tags in HTML and how they are used.",
+        "questionAnswer": "Meta tags are HTML tags that can be included in webpages to describe what the web page is about. These tags are not displayed on the page itself but are read by search engines like google.com and web crawlers.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["html"]
+      },
+      {
+        "questionUuid": 116,
+        "questionTitle": "What are two types of Web Storage in HTML5?",
+        "questionDescription": "Discuss the differences between Session Storage and Local Storage in HTML5.",
+        "questionAnswer": "Session Storage stores data of the current session and is cleared automatically when the browser is closed. Local Storage data is not deleted automatically when the current browser window is closed.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["html"]
+      },
+      {
+        "questionUuid": 117,
+        "questionTitle": "What are web workers?",
+        "questionDescription": "Explain the purpose of web workers in JavaScript and how they affect page performance.",
+        "questionAnswer": "A web worker is a JavaScript code that runs on a separate thread. It is used to compute long and heavy tasks without affecting the performance of the page.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["html"]
+      },
+      {
+        "questionUuid": 118,
+        "questionTitle": "What is HTML?",
+        "questionDescription": "Define HTML and its role as the standard markup language for creating web pages.",
+        "questionAnswer": "HTML, or HyperText Markup Language, is the standard markup language for creating web pages. It is used to structure a web page and its content.",
+        "questionDifficulty": "easy",
+        "questionType": "topic",
+        "questionTags": ["html"]
+      },
+      {
+        "questionUuid": 119,
+        "questionTitle": "What are HTML attributes?",
+        "questionDescription": "Explain the role of HTML attributes and how they change the behavior or display of HTML elements.",
+        "questionAnswer": "HTML attributes are additional information on HTML tags that change the way the HTML element behaves or is displayed. Attributes are specified directly after the opening name of the tag, inside the two angled brackets.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["html"]
+      },
+      {
+        "questionUuid": 120,
+        "questionTitle": "What are data-attributes good for?",
+        "questionDescription": "Discuss the purpose and usage of data-attributes in HTML.",
+        "questionAnswer": "Data attributes let you assign custom data to an element to store more information or data when no suitable HTML5 element or attribute exists.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["html"]
+      },
+      {
+        "questionUuid": 121,
+        "questionTitle": "What is the difference between `id` and the `class` attribute?",
+        "questionDescription": "Compare the usage of 'id' and 'class' attributes in HTML elements.",
+        "questionAnswer": "ID is only used to identify one single element. Class can be used to identify more than one HTML element.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["html"]
+      },
+      {
+        "questionUuid": 122,
+        "questionTitle": "What is the purpose of the alt attribute on images?",
+        "questionDescription": "Explain the significance of the alt attribute on HTML images.",
+        "questionAnswer": "The alt attribute provides alternative information in case the user cannot view the image. This attribute can be also used for accessibility.",
+        "questionDifficulty": "easy",
+        "questionType": "topic",
+        "questionTags": ["html"]
+      },
+      {
+        "questionUuid": 123,
+        "questionTitle": "What are the differences between inline and block-level elements?",
+        "questionDescription": "Highlight the distinctions between inline and block-level elements in HTML.",
+        "questionAnswer": "Inline elements just take up the space that is absolutely necessary for the content and do not start from a new line. Block elements start on a new line and consume the full width of the page available.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["html"]
+      },
+      {
+        "questionUuid": 124,
+        "questionTitle": "How can we create a hyperlink in HTML?",
+        "questionDescription": "Describe the HTML element used to create hyperlinks between different web pages.",
+        "questionAnswer": "An anchor tag or <a> tag is used to create hyperlinks. This creates a path between two different HTML web pages.",
+        "questionDifficulty": "easy",
+        "questionType": "topic",
+        "questionTags": ["html"]
       }
     ]
   },
@@ -378,31 +1096,139 @@
     "setTags": ["Python", "Programming", "Scripting", "Development"],
     "setData": [
       {
-        "questionUuid": 31,
-        "questionTitle": "topic-react What is Javascript?",
-        "questionDescription": "Can you spend 2 minutes explaing to me what JavaScript is",
-        "questionAnswer": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
-        "questionDifficulty": "hard",
+        "questionUuid": 500,
+        "questionTitle": "What is Python?",
+        "questionDescription": "Explain Python and its primary usage areas.",
+        "questionAnswer": "Python is a popular programming language created by Guido van Rossum in 1991. It is used for web development (server-side), software development, mathematics, and system scripting.",
+        "questionDifficulty": "medium",
         "questionType": "topic",
-        "questionTags": ["js", "ts", "react"]
+        "questionTags": ["python"]
       },
       {
-        "questionUuid": 32,
-        "questionTitle": "topic-react What is ECMAScript?",
-        "questionDescription": "In a sentance, 'have you seen the latest ECMAScript changes?'",
-        "questionAnswer": "It is a standard specification for scripting languages. JavaScript is based on ECMAScript.",
-        "questionDifficulty": "hard",
+        "questionUuid": 501,
+        "questionTitle": "What can Python do?",
+        "questionDescription": "Explore the versatility and applications of Python.",
+        "questionAnswer": "Python is versatile and can be used for web applications, software workflows, connecting to databases, handling big data, performing complex mathematics, and rapid prototyping.",
+        "questionDifficulty": "medium",
         "questionType": "topic",
-        "questionTags": ["js"]
+        "questionTags": ["python"]
       },
       {
-        "questionUuid": 33,
-        "questionTitle": "topic-react What is the difference between == and ===?",
-        "questionDescription": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
-        "questionAnswer": "== compares values. === compares both type and value.",
-        "questionDifficulty": "hard",
+        "questionUuid": 502,
+        "questionTitle": "When is Python the 'right choice' for a project?",
+        "questionDescription": "Discuss the scenarios where Python is considered a suitable choice for projects.",
+        "questionAnswer": "Python is suitable for a variety of tasks due to its readability, large standard library, and applicability to different problem domains. It excels in ease of use, rapid prototyping, and compact code.",
+        "questionDifficulty": "medium",
         "questionType": "topic",
-        "questionTags": ["js", "ts", "css"]
+        "questionTags": ["python"]
+      },
+      {
+        "questionUuid": 503,
+        "questionTitle": "What are some drawbacks of Python?",
+        "questionDescription": "Highlight common drawbacks associated with the Python programming language.",
+        "questionAnswer": "Common drawbacks include the Global Interpreter Lock (GIL) affecting multi-threading, and its interpreted nature leading to potential speed issues. However, these are balanced by its strengths in ease of use and a rich standard library.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["python"]
+      },
+      {
+        "questionUuid": 504,
+        "questionTitle": "Key differences between Python 2 and 3?",
+        "questionDescription": "Examine the significant changes introduced in Python 3 compared to Python 2.",
+        "questionAnswer": "Python 3 introduced changes like text and data handling, the `print` function, removal of `xrange`, API changes in `zip()`, `map()`, and `filter()`, and modifications in comparison operators.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["python"]
+      },
+      {
+        "questionUuid": 505,
+        "questionTitle": "Key differences between Python and Java?",
+        "questionDescription": "Explore the fundamental differences between Python and Java.",
+        "questionAnswer": "Differences include dynamic vs. static typing, handling static vs. class methods, method overloading, single vs. double quotes, getters and setters usage, class requirements, and indentation significance in Python.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["python"]
+      },
+      {
+        "questionUuid": 506,
+        "questionTitle": "Difference between 'range' and 'xrange'?",
+        "questionDescription": "Discuss the distinction between 'range' and 'xrange' in Python 2.",
+        "questionAnswer": "In Python 2, 'range' returns a list, while 'xrange' returns an iterator. 'xrange' is memory-efficient for large ranges.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["python"]
+      },
+      {
+        "questionUuid": 507,
+        "questionTitle": "What is a method in Python?",
+        "questionDescription": "Define and explain the concept of a method in Python.",
+        "questionAnswer": "A method is a function defined within a class, called using the format `object.method(arguments)`.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["python"]
+      },
+      {
+        "questionUuid": 508,
+        "questionTitle": "Calling a base class method from a derived class?",
+        "questionDescription": "Explain how to call a method from a base class in a derived class in both new-style and classic classes.",
+        "questionAnswer": "In new-style classes, use `super(Derived, self).meth()`. In classic classes, use `Base.meth(self, arguments)`.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["python"]
+      },
+      {
+        "questionUuid": 509,
+        "questionTitle": "How to organize code for easier base class changes?",
+        "questionDescription": "Discuss a strategy for organizing code to facilitate changes to the base class.",
+        "questionAnswer": "Define an alias for the base class, assign the real base class dynamically, and use the alias throughout the class.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["python"]
+      },
+      {
+        "questionUuid": 510,
+        "questionTitle": "Finding the current module name in Python?",
+        "questionDescription": "Explain how to determine the current module name in a Python script.",
+        "questionAnswer": "Use the predefined global variable `__name__`. If it equals '__main__', the program is running as a script.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["python"]
+      },
+      {
+        "questionUuid": 511,
+        "questionTitle": "Accessing a Python module from C?",
+        "questionDescription": "Describe the process of accessing a Python module from C.",
+        "questionAnswer": "Use `PyImport_ImportModule('')` to get a pointer to the module object. Access module attributes with `PyObject_GetAttrString()`.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["python"]
+      },
+      {
+        "questionUuid": 512,
+        "questionTitle": "Converting a number to a string?",
+        "questionDescription": "Provide methods for converting a number to a string in Python.",
+        "questionAnswer": "Use the `str()` function to convert a number to a string. For hexadecimal or octal representation, use `hex()` or `oct()`.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["python"]
+      },
+      {
+        "questionUuid": 513,
+        "questionTitle": "Implementation of Python's dictionaries?",
+        "questionDescription": "Explain the implementation details of Python dictionaries.",
+        "questionAnswer": "Dictionaries are implemented using a hash table. The hash value of the key points to a location in an array of buckets or collision lists, containing key-value pairs.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["python"]
+      },
+      {
+        "questionUuid": 514,
+        "questionTitle": "Creating Unicode strings in Python?",
+        "questionDescription": "Discuss methods for creating Unicode strings in Python.",
+        "questionAnswer": "Prefix the string with 'u' or use `unicode(text)` to create Unicode strings. Example: `u'Python'` or `unicode(text)`.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["python"]
       }
     ]
   },
@@ -415,31 +1241,184 @@
     "setTags": ["js", "WebDevelopment", "Frontend", "Backend"],
     "setData": [
       {
-        "questionUuid": 34,
-        "questionTitle": "topic-JavaScript What is Javascript?",
-        "questionDescription": "Can you spend 2 minutes explaining to me what JavaScript is",
-        "questionAnswer": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
-        "questionDifficulty": "easy",
-        "questionType": "topic",
-        "questionTags": ["js", "ts", "react"]
-      },
-      {
-        "questionUuid": 35,
-        "questionTitle": "topic-JavaScript What is ECMAScript?",
-        "questionDescription": "In a sentence, 'have you seen the latest ECMAScript changes?'",
-        "questionAnswer": "It is a standard specification for scripting languages. JavaScript is based on ECMAScript.",
+        "questionUuid": 200,
+        "questionTitle": "What is Javascript?",
+        "questionDescription": "Explain JavaScript and its evolution from a browser scripting language to a server-side language.",
+        "questionAnswer": "JavaScript is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used on the server.",
         "questionDifficulty": "easy",
         "questionType": "topic",
         "questionTags": ["js"]
       },
       {
-        "questionUuid": 36,
-        "questionTitle": "topic-JavaScript What is the difference between == and ===?",
-        "questionDescription": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
-        "questionAnswer": "== compares values. === compares both type and value.",
+        "questionUuid": 201,
+        "questionTitle": "What is ECMAScript?",
+        "questionDescription": "Define ECMAScript and its role as a standard specification for scripting languages.",
+        "questionAnswer": "ECMAScript is a standard specification for scripting languages. JavaScript is based on ECMAScript.",
         "questionDifficulty": "easy",
         "questionType": "topic",
-        "questionTags": ["js", "ts"]
+        "questionTags": ["js"]
+      },
+      {
+        "questionUuid": 202,
+        "questionTitle": "What is the difference between == and ===?",
+        "questionDescription": "Differentiate between the usage of == and === in JavaScript.",
+        "questionAnswer": "== compares values, while === compares both type and value.",
+        "questionDifficulty": "easy",
+        "questionType": "topic",
+        "questionTags": ["js"]
+      },
+      {
+        "questionUuid": 203,
+        "questionTitle": "What is a promise?",
+        "questionDescription": "Explain the concept of a promise in JavaScript and its purpose.",
+        "questionAnswer": "A promise is an object that may produce a single value sometime in the future with either a resolved value or a reason for not being resolved.",
+        "questionDifficulty": "easy",
+        "questionType": "topic",
+        "questionTags": ["js"]
+      },
+      {
+        "questionUuid": 204,
+        "questionTitle": "What is strict mode in JS?",
+        "questionDescription": "Describe the purpose and benefits of using strict mode in JavaScript.",
+        "questionAnswer": "Strict mode in JS is useful for writing secure code. It prevents some bugs from happening and throws more exceptions.",
+        "questionDifficulty": "easy",
+        "questionType": "topic",
+        "questionTags": ["js"]
+      },
+      {
+        "questionUuid": 205,
+        "questionTitle": "What is the difference between null and undefined?",
+        "questionDescription": "Differentiate between the null and undefined types in JavaScript.",
+        "questionAnswer": "null type is an object that is explicitly assigned to a variable. undefined type is undefined where the variable has been declared but has no assigned value.",
+        "questionDifficulty": "easy",
+        "questionType": "topic",
+        "questionTags": ["js"]
+      },
+      {
+        "questionUuid": 206,
+        "questionTitle": "What is AJAX?",
+        "questionDescription": "Define AJAX and its role in web development.",
+        "questionAnswer": "AJAX stands for Asynchronous JavaScript and XML. It allows sending and retrieving data from the server without refreshing the page.",
+        "questionDifficulty": "easy",
+        "questionType": "topic",
+        "questionTags": ["js"]
+      },
+      {
+        "questionUuid": 207,
+        "questionTitle": "Explain the difference between synchronous and asynchronous.",
+        "questionDescription": "Discuss the distinctions between synchronous and asynchronous operations in JavaScript.",
+        "questionAnswer": "Synchronous is a blocking operation, while asynchronous is not. Synchronous completes the current code before the next code is executed, while asynchronous continues to the next code without completing the current code.",
+        "questionDifficulty": "easy",
+        "questionType": "topic",
+        "questionTags": ["js"]
+      },
+      {
+        "questionUuid": 208,
+        "questionTitle": "What are the differences between var, let, and const?",
+        "questionDescription": "Discuss the differences in scope and usage between var, let, and const in JavaScript.",
+        "questionAnswer": "var is scoped to a function, while let and const are block-scoped. They are accessible to the nearest curly braces (function, if-else, for-loop).",
+        "questionDifficulty": "easy",
+        "questionType": "topic",
+        "questionTags": ["js"]
+      },
+      {
+        "questionUuid": 209,
+        "questionTitle": "What is the DOM?",
+        "questionDescription": "Define the Document Object Model (DOM) and its application in web development.",
+        "questionAnswer": "The DOM stands for Document Object Model. It is used to access and change the document structure, style, and content.",
+        "questionDifficulty": "easy",
+        "questionType": "topic",
+        "questionTags": ["js"]
+      },
+      {
+        "questionUuid": 210,
+        "questionTitle": "What is a closure?",
+        "questionDescription": "Explain the concept of a closure in JavaScript and its characteristics.",
+        "questionAnswer": "Closure is a function in a function. The inner function has access to the outer function's scope and parameters even after the outer function has returned.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["js"]
+      },
+      {
+        "questionUuid": 211,
+        "questionTitle": "What are the differences between call, apply, and bind?",
+        "questionDescription": "Discuss the distinctions between the JavaScript methods call, apply, and bind.",
+        "questionAnswer": "call and apply immediately call a function, while bind creates a new function that can be invoked in the future. Arguments with call are passed in one by one, separated with a comma, while apply expects an array as its argument.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["js"]
+      },
+      {
+        "questionUuid": 212,
+        "questionTitle": "What is an event loop?",
+        "questionDescription": "Define the concept of an event loop in JavaScript and its role in executing code.",
+        "questionAnswer": "An event loop is responsible for executing JavaScript code, collecting and processing events, and executing queued sub-tasks.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["js"]
+      },
+      {
+        "questionUuid": 213,
+        "questionTitle": "What is a currying function?",
+        "questionDescription": "Explain the concept of currying in JavaScript and its benefits.",
+        "questionAnswer": "A currying function is the process of taking a function with multiple arguments and turning it into a sequence of functions, each with a single argument. Curried functions improve code reusability and functional composition.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["js"]
+      },
+      {
+        "questionUuid": 214,
+        "questionTitle": "What is prototype in javascript?",
+        "questionDescription": "Define the concept of prototype in JavaScript and its role in inheritance.",
+        "questionAnswer": "Prototypes are the mechanism by which JavaScript objects inherit from another object.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["js"]
+      },
+      {
+        "questionUuid": 215,
+        "questionTitle": "What is memoization?",
+        "questionDescription": "Explain the concept of memoization and its application in optimizing function calls.",
+        "questionAnswer": "Memoization is an optimization technique by storing the result of expensive function calls and returning the cached results when the same inputs occur again.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["js"]
+      },
+      {
+        "questionUuid": 216,
+        "questionTitle": "What is a higher-order function?",
+        "questionDescription": "Define the concept of a higher-order function in JavaScript and provide examples.",
+        "questionAnswer": "A higher-order function is a function that accepts another function as an argument or returns a function as a return value or both. Map, filter, and reduce are examples of higher-order functions built into JavaScript.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["js"]
+      },
+      {
+        "questionUuid": 217,
+        "questionTitle": "What is event delegation?",
+        "questionDescription": "Explain the concept of event delegation in JavaScript.",
+        "questionAnswer": "Event delegation is a pattern of adding a single event listener to a parent element instead of multiple elements.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["js"]
+      },
+      {
+        "questionUuid": 218,
+        "questionTitle": "Name some ways to handle asynchronous operation in javascript",
+        "questionDescription": "Discuss various methods for handling asynchronous operations in JavaScript.",
+        "questionAnswer": "Callback is a function used to notify the calling instance. Promise is an object representing the eventual completion or failure of an asynchronous operation. Async/await is a new addition to ES2017, providing syntactic sugar on top of promises, making asynchronous code look synchronous.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["js"]
+      },
+      {
+        "questionUuid": 219,
+        "questionTitle": "What is recursion?",
+        "questionDescription": "Define recursion and explain its use in iterating over operations.",
+        "questionAnswer": "Recursion is a technique for iterating over an operation by having a function call itself repeatedly until it arrives at a result. This is most effective for solving problems like sorting or traversing the nodes of complex or non-linear data structures.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["js"]
       }
     ]
   },
@@ -452,31 +1431,382 @@
     "setTags": ["ts", "js", "TypeSafety", "Development"],
     "setData": [
       {
-        "questionUuid": 37,
-        "questionTitle": "topic-TypeScript What is TypeScript?",
-        "questionDescription": "Can you spend 2 minutes explaining to me what TypeScript is",
-        "questionAnswer": "It is a superset of JavaScript that adds strong typing and other features to the language.",
+        "questionUuid": 600,
+        "questionTitle": "Explain TypeScript and its use?",
+        "questionDescription": "Provide an overview of TypeScript, its development, and how it enhances JavaScript with static typing.",
+        "questionAnswer": "TypeScript is an open-source language extending JavaScript with type annotations. It catches errors during compilation, ensuring safer code. It offers scalability, integration with JavaScript frameworks, and features like namespaces and decorators.",
         "questionDifficulty": "easy",
         "questionType": "topic",
-        "questionTags": ["ts", "js", "Frontend"]
+        "questionTags": ["ts"]
       },
       {
-        "questionUuid": 38,
-        "questionTitle": "topic-TypeScript Why use TypeScript?",
-        "questionDescription": "What are the advantages of using TypeScript over JavaScript?",
-        "questionAnswer": "TypeScript provides static type-checking, which helps catch errors during development. It also offers better tooling and code maintainability.",
+        "questionUuid": 601,
+        "questionTitle": "Can you tell the names of some of the built-in types in TypeScript?",
+        "questionDescription": "List some common built-in types in TypeScript and their purposes.",
+        "questionAnswer": "TypeScript has built-in types like 'any', 'boolean', 'number', 'string', 'null', 'undefined', and 'void'. Each serves a specific purpose, allowing developers to enforce type safety.",
         "questionDifficulty": "easy",
         "questionType": "topic",
-        "questionTags": ["ts", "js", "html"]
+        "questionTags": ["ts"]
       },
       {
-        "questionUuid": 39,
-        "questionTitle": "topic-TypeScript What is type safety?",
-        "questionDescription": "Explain the concept of type safety in TypeScript.",
-        "questionAnswer": "Type safety refers to the ability to catch type-related errors during compile-time rather than runtime, ensuring more robust code.",
+        "questionUuid": 602,
+        "questionTitle": "Give an example of generics in TypeScript?",
+        "questionDescription": "Demonstrate the usage of generics in TypeScript with an example.",
+        "questionAnswer": "Generics in TypeScript enable the creation of reusable components. They allow functions, classes, or interfaces to work with different types while maintaining static typing.",
         "questionDifficulty": "easy",
         "questionType": "topic",
-        "questionTags": ["ts", "js"]
+        "questionTags": ["ts"]
+      },
+      {
+        "questionUuid": 603,
+        "questionTitle": "Tell me about Modules in TypeScript.",
+        "questionDescription": "Explain the concept of modules in TypeScript and how they contribute to code organization.",
+        "questionAnswer": "Modules in TypeScript organize and encapsulate code, enhancing development for large applications. They split code into files, manage dependencies, and avoid naming conflicts using namespaces and imports/exports.",
+        "questionDifficulty": "easy",
+        "questionType": "topic",
+        "questionTags": ["ts"]
+      },
+      {
+        "questionUuid": 604,
+        "questionTitle": "Why can TypeScript be chosen over JavaScript?",
+        "questionDescription": "Enumerate the advantages of choosing TypeScript over JavaScript in the development of applications.",
+        "questionAnswer": "TypeScript provides advanced autocompletion, large-scale application support, improved code readability, and strict null checks. Its static typing enhances error detection during compilation, reducing runtime errors.",
+        "questionDifficulty": "easy",
+        "questionType": "topic",
+        "questionTags": ["ts"]
+      },
+      {
+        "questionUuid": 605,
+        "questionTitle": "Do TypeScript files need compilation?",
+        "questionDescription": "Clarify whether TypeScript files require compilation and the purpose of the compilation process.",
+        "questionAnswer": "Yes, TypeScript files need compilation because browsers cannot interpret TypeScript directly. The compilation process converts TypeScript to JavaScript using the TypeScript compiler.",
+        "questionDifficulty": "easy",
+        "questionType": "topic",
+        "questionTags": ["ts"]
+      },
+      {
+        "questionUuid": 606,
+        "questionTitle": "List some benefits of TypeScript?",
+        "questionDescription": "Enumerate the advantages offered by TypeScript in the development process.",
+        "questionAnswer": "TypeScript brings static typing, improving code quality and maintainability. It offers better tooling support, large-scale application support, and compatibility with the JavaScript ecosystem.",
+        "questionDifficulty": "easy",
+        "questionType": "topic",
+        "questionTags": ["ts"]
+      },
+      {
+        "questionUuid": 607,
+        "questionTitle": "In TypeScript, can we call the base class constructor from the child class?",
+        "questionDescription": "Explain whether it is possible to call the constructor of the base class from a child class in TypeScript.",
+        "questionAnswer": "Yes, in TypeScript, you can call the base class constructor from a child class using the 'super()' function within the child class constructor.",
+        "questionDifficulty": "easy",
+        "questionType": "topic",
+        "questionTags": ["ts"]
+      },
+      {
+        "questionUuid": 608,
+        "questionTitle": "What is the difference between TypeScript and a statically typed language?",
+        "questionDescription": "Differentiate between TypeScript and a fully statically typed language, emphasizing TypeScript's optional static typing.",
+        "questionAnswer": "TypeScript is optionally statically typed, allowing the compiler to ignore a variable's type. It offers flexibility by permitting any type to be assigned to a variable, with no error checking during compilation.",
+        "questionDifficulty": "easy",
+        "questionType": "topic",
+        "questionTags": ["ts"]
+      },
+      {
+        "questionUuid": 609,
+        "questionTitle": "Is string interpolation possible in TypeScript?",
+        "questionDescription": "Discuss the possibility of string interpolation, also known as template literals, in TypeScript.",
+        "questionAnswer": "Yes, string interpolation is possible in TypeScript using template literals. It allows embedding expressions within string literals, improving readability and conciseness.",
+        "questionDifficulty": "easy",
+        "questionType": "topic",
+        "questionTags": ["ts"]
+      },
+      {
+        "questionUuid": 610,
+        "questionTitle": "Explain the Interface in TypeScript?",
+        "questionDescription": "Provide an overview of interfaces in TypeScript, their purpose, and how they are used.",
+        "questionAnswer": "In TypeScript, an interface defines the shape, structure, and contract of an object or class without implementing functionality. It specifies properties, their types, optional properties, read-only properties, and method signatures. Interfaces ensure adherence to specifications, promoting code consistency.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["ts"]
+      },
+      {
+        "questionUuid": 611,
+        "questionTitle": "Explain Decorators in TypeScript.",
+        "questionDescription": "Describe the purpose and usage of decorators in TypeScript, highlighting their role in modifying code behavior.",
+        "questionAnswer": "Decorators in TypeScript are declarative syntax used to add metadata or modify behavior in classes, methods, properties, or parameters. Built using higher-order functions, decorators apply reusable logic across code without manual modification. They facilitate cleaner code organization and maintainability.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["ts"]
+      },
+      {
+        "questionUuid": 612,
+        "questionTitle": "When should you use interfaces or classes in TypeScript?",
+        "questionDescription": "Clarify the scenarios where interfaces and classes are preferable in TypeScript, highlighting their respective use cases.",
+        "questionAnswer": "Use interfaces for defining object or class structure, contracts, and lightweight type-checking. Classes are suitable for encapsulating methods and properties, using OOP concepts, creating instances, and employing instance-specific state and methods.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["ts"]
+      },
+      {
+        "questionUuid": 613,
+        "questionTitle": "How can you use class constants in TypeScript?",
+        "questionDescription": "Provide insights into declaring and using class constants in TypeScript, emphasizing the keywords and considerations involved.",
+        "questionAnswer": "Class constants in TypeScript are declared using 'readonly', 'const', and 'readonly static'. 'readonly' marks a property as unchangeable, 'const' declares a constant outside the class, and 'readonly static' ensures accessibility only within the class.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["ts"]
+      },
+      {
+        "questionUuid": 614,
+        "questionTitle": "In TypeScript, what can you do to check null and undefined?",
+        "questionDescription": "Discuss the techniques and constructs available in TypeScript for checking null and undefined.",
+        "questionAnswer": "In TypeScript, null and undefined can be checked using equality operators, optional chaining operator '?', and explicit checks. Techniques include equality checks, optional chaining, and ensuring proper handling of potentially null or undefined values.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["ts"]
+      },
+      {
+        "questionUuid": 615,
+        "questionTitle": "Are all object-oriented principles supported by TypeScript?",
+        "questionDescription": "Confirm whether TypeScript supports fundamental object-oriented principles and provide a brief overview of the supported principles.",
+        "questionAnswer": "Yes, TypeScript supports key OOP principles: Inheritance, Abstraction, Polymorphism, and Encapsulation. It enables developers to create structured, maintainable, and reusable code using these principles.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["ts"]
+      },
+      {
+        "questionUuid": 616,
+        "questionTitle": "Also, tell me some OOP terms supported by TypeScript.",
+        "questionDescription": "Enumerate and explain essential Object-Oriented Programming (OOP) terms supported by TypeScript.",
+        "questionAnswer": "TypeScript supports classes, inheritance, interfaces, abstraction through abstract classes, and encapsulation with access modifiers (public, private, protected). These OOP terms enhance code structure, reusability, and maintainability.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["ts"]
+      },
+      {
+        "questionUuid": 617,
+        "questionTitle": "Explain Getters/Setters in TypeScript.",
+        "questionDescription": "Provide an overview of getters and setters in TypeScript, detailing their purpose and how they control property access and modification.",
+        "questionAnswer": "Getters and setters in TypeScript are special methods controlling property access and modification. Getters use 'get' to retrieve property values, while setters use 'set' to update them. They offer flexibility and encapsulation in working with properties.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["ts"]
+      },
+      {
+        "questionUuid": 618,
+        "questionTitle": "Can TypeScript be used on the back-end and how?",
+        "questionDescription": "Explain the possibilities of using TypeScript on the back-end, focusing on building server-side applications and services.",
+        "questionAnswer": "Yes, TypeScript can be used on the back-end for server-side applications, especially with Node.js. It allows developers to create scalable and maintainable server-side code, leveraging TypeScript's features like static typing and other language enhancements.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["ts"]
+      },
+      {
+        "questionUuid": 619,
+        "questionTitle": "Explain TypeScript Map file?",
+        "questionDescription": "Describe the purpose and function of a TypeScript Map file, emphasizing its role in debugging TypeScript code.",
+        "questionAnswer": "A TypeScript Map file, or Source Map, bridges TypeScript to JavaScript during compilation. It aids debugging by mapping compiled JavaScript back to the original TypeScript code, enabling features like breakpoints, code stepping, and variable inspection in the TypeScript source.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["ts"]
+      },
+      {
+        "questionUuid": 620,
+        "questionTitle": "Can you explain the difference between String and string in TypeScript?",
+        "questionDescription": "Differentiate between 'String' and 'string' in TypeScript, clarifying their meanings and use cases.",
+        "questionAnswer": "'string' is a primitive type for textual data with type checking. 'String' is a JavaScript global object providing additional methods. 'string' is preferred, while 'String' is used when additional functionality is required.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["ts"]
+      },
+      {
+        "questionUuid": 621,
+        "questionTitle": "Explain Type Erasure in TypeScript?",
+        "questionDescription": "Define and discuss Type Erasure in TypeScript, highlighting its implications and consequences during the compilation process.",
+        "questionAnswer": "Type Erasure in TypeScript refers to the removal of type information during transpilation to JavaScript. It eliminates type-related constructs, ensuring compatibility with JavaScript and minimizing runtime performance impact.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["ts"]
+      },
+      {
+        "questionUuid": 622,
+        "questionTitle": "List some features of TypeScript.",
+        "questionDescription": "Enumerate key features of TypeScript that contribute to safer and more maintainable code.",
+        "questionAnswer": "TypeScript offers static typing, interfaces, classes, generics, type inference, and advanced tooling. These features enhance code quality, promote code consistency, and improve developer productivity.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["ts"]
+      },
+      {
+        "questionUuid": 623,
+        "questionTitle": "Tell me the Components of TypeScript?",
+        "questionDescription": "Provide an overview of the components that constitute TypeScript, including the language, compiler, language service, type definitions, and tooling.",
+        "questionAnswer": "TypeScript includes the language with static typing and advanced features, a compiler (tsc) for transpilation, a Language Service for editor support, type definitions for external libraries, and integration with various tools like build systems and bundlers.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["ts"]
+      },
+      {
+        "questionUuid": 624,
+        "questionTitle": "Why do we say that TypeScript is an optionally statically typed language?",
+        "questionDescription": "Explain the concept of TypeScript being an optionally statically typed language and how developers can leverage static and dynamic typing.",
+        "questionAnswer": "TypeScript is an 'optionally statically typed language' as it allows developers to mix static and dynamic typing within the same codebase. While TypeScript provides static type-checking through annotations, interfaces, and generics, it doesn't enforce static typing for all variables or functions. Developers have flexibility, using static types where needed and dynamic typing with the 'any' type when desired, making it adaptable for gradual migration and maintaining JavaScript's dynamic nature.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["ts"]
+      },
+      {
+        "questionUuid": 625,
+        "questionTitle": "Explain modules in TypeScript?",
+        "questionDescription": "Provide an overview of modules in TypeScript, highlighting their purpose, advantages, and the two popular module systems.",
+        "questionAnswer": "In TypeScript, modules organize and encapsulate related code, enhancing code organization and maintainability. They enable splitting code into files with components (classes, functions) exported and imported. Modules prevent naming collisions and control code visibility. TypeScript supports CommonJS (Node.js) and ES Modules (browser) module systems.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["ts"]
+      },
+      {
+        "questionUuid": 626,
+        "questionTitle": "Is function overloading supported in TypeScript?",
+        "questionDescription": "Discuss TypeScript's support for function overloading, explaining how it is implemented and its benefits.",
+        "questionAnswer": "Yes, TypeScript supports function overloading, allowing multiple function signatures with the same name but different parameters. Overloaded signatures are declared, followed by a generic implementation. TypeScript enforces compatibility between the implementation and declared signatures, providing flexibility and type checking for various function calls.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["ts"]
+      },
+      {
+        "questionUuid": 627,
+        "questionTitle": "Explain Mixins?",
+        "questionDescription": "Provide an explanation of mixins in TypeScript, describing how they are used to create reusable components.",
+        "questionAnswer": "Mixins in TypeScript involve creating classes from components for reuse. Unlike traditional inheritance, a mixin adds functionality to a class without becoming its parent. Mixins enhance code modularity and reusability, allowing classes to borrow behavior from multiple sources.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["ts"]
+      },
+      {
+        "questionUuid": 628,
+        "questionTitle": "TypeScript supports optional parameters in a function, can you explain how?",
+        "questionDescription": "Discuss how TypeScript supports optional parameters in functions, including syntax and use cases.",
+        "questionAnswer": "In TypeScript, optional parameters are denoted by adding a '?' symbol after the parameter name in the function signature. When a function is invoked, TypeScript allows omitting optional parameters. This enhances flexibility in function calls, enabling developers to provide values for necessary parameters while omitting optional ones.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["ts"]
+      },
+      {
+        "questionUuid": 629,
+        "questionTitle": "Explain TypeScript Definition Manager and its use.",
+        "questionDescription": "Provide insights into TypeScript Definition Manager (TSD), its role in managing declaration files, and its replacement in modern TypeScript development.",
+        "questionAnswer": "TypeScript Definition Manager (TSD) was a tool to manage declaration files (.d.ts) for external libraries. Deprecated now, it is replaced by DefinitelyTyped and @types scoped packages, providing high-quality type definitions. DefinitelyTyped is a repository with declaration files, and @types packages offer scoped type definitions for npm packages.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["ts"]
+      },
+      {
+        "questionUuid": 630,
+        "questionTitle": "Explain TypeScript Declare Keyword?",
+        "questionDescription": "Elaborate on the 'declare' keyword in TypeScript, its purpose, and how it helps when dealing with external JavaScript code or libraries.",
+        "questionAnswer": "The 'declare' keyword in TypeScript signals the existence of external variables, functions, classes, or modules defined in external JavaScript code or libraries. It allows TypeScript to provide type checking and IntelliSense support for these external entities without implementing their behavior. 'declare' is commonly used in TypeScript declaration files (.d.ts) bridging the gap between TypeScript and external JavaScript.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["ts"]
+      },
+      {
+        "questionUuid": 631,
+        "questionTitle": "Explain tsconfig.json file?",
+        "questionDescription": "Provide an overview of the tsconfig.json file in TypeScript, its role, and the various compiler options it controls.",
+        "questionAnswer": "The tsconfig.json file configures TypeScript projects, specifying compiler options and settings. It controls output folders, module resolution, type checking strictness, source mapping, and ECMAScript version features. TypeScript compiler uses this file to transpile TypeScript code into JavaScript, allowing developers to tailor compilation according to project needs.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["ts"]
+      },
+      {
+        "questionUuid": 632,
+        "questionTitle": "Tell me about Generics in TypeScript?",
+        "questionDescription": "Explain the concept of generics in TypeScript, highlighting their role in creating reusable and flexible components.",
+        "questionAnswer": "Generics in TypeScript enable the creation of reusable components that work with various data types without sacrificing type safety. They provide flexibility without compromising performance and productivity. Generics can be applied to classes, functions, methods, and interfaces, fostering code reusability and type safety.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["ts"]
+      },
+      {
+        "questionUuid": 633,
+        "questionTitle": "Explain Ambients in TypeScript and their use?",
+        "questionDescription": "Provide an explanation of Ambients in TypeScript, their role, and how they are used in the development process.",
+        "questionAnswer": "Ambients in TypeScript are declarations that inform the compiler about external source code. They define variables, functions, classes, or modules existing outside TypeScript but used in a project. Ambients help maintain type safety and IntelliSense support when integrating TypeScript with JavaScript libraries. If not updated, ambient declaration files can lead to compilation errors when source code changes.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["ts"]
+      },
+      {
+        "questionUuid": 634,
+        "questionTitle": "Explain Type assertions in TypeScript?",
+        "questionDescription": "Elaborate on type assertions in TypeScript, their purpose, and how they provide developers with more control over type handling.",
+        "questionAnswer": "Type assertions in TypeScript inform the compiler about a developer's certainty regarding the type of a variable or expression. While not changing the runtime behavior, type assertions override TypeScript's inferred type, offering control during compile-time. This allows developers to handle specific scenarios where the compiler might struggle with type inference or when explicit type conversion is necessary.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["ts"]
+      },
+      {
+        "questionUuid": 635,
+        "questionTitle": "Explain Rest parameters?",
+        "questionDescription": "Provide an explanation of rest parameters in TypeScript, including their syntax and how they enhance handling function arguments.",
+        "questionAnswer": "Rest parameters in TypeScript allow handling an indefinite number of function arguments as an array. Denoted by three dots '...', they capture remaining arguments in a function, offering a cleaner alternative to the 'arguments' object in JavaScript. Rest parameters maintain type safety and improve code readability when dealing with functions that accept variable numbers of arguments.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["ts"]
+      },
+      {
+        "questionUuid": 636,
+        "questionTitle": "Explain 'as' syntax in TypeScript.",
+        "questionDescription": "Discuss the use of 'as' syntax in TypeScript, how it facilitates type assertion, and scenarios where it is beneficial.",
+        "questionAnswer": "The 'as' syntax in TypeScript is used for type assertion, indicating a developer's explicit knowledge of a value's actual type. It helps when the compiler struggles with type inference or when type conversion is required during development. 'as' syntax does not alter runtime behavior but provides compile-time type information, assisting in catching type-related errors.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["ts"]
+      },
+      {
+        "questionUuid": 637,
+        "questionTitle": "Explain the anonymous function?",
+        "questionDescription": "Provide an explanation of anonymous functions in TypeScript, their characteristics, and common use cases.",
+        "questionAnswer": "Anonymous functions in TypeScript are nameless functions typically defined with a lightweight syntax. They are often used for one-time purposes, such as callback functions or event listeners. Anonymous functions don't require explicit declaration or referencing after definition, making them suitable for scenarios where a simple function is needed without the need for a named identifier.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["ts"]
+      },
+      {
+        "questionUuid": 638,
+        "questionTitle": "Explain the method overriding in TypeScript?",
+        "questionDescription": "Discuss the concept of method overriding in TypeScript, its importance in object-oriented programming, and the rules associated with it.",
+        "questionAnswer": "Method overriding in TypeScript allows a derived class to provide a new implementation for a method inherited from its base class. It is crucial in object-oriented programming to customize behavior while maintaining the same method signature. Rules include matching names and parameters, ensuring an IS-A relationship (inheritance). Method overriding enhances code flexibility and reuse in class hierarchies.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["ts"]
+      },
+      {
+        "questionUuid": 639,
+        "questionTitle": "Explain Lambda/Arrow function?",
+        "questionDescription": "Provide an explanation of Lambda/Arrow functions in TypeScript, highlighting their concise syntax and lexical 'this' behavior.",
+        "questionAnswer": "Lambda or arrow functions in TypeScript offer a concise syntax for defining functions using the '=>' arrow. Introduced in ECMAScript 6, they simplify function expressions and inherit the 'this' value from their surrounding scope, making them useful in callbacks or event listeners. Their shorter syntax enhances code readability and maintainability.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["ts"]
+      },
+      {
+        "questionUuid": 640,
+        "questionTitle": "Explain conditional types in TypeScript.",
+        "questionDescription": "Discuss conditional types in TypeScript, their purpose, and how they allow developers to create types based on conditions.",
+        "questionAnswer": "Conditional types in TypeScript, introduced in version 2.8, enable developers to define types based on conditions using generic type parameters. They take the form 'T extends U ? X : Y,' where T and U are type variables and X and Y are types. Conditional types are powerful for modeling complex type logic, offering flexibility and precision in type definitions.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["ts"]
+      },
+      {
+        "questionUuid": 641,
+        "questionTitle": "Explain Nullish Coalescing operator?",
+        "questionDescription": "Provide an explanation of the Nullish Coalescing operator in TypeScript, its purpose, and how it enhances code robustness.",
+        "questionAnswer": "The Nullish Coalescing operator (introduced in TypeScript 3.7) returns the right-hand operand when the left-hand operand is null or undefined. Denoted by '??', it is useful for providing default values in scenarios where null or undefined might cause issues. The operator promotes code robustness by ensuring that default values are used only when necessary.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["ts"]
       }
     ]
   },
@@ -489,31 +1819,229 @@
     "setTags": ["js", "ts", "react", "State", "Testing"],
     "setData": [
       {
-        "questionUuid": 40,
-        "questionTitle": "topic-react What is Javascript?",
-        "questionDescription": "Can you spend 2 minutes explaing to me what JavaScript is",
-        "questionAnswer": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
-        "questionDifficulty": "hard",
+        "questionUuid": 300,
+        "questionTitle": "What is React?",
+        "questionDescription": "Explain the basic concept of React and its role in creating user interfaces.",
+        "questionAnswer": "React is an open-source JavaScript frontend library for creating user interfaces. It uses a component-based approach to create complicated, interactive web and mobile user interfaces. Developing single-page applications with React is effortless, especially using the integrated toolchain called Create React App.",
+        "questionDifficulty": "easy",
         "questionType": "topic",
-        "questionTags": ["js", "ts", "react"]
+        "questionTags": ["react"]
       },
       {
-        "questionUuid": 41,
-        "questionTitle": "topic-react What is ECMAScript?",
-        "questionDescription": "In a sentance, 'have you seen the latest ECMAScript changes?'",
-        "questionAnswer": "It is a standard specification for scripting languages. JavaScript is based on ECMAScript.",
-        "questionDifficulty": "medium",
+        "questionUuid": 301,
+        "questionTitle": "What are the advantages of React?",
+        "questionDescription": "Discuss the advantages of using React in web development.",
+        "questionAnswer": "React offers increased performance with Virtual DOM, JSX for readable and writable code, works on both the client and server side, easy integration with other frameworks, and simplicity in writing unit tests.",
+        "questionDifficulty": "easy",
         "questionType": "topic",
-        "questionTags": ["js", "html"]
+        "questionTags": ["react"]
       },
       {
-        "questionUuid": 42,
-        "questionTitle": "topic-react What is the difference between == and ===?",
-        "questionDescription": "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
-        "questionAnswer": "== compares values. === compares both type and value.",
+        "questionUuid": 302,
+        "questionTitle": "What is JSX?",
+        "questionDescription": "Define JSX and explain its role in React development.",
+        "questionAnswer": "JSX is a syntax extension to JavaScript that describes what the UI should look like with the full power of JavaScript. It provides syntactic sugar for the React.createElement() function and gets compiled to React.createElement() calls.",
+        "questionDifficulty": "easy",
+        "questionType": "topic",
+        "questionTags": ["react"]
+      },
+      {
+        "questionUuid": 303,
+        "questionTitle": "What is the difference between Element and Component?",
+        "questionDescription": "Differentiate between React elements and components.",
+        "questionAnswer": "React elements are the building blocks of React applications, describing what you want to see on the screen and being immutable. React components are small, reusable pieces of code that return a React element to be rendered to the page. Components can be either plain JavaScript functions or ES6 classes.",
+        "questionDifficulty": "easy",
+        "questionType": "topic",
+        "questionTags": ["react"]
+      },
+      {
+        "questionUuid": 304,
+        "questionTitle": "What are react fragments?",
+        "questionDescription": "Explain the concept of React fragments and their purpose.",
+        "questionAnswer": "Fragments let you group a list of children without adding extra nodes to the DOM. They are useful for maintaining special parent-to-child relationships, as adding an extra tag in between would break the layout.",
+        "questionDifficulty": "easy",
+        "questionType": "topic",
+        "questionTags": ["react"]
+      },
+      {
+        "questionUuid": 305,
+        "questionTitle": "What is prop in React?",
+        "questionDescription": "Define props in React and their role in passing data between components.",
+        "questionAnswer": "Props or properties are arguments passed into React components, containing data coming down from a parent component to a child component.",
+        "questionDifficulty": "easy",
+        "questionType": "topic",
+        "questionTags": ["react"]
+      },
+      {
+        "questionUuid": 306,
+        "questionTitle": "What is 'key' prop?",
+        "questionDescription": "Explain the purpose of the 'key' prop in React.",
+        "questionAnswer": "Keys help React identify which elements were added, changed, or updated, and removed. They provide a unique identity for each element, allowing React to reorder elements without needing to re-evaluate as much.",
+        "questionDifficulty": "easy",
+        "questionType": "topic",
+        "questionTags": ["react"]
+      },
+      {
+        "questionUuid": 307,
+        "questionTitle": "What is state in React?",
+        "questionDescription": "Define the concept of state in React and its role in a component.",
+        "questionAnswer": "State holds information that may change over the lifetime of the component. It is private and fully controlled by the component until the owner component decides to pass it.",
+        "questionDifficulty": "easy",
+        "questionType": "topic",
+        "questionTags": ["react"]
+      },
+      {
+        "questionUuid": 308,
+        "questionTitle": "Why should we not update the state directly?",
+        "questionDescription": "Explain why updating the state directly in React is not recommended.",
+        "questionAnswer": "Updating the state directly, like below, will not cause the component to re-render. Instead, use the setState() method, which schedules an update to a component's state object, triggering a re-render when the state changes.",
+        "questionDifficulty": "easy",
+        "questionType": "topic",
+        "questionTags": ["react"]
+      },
+      {
+        "questionUuid": 309,
+        "questionTitle": "What are lifecycle methods?",
+        "questionDescription": "Discuss the concept of lifecycle methods in React and their execution phases.",
+        "questionAnswer": "Lifecycle methods are custom functionality that gets executed during the different phases of a component. These methods are available when the component gets created or inserted into the DOM, when the component updates, and when the component gets unmounted or removed from the DOM.",
+        "questionDifficulty": "easy",
+        "questionType": "topic",
+        "questionTags": ["react"]
+      },
+      {
+        "questionUuid": 310,
+        "questionTitle": "What are Controlled and Uncontrolled Components?",
+        "questionDescription": "Differentiate between Controlled and Uncontrolled Components in React.",
+        "questionAnswer": "A Controlled Component is one that takes a value through props and notifies changes through callbacks like onChange or onClick. Form data is handled by the React component. An Uncontrolled Component is one that stores its own state internally, and queries the DOM using a ref or reference to find the current value when needed. Form data is handled by the DOM. Controlled components are recommended for most cases when implementing forms.",
+        "questionDifficulty": "easy",
+        "questionType": "topic",
+        "questionTags": ["react"]
+      },
+      {
+        "questionUuid": 311,
+        "questionTitle": "What is the use of refs?",
+        "questionDescription": "Explain the use of refs in React and when they are beneficial.",
+        "questionAnswer": "The ref is used to return a reference to the element. They can be useful when you need direct access to the DOM element or an instance of a component.",
+        "questionDifficulty": "easy",
+        "questionType": "topic",
+        "questionTags": ["react"]
+      },
+      {
+        "questionUuid": 312,
+        "questionTitle": "Why should component names start with capital letters?",
+        "questionDescription": "Discuss why component names in React should start with capital letters.",
+        "questionAnswer": "The type of a component is determined by the way the tags are named. Both capitalized and dot notations are treated as React components while lowercase names are treated as DOM elements.",
+        "questionDifficulty": "easy",
+        "questionType": "topic",
+        "questionTags": ["react"]
+      },
+      {
+        "questionUuid": 313,
+        "questionTitle": "What is Virtual DOM?",
+        "questionDescription": "Define Virtual DOM (VDOM) and explain its role in optimizing DOM updates.",
+        "questionAnswer": "Virtual DOM or VDOM is a lightweight JavaScript representation of the DOM. It keeps the representation of the User Interface in memory and syncs it with the 'real' DOM. Updates on the virtual DOM are cheaper and faster than updating the actual DOM. When React finds differences between the previous virtual DOM and the current one, it only makes the necessary changes to the actual DOM.",
+        "questionDifficulty": "easy",
+        "questionType": "topic",
+        "questionTags": ["react"]
+      },
+      {
+        "questionUuid": 320,
+        "questionTitle": "What is context?",
+        "questionDescription": "Explain how context provides a way to pass data through the component tree without manual prop passing.",
+        "questionAnswer": "Context is used to share global data across a tree of React components. It avoids manual prop passing but should be applied sparingly due to potential difficulties in component reuse.",
         "questionDifficulty": "medium",
         "questionType": "topic",
-        "questionTags": ["js", "ts", "css"]
+        "questionTags": ["react"]
+      },
+      {
+        "questionUuid": 321,
+        "questionTitle": "How to pass data between components?",
+        "questionDescription": "Describe methods for passing data between React components.",
+        "questionAnswer": "1. Parent to child: Use props. 2. Child to parent: Use callbacks. 3. Siblings and elsewhere: Utilize React's Context API or state management libraries like Redux, MobX, and Recoil for stateful applications.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["react"]
+      },
+      {
+        "questionUuid": 322,
+        "questionTitle": "What are some limitations of React?",
+        "questionDescription": "Discuss limitations such as JSX complexity, less user-friendly documentation, and uniqueness in React projects.",
+        "questionAnswer": "JSX complexity, steep learning curve for beginners. Less user-friendly documentation. React projects can be unique to engineers, relying on various technologies.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["react"]
+      },
+      {
+        "questionUuid": 323,
+        "questionTitle": "What is prop drilling and how can you avoid it?",
+        "questionDescription": "Explain prop drilling and methods to avoid it, mentioning the disadvantages of prop drilling.",
+        "questionAnswer": "Prop drilling is passing data through deeply nested components, making maintenance challenging. Avoid by using React context or state management libraries. Disadvantages include unnecessary complexity in components and harder maintenance.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["react"]
+      },
+      {
+        "questionUuid": 324,
+        "questionTitle": "What is the use of dangerouslySetInnerHTML?",
+        "questionDescription": "Explain the purpose of dangerouslySetInnerHTML and mention a caution regarding its usage.",
+        "questionAnswer": "dangerouslySetInnerHTML is React's replacement for innerHTML, rendering raw HTML. Limit its use due to potential exposure to cross-site scripting attacks.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["react"]
+      },
+      {
+        "questionUuid": 325,
+        "questionTitle": "Name a few techniques to optimize React app performance.",
+        "questionDescription": "List techniques like lazy loading, memoization, using React.Fragment, and production builds for optimizing React app performance.",
+        "questionAnswer": "1. Lazy loading with React.Suspense and React.Lazy. 2. Memoization with React.memo. 3. Using React.Fragment or <></> to avoid extra nodes. 4. Utilizing Reselect/Re-reselect in Redux. 5. Deploying production builds for optimization.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["react"]
+      },
+      {
+        "questionUuid": 326,
+        "questionTitle": "What is reconciliation?",
+        "questionDescription": "Define reconciliation in React and its role in deciding DOM updates.",
+        "questionAnswer": "Reconciliation is the process of comparing newly returned elements with previously rendered ones when props or state change. It decides whether an actual DOM update is necessary.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["react"]
+      },
+      {
+        "questionUuid": 327,
+        "questionTitle": "What are Higher-Order Components?",
+        "questionDescription": "Define Higher-Order Components (HOCs) and their usage in reusing component logic.",
+        "questionAnswer": "HOCs are functions that take a component and return a new component, used for reusing component logic. Common in third-party React libraries like Reduxs connect and Relays createFragmentContainer.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["react"]
+      },
+      {
+        "questionUuid": 328,
+        "questionTitle": "What is children prop?",
+        "questionDescription": "Explain the children prop in React, allowing the passing of components as data.",
+        "questionAnswer": "The children prop enables passing components as data to other components. It represents the component tree between the opening and closing tags of the component.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["react"]
+      },
+      {
+        "questionUuid": 329,
+        "questionTitle": "How to pass a parameter to an event handler or callback?",
+        "questionDescription": "Describe methods for passing parameters to event handlers or callbacks in React.",
+        "questionAnswer": "Use an arrow function to wrap around an event handler and pass parameters, or pass arguments to a function defined as an arrow function.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["react"]
+      },
+      {
+        "questionUuid": 320,
+        "questionTitle": "Why do we need to pass a function to setState()?",
+        "questionDescription": "Explain the necessity of passing a function to setState() in React.",
+        "questionAnswer": "setState() is asynchronous, and React batches state changes for performance. Passing a function with the previous state as an argument ensures proper state updates.",
+        "questionDifficulty": "medium",
+        "questionType": "topic",
+        "questionTags": ["react"]
       }
     ]
   }
