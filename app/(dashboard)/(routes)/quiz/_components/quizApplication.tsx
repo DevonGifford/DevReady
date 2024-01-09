@@ -101,7 +101,7 @@ const QuizApplication: React.FC<QuizProps> = ({ questions }) => {
   };
 
   return (
-    <div className="flex flex-row justify-evenly items-center w-fit lg:w-2/5 md:mx-10 px-1 md:px-2 overflow-hidden max-w-2xl">
+    <div className="flex flex-row justify-evenly items-center w-fit lg:w-2/5 md:mx-10 px-1 md:px-2 max-w-2xl">
       <div className="w-10">
         <Button
           className="rounded-full -translate-x-5 h-20 w-20 hover:bg-transparent"
@@ -125,8 +125,6 @@ const QuizApplication: React.FC<QuizProps> = ({ questions }) => {
           <CardContent className="flex flex-col gap-3 md:gap-8 md:py-6 xl:py-12 ">
             <CardTitle className="">
               {questions[currentQuestion].questionTitle}
-              <br />
-              How does it look?
             </CardTitle>
 
             <CardDescription>

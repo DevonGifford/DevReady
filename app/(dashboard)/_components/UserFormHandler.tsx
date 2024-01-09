@@ -47,7 +47,7 @@ export const UserFormHandler = () => {
         <SheetDescription>
           Make changes to your profile here. Click update when youre done.
         </SheetDescription>
-        {/* Handle Selecting Forms */}
+        {/* //- Handle Selecting Forms */}
         <div className="h-full overflow-y-auto flex space-y-8 pl-5 flex-row lg:space-x-12 lg:space-y-0 md:px-4 md:py-3">
           <aside className="-mx-3 lg:w-1/5 flex space-x-2 flex-row items-center justify-start sm:justify-normal sm:flex-row overflow-x-aut scrollbar-thin scrollbar-thumb-gray-500 scrollbar-track-gray-200">
             {Object.keys(userProfileForms).map((key) => (
@@ -70,7 +70,7 @@ export const UserFormHandler = () => {
         </div>
         <Separator className="mt-20" />
       </SheetHeader>
-      {/* Handle The Different Forms */}
+      {/* //- Handle Rendering Different Forms */}
       <div className="space-y-6 pt-5 px-2">
         {userProfileForms[currentForm] && (
           <>

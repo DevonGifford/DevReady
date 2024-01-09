@@ -5,9 +5,9 @@ import { usePathname } from "next/navigation";
 import { useMediaQuery } from "usehooks-ts";
 import { ElementRef, useEffect, useRef, useState } from "react";
 
+import Navbar from "./Navbar";
 import { Sidebar } from "./Sidebar";
 import { ChevronLeft } from "lucide-react";
-import Navbar from "./Navbar";
 
 export const Navigation = () => {
   const pathname = usePathname();
@@ -20,8 +20,6 @@ export const Navigation = () => {
   const [isResetting, setIsResetting] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(isMobile);
 
-
-
   //✅ Trigger for mobile view
   useEffect(() => {
     if (isMobile) {
@@ -31,7 +29,6 @@ export const Navigation = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isMobile]);
-
   useEffect(() => {
     if (isMobile) {
       collapse(); //-If in mobile view, collapse the sidebar
@@ -49,7 +46,6 @@ export const Navigation = () => {
     document.addEventListener("mousemove", handleMouseMove); // 👉 Add mouse move event listener
     document.addEventListener("mouseup", handleMouseUp); // 👉 Add mouse up event listener
   };
-
   const handleMouseMove = (event: MouseEvent) => {
     // 👇 If not resizing, return
     if (!isResizingRef.current) return;
@@ -68,7 +64,6 @@ export const Navigation = () => {
       ); //👉 Sets navbar width based on sidebar width
     }
   };
-
   const handleMouseUp = () => {
     isResizingRef.current = false; // 👉 Sets resizing flag to false
     document.removeEventListener("mousemove", handleMouseMove); // 👉 Removes mouse move event listener
@@ -80,17 +75,15 @@ export const Navigation = () => {
     if (sidebarRef.current && navbarRef.current) {
       setIsCollapsed(false);
       setIsResetting(true);
-
-      //👉 Set sidebar width
+      //👇Set sidebar width
       sidebarRef.current.style.width = isMobile ? "100%" : "333px";
-      //👉 Set navbar width based on sidebar width
+      //👇Set navbar width based on sidebar width
       navbarRef.current.style.setProperty(
         "width",
         isMobile ? "0" : "calc(100% - 500px)"
       );
-      //👉 Finally set navbar position
+      //👇Finally set navbar position
       navbarRef.current.style.setProperty("left", isMobile ? "100%" : "500px");
-
       //👇Reset 'resetting-flag' after transition effect
       setTimeout(() => setIsResetting(false), 300);
     }
@@ -101,7 +94,6 @@ export const Navigation = () => {
     if (sidebarRef.current && navbarRef.current) {
       setIsCollapsed(true);
       setIsResetting(true);
-
       sidebarRef.current.style.width = "0"; //👉 Collaps sidebar
       navbarRef.current.style.setProperty("width", "100%"); //👉 Set navbar to full width
       navbarRef.current.style.setProperty("left", "0"); //👉 Set navbar position

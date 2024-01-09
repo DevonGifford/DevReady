@@ -1,7 +1,7 @@
 import React from "react";
 
 type AuthFormHeaderProps = {
-  type: "login" | "register"; 
+  type: "login" | "register";
 };
 
 const AuthFormHeader: React.FC<AuthFormHeaderProps> = ({ type }) => {

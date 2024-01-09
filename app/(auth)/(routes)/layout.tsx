@@ -3,7 +3,6 @@ import Image from "next/image";
 
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    // <div className="h-full flex-col">
     <div className="flex h-screen flex-col items-center justify-center max-w-3xl mx-auto overflow-x-hidden">
       <div
         className="absolute inset-x-0 top-10 -z-10 flex transform-gpu justify-center overflow-hidden blur-3xl"

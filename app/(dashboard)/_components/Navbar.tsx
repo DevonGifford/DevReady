@@ -12,7 +12,7 @@ interface NavbarProps {
 export const Navbar = ({ isCollapsed, onResetWidth }: NavbarProps) => {
   return (
     <>
-      <nav className="flex bg-transparent dark:bg-[#1F1F1F] px-3 py-2 w-full justify-between items-center gap-x-4">
+      <nav className="flex bg-transparent px-3 py-2 w-full justify-between items-center gap-x-4">
         {isCollapsed && (
           <>
             <MenuIcon

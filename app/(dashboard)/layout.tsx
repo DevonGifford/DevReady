@@ -28,7 +28,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
       timeoutId = setTimeout(() => {
         console.log("🎯event_log: AUTH FAILED - please login again");
         router.push("/");
-      }, 2500); // 2500 milliseconds = 2.5 seconds
+      }, 2500); // 2.5 seconds
     }
 
     return () => {

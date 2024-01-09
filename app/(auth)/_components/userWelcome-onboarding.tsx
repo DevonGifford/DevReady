@@ -79,7 +79,10 @@ export default function UserOnboardingWelcome() {
     <>
       <div className="z-10 flex flex-col items-center text-center sm:mx-auto -translate-y-12 lg:-translate-y-20 ">
         {/* HEADING */}
-        <div data-testid='welcome-header' className="flex flex-col justify-center text-center items-center gap-2 text-2xl pb-8 sm:text-3xl sm:pb-10 md:text-4xl md:pb-12 sm:mx-16">
+        <div
+          data-testid="welcome-header"
+          className="flex flex-col justify-center text-center items-center gap-2 text-2xl pb-8 sm:text-3xl sm:pb-10 md:text-4xl md:pb-12 sm:mx-16"
+        >
           <motion.h1
             className="font-display text-xl sm:text-3xl md:text-4xl font-bold transition-colors"
             variants={{

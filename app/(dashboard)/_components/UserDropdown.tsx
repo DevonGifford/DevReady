@@ -32,13 +32,11 @@ export const UserDropdown = () => {
   const { dispatch } = useModalContext();
   const customToast = useCustomToast();
 
-  // 🎯 to-do-list : improve handle user Image
-  // 🎯 - improve waiting for context to load
-  // 🎯 - skeleton avatar while waiting to load
+  // 🎯🔮 to-do-list : improve handling user Image
   const userImage =
     userProfile?.account.userimage || "/profile-placeholder-image.svg";
 
-  //👇🎯 to-do-list: remove testing toast notifications
+  //🎯🔮 to-do-list: remove testing toast notifications
   const ztmTest = () => {
     toast.success("This is a Test notification 🎯🧪");
     customToast("Hello?");
@@ -76,7 +74,8 @@ export const UserDropdown = () => {
         alignOffset={11}
         forceMount
       >
-        {/* HEADER - USER SUMMARY */}
+        {/* //👉 HEADER - USER PROFILE SUMMARY */}
+        {/* //🎯🔮 to-do-list: refactor design */}
         <div
           className="flex items-center justify-between gap-x-2 hover:cursor-pointer pt-3"
           //👇🎯temp
@@ -98,7 +97,7 @@ export const UserDropdown = () => {
         </div>
         <DropdownMenuSeparator />
 
-        {/* 👉 UPDATE FORM - forms */}
+        {/* //👉 USER PROFILE FORMS */}
         <Sheet>
           <SheetTrigger asChild>
             <div className="group min-h-[30px] text-base py-2 pr-3 pl-2.5 cursor-pointer w-full hover:bg-primary/5 flex items-center text-muted-foreground font-medium pt-3">
@@ -116,17 +115,17 @@ export const UserDropdown = () => {
           </SheetContent>
         </Sheet>
 
-        {/* 👉 USER DASHBOARD */}
+        {/* //👉 USER DASHBOARD - link */}
         <Link href={"/user-dashboard"}>
           <SidebarItem label="User Dashboard" icon={Gauge} />
         </Link>
 
-        {/* 👉 ZTM ACADEMY */}
+        {/* //👉 ZTM ACADEMY - link */}
         <a href="https://academy.zerotomastery.io/" target="_blank">
           <SidebarItem label="ZTM Academy" icon={LogOut} onClick={() => {}} />
         </a>
 
-        {/* 👉 LOGOUT BUTTON */}
+        {/* //👉 LOGOUT BUTTON - modal */}
         <Button
           onClick={() => dispatch({ type: "OPEN_MODAL", modalType: "LOGOUT" })}
         >
@@ -134,8 +133,8 @@ export const UserDropdown = () => {
           Logout{" "}
         </Button>
 
-        {/* FOOTER USER LEVEL SUMMARY */}
-        {/* update with link & seperate component? 🎯 */}
+        {/* //👉 FOOTER - USER LEVEL SUMMARY */}
+        {/* //🎯🔮 to-do-list: complete refactor, waiting on future features */}
         <DropdownMenuSeparator />
         <div
           className="flex flex-col py-2 px-5 text-primary/50 gap-3 hover:cursor-pointer"
