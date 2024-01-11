@@ -18,7 +18,6 @@ import {
   DropdownMenuItem,
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
-import toast from "react-hot-toast";
 
 interface ItemProps {
   id?: string;
@@ -115,11 +114,11 @@ export const SidebarItem = ({
       {customIcon ? (
         <div className="shrink-0 mr-5">
           <Image
-            src={`/sidebar-icons/${customIcon}`} // Adjust the path and extension according to your file structure
+            src={`/sidebar-icons/${customIcon}`}
             alt={customIcon}
             height={30}
             width={30}
-            className="h-[22px] w-[22px]" // Set the appropriate height and width for your image
+            className="h-[22px] w-[22px]"
           />
         </div>
       ) : (

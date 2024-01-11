@@ -98,7 +98,7 @@ function QuizControl({ params }: { params: { quizId: string } }) {
   }, []);
 
   return (
-    <div className="flex flex-col h-auto py-24 md:h-screen items-center justify-center space-y-4 overflow-scroll">
+    <div className="flex flex-col h-auto py-24 items-center justify-center space-y-4 overflow-scroll">
       {/* Conditional rendering based on router query */}
       {pageId === "active-quiz" && (
         <>
