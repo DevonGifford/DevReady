@@ -44,6 +44,8 @@ export const Sidebar = () => {
                   dispatch({ type: "OPEN_MODAL", modalType: "SETTINGS" });
                 } else if (label === "User Dashboard") {
                   router.push("/user-dashboard");
+                } else if (label === "Question Vault") {
+                  router.push("/quiz/database");
                 } else if (label === "Create Flash Cards") {
                   router.push("/create-flashcards");
                 }
