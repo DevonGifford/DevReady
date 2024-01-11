@@ -1,7 +1,10 @@
 {
   "overview": "Introduction",
-  "log": "Change Log/Release Notes",
-  "testing": "Test Suites",
+  "featurelist": "Feature List",
+  "changelog": "Change Log/Release Notes",
   "schemas": "Database Schema's",
-  "devops": "DevOps Documentation"
+  "questionvault": "Question Vault",
+  "quizapp": "Quiz Application",
+  "auth": "Auth & Onboarding",
+  "testing": "Test Suites"
 }

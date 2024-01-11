@@ -1,31 +1,33 @@
-# This is still a template page 🎈
+# How to File an Issue
 
-```js filename="demo.js" {3} copy
-let a = 1;
+Thank you for taking the time to file an issue and help improve ZTMReady. Before submitting, please review the guidelines below to ensure that your issue is clear and actionable.
 
-console.log(a);
-```
+## GitHub Issues
 
-## Component
+Our primary channel for handling bug reports and improvements is through [GitHub issues](#). If you have proposals or discussions about the project's architecture, you can also visit our [Discussions and Proposals](#) repository.
 
-import { useState } from 'react'
+## Before Filing an Issue
 
-{/* Import CSS modules */}
-import styles from '../../components/counters.module.css'
+Before filing an issue, consider the following steps to enhance the chances of resolving it quickly:
 
-export const Counter = () => {
-  const [count, setCount] = useState(0);
-  return (
-    <div>
-      <button onClick={() => setCount(count + 1)} className={styles.counter}>Clicked {count} times</button>
-    </div>
-  );
-};
+- **Version Information:** Provide the version of ZTMReady that you are using. You can obtain this information by running `npm info ztm-ready version` in your console and including the results in your issue.
 
-<Counter/>
+- **Steps to Reproduce:** Clearly outline the steps to reproduce the issue. What actions can someone take to experience the same problem, and how do the results differ from expectations?
 
-## External Component
+- **Code Example:** Include a code example, if possible. A concise and reproducible code snippet can significantly aid in understanding and addressing the issue. You can use online tools like [Snack](https://snack.expo.io/) to create a reproducible example.
 
-import Counters from '../../components/counters'
+## Code-Level Help
 
-<Counters />
+If you're seeking assistance with your app's code, check our [list of community resources](#). Many community members also use platforms like Stack Overflow to [ask questions](#) using relevant tags.
+
+## Existing Issues
+
+If the issue you're facing is already being tracked, you can still contribute by:
+
+- **Providing Additional Information:** Share more details about how you are affected. Adding comments or reactions to the original issue helps communicate that it's a recurring problem.
+
+- **Workaround:** If you have identified a workaround, share it. This can help others temporarily while a long-term fix is being developed.
+
+- **Pull Request:** If you believe you can contribute to a solution, submit a pull request. We welcome community involvement and appreciate your willingness to contribute code fixes.
+
+Thank you for being an active part of the ZTMReady community. Your collaboration and contributions are valuable in making our platform even better.

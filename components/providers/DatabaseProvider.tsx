@@ -203,7 +203,7 @@ export const DatabaseContextProvider = ({
 
   /**
    * ✅ HANDLES UPDATING FIREBASE DATABASE:
-   * Handles updating user document by checking if the document exists, updating it, and updating the state accordingly.
+   * - Handles updating user document by checking if the document exists, updating it, and updating the state accordingly.
    * @param {string} documentId - The ID of the document to update.
    * @param {Partial<DatabaseSchema[]>} newData - The new data to update in the user profile.
    * @returns {Promise<void>} A Promise that resolves once the update process completes.
@@ -259,7 +259,7 @@ export const DatabaseContextProvider = ({
   /**
    * ✅ HANDLES FETCHING/SYNCHING WITH FIREBASE DATABASE
    * 🔮 Need to also add funcitonality to update local storage
-   * Handles fetching user firestore collection by checking if it exists and then sets it to the state & local-storage.
+   * - Handles fetching user firestore collection by checking if it exists and then sets it to the state & local-storage.
    * @param {string} userId - The ID of the user whose data is being fetched.
    * @returns {Promise<void>} A Promise that resolves once the fetch process completes.
    */
