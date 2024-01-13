@@ -1,54 +1,44 @@
-"use client"; //👈 req for error boundary
+"use client"; //👈 required for error boundary
 
+import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
 import { notFound, useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { LucideXSquare } from "lucide-react";
-
+import { useQuizContext } from "@/components/providers/QuizProvider";
+import { quizGeneratingAlgo } from "@/lib/quizGeneratingAlgo";
+import { synchQuestionVault } from "@/utils/firebase/firestore.utils";
 import QuizApplication from "../_components/quizApplication";
 import QuizWelcome from "../_components/quizWelcome";
 import QuizResults from "../_components/quizResults";
-
-import { useQuizContext } from "@/components/providers/QuizProvider";
-import { quizGeneratingAlgo } from "@/lib/quizGeneratingAlgo";
-import toast from "react-hot-toast";
 import { DatabaseSchema } from "@/types/databaseSchema";
 
 function QuizControl({ params }: { params: { quizId: string } }) {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const { resetQuizResults, setCustomQuestions, quizData } = useQuizContext();
   const [isLoadingData, setIsLoadingData] = useState(true);
-  const { resetQuizResults, setCustomQuizData, quizData } = useQuizContext();
   const [quizMetaData, setQuizMetaData] = useState<DatabaseSchema | null>(null);
+  const paramsQuizzId = params.quizId;
+  const pageId = searchParams.get("pageId");
 
-  const paramsQuizzId = params.quizId; // 👈 Reference, check and fetch data from local DB
-  const pageId = searchParams.get("pageId"); // 👈 Renders different component pages accordingly
-
-  // ✅ SERVE NOT FOUND IF NO SPECIFIC QUEREY
-  // 👇 If the selected quiz ID doesn't match any in the database, redirect to a not-found page
   if (!paramsQuizzId) {
     notFound();
   }
 
-  // ✅ FETCH QUIZ METADATA - title description tags etc.
-  const fetchQuizMetadata = () => {
+  const initializeQuizMetadata = () => {
     const localStorageKey = "ztmready-database";
-    const localDB: string | null = localStorage.getItem(localStorageKey);
+    const localVault: string | null = localStorage.getItem(localStorageKey);
 
-    if (!localDB) {
-      console.log(
-        "🎯event_log:  🎇/fetchQuizMetadata  ❌ Error occurred: no data found in local storage"
-      );
+    if (!localVault) {
+      synchQuestionVault();
       return null; // Handle the absence of data
     }
 
     try {
-      const parsedData = JSON.parse(localDB);
+      const parsedData = JSON.parse(localVault);
 
       if (!parsedData.data || !parsedData.timestamp) {
-        console.log(
-          "🎯event_log:  🎇/fetchQuizMetadata  ❌ Error occurred: incomplete data format in local storage"
-        );
         return null; // Handle incomplete data format
       }
 
@@ -57,9 +47,6 @@ function QuizControl({ params }: { params: { quizId: string } }) {
       );
 
       if (!relevantData) {
-        console.log(
-          "🎯event_log:  🎇/fetchQuizMetadata  ❌ Error occurred: no matching data found"
-        );
         return null; // Handle the absence of relevant data
       }
 
@@ -68,32 +55,29 @@ function QuizControl({ params }: { params: { quizId: string } }) {
       return dataWithoutSetData;
     } catch (error) {
       console.error(
-        "🎯event_log:  🎇/fetchQuizMetadata  ❌ Error occurred while parsing data from local storage:",
+        "✖ Error occurred while parsing data from local storage:",
         error
       );
       return null; // Handle parsing error
     }
   };
 
-  // ✅ GET CUSTOM QUESTIONS via Algorithm
-  const setCustomQuizQuestion = () => {
-    // - Call Algo to create custom questions
-    // 🎯 need to update the Algo
+  const initializeCustomQuestions = () => {
     const customQuestionSet = quizGeneratingAlgo(
+      // 🎯🔮 to-do-list - work-in-progress...
       paramsQuizzId,
       10,
       "userHistory"
     );
-    console.log("customQuestionSet 🎈", customQuestionSet);
-    setCustomQuizData(customQuestionSet);
+    setCustomQuestions(customQuestionSet!); //update state
   };
 
-  // ✅ HOOK TO TRIGGER FETCH ACTIONS
+  //-TRIGGER FETCH ACTIONS
   useEffect(() => {
-    setCustomQuizQuestion(); // Call setCustomQuizQuestion once on initial render
-    const metaQuizData = fetchQuizMetadata();
+    initializeCustomQuestions();
+    const metaQuizData = initializeQuizMetadata();
     setQuizMetaData(metaQuizData);
-    setIsLoadingData(false); // Turn off loading once data is set
+    setIsLoadingData(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -102,7 +86,7 @@ function QuizControl({ params }: { params: { quizId: string } }) {
       {/* Conditional rendering based on router query */}
       {pageId === "active-quiz" && (
         <>
-          <QuizApplication key="quiz" questions={quizData} />
+          <QuizApplication key="quiz" questions={quizData!} />
           {/* Quit quiz button */}
           <Button
             className="text-xs font-bold translate-y-1/2"

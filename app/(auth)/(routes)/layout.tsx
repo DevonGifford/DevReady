@@ -19,7 +19,6 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
 
       <main className="flex flex-col h-full overflow-y-auto">
         <div className="flex flex-col items-center h-screen justify-center">
-          {/* TEMPORARY LOGO SOLUTION 🎯 */}
           <Link
             href="/"
             className="flex flex-row items-center justify-start gap-0.5 font-bold text-3xl pt-6"

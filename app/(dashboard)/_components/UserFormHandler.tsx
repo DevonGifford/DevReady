@@ -13,10 +13,10 @@ import { ProfileForm } from "./forms/profile-form";
 import { GoalsForm } from "./forms/goals-form";
 import { NotificationsForm } from "./forms/notification-form";
 
-interface FormObject {
+type FormObject = {
   component: React.ReactNode;
   description: string;
-}
+};
 
 const userProfileForms: Record<string, FormObject> = {
   Account: {

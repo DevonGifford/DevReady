@@ -1,5 +1,5 @@
 import { Bar, BarChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
-import fakeRatingHistoryData from "@/constants/fakeRatingHistoryData.json";
+import fakeRatingHistoryData from "@/constants/mock/fakeRatingHistoryData.json";
 
 // 🎯🔮 Need to replace the fake data and create a state waiting for data...
 

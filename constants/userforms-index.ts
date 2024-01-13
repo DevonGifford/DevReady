@@ -1,4 +1,4 @@
-// 👇 Profile-form 
+// 👇 Profile-form
 export const locations = [
   { label: "United States", value: "US" },
   { label: "Canada", value: "CA" },
@@ -34,9 +34,7 @@ export const home_languages = [
   { label: "Chinese", value: "zh" },
 ] as const;
 
-
-
-// 👇 Account-form 
+// 👇 Account-form
 export const careerList = [
   { label: "Frontend Developer" },
   { label: "Fullstack Developer" },
@@ -104,4 +102,3 @@ export const skillsList = [
   { label: "Flutter" },
   { label: "Git/GitHub" },
 ] as const;
-

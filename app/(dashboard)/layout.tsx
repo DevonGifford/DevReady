@@ -1,10 +1,10 @@
 "use client";
 
+import toast from "react-hot-toast";
 import { useEffect, useReducer } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/components/providers/AuthProvider";
 import { Navigation } from "./_components/Navigation";
-
 import { SearchModal } from "../../components/modals/search-modal";
 import { LogoutModal } from "@/components/modals/logout-modal";
 import { SettingsModal } from "@/components/modals/settings-modal";
@@ -22,18 +22,18 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
   // ✅ If not authenticated, redirect to the home page
   // 🎯 to-do-list:  improvement & persisting auth state
   useEffect(() => {
-    let timeoutId: ReturnType<typeof setTimeout>;
+    // let timeoutId: ReturnType<typeof setTimeout>;
 
     if (!user || !user.uid) {
-      timeoutId = setTimeout(() => {
-        console.log("🎯event_log: AUTH FAILED - please login again");
-        router.push("/");
-      }, 2500); // 2.5 seconds
+      // timeoutId = setTimeout(() => {
+      toast.error("Please validate your credentials again");
+      router.push("/");
+      // }, 2500); // 2.5 seconds
     }
 
-    return () => {
-      clearTimeout(timeoutId);
-    };
+    // return () => {
+    //   clearTimeout(timeoutId);
+    // };
   }, [user, router]);
 
   return (

@@ -1,17 +1,17 @@
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 
-interface PieData {
+type PieData = {
   name: string;
   value: number;
-}
+};
 
-interface CustomPieChartProps {
+type CustomPieChartProps = {
   pieData: PieData[];
-}
+};
 
 const COLORS = ["#00fe37", "#ff4242", "#FFBB28"];
 
-const CustomPieChart: React.FC<CustomPieChartProps> = ({ pieData }) => {
+export const CustomPieChart: React.FC<CustomPieChartProps> = ({ pieData }) => {
   const renderLegend = () => (
     <div className="legend-container ">
       {pieData.map((entry, index) => (
@@ -53,5 +53,3 @@ const CustomPieChart: React.FC<CustomPieChartProps> = ({ pieData }) => {
     </PieChart>
   );
 };
-
-export default CustomPieChart;

@@ -1,10 +1,8 @@
 "use client";
 
 import { Table } from "@tanstack/react-table";
-
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-
+import { Button } from "@/components/ui/button";
 import { PlusCircle } from "lucide-react";
 import { DataTableFilter } from "./data-table-filters";
 import { DataTableViewOptions } from "./data-table-view-options";
@@ -41,7 +39,7 @@ export function DataTableToolbar<TData>({
                 options={difficulty}
               />
             )}
-            {/* 🔮FILTER BY TAGS */}
+            {/* //🔮 to-do-list:  filter by tags */}
             {/* {table.getColumn("questionTags") && (
               <DataTableFilter
                 column={table.getColumn("questionTags")}

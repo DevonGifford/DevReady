@@ -6,7 +6,6 @@ import { motion } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
-
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { CheckIcon, ChevronDown } from "lucide-react";
@@ -34,7 +33,6 @@ import {
 import { careerList } from "@/constants/userforms-index";
 import { EXIT_NORMAL_ALL } from "@/constants/onboarding-index";
 
-// 👇 FORM SCHEMA : Welcome Onboarding Form
 const userOnboardingFormSchema = z.object({
   username: z
     .string()
@@ -47,27 +45,17 @@ const userOnboardingFormSchema = z.object({
   career_title: z.string(),
 });
 type WelcomeOnboardingValues = z.infer<typeof userOnboardingFormSchema>;
-// ⌛ PLACEHOLDER :  Default form values
-const defaultValues: Partial<WelcomeOnboardingValues> = {
-  // 🎯 to-do-list : remove
-};
 
 export default function UserOnboardingWelcome() {
   const router = useRouter();
-
-  // ✅ ZOD-FORM HOOK :  custom hook initializes form instance,
   const form = useForm<WelcomeOnboardingValues>({
     resolver: zodResolver(userOnboardingFormSchema),
-    defaultValues,
   });
 
-  // ✅ SUBMIT ONBOARDING FORM - Navigates to the next onboarding page with submitted data.
   async function onSubmit(data: WelcomeOnboardingValues) {
-    console.log("🎯event-log:  📝onboarding/welcome/onSubmit:  💢 Triggered");
-
     const queryParams = {
       pageId: "data-onboarding",
-      username: data.username,
+      username: data.username.trim(),
       career_title: data.career_title,
     };
 
@@ -132,10 +120,6 @@ export default function UserOnboardingWelcome() {
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit((data) => {
-              console.log(
-                "🎯event_log:  👋📝 Onboarding form submitted - form-data : ",
-                data
-              );
               onSubmit(data);
             })}
             className="flex flex-col justify-center items-center text-center space-y-[calc(100vw-90vw)] lg:space-y-16 w-full  "

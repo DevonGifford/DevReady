@@ -1,6 +1,6 @@
-import { Column } from "@tanstack/react-table";
-
 import { cn } from "@/lib/utils";
+import { Column } from "@tanstack/react-table";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,7 +8,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
 import {
   ArrowDownIcon,
   ArrowUpIcon,

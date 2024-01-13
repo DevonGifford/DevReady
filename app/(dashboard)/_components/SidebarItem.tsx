@@ -58,15 +58,11 @@ export const SidebarItem = ({
 
   const handleNavigation = () => {
     if (isMaster) {
-      //- accordion trigger, should not update route
       return null;
     }
     if (onClick) {
-      //- opens external link in seperate tab
-      //🎯🔮 this could be handled better?
       onClick();
     } else if (!onClick) {
-      //- updates route
       router.push(`/${href}`);
     }
   };
@@ -163,7 +159,7 @@ export const SidebarItem = ({
           </DropdownMenu>
           <div
             role="button"
-            onClick={() => {}}  
+            onClick={() => {}}
             className="opacity-0 group-hover:opacity-100 h-full ml-auto rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-600"
           >
             <Plus className="h-4 w-4 text-muted-foreground" />

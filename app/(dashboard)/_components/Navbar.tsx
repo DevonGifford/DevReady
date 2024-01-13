@@ -4,10 +4,10 @@ import { cn } from "@/lib/utils";
 import { MenuIcon } from "lucide-react";
 import { UserDropdown } from "./UserDropdown";
 
-interface NavbarProps {
+type NavbarProps = {
   isCollapsed: boolean;
   onResetWidth: () => void;
-}
+};
 
 export const Navbar = ({ isCollapsed, onResetWidth }: NavbarProps) => {
   return (

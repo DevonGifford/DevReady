@@ -88,7 +88,7 @@ const questionCardSchema = z.object({
 });
 type QuestionFormValues = z.infer<typeof questionCardSchema>;
 
-const QuestionCardPreview: React.FC<QuestionCardPreviewProps> = ({
+export const QuestionCardPreview: React.FC<QuestionCardPreviewProps> = ({
   questionData,
   submitType,
 }) => {
@@ -270,5 +270,3 @@ const QuestionCardPreview: React.FC<QuestionCardPreviewProps> = ({
     </Form>
   );
 };
-
-export default QuestionCardPreview;

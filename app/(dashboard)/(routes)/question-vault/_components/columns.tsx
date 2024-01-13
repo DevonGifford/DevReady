@@ -72,7 +72,6 @@ export const columns: ColumnDef<QuizQuestion>[] = [
     ),
     cell: ({ row }) => {
       const rowTags = row.original.questionTags;
-
       return (
         <div className="flex flex-row gap-2 text-right font-medium justify-end">
           <TagIcons tagArray={rowTags} />

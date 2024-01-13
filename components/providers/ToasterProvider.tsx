@@ -2,7 +2,7 @@
 
 import { Toaster } from "react-hot-toast";
 
-const ToasterProvider = () => {
+export const ToasterProvider = () => {
   return (
     <Toaster
       position="bottom-center"
@@ -11,11 +11,9 @@ const ToasterProvider = () => {
         style: {
           background: "#333",
           color: "#fff",
-          zIndex: 9999999, // Check and adjust this value
+          zIndex: 9999999,
         },
       }}
     />
   );
 };
-
-export default ToasterProvider;

@@ -1,6 +1,6 @@
 import { Timestamp } from "firebase/firestore";
 
-export interface UserProfile {
+export type UserProfile = {
   uuid: string;
   email: string;
   user_role: string;
@@ -10,13 +10,10 @@ export interface UserProfile {
   account: {
     username: string | null;
     userimage: string | null;
-
     career_title: string | null;
     programming_lang: string | null;
-
     career_level: number;
     experience_level: number;
-
     skills_list: string[] | null;
   };
 
@@ -69,10 +66,10 @@ export interface UserProfile {
   history?: {
     quizCompleted?: {
       quizID: string;
-      incorrectQuestionIDs: number;
+      incorrectQuestionIDs: number[];
     }[];
   };
-}
+};
 
 export const defaultUserProfile: UserProfile = {
   uuid: "",

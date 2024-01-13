@@ -1,38 +1,25 @@
 "use client"; //👈 req for error boundary
 
-import { useEffect, useState } from "react";
 import { notFound } from "next/navigation";
-
-import { QuizQuestion } from "@/types/databaseSchema";
-import { Spinner } from "@/components/Spinner";
+import { useEffect, useState } from "react";
 import { findQuestionByUuid } from "@/lib/findQuestionByUuid";
-
-import QuestionCardPreview from "@/components/QuestionCardPreview";
+import { QuestionCardPreview } from "@/components/QuestionCardPreview";
+import { Spinner } from "@/components/Spinner";
+import { QuizQuestion } from "@/types/databaseSchema";
 
 function QuestionView({ params }: { params: { questionId: number } }) {
   const [isLoadingData, setIsLoadingData] = useState(true);
   const [questionData, setQuestionData] = useState<QuizQuestion | null>(null);
-
   const paramsQuestionId = params.questionId;
 
-  // ✅ SERVE NOT FOUND IF NO SPECIFIC QUEREY
-  // 👇 If the selected quiz ID doesn't match any in the database, redirect to a not-found page
   if (!paramsQuestionId) {
     notFound();
   }
 
-  // ✅ FETCH QUESTION DATA
-  const fetchQuestionData = () => {
-    return findQuestionByUuid(Number(paramsQuestionId));
-  };
-
-  // ✅ HOOK TO TRIGGER FETCH & SET
   useEffect(() => {
-    const currentQuestionData = fetchQuestionData();
-
-    currentQuestionData !== undefined && setQuestionData(currentQuestionData);
-
-    setIsLoadingData(false); // Turn off loading once data is set
+    const specificQuestion = findQuestionByUuid(Number(paramsQuestionId));
+    specificQuestion !== undefined && setQuestionData(specificQuestion);
+    setIsLoadingData(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

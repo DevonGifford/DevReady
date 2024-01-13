@@ -1,9 +1,9 @@
-interface GradeStampProps {
+type GradeStampProps = {
   score: number;
   difficulty_modifier?: number;
-}
+};
 
-const GradeStamp: React.FC<GradeStampProps> = ({ score }) => {
+export const GradeStamp: React.FC<GradeStampProps> = ({ score }) => {
   const getGrade = (score: number) => {
     if (score >= 90)
       return {
@@ -61,5 +61,3 @@ const GradeStamp: React.FC<GradeStampProps> = ({ score }) => {
     </div>
   );
 };
-
-export default GradeStamp;

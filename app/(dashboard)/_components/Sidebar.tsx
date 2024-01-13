@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { SidebarItem } from "./SidebarItem";
 import { useModalContext } from "@/components/providers/ModalReducerProvider";
-
 import { Logo } from "@/components/Logo";
 import { Separator } from "@/components/ui/separator";
 import { Github, Linkedin, UserSquare } from "lucide-react";
