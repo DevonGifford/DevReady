@@ -8,8 +8,10 @@
     <h3>Fullstack Application</h3>
     <h3> ⚠ Currently a work in progress ⚠</h3>
   <a href='https://ztm-ready-portfolio-project.vercel.app/', target='_blank'>
-    <h4>demo website</h4>
-    <h4>documentation website</h4>
+    <h4>🔗 demo website</h4>
+  </a>
+  <a href='https://ztm-ready-documentation.vercel.app/', target='_blank'>
+    <h4>🔗 documentation website </h4>
   </a>
     <hr>
 </div>
