@@ -5,7 +5,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import RecentActivityCarousel from "@/components/RecentActivityCarousel";
 import RecommendedCarousel from "@/components/RecommendedCarousel";
 import CurrentRank from "./_components/CurrentRank";
-import AssociatedTags from "@/components/AssociatedTags";
+import TagButtons from "@/components/TagButtons";
 import RatingHistory from "./_components/RatingHistory";
 
 import fakeRecentActivityData from "@/constants/fakeRecentActivityData.json";
@@ -42,7 +42,7 @@ function UserDashboard() {
                 </p>
                 {/* //👇  BADGES SECTION */}
                 {/* // 🎯🔮 Future feature - users will be able to earn badges upon completing certain objectives - this component will display those badges.... */}
-                <AssociatedTags data={userProfile?.account.skills_list!} />
+                <TagButtons data={userProfile?.account.skills_list!} />
               </div>
             </div>
             <CurrentRank rank={userProfile?.ranking?.current_rank} />

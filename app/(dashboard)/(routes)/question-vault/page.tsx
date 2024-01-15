@@ -34,13 +34,12 @@ export default function QuestionVault() {
         </div>
         <div className="py-6 relative items-center">
           {data ? (
-            <DataTable columns={columns} data={data} /> //-render DataTable when data is available
+            <DataTable columns={columns} data={data} />
           ) : (
-            <Spinner size={"screen"} /> //-render Loading Animation while waiting for data
+            <Spinner size={"screen"} />
           )}
         </div>
       </div>
     </>
   );
 }
- 

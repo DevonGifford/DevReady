@@ -2,7 +2,7 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import * as Sentry from "@sentry/react";
 import QuizTypeInstructions, { QuizType } from "./quizTypeIntstructions";
-import AssociatedTags from "@/components/AssociatedTags";
+import TagButtons from "@/components/TagButtons";
 import { useQuizContext } from "@/components/providers/QuizProvider";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -63,7 +63,7 @@ const QuizWelcome: React.FC<QuizWelcomeProps> = ({
         <Skeleton className="h-10 w-60 rounded-full" />
       )}
       {quizMetaData && quizMetaData.setTags ? (
-        <AssociatedTags data={quizMetaData.setTags} />
+        <TagButtons data={quizMetaData.setTags} />
       ) : (
         <div className="flex flex-row gap-1.5">
           {Array.from({ length: 4 }).map((_, index) => (

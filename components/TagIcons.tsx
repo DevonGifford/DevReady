@@ -1,18 +1,19 @@
 import React from "react";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { tags } from "@/constants/tags-index";
-import Image from "next/image";
 
 interface TagIconsProps {
-  data?: string[];
+  tagArray?: string[];
 }
 
-const TagIcons: React.FC<TagIconsProps> = ({ data }) => {
-  const tagData = data || ["baby yoda"]; // If data is not provided, default to ["baby yoda"]
+const TagIcons: React.FC<TagIconsProps> = ({ tagArray }) => {
+  const defaultTags = ["baby yoda"];
+  const tagsToDisplay = tagArray || defaultTags;
 
   return (
     <div className="flex justify-center items-center flex-row gap-1.5">
-      {tagData.map((tag) => {
+      {tagsToDisplay.map((tag) => {
         const tagIcon = tags.find((t) => t.label === tag);
 
         if (tagIcon) {
