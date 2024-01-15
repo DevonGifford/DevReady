@@ -4,7 +4,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { QuizQuestion } from "@/types/databaseSchema";
 import { DataTableColumnHeader } from "./column-header";
 import { difficulty, types } from "@/constants/data-table-index";
-import TagIcons from "./data-table-tag-icons";
+import TagIcons from "@/components/TagIcons";
 
 export const columns: ColumnDef<QuizQuestion>[] = [
   {
@@ -75,7 +75,7 @@ export const columns: ColumnDef<QuizQuestion>[] = [
 
       return (
         <div className="flex flex-row gap-2 text-right font-medium justify-end">
-          <TagIcons data={rowTags} />
+          <TagIcons tagArray={rowTags} />
         </div>
       );
     },

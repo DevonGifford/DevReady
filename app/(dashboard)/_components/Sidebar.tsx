@@ -45,7 +45,7 @@ export const Sidebar = () => {
                 } else if (label === "User Dashboard") {
                   router.push("/user-dashboard");
                 } else if (label === "Question Vault") {
-                  router.push("/quiz/database");
+                  router.push("/question-vault");
                 } else if (label === "Create Flash Cards") {
                   router.push("/create-flashcards");
                 }

@@ -1,12 +1,13 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 
-interface AssociatedTagsProps {
+interface TagButtonsProps {
   data?: string[]; 
 }
 
-const AssociatedTags: React.FC<AssociatedTagsProps> = ({ data }) => {
-  const tagData = data || ["baby yoda"]; // If rank is not provided, default ...
+const TagButtons: React.FC<TagButtonsProps> = ({ data }) => {
+  const defaultTags = ["baby yoda"];
+  const tagData = data || defaultTags; // If rank is not provided, default ...
 
   return (
     <div className="flex justify-center items-center flex-wrap flex-row gap-1.5">
@@ -28,4 +29,4 @@ const AssociatedTags: React.FC<AssociatedTagsProps> = ({ data }) => {
   );
 };
 
-export default AssociatedTags;
+export default TagButtons;

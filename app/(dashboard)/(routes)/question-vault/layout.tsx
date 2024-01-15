@@ -1,21 +1,16 @@
 "use client";
 
 import { DatabaseContextProvider } from "@/components/providers/DatabaseProvider";
-import { QuizContextProvider } from "@/components/providers/QuizProvider";
 
-export default function QuizLayout({
-  children,
-}: {
+export default function Layout(props: {
+  modal: React.ReactNode;
   children: React.ReactNode;
 }) {
   return (
     <>
       <DatabaseContextProvider>
-        <QuizContextProvider>
-
-        {children}
-
-        </QuizContextProvider>
+        {props.modal}
+        {props.children}
       </DatabaseContextProvider>
     </>
   );
