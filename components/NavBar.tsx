@@ -1,15 +1,13 @@
-import { NAV_LINKS } from "@/constants/landingpage-index";
-import Image from "next/image";
 import Link from "next/link";
 import { ModeToggle } from "./ThemeToggle";
+import { NAV_LINKS } from "@/constants/landingpage-index";
 import { Button } from "./ui/button";
 import { Logo } from "./Logo";
 
 const Navbar = () => {
   return (
     <nav className="flexBetween max-container padding-container relative z-30 py-5">
-        {/* TEMPORARY LOGO SOLUTION 🎯 */}
-       <Logo href="/"/>
+      <Logo href="/" />
 
       <ul className="hidden h-full gap-12 lg:flex">
         {NAV_LINKS.map((link) => (

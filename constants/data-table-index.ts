@@ -1,8 +1,5 @@
 import {
   Apple,
-  ArrowBigRight,
-  ArrowDown,
-  ArrowUp,
   BrainCircuit,
   CableCar,
   HelpCircle,
@@ -12,7 +9,6 @@ import {
   ScrollText,
   Sparkles,
 } from "lucide-react";
-
 
 export const types = [
   {

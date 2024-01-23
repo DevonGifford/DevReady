@@ -1,20 +1,21 @@
-import { useRouter } from "next/navigation";
-import toast from "react-hot-toast";
 import * as Sentry from "@sentry/react";
-import QuizTypeInstructions, { QuizType } from "./quizTypeIntstructions";
-import TagButtons from "@/components/TagButtons";
+import toast from "react-hot-toast";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { QuizTypeInstructions, QuizType } from "./quizTypeIntstructions";
 import { useQuizContext } from "@/components/providers/QuizProvider";
-import { Button } from "@/components/ui/button";
+import { TagButtons } from "@/components/TagButtons";
+import { useRouter } from "next/navigation";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Spinner } from "@/components/Spinner";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { DatabaseSchema } from "@/types/databaseSchema";
+import { Button } from "@/components/ui/button";
 import { ExternalLinkIcon } from "lucide-react";
 
-interface QuizWelcomeProps {
+import { DatabaseSchema } from "@/types/databaseSchema";
+
+type QuizWelcomeProps = {
   quizMetaData: Partial<DatabaseSchema> | null;
   isLoading: boolean;
-}
+};
 
 const QuizWelcome: React.FC<QuizWelcomeProps> = ({
   quizMetaData,

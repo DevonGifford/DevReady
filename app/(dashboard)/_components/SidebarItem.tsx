@@ -56,18 +56,13 @@ export const SidebarItem = ({
 }: ItemProps) => {
   const router = useRouter();
 
-  // 🎯  requires updating with sidebar
   const handleNavigation = () => {
     if (isMaster) {
-      //- accordion trigger, should not update route
       return null;
     }
     if (onClick) {
-      //- opens external link in seperate tab
-      //🎯 this could be handled better
       onClick();
     } else if (!onClick) {
-      //- updates route
       router.push(`/${href}`);
     }
   };

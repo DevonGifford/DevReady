@@ -4,8 +4,8 @@ import { useUserContext } from "@/components/providers/UserProvider";
 import RecentActivityCarousel from "@/components/RecentActivityCarousel";
 import RecommendedCarousel from "@/components/RecommendedCarousel";
 
-import fakeRecentActivityData from "@/constants/fakeRecentActivityData.json";
-import fakeRecommendedActivityData from "@/constants/fakeRecommendedData.json";
+import fakeRecentActivityData from "@/constants/mock/fakeRecentActivityData.json";
+import fakeRecommendedActivityData from "@/constants/mock/fakeRecommendedData.json";
 
 function LandingDashboardPage() {
   const { userProfile } = useUserContext();

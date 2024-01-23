@@ -1,31 +1,29 @@
-# This is still a template page 🎈
+# Introduction
 
-```js filename="demo.js" {3} copy
-let a = 1;
+Welcome to the technical documentation for ZTMReady - the Quiz Platform designed to empower learning through gamification and dynamic features tailored to enhance the learning experience. This documentation serves as a comprehensive guide to understanding the inner workings of the ZTMReady project, providing insights into its architecture, features, and implementation details.
 
-console.log(a);
-```
+<img
+    src={`/highlevel-overview.svg`}
+    alt={"test"}
+    height={550}
+/>
 
-## Component
+## Key Sections to follow
 
-import { useState } from 'react'
+- **Database Schema's:** Dive into the structure of the database, understanding how user profiles, quiz questions, and other essential data are organized and stored.
 
-{/* Import CSS modules */}
-import styles from '../../components/counters.module.css'
+- **High-level Overview:** Gain a bird's-eye view of the ZTMReady project, understanding its goals, features, and the technologies that power its development.
 
-export const Counter = () => {
-  const [count, setCount] = useState(0);
-  return (
-    <div>
-      <button onClick={() => setCount(count + 1)} className={styles.counter}>Clicked {count} times</button>
-    </div>
-  );
-};
+- **Feature List:** Explore the various features implemented and those planned for future releases, offering an in-depth understanding of the platform's capabilities.
 
-<Counter/>
+- **Question Vault:** Delve into the details of the Question Vault, the heart of the quiz application, where dynamic flashcards and adaptive learning mechanisms come to life.
 
-## External Component
+- **Quiz Application:** Understand the inner workings of the quiz application, from user interactions to the algorithms driving the adaptive learning system.
 
-import Logo from '../../components/Logo'
+- **Change Log/Release Notes:** Stay up-to-date with the latest changes, improvements, and feature additions through the project's change log and release notes.
 
-<Logo />
+- **Test Suites:** Explore the testing strategies employed to ensure the reliability and functionality of the ZTMReady platform.
+
+This documentation is designed to be a living resource, evolving alongside the project. Whether you're a developer, student, or educator, we encourage you to explore, contribute, and leverage the insights provided here to enhance your experience with ZTMReady.
+
+Let's embark on a journey through the technical landscape of ZTMReady! 🚀

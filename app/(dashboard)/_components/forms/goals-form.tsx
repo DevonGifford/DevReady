@@ -7,7 +7,6 @@ import { Timestamp } from "firebase/firestore";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useUserContext } from "@/components/providers/UserProvider";
 import { useEffect, useState } from "react";
-
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Spinner } from "@/components/Spinner";
@@ -31,7 +30,6 @@ import {
 
 import { UserProfile } from "@/types/UserProfile";
 
-// 👇 FORM SCHEMA : Goals Form
 const goalsFormSchema = z.object({
   goal_title: z.string().max(45, {
     message: "⚠ Goal title must not be longer than 45 characters.",
@@ -45,10 +43,6 @@ const goalsFormSchema = z.object({
   }),
 });
 type GoalsFormValues = z.infer<typeof goalsFormSchema>;
-// ⌛ PLACEHOLDER :  Default form values
-const defaultValues: Partial<GoalsFormValues> = {
-  // 🎯 to-do-list : remove
-};
 
 export function GoalsForm() {
   const { userProfile, updateUserDataProcess } = useUserContext();
@@ -57,13 +51,10 @@ export function GoalsForm() {
   const [isAchieving, setIsAchieving] = useState(false);
   const [achieved, setAchieved] = useState(false);
 
-  // ✅ ZOD-FORM HOOK :  custom hook initializes a form instance,
   const form = useForm<GoalsFormValues>({
     resolver: zodResolver(goalsFormSchema),
-    defaultValues,
   });
 
-  // ✅ SETTING FORM VALUES -  based on exisitng user profile context data
   useEffect(() => {
     if (userProfile) {
       form.setValue(
@@ -74,7 +65,6 @@ export function GoalsForm() {
         "goal_description",
         userProfile.goals.current_goals.goal_description || ""
       );
-
       // - convert firebase date to javascript date
       const goalEtaContextData = userProfile.goals.current_goals.goal_eta;
       const formattedDate = goalEtaContextData.toDate();
@@ -83,11 +73,7 @@ export function GoalsForm() {
     }
   }, [userProfile, form]);
 
-  // ✅ HANDLE GOAL ACHIEVED : saves and clears current goal
   function onAchieved() {
-    console.log(
-      "🎯event-log:  📝UserForm/goals-form/onAchieved:  💢 Triggered"
-    );
     if (userProfile) {
       setIsAchieving(true); //- Set loading spinner
       const achievedGoalData: UserProfile = {
@@ -114,33 +100,23 @@ export function GoalsForm() {
 
       updateUserDataProcess(userProfile.uuid, achievedGoalData)
         .then(() => {
-          // - on success
-          console.log(
-            "🎯event-log:  📝UserForm/goals-form/onAchieved:  ✔ Success"
-          );
           setIsAchieving(false); //- Reset loading state
           setAchieved(true); //- Set achieved state
 
           setTimeout(() => {
             setAchieved(false); //- Reset achieved state after a while
-          }, 2000);
+          }, 1000);
         })
         .catch((error) => {
-          //- on error
-          console.log(
-            "🎯event-log:  📝UserForm/goals-form/onAchieved:  ❌ Something went wrong, error: ",
-            error
-          );
+          console.error("✖ Something went wrong, error: ", error);
           setIsAchieving(false); //- Reset loading state
         });
     }
   }
 
-  // ✅ SUBMIT FORM :  submit goals form
   function onSubmit(data: GoalsFormValues) {
-    console.log("🎯event-log:  📝UserForm/goals-form/onSubmit:  💢 Triggered");
     if (userProfile) {
-      setIsLoading(true); //- Set loading spinner
+      setIsLoading(true);
       const updatedUserData: UserProfile = {
         ...userProfile,
         goals: {
@@ -149,7 +125,7 @@ export function GoalsForm() {
             ...userProfile.goals.current_goals,
             goal_title: data.goal_title,
             goal_description: data.goal_description,
-            goal_eta: Timestamp.fromDate(data.goal_eta), //- convert to firebase format
+            goal_eta: Timestamp.fromDate(data.goal_eta),
           },
         },
       };
@@ -184,10 +160,6 @@ export function GoalsForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit((data) => {
-          console.log(
-            "🎯event_log:  📝-form submitted with following form-data : ",
-            data
-          );
           onSubmit(data);
         })}
         className="space-y-8"

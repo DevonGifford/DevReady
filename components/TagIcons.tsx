@@ -1,11 +1,11 @@
-import React from "react";
+// 🎯🔮 to-do-list: work-in-progress
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { tags } from "@/constants/tags-index";
 
-interface TagIconsProps {
+type TagIconsProps = {
   tagArray?: string[];
-}
+};
 
 const TagIcons: React.FC<TagIconsProps> = ({ tagArray }) => {
   const defaultTags = ["baby yoda"];

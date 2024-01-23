@@ -1,4 +1,5 @@
-import React from "react";
+// 🎯🔮 to-do-list: work-in-progress
+
 import Image from "next/image";
 import Link from "next/link";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
@@ -10,7 +11,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 
-interface RecentActivityCarouselProps {
+type RecentActivityCarouselProps = {
   title: string;
   data: {
     index: number;
@@ -19,9 +20,9 @@ interface RecentActivityCarouselProps {
     imagelink: string;
     href: string;
   }[];
-}
+};
 
-// 🎯🔮 FUTURE TASKS:
+// 🎯🔮 to-do-list - FUTURE TASKS:
 // - handle real data...
 // - handle case no data...
 // - handle loading skeleton...

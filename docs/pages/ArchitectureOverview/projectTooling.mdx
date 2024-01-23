@@ -1,31 +1,87 @@
-# This is still a template page 🎈
+# Project Tooling
 
-```js filename="demo.js" {3} copy
-let a = 1;
+ZTMReady is equipped with a powerful set of tools that facilitate development, testing, and styling. Each tool is carefully chosen to enhance efficiency, maintainability, and overall development experience.
 
-console.log(a);
-```
+## Main Tooling
 
-## Component
 
-import { useState } from 'react'
+import ToolHeading from '../../components/ToolHeading'
 
-{/* Import CSS modules */}
-import styles from '../../components/counters.module.css'
+<ToolHeading title='Next.js' icon='next'/>
+[Next.js](https://nextjs.org/) is the core frontend framework, providing a robust foundation for building React applications. It supports server-side rendering, static site generation, and seamless integration with various plugins and libraries.
 
-export const Counter = () => {
-  const [count, setCount] = useState(0);
-  return (
-    <div>
-      <button onClick={() => setCount(count + 1)} className={styles.counter}>Clicked {count} times</button>
-    </div>
-  );
-};
+<ToolHeading title='TypeScript' icon='ts'/>
+[TypeScript](https://www.typescriptlang.org/) enhances JavaScript by introducing static typing. It improves code readability, reduces errors, and facilitates collaboration within the development team.
 
-<Counter/>
+<ToolHeading title='Tailwind' icon='tailwind'/>
+[Tailwind CSS](https://tailwindcss.com/) is a utility-first CSS framework that streamlines styling by providing pre-defined classes. Its modular and configurable nature allows for rapid development and easy maintenance of a consistent design system.
 
-## External Component
+<ToolHeading title='Firebase' icon='firebase'/>
+[Firebase](https://firebase.google.com/) is integrated into the project for various features, including authentication, real-time database, and hosting.
 
-import Counters from '../../components/counters'
+<ToolHeading title='ShadCN' icon='planetscale'/>
+[shadcn/ui](https://ui.shadcn.com/) is _a simple, modular and accessible component library.  Built with Radix UI and Tailwind **CSS**
 
-<Counters />
+<ToolHeading title='Sentry' icon='sentry'/>
+Sentry.io is seamlessly integrated into the ZTMReady project, providing robust error tracking and real-time monitoring to ensure a smooth and error-free user experience.
+
+<br/>
+
+## Testing
+
+### Jest
+<ToolHeading title='Jest' icon='jest'/>
+[Jest](https://jestjs.io/) is the primary testing framework for ZTMReady. It enables unit testing and provides a comprehensive suite for ensuring the reliability of the application.
+
+### Playwright
+<ToolHeading title='' icon=''/>
+[Playwright](https://playwright.dev/) is employed for end-to-end testing, allowing for the automation of browser interactions. It ensures the functionality and integration of components across the application.
+
+### React Testing Library
+<ToolHeading title='' icon=''/>
+[Testing Library](https://testing-library.com/) provides utilities for testing React components, ensuring a user-centric approach to testing and validation.
+
+<br/>
+
+## Additional Utilities
+
+### Code Quality and Formatting
+
+#### [ESLint](https://eslint.org/)
+
+ESLint is used for static code analysis to catch potential errors and maintain a consistent code style across the ZTMReady project.
+
+#### [Prettier](https://prettier.io/)
+
+An opinionated code formatter is employed for code formatting, ensuring a clean and standardized codebase.
+
+### Form Handling
+
+#### [React Hook Form](https://react-hook-form.com/)
+
+React Hook Form simplifies form management with easy-to-use React hooks. It offers a flexible and performant solution for handling forms in ZTMReady.
+
+#### [zod form validation](https://zod.dev/)
+
+A TypeScript-first schema declaration and validation library utilized for form validation in ZTMReady.
+
+## Animation and UI Enhancement
+
+#### [Framer Motion](https://www.framer.com/motion/)
+
+Framer Motion is a simple and powerful JavaScript animation library integrated into ZTMReady for creating smooth and interactive user interfaces.
+
+#### Utility Libraries
+
+- **clsx**: A utility for constructing class names dynamically.
+- **date-fns**: A library for date formatting and manipulation.
+- **recharts**: A charting library for creating interactive charts.
+
+These additional utilities contribute to the overall development, code quality, and user experience within ZTMReady. Each tool is carefully chosen to fulfill specific roles, enhancing the project's functionality and maintainability. Explore their respective documentation for more detailed insights into their capabilities.
+
+---
+
+<br/>
+
+
+This selection of tools, frameworks, and libraries ensures ZTMReady is not only feature-rich but also well-maintained and future-ready. Feel free to explore each tool's documentation for more in-depth insights into their capabilities.

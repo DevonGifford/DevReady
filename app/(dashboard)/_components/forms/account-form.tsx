@@ -1,19 +1,19 @@
 "use client";
 
 import * as z from "zod";
-import { cn } from "@/lib/utils";
-import { useForm } from "react-hook-form";
+import { useEffect, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UserProfile } from "firebase/auth";
-import { useEffect, useState } from "react";
-
-import { useUserContext } from "@/components/providers/UserProvider";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Slider } from "@/components/ui/slider";
-import { Spinner } from "@/components/Spinner";
+import { useForm } from "react-hook-form";
+import { cn } from "@/lib/utils";
 import { Check, CheckCheckIcon, CheckIcon } from "lucide-react";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
+import { ProfilePictureUploader } from "@/components/ProfilePictureUploader";
+import { useUserContext } from "@/components/providers/UserProvider";
+import { Spinner } from "@/components/Spinner";
+import { Button } from "@/components/ui/button";
+import { Slider } from "@/components/ui/slider";
+import { Input } from "@/components/ui/input";
 import {
   Popover,
   PopoverContent,
@@ -35,15 +35,12 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-
 import {
   careerList,
   programmingLanguagesList,
   skillsList,
 } from "@/constants/userforms-index";
-import { ProfilePictureUploader } from "@/components/ProfilePictureUploader";
 
-// 👇 FORM SCHEMA : Account Form
 const accountFormSchema = z.object({
   username: z
     .string()
@@ -64,10 +61,6 @@ const accountFormSchema = z.object({
   skills_list: z.array(z.string()).optional(),
 });
 type AccountFormValues = z.infer<typeof accountFormSchema>;
-// ⌛ PLACEHOLDER :  Default form values
-const defaultValues: Partial<AccountFormValues> = {
-  // 🎯 to-do-list : remove
-};
 
 export function AccountForm() {
   const { userProfile, updateUserDataProcess } = useUserContext();
@@ -75,35 +68,26 @@ export function AccountForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-  // ✅ ZOD-FORM HOOK :  custom hook initializes a form instance,
+  const defaultValues: Partial<AccountFormValues> = {
+    username: userProfile?.account.username || "",
+    career_title: userProfile?.account.career_title || "",
+    programming_lang: userProfile?.account.programming_lang || "",
+    career_level: userProfile?.account.career_level || 1,
+    experience_level: userProfile?.account.experience_level || 1,
+    skills_list: userProfile?.account.skills_list || [],
+  };
+
   const form = useForm<AccountFormValues>({
     resolver: zodResolver(accountFormSchema),
     defaultValues,
   });
 
-  // ✅ SET FORM VALUES - based on existing user profile context data
   useEffect(() => {
-    if (userProfile) {
-      form.setValue("username", userProfile.account.username || "");
-      form.setValue("career_title", userProfile.account.career_title || "");
-      form.setValue(
-        "programming_lang",
-        userProfile.account.programming_lang || ""
-      );
-      form.setValue("career_level", userProfile.account.career_level || 1);
-      form.setValue(
-        "experience_level",
-        userProfile.account.experience_level || 1
-      );
-      // - handle skills_lists + local state
-      if (userProfile && userProfile.account.skills_list) {
-        setSelectedSkills(userProfile.account.skills_list || []);
-        form.setValue("skills_list", userProfile.account.skills_list || []);
-      }
+    if (userProfile && userProfile.account.skills_list) {
+      setSelectedSkills(userProfile.account.skills_list || []);
     }
   }, [form, userProfile]);
 
-  // ✅ HANDLE SKILL SELECTION - checks if skill exists in state, and handles click accordingly
   const handleSkillList = (selectedSkill: string) => {
     const updatedSkills = selectedSkills.includes(selectedSkill)
       ? selectedSkills.filter((skill) => skill !== selectedSkill)
@@ -113,14 +97,9 @@ export function AccountForm() {
     form.setValue("skills_list", updatedSkills);
   };
 
-  // ✅ SUBMIT FORM - submit account form
-  function onSubmit(data: AccountFormValues) {
-    console.log(
-      "🎯event-log:  📝UserForm/account-form/onSubmit:  💢 Triggered"
-    );
-
+  const onSubmit = (data: AccountFormValues) => {
     if (userProfile) {
-      setIsLoading(true); //- Set loading spinner
+      setIsLoading(true);
       const updatedUserData: UserProfile = {
         account: {
           ...userProfile?.account,
@@ -138,38 +117,28 @@ export function AccountForm() {
 
       updateUserDataProcess(userProfile.uuid, updatedUserData)
         .then(() => {
-          console.log(
-            "🎯event-log:  📝UserForm/account-form/onSubmit:  ✔ Success"
-          );
-          setIsLoading(false); //- Reset loading state
-          setSubmitted(true); //- Set achieved state
+          setIsLoading(false);
+          setSubmitted(true);
           setTimeout(() => {
-            setSubmitted(false); //- Reset achieved state after a while
-          }, 2000);
+            setSubmitted(false);
+          }, 1000);
         })
         .catch((error) => {
-          console.log(
-            "🎯event-log:  📝UserForm/account-form/onSubmit:  ❌ Something went wrong, error: ",
-            error
-          );
-          setIsLoading(false); //- Reset loading state
+          console.error("✖ Something went wrong -  error: ", error);
+          setIsLoading(false);
         });
     }
-  }
+  };
 
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit((data) => {
-          console.log(
-            "🎯event_log:  📝-form submitted with following form-data: ",
-            data
-          );
           onSubmit(data);
         })}
-        className="space-y-6 w-full -translate-y-5 sm:-translate-y-10 md:-translate-y-18 "
+        className="space-y-2 w-full -translate-y-5 sm:-translate-y-10 md:-translate-y-18 "
       >
-        {/* USERNAME & USERIMAGE 🎯 */}
+        {/* USERNAME & USERIMAGE */}
         <div className="flex flex-col justify-between items-center gap-4 sm:flex-row max-w-3xl">
           {/* USERNAME */}
           <FormField
@@ -195,9 +164,8 @@ export function AccountForm() {
               </FormItem>
             )}
           />
-
-          {/* USER IMAGE 🎯 */}
-          <div className="flex h-[230px] sm:h-[250px] w-full max-w-sm justify-center sm:mb-5">
+          {/* USER IMAGE */}
+          <div className="flex h-[200px] sm:h-[220px] w-full max-w-sm justify-center">
             <ProfilePictureUploader userDocId={userProfile?.uuid!} />
           </div>
         </div>

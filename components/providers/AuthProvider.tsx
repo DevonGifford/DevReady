@@ -1,42 +1,53 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import { FirebaseError } from "firebase/app";
 import { auth } from "@/utils/firebase/firebase.config";
 import { Spinner } from "../Spinner";
 import {
+  User,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
 import {
-  createUserDataProcess,
+  initializeUserDocument,
   updateUserLoginTime,
 } from "@/utils/firebase/firestore.utils";
 
-interface UserType {
+type UserType = {
   email: string | null;
   uid: string | null;
-}
+};
+
+type RegistrationResult =
+  | { success: true }
+  | { success: false; error: FirebaseError | { message: string } };
+
+type LoginResult =
+  | { success: true; user: User }
+  | { success: false; error: FirebaseError | { message: string } };
 
 type AuthContextProps = {
   user: UserType | null;
-  register: (email: string, password: string) => {};
-  logIn: (email: string, password: string) => {};
-  logOut: () => {};
+  register: (email: string, password: string) => Promise<RegistrationResult>;
+  logIn: (email: string, password: string) => Promise<LoginResult>;
+  logOut: () => Promise<void>;
 };
 
-// 👇 AUTH CONTEXT => exposing following...
 const AuthContext = createContext<AuthContextProps>({
   user: null,
-  register: async () => {},
-  logIn: async () => {},
+  register: async () => ({
+    success: false,
+    error: { message: "Not implemented" },
+  }),
+  logIn: async () => ({
+    success: false,
+    error: { message: "Not implemented" },
+  }),
   logOut: async () => {},
 });
 
-// - Arrow Function Shorthand:
-// - directly returns result of useContext explicitly defining any type.
-export const useAuth = () => useContext<any>(AuthContext);
-
-// 🎯to-do-list:  update sessionStorage? (encrypted?)
+export const useAuth = () => useContext<AuthContextProps>(AuthContext);
 
 export const AuthContextProvider = ({
   children,
@@ -46,138 +57,79 @@ export const AuthContextProvider = ({
   const [user, setUser] = useState<UserType>({ email: null, uid: null });
   const [loading, setLoading] = useState<Boolean>(true);
 
-  /**
-   * ✅ UPDATING AUTH-STATE - Handles the auth state change event.
-   * @returns {void}
-   */
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      console.log(
-        "🎯event_log:  🔑authProvider/onAuthStateChanged:  💢 Triggered"
-      );
-      if (user) {
-        try {
+      try {
+        if (user) {
           setUser({
             email: user.email,
             uid: user.uid,
           });
-        } catch (error) {
-          console.log(
-            "🎯event_log:  🔑authProvider/onAuthStateChanged:   ❌ Error fetching user profile from firestore:",
-            error
-          );
+        } else {
+          setUser({ email: null, uid: null });
         }
-      } else {
-        setUser({ email: null, uid: null });
-        console.log(
-          "🎯event_log:  🔑authProvider/onAuthStateChanged:   ⚠ The user context has been set to null"
-        );
+      } catch (error) {
+        console.error("✖ Error fetching user profile:", error);
+      } finally {
+        setLoading(false);
       }
-
-      setLoading(false);
     });
 
     return () => unsubscribe();
   }, []);
 
-  /**
-   * ✅ HANDLE REGISTER NEW USER - Registers a new user.
-   * @param {string} email - The user's email.
-   * @param {string} password - The user's password.
-   * @returns {Promise<{ result?: any, error?: any }>} A Promise with the registration result or error.
-   */
-  const register = async (email: string, password: string) => {
-    console.log("🎯event_log:  🔑authProvider/register:  💢 Triggered");
-
+  const register = async (
+    email: string,
+    password: string
+  ): Promise<RegistrationResult> => {
     try {
-      console.log(
-        "🎯event_log:  🔑authProvider/register:  Creating new user account in firebase/auth"
-      );
-      const { user } = await createUserWithEmailAndPassword(
+      const userCredential = await createUserWithEmailAndPassword(
         auth,
         email,
         password
       );
-
-      if (user) {
-        console.log(
-          "🎯event_log:  🔑authProvider/register:  Creating new user document in firestore/users"
-        );
-
-        try {
-          // - Create a new user document in firebase
-          createUserDataProcess(user.uid, {
-            uuid: user.uid,
-            email: email,
-          });
-        } catch (creationError) {
-          console.error(
-            "🎯event_log:  🔑authProvider/register:  ❌ Error creating user document:",
-            creationError
-          );
-          // Handle creation error here (retry or handle it as needed)
-        }
+      // - Create a new user document in firebase
+      initializeUserDocument(userCredential.user.uid, {
+        uuid: userCredential.user.uid,
+        email: email,
+      });
+      return { success: true };
+    } catch (error) {
+      if (error instanceof FirebaseError) {
+        return { success: false, error };
+      } else {
+        const unknownError = {
+          message: "Unknown error during user registration",
+        };
+        return { success: false, error: unknownError };
       }
-      // - Return user on successful registration
-      console.log(
-        "🎯event_log:  🔑authProvider/register:  ✔ successfully registered user "
-      );
-      return { result: user };
-    } catch (registrationError) {
-      // - Return error if registration fails
-      console.error(
-        "🎯event_log:  🔑authProvider/register:  ❌ error registering user:",
-        registrationError
-      );
-
-      return { error: registrationError };
     }
   };
 
-  /**
-   * ✅ HANDLE USER LOGIN - Logs in a user.
-   * @param {string} email - The user's email.
-   * @param {string} password - The user's password.
-   * @returns {Promise<void>} A Promise that resolves once the login process completes.
-   */
-  const logIn = async (email: string, password: string) => {
-    console.log("🎯event_log:  🔑authProvider/login:  💢 Triggered ");
+  const logIn = async (
+    email: string,
+    password: string
+  ): Promise<LoginResult> => {
     try {
       const { user } = await signInWithEmailAndPassword(auth, email, password);
 
-      if (user) {
-        console.log(
-          "🎯event_log:  🔑authProvider/login:   Updating user login time"
-        );
-
-        try {
-          updateUserLoginTime(user.uid);
-          return { result: user };
-        } catch (updateError: any) {
-          console.error(
-            "🎯event_log:  🔑authProvider/login:  ❌ Error occurred during lastLogin update:",
-            updateError.message
-          );
-        }
-      } else {
-        console.log(
-          "🎯event_log:  🔑authProvider/login:  ❌ User not found during login"
-        );
+      if (!user) {
+        console.error("✖ User not found after login.");
+        return {
+          success: false,
+          error: { message: "User not found after login." },
+        };
       }
+
+      updateUserLoginTime(user.uid);
+      return { success: true, user };
     } catch (loginError: any) {
-      console.error(
-        "🎯event_log:  🔑authProvider/login:  ❌ Error occurred during login:",
-        loginError.message
-      );
+      console.error("✖ Error occurred during login:", loginError.message);
+      return { success: false, error: loginError };
     }
   };
 
-  /**
-   * ✅ HANLDE USER LOGOUT - Logs out the current user.
-   * @returns {Promise<void>} A Promise that resolves once the logout process completes.
-   */
   const logOut = async () => {
-    console.log("🎯event_log:  🔑authProvider/logout:    💢 Triggered ");
     setUser({ email: null, uid: null });
     return await signOut(auth);
   };

@@ -1,9 +1,9 @@
-export interface usersInput {
+export type usersInput = {
   questionUuid: number;
-  selectedAnswer: ["True" | "False" | "Skipped"];
-}
+  selectedAnswer: string;
+};
 
-export interface QuizResultsSchema {
-  quizUuid: string; // References the UUID of the quiz
+export type QuizResultsSchema = {
+  quizUuid: string;
   usersAnswers: usersInput[];
-}
+};

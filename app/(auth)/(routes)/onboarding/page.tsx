@@ -1,14 +1,13 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
+import { AnimatePresence, motion } from "framer-motion";
+import { EXIT_NORMAL_ALL } from "@/constants/onboarding-index";
 import { ArrowLeftIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
-import { AnimatePresence, motion } from "framer-motion";
 import UserOnboardingCareer from "../../_components/userCareer-onboarding";
 import UserOnboardingImage from "../../_components/userImage-onboarding";
 import UserOnboardingWelcome from "../../_components/userWelcome-onboarding";
-import { EXIT_NORMAL_ALL } from "@/constants/onboarding-index";
 
 export default function OnboardingFormHandler() {
   const router = useRouter();
@@ -46,8 +45,8 @@ export default function OnboardingFormHandler() {
           </motion.div>
         ) : (
           <UserOnboardingWelcome key="intro" />
-          // <UserOnboardingCareer key="data-onboarding" />  //👉 for development use
-          // <UserOnboardingImage key="image-onboarding" />  //👉 for development use
+          // <UserOnboardingCareer key="data-onboarding" />  //👉 for development
+          // <UserOnboardingImage key="image-onboarding" />  //👉 for development
         )}
       </AnimatePresence>
     </div>

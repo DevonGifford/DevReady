@@ -1,7 +1,6 @@
 import {
   createContext,
   Dispatch,
-  SetStateAction,
   useContext,
   useReducer,
   useEffect,
@@ -14,12 +13,16 @@ export type ToggleAction =
   | { type: "TOGGLE_LOG_EVENTS" }
   | { type: "TOGGLE_STAR_MENTOR" };
 
-interface CombinedSettingsState {
+type CombinedSettingsState = {
   generalNotifications: boolean;
   hideCorrectAnswer: boolean;
   logEvents: boolean;
   starMentor: boolean;
-}
+};
+
+type SettingsReducerProviderProps = {
+  children: React.ReactNode;
+};
 
 const initialState: CombinedSettingsState = {
   generalNotifications: true,
@@ -65,13 +68,9 @@ export function useSettingsReducerContext() {
   return context;
 }
 
-type SettingsReducerProviderProps = {
-  children: React.ReactNode;
-};
-
-export const SettingsReducerProvider: React.FC<SettingsReducerProviderProps> = ({
-  children,
-}) => {
+export const SettingsReducerProvider: React.FC<
+  SettingsReducerProviderProps
+> = ({ children }) => {
   // 👇 Load settings from local storage on app load
   const savedSettings = localStorage.getItem("ztmready-setings");
   const initialSettings = savedSettings
@@ -85,8 +84,7 @@ export const SettingsReducerProvider: React.FC<SettingsReducerProviderProps> = (
     try {
       localStorage.setItem("ztmready-setings", JSON.stringify(state));
     } catch (error) {
-      //- error handling for cases where the local storage is full or not available.
-      // 🎯 to-do-list:  Better handle the error here (req: logger)
+      // 🎯 to-do-list:  Better handle the error here (req: logger) - where the local storage is full or not available?
       toast.error("Failed to save state to local storage:");
       console.log("Failed to save state to local storage:", error);
     }

@@ -3,13 +3,12 @@
 import Link from "next/link";
 import toast from "react-hot-toast";
 import { SidebarItem } from "./SidebarItem";
-import { useUserContext } from "@/components/providers/UserProvider";
-import { useCustomToast } from "@/lib/useCustomToast";
 import { UserFormHandler } from "./UserFormHandler";
 import { useModalContext } from "@/components/providers/ModalReducerProvider";
-
-import { Button } from "@/components/ui/button";
+import { useUserContext } from "@/components/providers/UserProvider";
 import { Progress } from "@/components/ui/progress";
+import { Skeleton } from "@/components/ui/skeleton";
+import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import {
@@ -25,35 +24,25 @@ import {
   SettingsIcon,
   Trophy,
 } from "lucide-react";
-import { Skeleton } from "@/components/ui/skeleton";
+import { useRouter } from "next/navigation";
 
 export const UserDropdown = () => {
+  const router = useRouter();
   const { userProfile } = useUserContext();
   const { dispatch } = useModalContext();
-  const customToast = useCustomToast();
-
-  // 🎯 to-do-list : improve handle user Image
-  // 🎯 - improve waiting for context to load
-  // 🎯 - skeleton avatar while waiting to load
   const userImage =
     userProfile?.account.userimage || "/profile-placeholder-image.svg";
-
-  //👇🎯 to-do-list: remove testing toast notifications
-  const ztmTest = () => {
-    toast.success("This is a Test notification 🎯🧪");
-    customToast("Hello?");
-  };
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <div role="button" className="flex items-center text-base">
+        <div role="button" className="flex items-center text-base mr-2">
           <div className="gap-x-1 flex items-center max-w-[200px]">
             {userProfile ? (
               <>
-                <span className="text-start font-medium line-clamp-1 text-lg">
+                {/* <span className="text-start font-medium line-clamp-1 text-lg">
                   {userProfile.account.username}
-                </span>
+                </span> */}
                 <Avatar className="h-10 w-10">
                   <AvatarImage src={userImage} alt="profile-picture" />
                   <AvatarFallback>ZTM</AvatarFallback>
@@ -62,7 +51,7 @@ export const UserDropdown = () => {
             ) : (
               //-Shows skeleton when userProfile is not available
               <div className="flex flex-row space-x-2 justify-center items-center">
-                <Skeleton className="h-5 w-28" />
+                {/* <Skeleton className="h-5 w-28" /> */}
                 <Skeleton className="h-10 w-10 rounded-full" />
               </div>
             )}
@@ -76,11 +65,12 @@ export const UserDropdown = () => {
         alignOffset={11}
         forceMount
       >
-        {/* HEADER - USER SUMMARY */}
+        {/* HEADER - USER PROFILE SUMMARY */}
         <div
           className="flex items-center justify-between gap-x-2 hover:cursor-pointer pt-3"
-          //👇🎯temp
-          onClick={ztmTest}
+          onClick={() => {
+            router.push("/user-dashboard");
+          }}
         >
           <div className="space-y-1 p-2">
             <p className="text-lg tracking-widest font-semibold line-clamp-1">
@@ -96,9 +86,10 @@ export const UserDropdown = () => {
             </Avatar>
           </div>
         </div>
+
         <DropdownMenuSeparator />
 
-        {/* 👉 UPDATE FORM - forms */}
+        {/* USER PROFILE - forms sheet */}
         <Sheet>
           <SheetTrigger asChild>
             <div className="group min-h-[30px] text-base py-2 pr-3 pl-2.5 cursor-pointer w-full hover:bg-primary/5 flex items-center text-muted-foreground font-medium pt-3">
@@ -116,17 +107,17 @@ export const UserDropdown = () => {
           </SheetContent>
         </Sheet>
 
-        {/* 👉 USER DASHBOARD */}
+        {/* USER DASHBOARD - link */}
         <Link href={"/user-dashboard"}>
           <SidebarItem label="User Dashboard" icon={Gauge} />
         </Link>
 
-        {/* 👉 ZTM ACADEMY */}
+        {/* ZTM ACADEMY - link */}
         <a href="https://academy.zerotomastery.io/" target="_blank">
           <SidebarItem label="ZTM Academy" icon={LogOut} onClick={() => {}} />
         </a>
 
-        {/* 👉 LOGOUT BUTTON */}
+        {/* LOGOUT BUTTON - modal */}
         <Button
           onClick={() => dispatch({ type: "OPEN_MODAL", modalType: "LOGOUT" })}
         >
@@ -134,13 +125,14 @@ export const UserDropdown = () => {
           Logout{" "}
         </Button>
 
-        {/* FOOTER USER LEVEL SUMMARY */}
-        {/* update with link & seperate component? 🎯 */}
+        {/* FOOTER - USER LEVEL SUMMARY */}
+        {/* //🎯🔮 to-do-list:  refactor, waiting on future features */}
         <DropdownMenuSeparator />
         <div
           className="flex flex-col py-2 px-5 text-primary/50 gap-3 hover:cursor-pointer"
-          //👇🎯temp
-          onClick={ztmTest}
+          onClick={() => {
+            toast.success("maybe show user level here?");
+          }}
         >
           <div className="flex flex-row gap-2 text-sm font-semibold text-center justify-center text-amber-500">
             <Trophy size={20} />

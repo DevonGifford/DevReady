@@ -19,9 +19,9 @@ import {
 import { QuizQuestion } from "@/types/databaseSchema";
 import { QuizResultsSchema } from "@/types/quizzSchema";
 
-interface QuizProps {
+type QuizProps = {
   questions: QuizQuestion[];
-}
+};
 
 const QuizApplication: React.FC<QuizProps> = ({ questions }) => {
   const router = useRouter();
@@ -31,12 +31,11 @@ const QuizApplication: React.FC<QuizProps> = ({ questions }) => {
 
   const handleNextCard = async () => {
     try {
-      //- handle if there are more questions
       if (currentQuestion < questions.length - 1) {
         setCurrentQuestion(currentQuestion + 1);
         setShowAnswer(false);
       } else {
-        //- handle if final question -> redirect complete
+        //- handle quiz complete & redirect
         const queryParams = {
           pageId: "results-page",
         };
@@ -58,40 +57,34 @@ const QuizApplication: React.FC<QuizProps> = ({ questions }) => {
   };
 
   const correctAnswer = (data: QuizQuestion) => {
-    toast("Marked Correct", {
-      icon: "✅",
-    });
-    //- Get existing user answers or initialize an empty array
-    const newCorrectAnswers = quizResults?.usersAnswers || [];
-    //- Append new correct answer object
-    const updatedCorrectAnswers = [
-      ...newCorrectAnswers,
+    toast("Marked Correct", { icon: "✅" });
+
+    const updatedAnswers = [
+      ...(quizResults?.usersAnswers || []),
       { questionUuid: data.questionUuid, selectedAnswer: "True" },
     ];
-    // - Set new data and update state
+
     const newData: Partial<QuizResultsSchema> = {
-      usersAnswers: updatedCorrectAnswers,
+      usersAnswers: updatedAnswers,
     };
+
     updateResults(newData);
-    // - next card
     handleNextCard();
   };
 
   const wrongAnswer = (data: QuizQuestion) => {
     toast("Marked Incorrect", { icon: "❌" });
-    //- Get existing user answers or initialize an empty array
-    const newIncorrectAnswers = quizResults?.usersAnswers || [];
-    //- Append new incorrect answer object
-    const updatedIncorrectAnswers = [
-      ...newIncorrectAnswers,
+
+    const updatedAnswers = [
+      ...(quizResults?.usersAnswers || []),
       { questionUuid: data.questionUuid, selectedAnswer: "False" },
     ];
-    // - Set new data and update state
+
     const newData: Partial<QuizResultsSchema> = {
-      usersAnswers: updatedIncorrectAnswers,
+      usersAnswers: updatedAnswers,
     };
+
     updateResults(newData);
-    // - next card
     handleNextCard();
   };
 
@@ -101,7 +94,7 @@ const QuizApplication: React.FC<QuizProps> = ({ questions }) => {
   };
 
   return (
-    <div className="flex flex-row justify-evenly items-center w-fit lg:w-2/5 md:mx-10 px-1 md:px-2 overflow-hidden max-w-2xl">
+    <div className="flex flex-row justify-evenly items-center w-fit lg:w-2/5 md:mx-10 px-1 md:px-2 max-w-2xl">
       <div className="w-10">
         <Button
           className="rounded-full -translate-x-5 h-20 w-20 hover:bg-transparent"
@@ -125,8 +118,6 @@ const QuizApplication: React.FC<QuizProps> = ({ questions }) => {
           <CardContent className="flex flex-col gap-3 md:gap-8 md:py-6 xl:py-12 ">
             <CardTitle className="">
               {questions[currentQuestion].questionTitle}
-              <br />
-              How does it look?
             </CardTitle>
 
             <CardDescription>
@@ -147,28 +138,28 @@ const QuizApplication: React.FC<QuizProps> = ({ questions }) => {
         )}
 
         <CardFooter className="p-0 top-0 w-full flex flex-row justify-between">
-          <div
+          <button
             className="cursor-pointer font-bold tracking-wider text-sm sm:text-base md:text-lg w-full flex justify-center items-center h-16 hover:bg-red-700 rounded-bl-md"
             onClick={() => {
               wrongAnswer(questions[currentQuestion]);
             }}
           >
             wrong
-          </div>
-          <div
+          </button>
+          <button
             className="cursor-pointer font-bold tracking-wider text-sm sm:text-base md:text-lg w-full flex justify-center items-center h-16 hover:bg-yellow-700 "
             onClick={handleFlipCard}
           >
             show
-          </div>
-          <div
+          </button>
+          <button
             className="cursor-pointer font-bold tracking-wider text-sm sm:text-base md:text-lg w-full flex justify-center items-center h-16 hover:bg-green-700 rounded-br-md"
             onClick={() => {
               correctAnswer(questions[currentQuestion]);
             }}
           >
             correct
-          </div>
+          </button>
         </CardFooter>
       </Card>
 

@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Spinner } from "@/components/Spinner";
-import { Check } from "lucide-react";
+import { Check, EyeIcon, EyeOff } from "lucide-react";
 import {
   Form,
   FormControl,
@@ -23,8 +23,9 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { FirebaseError } from "firebase/app";
+import { useUserContext } from "@/components/providers/UserProvider";
 
-// 👇 FORM SCHEMA : Register Form
 const registerFormSchema = z.object({
   email: z.string().email("Invalid email format").min(1, "Email is required"),
   password: z.string().min(8, "Password must be at least 8 characters"),
@@ -33,16 +34,18 @@ type RegisterFormValues = z.infer<typeof registerFormSchema>;
 
 function RegisterPage(): JSX.Element {
   const router = useRouter();
-  const { register: registerUser } = useAuth();
-  const [isLoading, setIsLoading] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-
-  // ✅ ZOD-FORM HOOK :  custom hook initializes a form instance
+  const { register, user } = useAuth();
+  const { synchUserContext } = useUserContext();
+  const [isLoading, setIsLoading] = useState(false); //-submit-button-loading-state
+  const [submitted, setSubmitted] = useState(false); //-submit-button-success-state
+  const [isShown, setIsShown] = useState(false); //-show-hide-password
+  const togglePassword = () => {
+    setIsShown((isShown) => !isShown);
+  };
   const form = useForm<RegisterFormValues>({
     resolver: zodResolver(registerFormSchema),
   });
 
-  // ✅ SUBMIT FORM - submit register form
   const onSubmit = async ({
     email,
     password,
@@ -50,55 +53,56 @@ function RegisterPage(): JSX.Element {
     email: string;
     password: string;
   }) => {
-    console.log("🎯event_log:  🗝auth/register-page/submit:  💢 Triggered ");
-
     try {
-      setIsLoading(true); //- Set loading spinner
-      const { result, error } = await registerUser(email, password);
+      setIsLoading(true);
+      const trimmedEmail = email.trim();
+      const trimmedPassword = password.trim();
+      const result = await register(trimmedEmail, trimmedPassword);
 
-      if (error) {
-        //- Handle specific error scenarios with appropriate messages
-        switch (error.code) {
-          case "auth/email-already-in-use":
-            toast.error(
-              "This email is already in use. Please use a different email."
-            );
-            break;
-          case "auth/invalid-email":
-            toast.error("Please provide a valid email.");
-            break;
-          case "auth/weak-password":
-            toast.error(
-              "The password provided is too weak. Please use a stronger password."
-            );
-            break;
-          //🤔 more conditions?
-          default:
-            toast.error("Hmmm... something went wrong. Please try again.");
-            break;
-        }
+      if (result.success) {
+        setIsLoading(false);
+        setSubmitted(true);
+        toast.success("Successfully registered.");
+        router.push("/onboarding");
+        setUserContext();
       } else {
-        //- Handle successful registration
-        console.log(
-          "🎯event_log:  🗝auth/register-page/submit:  ✔ user has been successfully created - firebase result: ",
-          result
-        );
-        setIsLoading(false); //- Reset loading state
-        setSubmitted(true); //- Set achieved state
-        setTimeout(() => {
-          setSubmitted(false); //- Reset achieved state after a while
-          toast.success("Successfully registered.");
-          router.push("/onboarding");
-        }, 1000);
+        setIsLoading(false);
+        handleRegistrationError(result.error);
       }
     } catch (error) {
-      //- Handle other unexpected errors
-      console.error(
-        "🎯event_log:  🗝auth/register-page/submit:  ❌ something went wrong:",
-        error
-      );
-      toast.error("Hmmm... something went wrong. Please try again.");
-      setIsLoading(false); //- Reset loading state
+      handleRegistrationError(error);
+      setIsLoading(false);
+    }
+  };
+
+  const setUserContext = () => {
+    if (user?.uid) {
+      synchUserContext(user.uid);
+    }
+  };
+
+  const handleRegistrationError = (error: FirebaseError | unknown) => {
+    if (error instanceof FirebaseError) {
+      switch (error.code) {
+        case "auth/email-already-in-use":
+          toast.error(
+            "This email is already in use. Please use a different email."
+          );
+          break;
+        case "auth/invalid-email":
+          toast.error("Please provide a valid email.");
+          break;
+        case "auth/weak-password":
+          toast.error(
+            "The password provided is too weak. Please use a stronger password."
+          );
+          break;
+        default:
+          toast.error("Hmmm... something went wrong. Please try again.");
+          break;
+      }
+    } else {
+      toast.error("Unknown error occurred. Please try again.");
     }
   };
 
@@ -111,10 +115,6 @@ function RegisterPage(): JSX.Element {
         <form
           className="rounded space-y-4"
           onSubmit={form.handleSubmit((data) => {
-            console.log(
-              "🎯event_log:  📝 register form submitted with following form-data: ",
-              data
-            );
             onSubmit(data);
           })}
         >
@@ -150,13 +150,20 @@ function RegisterPage(): JSX.Element {
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className="text-left"
-                    type="password"
+                    className="text-left hide-reveal"
+                    type={isShown ? "text" : "password"}
                     id="password"
                     placeholder="password"
                     {...field}
                   />
                 </FormControl>
+                <div
+                  className="relative -translate-y-4 -translate-x-2 flex items-end justify-end cursor-pointer h-0"
+                  onClick={togglePassword}
+                  data-testid="toggle-password-vis"
+                >
+                  {isShown ? <EyeIcon size={22} /> : <EyeOff size={22} />}
+                </div>
                 <FormMessage />
               </FormItem>
             )}

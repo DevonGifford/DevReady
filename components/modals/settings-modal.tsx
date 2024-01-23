@@ -1,14 +1,13 @@
 "use client";
 import { useContext, useEffect, useState } from "react";
-import { ModeToggle } from "../ThemeToggle";
 import { useModalContext } from "../providers/ModalReducerProvider";
+import { ModeToggle } from "../ThemeToggle";
+import { Switch } from "@/components/ui/switch";
+import { Label } from "@/components/ui/label";
 import {
   SettingsReducerContext,
   ToggleAction,
 } from "../providers/SettingsReducerProvider";
-
-import { Switch } from "@/components/ui/switch";
-import { Label } from "@/components/ui/label";
 import {
   Dialog,
   DialogContent,
@@ -26,7 +25,6 @@ export const SettingsModal = () => {
     SettingsReducerContext
   );
 
-  // ✅ listening if should be mounted
   useEffect(() => {
     if (modal.open && modal.type === "SETTINGS") {
       setIsMounted(true);
@@ -67,12 +65,11 @@ export const SettingsModal = () => {
             </SettingDescription>
           </SettingTitle>
           <Switch
-            checked={toggleState.generalNotifications} // Use the toggle state
-            onCheckedChange={
-              () =>
-                toggleDispatch({
-                  type: "TOGGLE_GENERAL_NOTIFICATIONS",
-                } as ToggleAction) // Dispatch action to toggle the state
+            checked={toggleState.generalNotifications}
+            onCheckedChange={() =>
+              toggleDispatch({
+                type: "TOGGLE_GENERAL_NOTIFICATIONS",
+              } as ToggleAction)
             }
           />
         </SettingSection>
@@ -85,12 +82,11 @@ export const SettingsModal = () => {
             </SettingDescription>
           </SettingTitle>
           <Switch
-            checked={toggleState.hideCorrectAnswer} // Use the toggle state
-            onCheckedChange={
-              () =>
-                toggleDispatch({
-                  type: "TOGGLE_HIDE_CORRECT_ANSWER",
-                } as ToggleAction) // Dispatch action to toggle the state
+            checked={toggleState.hideCorrectAnswer}
+            onCheckedChange={() =>
+              toggleDispatch({
+                type: "TOGGLE_HIDE_CORRECT_ANSWER",
+              } as ToggleAction)
             }
           />
         </SettingSection>
@@ -103,12 +99,11 @@ export const SettingsModal = () => {
             </SettingDescription>
           </SettingTitle>
           <Switch
-            checked={toggleState.logEvents} // Use the toggle state
-            onCheckedChange={
-              () =>
-                toggleDispatch({
-                  type: "TOGGLE_LOG_EVENTS",
-                } as ToggleAction) // Dispatch action to toggle the state
+            checked={toggleState.logEvents}
+            onCheckedChange={() =>
+              toggleDispatch({
+                type: "TOGGLE_LOG_EVENTS",
+              } as ToggleAction)
             }
           />
         </SettingSection>
@@ -121,18 +116,16 @@ export const SettingsModal = () => {
             </SettingDescription>
           </SettingTitle>
           <Switch
-            checked={toggleState.starMentor} // Use the toggle state
-            onCheckedChange={
-              () =>
-                toggleDispatch({
-                  type: "TOGGLE_STAR_MENTOR",
-                } as ToggleAction) // Dispatch action to toggle the state
+            checked={toggleState.starMentor}
+            onCheckedChange={() =>
+              toggleDispatch({
+                type: "TOGGLE_STAR_MENTOR",
+              } as ToggleAction)
             }
             disabled
             aria-readonly
           />
         </SettingSection>
-
       </DialogContent>
     </Dialog>
   );

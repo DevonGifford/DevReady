@@ -5,11 +5,11 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import RecentActivityCarousel from "@/components/RecentActivityCarousel";
 import RecommendedCarousel from "@/components/RecommendedCarousel";
 import CurrentRank from "./_components/CurrentRank";
-import TagButtons from "@/components/TagButtons";
+import { TagButtons } from "@/components/TagButtons";
 import RatingHistory from "./_components/RatingHistory";
 
-import fakeRecentActivityData from "@/constants/fakeRecentActivityData.json";
-import fakeRecommendedActivityData from "@/constants/fakeRecommendedData.json";
+import fakeRecentActivityData from "@/constants/mock/fakeRecentActivityData.json";
+import fakeRecommendedActivityData from "@/constants/mock/fakeRecommendedData.json";
 
 function UserDashboard() {
   const { userProfile } = useUserContext();

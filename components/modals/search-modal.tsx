@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { useModalContext } from "../providers/ModalReducerProvider";
-
 import {
   CommandDialog,
   CommandEmpty,
@@ -21,8 +20,6 @@ export const SearchModal = () => {
   const [isMounted, setIsMounted] = useState(false);
   const { modal, dispatch } = useModalContext();
 
-
-  // ✅ listening if should be mounted
   useEffect(() => {
     if (modal.open && modal.type === "SEARCH") {
       setIsMounted(true);
@@ -31,7 +28,6 @@ export const SearchModal = () => {
     }
   }, [modal]);
 
-  //✅ listening for shortcut key input
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
       if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
@@ -39,7 +35,6 @@ export const SearchModal = () => {
         dispatch({ type: "OPEN_MODAL", modalType: "SEARCH" });
       }
     };
-
     document.addEventListener("keydown", down);
     return () => document.removeEventListener("keydown", down);
   }, [dispatch, modal.open]);

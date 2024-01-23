@@ -33,12 +33,22 @@ const AuthFormFooter: React.FC<{ type: string }> = ({ type }) => {
   return (
     <div className="flex flex-col gap-4 py-4">
       <Link href={linkTarget}>
-        <Button type="button" variant="link" size={"mini"} className=" hover:no-underline bg-transparent hover:text-devready-green">
+        <Button
+          type="button"
+          variant="link"
+          size={"mini"}
+          className=" hover:no-underline bg-transparent hover:text-devready-green"
+        >
           {linkLabel}
         </Button>
       </Link>
       <Link href={linkHref}>
-        <Button type="button" variant="link" size={"mini"} className=" hover:no-underline bg-transparent hover:text-devready-green">
+        <Button
+          type="button"
+          variant="link"
+          size={"mini"}
+          className=" hover:no-underline bg-transparent hover:text-devready-green"
+        >
           {buttonLabel}
         </Button>
       </Link>

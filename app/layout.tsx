@@ -4,9 +4,7 @@ import { SettingsReducerProvider } from "@/components/providers/SettingsReducerP
 import { AuthContextProvider } from "@/components/providers/AuthProvider";
 import { UserContextProvider } from "@/components/providers/UserProvider";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
-import ToasterProvider from "@/components/providers/ToasterProvider";
-
-// 🤔 import type { Metadata } from "next";
+import { ToasterProvider } from "@/components/providers/ToasterProvider";
 
 import { Inter } from "next/font/google";
 

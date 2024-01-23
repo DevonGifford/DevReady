@@ -1,31 +1,79 @@
-# This is still a template page 🎈
+# How to Open a Pull Requests
 
-```js filename="demo.js" {3} copy
-let a = 1;
+These instructions guide you through the process of contributing code changes to ZTMReady through pull requests. Follow these steps to set up your development environment, create branches, make changes, and submit pull requests.
 
-console.log(a);
+## Prologue: Getting Ready
+
+Before contributing, ensure that you have the necessary tools and dependencies installed. You can find guidance in the [Environment Setup](#) section. Additionally, to accept your pull request, submit a [Contributor License Agreement (CLA)](#). Complete this once to contribute to any of ZTMReady's open-source projects.
+
+## Chapter I: Welcome to Open Source
+
+### 1. Install `git`
+
+Ensure that you have `git` installed on your machine. Follow [GitHub's instructions](https://help.github.com/articles/set-up-git/) for the setup.
+
+### 2. Get the source code
+
+Fork the ZTMReady repository on GitHub to your account. Clone your fork to your local machine using the following commands:
+
+```bash
+git clone https://github.com/your_username/ZTMReady.git
+git remote add fork https://github.com/your_username/ZTMReady.git
 ```
 
-## Component
+This creates a local clone with remotes set up for the upstream ZTMReady repository (`origin`) and your fork (`fork`).
 
-import { useState } from 'react'
+### 3. Create a branch
 
-{/* Import CSS modules */}
-import styles from '../../components/counters.module.css'
+Create a new branch to track your changes:
 
-export const Counter = () => {
-  const [count, setCount] = useState(0);
-  return (
-    <div>
-      <button onClick={() => setCount(count + 1)} className={styles.counter}>Clicked {count} times</button>
-    </div>
-  );
-};
+```bash
+git checkout --branch my_feature_branch --track origin/main
+```
 
-<Counter/>
+## Chapter II: Implementing your Changes
 
-## External Component
+### 1. Make changes to the code
 
-import Counters from '../../components/counters'
+Use your preferred code editor to make necessary changes. Ensure changes adhere to coding conventions and guidelines.
 
-<Counters />
+### 2. Test your changes
+
+Verify that your changes are correct and do not introduce test failures. Refer to [Running and Writing Tests](#) for detailed testing instructions.
+
+### 3. Lint your code
+
+Run linting tools (e.g., [Prettier](https://prettier.io/)) to ensure code styling consistency. Check code styling using `yarn run lint`.
+
+### 4. View your changes
+
+Use `git status` and `git diff` to keep track of code changes in your branch.
+
+## Chapter III: Proposing your Changes
+
+### 1. Commit your changes
+
+Add and commit your changes to version control:
+
+```bash
+git add <filename>
+git commit -m <message>
+```
+
+Provide a short, descriptive commit message.
+
+### 2. Push your changes to GitHub
+
+Push your changes to your fork on GitHub:
+
+```bash
+git push fork my_feature_branch
+```
+
+If successful, follow the provided URL to open a pull request.
+
+### 3. Create your pull request
+
+Fill out the pull request with a descriptive title, a summary of your motivation, and a test plan. Review and address feedback provided by maintainers.
+
+You are on your way to making a meaningful contribution to ZTMReady! The maintainers will guide you through the review process to help get your changes ready for merging into the main repository.

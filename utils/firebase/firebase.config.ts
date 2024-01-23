@@ -27,14 +27,11 @@ if (getApps().length === 0) {
   app = getApps()[0];
 }
 
-//- Auth exports
+//- Exports
 auth = getAuth(app);
 const provider = new EmailAuthProvider();
 
-//- Firestore exports
 db = getFirestore(app);
-
-//- Storage exports
 storage = getStorage(app);
 
 export { provider, auth, storage };
