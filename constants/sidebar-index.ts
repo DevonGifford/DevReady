@@ -5,7 +5,6 @@ import {
   BrainCircuit,
   DatabaseBackup,
   Gauge,
-  LibrarySquare,
   LucideIcon,
   MonitorSmartphone,
   Newspaper,

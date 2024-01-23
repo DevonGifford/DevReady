@@ -1,4 +1,6 @@
-import React from "react";
+// 🎯🔮 to-do-list: work-in-progress
+
+import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import {
   Carousel,
@@ -16,7 +18,6 @@ import {
   ScrollText,
   LucideIcon,
 } from "lucide-react";
-import Link from "next/link";
 
 const iconMap: Record<string, LucideIcon> = {
   PlusCircle,
@@ -27,16 +28,16 @@ const iconMap: Record<string, LucideIcon> = {
   ScrollText,
 };
 
-interface RecommendedCarouselProps {
+type RecommendedCarouselProps = {
   data: {
     label: string;
     icon: string;
     href: string;
     isMain?: boolean;
   }[];
-}
+};
 
-// 🎯🔮 FUTURE TASKS:
+// 🎯🔮 to-do-list - FUTURE TASKS:
 // - handle real data...
 // - handle case no data...
 // - handle loading skeleton...

@@ -2,9 +2,9 @@
 
 import toast from "react-hot-toast";
 import { useEffect, useState } from "react";
-import { useAuth } from "../providers/AuthProvider";
-import { useRouter } from "next/navigation";
 import { useModalContext } from "../providers/ModalReducerProvider";
+import { useRouter } from "next/navigation";
+import { useAuth } from "../providers/AuthProvider";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader } from "@/components/ui/dialog";
 
@@ -12,10 +12,8 @@ export const LogoutModal = () => {
   const router = useRouter();
   const { logOut } = useAuth();
   const { modal, dispatch } = useModalContext();
-
   const [isMounted, setIsMounted] = useState(false);
 
-  // ✅ listening if should be mounted
   useEffect(() => {
     if (modal.open && modal.type === "LOGOUT") {
       setIsMounted(true);
@@ -40,7 +38,6 @@ export const LogoutModal = () => {
   };
 
   const handleCaseNo = () => {
-    //setOpenLogoutModal(false);
     dispatch({ type: "CLOSE_MODAL" });
   };
 

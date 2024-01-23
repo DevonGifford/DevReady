@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Spinner } from "@/components/Spinner";
-import { Check } from "lucide-react";
+import { Check, EyeIcon, EyeOff } from "lucide-react";
 import {
   Form,
   FormControl,
@@ -23,8 +23,8 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { FirebaseError } from "firebase/app";
 
-// 👇 FORM SCHEMA : Login Form
 const loginFormSchema = z.object({
   email: z.string().email("Invalid email format").min(1, "Email is required"),
   password: z.string().min(8, "Password must be at least 8 characters"),
@@ -34,15 +34,16 @@ type LoginFormValues = z.infer<typeof loginFormSchema>;
 function LoginPage(): JSX.Element {
   const router = useRouter();
   const { logIn } = useAuth();
-  const [isLoading, setIsLoading] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-
-  // ✅ ZOD-FORM HOOK :  custom hook initializes a form instance
+  const [isLoading, setIsLoading] = useState(false); //-submit-button-loading-state
+  const [submitted, setSubmitted] = useState(false); //-submit-button-success-state
+  const [isShown, setIsShown] = useState(false); //-show-hide-password
+  const togglePassword = () => {
+    setIsShown((isShown) => !isShown);
+  };
   const form = useForm<LoginFormValues>({
     resolver: zodResolver(loginFormSchema),
   });
 
-  // ✅ SUBMIT FORM - submit login form
   const onSubmit = async ({
     email,
     password,
@@ -50,40 +51,52 @@ function LoginPage(): JSX.Element {
     email: string;
     password: string;
   }) => {
-    console.log("🎯event_log:  🗝auth/login-page/submit:  💢 Triggered ");
-
     try {
-      setIsLoading(true); //- Set loading spinner
-      const { result } = await logIn(email, password);
-
-      setIsLoading(false); //- Reset loading state
-      setSubmitted(true); //- Set achieved state
-      setTimeout(() => {
-        setSubmitted(false); //- Reset achieved state after a while
-        console.log(
-          "🎯event_log:   🗝auth/login-page/submit:  ✔ Sign in successful - firebase result:  ",
-          result
-        );
+      setIsLoading(true);
+      const trimmedEmail = email.trim();
+      const trimmedPassword = password.trim();
+      const result = await logIn(trimmedEmail, trimmedPassword);
+      if (result.success) {
+        setIsLoading(false);
+        setSubmitted(true);
         toast.success("Successfully signed in");
-        // - Redirect to the home page
         router.push("/dashboard");
-      }, 1000);
-    } catch (error: any) {
-      console.log(
-        "🎯event_log:   🗝auth/login-page/submit:  ❌ Error in attempting to login: ",
-        error
-      );
-
-      let errorMessage = "Incorrect credentials, please try again."; //-Default error message
-      if (error && error.code === "auth/user-not-found") {
-        errorMessage = "User not found. Please check your credentials.";
-      } else if (error && error.code === "auth/wrong-password") {
-        errorMessage = "Incorrect password. Please try again.";
+      } else {
+        setIsLoading(false);
+        handleLoginError(result.error);
       }
-      //🤔 more conditions?
-      toast.error(errorMessage);
-      setIsLoading(false); //- Reset loading state
+    } catch (error) {
+      handleLoginError(error);
     }
+  };
+
+  const handleLoginError = (error: FirebaseError | unknown) => {
+    let errorMessage = "Something went wrong, please try again."; //-Default error message
+    if (error instanceof FirebaseError) {
+      switch (error.code) {
+        case "auth/user-not-found":
+          errorMessage = "User not found. Please check your credentials.";
+          break;
+        case "auth/wrong-password":
+          errorMessage = "Incorrect password. Please try again.";
+          break;
+        case "auth/invalid-login-credentials":
+          errorMessage = "Incorrect credentials. Please try again.";
+          break;
+        case "auth/network-request-failed":
+        case "auth/timeout":
+          errorMessage =
+            "Network error. Please check your internet connection and try again.";
+          break;
+        // https://firebase.google.com/docs/auth/admin/errors
+        default:
+          errorMessage = "An unexpected error occurred. Please try again.";
+          console.error("Firebase Authentication Error:", error);
+          break;
+      }
+    }
+    setIsLoading(false);
+    toast.error(errorMessage);
   };
 
   return (
@@ -95,10 +108,6 @@ function LoginPage(): JSX.Element {
         <form
           className="rounded space-y-4"
           onSubmit={form.handleSubmit((data) => {
-            console.log(
-              "🎯event_log:  📝 login form submitted with following form-data: ",
-              data
-            );
             onSubmit(data);
           })}
         >
@@ -115,7 +124,6 @@ function LoginPage(): JSX.Element {
                   <Input
                     placeholder="email"
                     id="email"
-
                     className="text-left"
                     {...field}
                   />
@@ -135,13 +143,20 @@ function LoginPage(): JSX.Element {
                 </FormLabel>
                 <FormControl>
                   <Input
-                    className="text-left"
-                    type="password"
+                    className="text-left hide-reveal"
+                    type={isShown ? "text" : "password"}
                     id="password"
                     placeholder="password"
                     {...field}
                   />
                 </FormControl>
+                <div
+                  className="relative -translate-y-4 -translate-x-2 flex items-end justify-end cursor-pointer h-0"
+                  onClick={togglePassword}
+                  data-testid="toggle-password-vis"
+                >
+                  {isShown ? <EyeIcon size={22} /> : <EyeOff size={22} />}
+                </div>
                 <FormMessage data-testid="password-error" />
               </FormItem>
             )}

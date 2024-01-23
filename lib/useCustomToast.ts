@@ -1,5 +1,6 @@
-import { useSettingsReducerContext } from '@/components/providers/SettingsReducerProvider';
-import { toast, ToastOptions } from 'react-hot-toast';
+//🎯 work in progress - still considering if this is the correct approach
+import { useSettingsReducerContext } from "@/components/providers/SettingsReducerProvider";
+import { toast, ToastOptions } from "react-hot-toast";
 
 export function useCustomToast() {
   const { state } = useSettingsReducerContext();

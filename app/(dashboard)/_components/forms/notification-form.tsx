@@ -5,7 +5,6 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useUserContext } from "@/components/providers/UserProvider";
-
 import { Check } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
@@ -20,10 +19,8 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-
 import { UserProfile } from "@/types/UserProfile";
 
-// 👇 FORM SCHEMA : Account Form
 const notificationsFormSchema = z.object({
   notif_level: z.enum(["all", "profile", "none"], {
     required_error: "⚠ You need to select a notification type.",
@@ -37,23 +34,15 @@ const notificationsFormSchema = z.object({
   mobile_notifs: z.boolean().default(false).optional(),
 });
 type NotificationsFormValues = z.infer<typeof notificationsFormSchema>;
-// ⌛ PLACEHOLDER :  Default form values
-const defaultValues: Partial<NotificationsFormValues> = {
-  // 🎯 to-do-list : remove
-};
 
 export function NotificationsForm() {
   const { userProfile, updateUserDataProcess } = useUserContext();
   const [isLoading, setIsLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-
-  // ✅ ZOD-FORM HOOK :  custom hook initializes a form instance,
   const form = useForm<NotificationsFormValues>({
     resolver: zodResolver(notificationsFormSchema),
-    defaultValues,
   });
 
-  //✅ SET FORM VALUES - fields with existing user profile data
   useEffect(() => {
     if (userProfile) {
       form.setValue("notif_level", userProfile.notifications.notif_level);
@@ -77,14 +66,10 @@ export function NotificationsForm() {
         "mobile_notifs",
         userProfile.notifications.mobile_notifs || false
       );
-
-      // 🎯 to-do-list:  Set skills_list based on userProfile
     }
   }, [form, userProfile]);
 
-  // ✅ SUBMIT FORM - submit notifications form
   function onSubmit(data: NotificationsFormValues) {
-    console.log("🎯event-log:  📝UserForm/notifs-form/onSubmit:  💢 Triggered");
     if (userProfile) {
       setIsLoading(true); //- Set loading spinner
       const updatedUserData: UserProfile = {
@@ -102,23 +87,15 @@ export function NotificationsForm() {
 
       updateUserDataProcess(userProfile.uuid, updatedUserData)
         .then(() => {
-          // - on success
-          console.log(
-            "🎯event-log:  📝UserForm/notifs-form/onSubmit:  ✔ Success"
-          );
-          setIsLoading(false); //- Reset loading state
-          setSubmitted(true); //- Set achieved state
-
+          setIsLoading(false);
+          setSubmitted(true);
           setTimeout(() => {
-            setSubmitted(false); //- Reset achieved state after a while
-          }, 2000);
+            setSubmitted(false);
+          }, 1000);
         })
         .catch((error) => {
-          console.log(
-            "🎯event-log:  📝UserForm/notifs-form/onSubmit:  ❌ Something went wrong, error: ",
-            error
-          );
-          setIsLoading(false); //- Reset loading state
+          console.error("✖ Something went wrong, error: ", error);
+          setIsLoading(false);
         });
     }
   }
@@ -127,10 +104,6 @@ export function NotificationsForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit((data) => {
-          console.log(
-            "🎯event_log:  📝-form submitted with following form-data : ",
-            data
-          );
           onSubmit(data);
         })}
         className="space-y-4"

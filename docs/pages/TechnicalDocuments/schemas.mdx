@@ -1,31 +1,89 @@
-# This is still a template page 🎈
+# Database Schema Documentation
 
-```js filename="demo.js" {3} copy
-let a = 1;
+## Overview
 
-console.log(a);
-```
+The ZTMReady application relies on a Firebase Firestore NoSQL database to store and manage data. The database is designed to efficiently organize and retrieve information related to user profiles, quiz questions, and quiz sets. This documentation provides an in-depth exploration of the two main collections within the database: `users` and `questions`.
 
-## Component
 
-import { useState } from 'react'
+# 1. **Users Collection:**
+---
+   - `uuid`: A unique identifier for each user.
+   - `email`: User's email address for authentication.
+   - `user_role`: User's role within the application.
+   - `created_at`: Timestamp indicating when the user account was created.
+   - `last_login`: Timestamp capturing the user's last login.
 
-{/* Import CSS modules */}
-import styles from '../../components/counters.module.css'
+   #### Account Information:
+   - `username`: User's chosen username (nullable).
+   - `userimage`: URL of the user's profile image (nullable).
+   - `career_title`: User's career title (nullable).
+   - `programming_lang`: User's preferred programming language (nullable).
+   - `career_level`: User's career level.
+   - `experience_level`: User's experience level.
+   - `skills_list`: Array of user's skills (nullable).
 
-export const Counter = () => {
-  const [count, setCount] = useState(0);
-  return (
-    <div>
-      <button onClick={() => setCount(count + 1)} className={styles.counter}>Clicked {count} times</button>
-    </div>
-  );
-};
+   #### Profile Information:
+   - `bio`: User's biography (nullable).
+   - `home_lang`: User's primary spoken language.
+   - `location`: User's geographical location.
+   - `urls`: Links to the user's external profiles (GitHub, LinkedIn, Portfolio).
+   - `projects`: Links to the user's projects (Capstone, Additional).
+   - `ztm_student`: Boolean indicating if the user is a ZTM student.
+   - `star_mentor`: Boolean indicating if the user is a star mentor.
 
-<Counter/>
+   #### Goals:
+   - `current_goals`: Array of current goals, including title, description, and estimated time of achievement.
+   - `past_goals`: Array of past goals (currently an empty array).
 
-## External Component
+   #### Notifications:
+   - `notif_level`: Notification preferences (all, profile, none).
+   - `communication_emails`: Boolean for communication-related emails.
+   - `marketing_emails`: Boolean for marketing-related emails.
+   - `newsletter_emails`: Boolean for newsletter-related emails.
+   - `push_notifs`: Boolean for push notifications.
+   - `mobile_notifs`: Boolean for mobile notifications.
 
-import Logo from '../../components/Logo'
+   #### Ranking:
+   - `current_rank`: User's current ranking (nullable).
+   - `past_rank`: Array of past rankings, including the year, month, and value.
 
-<Logo />
+   #### History:
+   - `quizCompleted`: Array of completed quizzes, including the quiz ID and incorrect question IDs.
+
+<br/>
+
+
+# 2. **Questions Collection:**
+
+---
+
+   - `uuid`: A unique identifier for each quiz set.
+   - `setType`: Type of the quiz set (e.g., technical interview, bootcamp, custom).
+   - `setTitle`: Title of the quiz set.
+   - `setDescription`: Description of the quiz set.
+   - `setImage`: URL of the quiz set image (nullable).
+   - `setTags`: Array of tags associated with the quiz set.
+   - `setData`: Array of QuizQuestion objects representing individual questions.
+
+   #### QuizQuestion Object:
+   - `questionUuid`: Unique identifier for each question.
+   - `questionTitle`: Title of the question.
+   - `questionDescription`: Description of the question (nullable).
+   - `questionAnswer`: Correct answer to the question.
+   - `questionDifficulty`: Difficulty level of the question.
+   - `questionType`: Type of the question (e.g., interview, topic, custom).
+   - `questionTags`: Array of tags associated with the question.
+
+## Database Interaction
+
+### Reading Data
+
+Data can be retrieved from the database by querying the respective collections using the Firebase Firestore API. Users can retrieve their profile information, quiz sets, and questions based on the provided unique identifiers.
+
+### Writing Data
+
+To update information, users can modify their user document or submit new quiz sets/questions, which will be added to the appropriate collections. Firebase Firestore automatically generates unique identifiers for new documents.
+
+## Conclusion
+
+Understanding the structure and relationships within the ZTMReady database is crucial for effective data management and application functionality. Whether you are a developer, contributor, or simply curious about the inner workings of ZTMReady, this documentation serves as a valuable resource for navigating the database schema.

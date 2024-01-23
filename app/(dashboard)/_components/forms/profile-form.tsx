@@ -4,9 +4,8 @@ import * as z from "zod";
 import { cn } from "@/lib/utils";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect, useState } from "react";
-
 import { useUserContext } from "@/components/providers/UserProvider";
+import { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
@@ -43,11 +42,9 @@ import {
   Medal,
   Trophy,
 } from "lucide-react";
-
 import { UserProfile } from "@/types/UserProfile";
 import { locations, home_languages } from "@/constants/userforms-index";
 
-// 👇 FORM SCHEMA : Profile Form
 const profileFormSchema = z.object({
   bio: z.string().max(160).min(4),
   location: z.string({
@@ -62,40 +59,26 @@ const profileFormSchema = z.object({
       linkedin: z.string().url().optional(),
       portfolio: z.string().url().optional(),
     })
-    // .refine((data) => Object.values(data).some(Boolean), {
-    //   message: "⚠ At least one social media profile is required.",
-    // })
     .optional(),
   projects: z
     .object({
       capstone: z.string().url().optional(),
       additional: z.string().url().optional(),
     })
-    // .refine((data) => Object.values(data).some(Boolean), {
-    //   message: "⚠ At least one project is required.",
-    // })
     .optional(),
   ztm_student: z.boolean().default(false).optional(),
 });
 type ProfileFormValues = z.infer<typeof profileFormSchema>;
-// ⌛ PLACEHOLDER :  Default form values
-const defaultValues: Partial<ProfileFormValues> = {
-  // 🎯 to-do-list : remove
-};
 
 export function ProfileForm() {
   const { userProfile, updateUserDataProcess } = useUserContext();
   const [isLoading, setIsLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-
-  // ✅ ZOD-FORM HOOK :  custom hook initializes a form instance,
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileFormSchema),
-    defaultValues,
     mode: "onChange",
   });
 
-  //✅ SETTING FORM : fields with existing user profile data
   useEffect(() => {
     if (userProfile) {
       form.setValue("bio", userProfile.profile.bio || "");
@@ -125,13 +108,9 @@ export function ProfileForm() {
     }
   }, [userProfile, form]);
 
-  // ✅ SUBMIT FORM : work-in-progress
   function onSubmit(data: ProfileFormValues) {
-    console.log(
-      "🎯event-log:  📝UserForm/profile-form/onSubmit:  💢 Triggered"
-    );
     if (userProfile) {
-      setIsLoading(true); //- Set loading spinner
+      setIsLoading(true);
       const updatedUserData: UserProfile = {
         ...userProfile,
         profile: {
@@ -154,23 +133,15 @@ export function ProfileForm() {
 
       updateUserDataProcess(userProfile.uuid, updatedUserData)
         .then(() => {
-          // - on success
-          console.log(
-            "🎯event-log:  📝UserForm/profile-form/onSubmit:  ✔ Success"
-          );
-          setIsLoading(false); //- Reset loading state
-          setSubmitted(true); //- Set achieved state
-
+          setIsLoading(false);
+          setSubmitted(true);
           setTimeout(() => {
-            setSubmitted(false); //- Reset achieved state after a while
-          }, 2000);
+            setSubmitted(false);
+          }, 1000);
         })
         .catch((error) => {
-          console.log(
-            "🎯event-log:  📝UserForm/profile-form/onSubmit:  ❌ Something went wrong, error: ",
-            error
-          );
-          setIsLoading(false); //- Reset loading state
+          console.error("✖ Something went wrong, error: ", error);
+          setIsLoading(false);
         });
     }
   }
@@ -179,10 +150,6 @@ export function ProfileForm() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit((data) => {
-          console.log(
-            "🎯event_log:  📝-form submitted with following form-data : ",
-            data
-          );
           onSubmit(data);
         })}
         className="space-y-8"

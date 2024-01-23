@@ -1,5 +1,3 @@
-// quizGenerator.ts
-
 import { QuizQuestion } from "@/types/databaseSchema";
 
 // 🔮 Implement custom logic here to generate quiz questions -  filter and select questions accordingly

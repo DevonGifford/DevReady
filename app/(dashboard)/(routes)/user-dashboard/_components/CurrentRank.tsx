@@ -1,10 +1,9 @@
-import React from "react";
 import { Progress } from "@/components/ui/progress";
 import { TrophyIcon } from "lucide-react";
 
-interface CurrentRankProps {
+type CurrentRankProps = {
   rank?: number;
-}
+};
 
 const CurrentRank: React.FC<CurrentRankProps> = ({ rank }) => {
   const currentRank = rank || 0; // If rank is not provided, default to 0

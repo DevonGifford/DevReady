@@ -3,7 +3,6 @@ import Image from "next/image";
 
 const AuthLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    // <div className="h-full flex-col">
     <div className="flex h-screen flex-col items-center justify-center max-w-3xl mx-auto overflow-x-hidden">
       <div
         className="absolute inset-x-0 top-10 -z-10 flex transform-gpu justify-center overflow-hidden blur-3xl"
@@ -20,7 +19,6 @@ const AuthLayout = ({ children }: { children: React.ReactNode }) => {
 
       <main className="flex flex-col h-full overflow-y-auto">
         <div className="flex flex-col items-center h-screen justify-center">
-          {/* TEMPORARY LOGO SOLUTION 🎯 */}
           <Link
             href="/"
             className="flex flex-row items-center justify-start gap-0.5 font-bold text-3xl pt-6"

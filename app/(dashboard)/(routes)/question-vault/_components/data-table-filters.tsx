@@ -1,9 +1,10 @@
 import * as React from "react";
-import { Column } from "@tanstack/react-table";
 import { cn } from "@/lib/utils";
-
+import { Column } from "@tanstack/react-table";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import { CheckIcon, PlusCircle } from "lucide-react";
 import {
   Command,
   CommandEmpty,
@@ -18,8 +19,6 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { Separator } from "@/components/ui/separator";
-import { CheckIcon, PlusCircle } from "lucide-react";
 
 interface DataTableFilterProps<TData, TValue> {
   column?: Column<TData, TValue>;

@@ -1,14 +1,14 @@
-export interface QuizQuestion {
+export type QuizQuestion = {
   questionUuid: number;
   questionTitle: string;
   questionDescription?: string;
   questionAnswer: string;
-  questionDifficulty?: string; //change to string - i.e. Hard, Medium, Easy, Other
-  questionType?: string; //related - i.e. Interview, Bootcamp, Topic, Other/Custom
+  questionDifficulty?: string;
+  questionType?: string;
   questionTags: string[];
-}
+};
 
-export interface DatabaseSchema {
+export type DatabaseSchema = {
   uuid: string;
   setType: string;
   setTitle: string;
@@ -16,7 +16,7 @@ export interface DatabaseSchema {
   setImage?: string;
   setTags: string[];
   setData: QuizQuestion[];
-}
+};
 
 export const quickSampleDatabaseData: DatabaseSchema[] = [
   {
@@ -24,25 +24,20 @@ export const quickSampleDatabaseData: DatabaseSchema[] = [
     setType: "interview",
     setTitle: "Frontend Interview",
     setDescription:
-      "This is a smart accumulation of questions in order to evaluate your readiness for a Frontend Interview.",
-    setImage: "not sure what this will be yet....",
-    setTags: [
-      "JavaScript",
-      "TypeScript",
-      "React",
-      "State management",
-      "Testing",
-    ],
+      "Embark on the Frontend Dev Journey! Dive into the world of client-side development, HTML, CSS, and JavaScript. This quiz tests your skills in crafting user interfaces, handling browser compatibility, and leveraging various frameworks and libraries. Perfect for aspiring UI/UX designers and seasoned frontend developers, this quiz challenges your mastery of frontend technologies!",
+    setImage: "",
+    setTags: ["HTML/CSS", "js", "ts", "react", "Testing"],
     setData: [
       {
-        questionUuid: 1,
-        questionTitle: "What is Javascript?",
+        questionUuid: 900,
+        questionTitle: "Explain the concept of Virtual DOM in React.",
         questionDescription:
-          "Can you spend 2 minutes explaining to me what JavaScript is",
+          "Provide an explanation of the Virtual DOM and how it works in the context of React.",
         questionAnswer:
-          "It is the scripting language of the web that was initially intended to run on the browser. Today, JavaScript is used in the server.",
-        questionDifficulty: "Hard",
-        questionTags: ["JS", "TS", "React"],
+          "The Virtual DOM in React is a lightweight copy of the actual DOM. React uses it to optimize rendering by updating only the parts of the actual DOM that have changed. Changes are first applied to the Virtual DOM, and React calculates the most efficient way to update the real DOM, minimizing performance impact.",
+        questionDifficulty: "medium",
+        questionType: "interview",
+        questionTags: ["react", "frontend"],
       },
       // ... (other questions)
     ],

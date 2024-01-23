@@ -1,11 +1,11 @@
-import React from "react";
+// 🎯🔮 to-do-list: work-in-progress
 import { Button } from "@/components/ui/button";
 
-interface TagButtonsProps {
-  data?: string[]; 
-}
+type TagButtonsProps = {
+  data?: string[];
+};
 
-const TagButtons: React.FC<TagButtonsProps> = ({ data }) => {
+export const TagButtons: React.FC<TagButtonsProps> = ({ data }) => {
   const defaultTags = ["baby yoda"];
   const tagData = data || defaultTags; // If rank is not provided, default ...
 
@@ -28,5 +28,3 @@ const TagButtons: React.FC<TagButtonsProps> = ({ data }) => {
     </div>
   );
 };
-
-export default TagButtons;

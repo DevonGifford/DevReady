@@ -4,10 +4,10 @@ import * as z from "zod";
 import { useRouter, useSearchParams } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
-
 import { Button } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { useForm } from "react-hook-form";
+import { EXIT_NORMAL_ALL } from "@/constants/onboarding-index";
 import {
   Form,
   FormControl,
@@ -18,34 +18,22 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-import { EXIT_NORMAL_ALL } from "@/constants/onboarding-index";
-
-// 👇 FORM SCHEMA : Data Onboarding Form
 const userCareerFormSchema = z.object({
   career_level: z.number().min(0, "⚠ Please set your level").optional(),
   experience_level: z.number().min(0, "⚠ Please set your level").optional(),
   ztm_student: z.boolean().default(false).optional(),
 });
+
 type UserOnboardingValues = z.infer<typeof userCareerFormSchema>;
-// ⌛ PLACEHOLDER :  Default form values
-const defaultValues: Partial<UserOnboardingValues> = {
-  // 🎯 to-do-list : remove
-};
 
 export default function UserOnbaordingCareer() {
   const router = useRouter();
   const searchParams = useSearchParams();
-
-  // ✅ ZOD-FORM HOOK :  custom hook initializes form instance,
   const form = useForm<UserOnboardingValues>({
     resolver: zodResolver(userCareerFormSchema),
-    defaultValues,
   });
 
-  // ✅ SUBMIT ONBOARDING FORM - Navigates to the next onboarding page with submitted data.
   function onSubmit(data: UserOnboardingValues) {
-    console.log("🎯event-log:  📝onboarding/career/onSubmit:  💢 Triggered");
-
     const queryParams = {
       pageId: "image-onboarding",
       username: searchParams.get("username")!,
@@ -53,7 +41,6 @@ export default function UserOnbaordingCareer() {
       career_level: data.career_level?.toString() || "",
       experience_level: data.experience_level?.toString() || "",
     };
-
     const queryString = new URLSearchParams(queryParams).toString();
     router.push(`?${queryString}`);
   }
@@ -83,10 +70,6 @@ export default function UserOnbaordingCareer() {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit((data) => {
-            console.log(
-              "🎯event_log:  👋📝 Onboarding orm submitted - form-data:  ",
-              data
-            );
             onSubmit(data);
           })}
           className="space-y-[calc(100vw-90vw)] lg:space-y-24 w-full "

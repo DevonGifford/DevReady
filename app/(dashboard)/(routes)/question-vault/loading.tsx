@@ -4,7 +4,7 @@ export default function Loading() {
   return (
     <>
       {" "}
-      <Spinner />
+      <Spinner size={"screen"} />
     </>
   );
 }

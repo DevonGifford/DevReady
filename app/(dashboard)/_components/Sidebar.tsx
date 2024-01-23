@@ -4,9 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { SidebarItem } from "./SidebarItem";
-
 import { useModalContext } from "@/components/providers/ModalReducerProvider";
-
 import { Logo } from "@/components/Logo";
 import { Separator } from "@/components/ui/separator";
 import { Github, Linkedin, UserSquare } from "lucide-react";
@@ -21,7 +19,6 @@ import { sidebarQuickIndex, sidebarIndex } from "@/constants/sidebar-index";
 
 export const Sidebar = () => {
   const router = useRouter();
-
   const { dispatch } = useModalContext();
 
   return (
@@ -98,7 +95,7 @@ export const Sidebar = () => {
                               />
                             </AccordionTrigger>
                             <AccordionContent>
-                              {/* Map over subItems of isMaster items */}
+                              {/* //- Map over subItems of isMaster items */}
                               {subItems?.map((subItem) => (
                                 <SidebarItem
                                   key={subItem.label}
